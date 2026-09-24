@@ -1,0 +1,45 @@
+{
+  "id": "primitive-supervision-optimization-v1",
+  "frozen_on": "2026-09-24",
+  "hypothesis": "Supervise observable primitives directly before and during joint learning to avoid the absence shortcut and question-routing bottleneck in visual learning.",
+  "conditions": {
+    "optimization-control-s24-v1": {"recipe": "joint_only", "seed": 20260924},
+    "optimization-primitive-s24-v1": {"recipe": "primitive_supervision", "seed": 20260924},
+    "optimization-control-s25-v1": {"recipe": "joint_only", "seed": 20260925},
+    "optimization-primitive-s25-v1": {"recipe": "primitive_supervision", "seed": 20260925}
+  },
+  "training": {
+    "optimizer_steps": 8192,
+    "batch_size": 64,
+    "max_train_seconds_per_run": 480,
+    "total_synchronized_training_seconds_cap": 1920,
+    "primitive_warmup_steps": 256,
+    "auxiliary_weight": 0.25,
+    "warmup_loss": "Mean visual-word CE plus mean visual-color CE plus mean audio-word CE, each normalized over its own examples or tiles",
+    "joint_loss": "Joint candidate CE plus 0.25 times the sum of the three primitive CEs for the treatment; joint CE only for the control",
+    "primitive_heads": "Temporary shared 128-to-8 word classifier for visual and acoustic tokens, plus 128-to-4 color classifier; never used at inference",
+    "inference_architecture": "Original 668097-parameter native-decision-v1 with exactly the same forward contract",
+    "optimizer": "AdamW, acoustic encoder lr 0.0001; others and temporary heads lr 0.0003; weight decay 0.01; gradient clipping norm 1.0",
+    "pairing_seed": "initialization seed plus one; identical independent audio resampling within each matched pair",
+    "data": "Unchanged 2048 original training scenes; held word-color tuples remain excluded",
+    "fairness": "Warmup counts within the common update budget. Treatment has extra supervision and temporary training parameters. Steps are matched, not FLOPs or elapsed time. A capped incomplete run remains recorded and cannot nominate."
+  },
+  "development": {
+    "data": "Existing scale-v1 ID and known-gap development panels; all prior tests are exposed evidence",
+    "selection": "Prefer checkpoints with ID six-family accuracy >=0.65, then maximize mean ID/compositional accuracy; ties choose smaller mean raw normalized NLL. If no checkpoint qualifies, retain the best fallback as a failed gate, never a promotion candidate.",
+    "retention": "Save selected and final weights and complete development probability files; report raw NLL, accuracy, present-target and absent-target performance. Preserve primitive-head diagnostics before training, after warmup, at final and selected checkpoints.",
+    "scope": "Accuracy selection is intentionally changed for BOTH control and treatment relative to the prior scale study; comparisons against old runs are operational references, not an isolated causal estimate."
+  },
+  "calibration": "Use only the existing scale-v1 calibration rows to fit scalar temperature after selection; report raw and adjusted confirmation metrics.",
+  "confirmation": {
+    "source": "Official TensorFlow Speech Commands v0.02 test archive, pinned TFDS SHA256; custom subset, not the official benchmark",
+    "archive_sha256": "cc2a00c1147c2254e9be3fa0f779d8c17421dc349b86366567a8edfa9acd51df",
+    "selection": "32 recordings from distinct new speakers per keyword, deterministic hashed order; exclude every prior manifest speaker and audio hash",
+    "panels": "New generated ID and compositional panel per recording; 256 recordings and 512 panels planned; same known gap identities",
+    "opening": "Only after all four runs and the development-selected treatment candidate are committed in a nomination record",
+    "comparisons": "Evaluate all four selected checkpoints plus the frozen served v2 on identical rows; paired speaker-cluster intervals per comparison, both seeds reported",
+    "promotion": "No automatic promotion. Both treatment seeds must finish and meet the development gate; candidate must show positive composition difference with speaker interval excluding zero versus served, no more than two points ID loss versus served, and treatment recipe must improve balanced accuracy over its control for both seeds. Any API change requires separate inference/latency/backward-compatibility checks."
+  },
+  "limits": ["Only two training seeds", "Eight recorded keywords", "Generated 2x2 panels", "Known composition-gap identities", "Not general speech intent, real-screen grounding, or browser execution", "No paid API or large training-corpus download"],
+  "sources": ["https://openaccess.thecvf.com/content/ICCV2025/html/Rakib_G2D_Boosting_Multimodal_Learning_with_Gradient-Guided_Distillation_ICCV_2025_paper.html", "https://www.tensorflow.org/datasets/catalog/speech_commands"]
+}
