@@ -4,7 +4,7 @@
 
 ![Project overview: visual observations and language enter a jointly trained model that predicts answer probabilities.](docs/assets/overview.svg)
 
-> **Stage: first unified neural prototype, with measured limits.** One 668,097-parameter model now reads recorded audio, pixels, question text, and candidate descriptions. It outperforms matched unimodal controls on the generated-panel task, but fails the held-out command–color composition test. General speech, real-browser grounding, and Jev-equivalent capabilities remain unestablished.
+> **Stage: runnable developer API and controlled model experiments.** The API serves a 668,097-parameter model that reads recorded audio, pixels, question text, and candidate descriptions. A new study tested a 2.42× larger model and a shape/color visual prior; neither earned a promotion. General speech, real-browser grounding, and Jev-equivalent capabilities remain unestablished.
 
 The first goal is a small model whose weights, data, losses, and failure modes we can understand. It should answer bounded questions about observations, return a probability distribution over the declared answers, and support abstention in the surrounding software. The initial target machine is an Apple M4 Pro with 48 GB of unified memory. The reports below record training budgets and loaded inference latency for the implemented prototypes.
 
@@ -30,6 +30,27 @@ The service loads our trained checkpoint once. It runs locally without calling O
 The real HTTP demo matches the saved neural output within `1.8e-7`. Warm CPU requests returning four typed answers measured **4.81 ms median / 5.60 ms p95** over 32 repeated-fixture requests, including HTTP, validation, decoding, and inference. Recording time, startup, and request assembly are excluded. See the [API evidence and reproduction commands](reports/api-v1/README.md).
 
 **The model's current scope still applies:** one short spoken keyword, one generated 2×2 panel, and a limited learned text vocabulary. Score is an expectation over declared candidate values; Ranking sorts the same candidate distribution. These output views do not establish arbitrary rubric understanding or general screenshot/speech capability.
+
+## Latest model iteration: size and visual structure
+
+![Fresh-speaker model comparison and complete development learning curves](reports/scale-v1/results.svg)
+
+We trained three predeclared conditions for **8,192 updates each** and reserved **80 previously unused speakers, with 117 recordings**, for confirmation. Each recording was paired with new familiar-combination and held-combination panels. All checkpoints were selected using development data before confirmation.
+
+| Checkpoint | Parameters | Familiar combinations | Known composition gap |
+|---|---:|---:|---:|
+| Existing served v2 | 668,097 | **72.51%** | 45.58% |
+| Small RGB rerun | 668,097 | 51.99% | 47.86% |
+| Larger RGB | 1,616,001 | 51.99% | 47.44% |
+| Separate shape/color features | 666,769 | 52.14% | 48.15% |
+
+**No new model was promoted.** Neither intervention established a composition gain over the matched small rerun; their paired speaker intervals include zero. All three new checkpoints lose about 20 percentage points on familiar combinations versus the served model. The larger attempt used 2.42× the parameters and about 17.5% more measured training time, with no accuracy benefit in this trial.
+
+The new development objective balances familiar and shifted normalized NLL. It selected early checkpoints because later training became overconfident on the composition shift. Attempt budgets are matched; the selected checkpoints represent different update counts. The old served model used a different seed, selection objective, and budget, so it is an operational reference. One new training seed is insufficient for a general claim about model size.
+
+![Pixel-derived shape and color branches used in the controlled experiment](docs/assets/shape-color-prior.svg)
+
+The held word/color pair identities were already exposed by the previous failure. This is confirmation on **fresh voices and panels for a known gap**, with generated images throughout. The [complete report](reports/scale-v1/README.md) retains every run, learning curve, confidence interval, and hash; the [design and source review](docs/research/scale-study.md) explains the fixed visual prior. The next model question is how to make perception and cross-modal binding train reliably before spending more on scale.
 
 ## First unified model and original evaluation
 
@@ -88,6 +109,7 @@ See the [runnable eval guide](evals/README.md) for training, saved-checkpoint in
 ## Read the project
 
 - [Developer API](docs/developer-api.md), [interface design and sources](docs/research/developer-interface.md)
+- [Latest scale study and fresh confirmation](reports/scale-v1/README.md)
 - [The decision we want to learn](#the-decision-we-want-to-learn)
 - [Audio, screens, and real-world evals](#audio-screens-and-real-world-evals)
 - [Architecture and alternatives](#architecture-and-alternatives)
@@ -411,11 +433,13 @@ The figure generator writes SVGs and PNG previews. Sources are original code, wi
 | Item | Current status |
 |---|---|
 | Primary literature and upstream source review | Documented in the reading map |
-| Architecture and loss recommendation | Proposed; untested on our task |
+| Architecture and loss recommendation | First native candidate scorer implemented; wider architecture/objective comparisons remain planned |
 | Original explanatory figures | Reproducible documentation artifacts |
 | Real-data controls and independent metrics | Implemented; three acquired manifests, categorical/multi-label/grounding/joint scorers |
 | Trained checkpoints and measured baselines | Two small audio CNNs plus fixed CLIP screen controls; see report |
 | Paired generated-panel data and native fusion | Implemented and evaluated; one selected model, two matched controls, one retained failed development attempt |
+| Developer API | Running local checkpoint, typed HTTP/OpenAPI and Python client; measured warm HTTP p95 5.60 ms on the four-answer fixture |
+| Size and representation follow-up | Three new training attempts, fresh confirmation, no promoted improvement; full negative evidence retained |
 | Sentence intent, real paired screens, and workflow success | Pending; the controlled prototype does not establish these |
 
 The next implementation gates are:

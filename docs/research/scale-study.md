@@ -12,6 +12,8 @@ The frozen [protocol](../../evals/scale-protocol-v1.json) compares three conditi
 
 The renderer places dark glyphs on colored tiles. Grayscale alone preserves tile luminance, so it does not remove the shortcut. The factorized encoder uses a declared pixel prior: take the maximum RGB channel, map intensities at or below 0.2 to one and at or above 0.4 to zero, with linear interpolation between. In this renderer, the glyph and border remain while all tile fills vanish. A CNN encodes this shape map; a separate MLP encodes spatially averaged RGB. Their outputs occupy different portions of the visual token. Every neural parameter is trainable; the pixel transform itself is fixed. A unit test verifies exact shape-map invariance to the four rendered colors while the separate color representation changes. This is a renderer-specific intervention, not general segmentation.
 
+![Pixel-derived shape and color factorization](../assets/shape-color-prior.svg)
+
 ```mermaid
 flowchart LR
   P[Raw RGB tile] --> I[Fixed dark-ink transform]

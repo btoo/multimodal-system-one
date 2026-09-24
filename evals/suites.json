@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "native_joint_prototype_evaluated",
+  "status": "developer_api_and_scale_study_evaluated",
   "execution_enabled": true,
   "data_populated": true,
   "results": [
@@ -202,7 +202,7 @@
     "chunk_latency",
     "real_time_factor"
   ],
-  "notes": "Earlier controls and a limited unified model have run. Its command-color composition test fails; broader application readiness remains unestablished.",
+  "notes": "Earlier controls, native joint inference, HTTP API, and a three-condition scale study have run. No new model was promoted. Fresh voices/images confirm the known composition gap; real browser readiness remains unestablished.",
   "joint_training_results": [
     "reports/joint-full-v1/training.json",
     "reports/joint-full-v2/training.json",
@@ -213,5 +213,18 @@
     "reports/joint-full-v2/evaluation.json",
     "reports/joint-audio-only-v2/evaluation.json",
     "reports/joint-image-only-v2/evaluation.json"
-  ]
+  ],
+  "scale_training_results": [
+    "reports/scale-small-v1/training.json",
+    "reports/scale-large-v1/training.json",
+    "reports/scale-factorized-v1/training.json"
+  ],
+  "scale_evaluation_results": [
+    "reports/scale-small-v1/evaluation.json",
+    "reports/scale-large-v1/evaluation.json",
+    "reports/scale-factorized-v1/evaluation.json",
+    "reports/scale-served-reference-v1/evaluation.json"
+  ],
+  "api_verification": "reports/api-v1/demo-verification.json",
+  "api_latency": "reports/api-v1/http-benchmark.json"
 }

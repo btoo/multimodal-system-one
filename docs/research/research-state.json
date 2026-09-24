@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "as_of": "2026-09-24",
-  "phase": "native_joint_prototype_with_limits",
+  "phase": "developer_api_and_controlled_scale_study",
   "method": "Primary-source claim verification, evidence retention, and targeted follow-up",
-  "model_runs_completed": 7,
+  "model_runs_completed": 10,
   "claims": [
     {
       "id": "C01",
@@ -151,6 +151,29 @@
       "evidence": "reports/joint-full-v2/evaluation.json",
       "observed_accuracy": 0.45659722222222227,
       "limit": "This exposed test must become development evidence for a later redesigned study."
+    },
+    {
+      "id": "C21",
+      "claim": "The local developer API accepts native image/audio content and returns Choice, Noul, Score, and Ranking views using the pinned joint-v2 checkpoint.",
+      "status": "implemented_and_verified",
+      "evidence": "reports/api-v1/README.md",
+      "limit": "Own API contract with content helpers, not full provider SDK compatibility; the checkpoint remains limited to eight keywords and generated panels."
+    },
+    {
+      "id": "C22",
+      "claim": "The 2.42-times larger model improves compositional accuracy over the matched small model in the new study.",
+      "status": "not_established_in_bounded_trial",
+      "evidence": "reports/scale-v1/summary.json",
+      "observed_difference_percentage_points": -0.4273504273504274,
+      "limit": "One seed, matched attempt steps but different selected checkpoint updates; paired fixed-checkpoint speaker interval includes zero."
+    },
+    {
+      "id": "C23",
+      "claim": "The tested fixed shape/color visual prior improves final compositional decisions.",
+      "status": "not_established_in_bounded_trial",
+      "evidence": "reports/scale-v1/summary.json",
+      "observed_difference_percentage_points": 0.2849002849002849,
+      "limit": "Renderer-specific pixel prior; paired interval includes zero; new checkpoints lose about twenty points of familiar-combination accuracy versus the served model."
     }
   ],
   "completed_research_actions": [
@@ -167,13 +190,22 @@
     "Implemented and trained the unified candidate-conditioned model",
     "Diagnosed and corrected fixed audio-panel pairing shortcuts using development evidence",
     "Evaluated a nominated checkpoint and matched unimodal controls on untouched slices",
-    "Preserved the failed compositional transfer result and complete predictions"
+    "Preserved the failed compositional transfer result and complete predictions",
+    "Implemented and verified a cached HTTP decision API, concrete OpenAPI schemas, and provider content helpers",
+    "Measured actual HTTP parity and warm processing on the recorded demo",
+    "Compared 668k and 1.62M models with a separate shape/color visual-prior condition",
+    "Reserved 80 previously unused speakers and confirmed all three conditions plus the frozen served reference",
+    "Retained the negative scale-study results and kept the established serving default"
   ],
-  "next_owned_action": "Investigate failed command-color compositional transfer using the exposed slice as development and reserve fresh confirmation; extend to semantically paired real speech/screens and stronger visual grounding.",
+  "next_owned_action": "Study stable perception and cross-modal binding with repeated development seeds and a targeted curriculum; define fresh confirmation before further selection, and collect semantically paired real speech/screens for browser claims.",
   "application_target": "Speech meaning, acoustic-event classification, screen understanding, and joint audio-screen decisions for computer/browser use",
   "models_trained_from_scratch": 2,
   "native_joint_model_trained": true,
   "baseline_runs_completed": 3,
-  "joint_model_runs_completed": 4,
-  "joint_evaluation_runs_completed": 3
+  "joint_model_runs_completed": 7,
+  "joint_evaluation_runs_completed": 7,
+  "developer_api_implemented": true,
+  "scale_training_runs_completed": 3,
+  "scale_confirmation_runs_completed": 4,
+  "served_model": "mmso-joint-v2"
 }
