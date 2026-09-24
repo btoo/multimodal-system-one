@@ -48,7 +48,7 @@
     "yellow",
     "yes"
   ],
-  "temperature": 1.0,
+  "temperature": 4.582741176122994,
   "recipe": "primitive_supervision",
   "seed": 20260925,
   "actual_steps": 8192,

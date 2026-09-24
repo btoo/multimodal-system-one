@@ -25,9 +25,11 @@ def example_payload():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--base-url", default="http://127.0.0.1:8000")
+    parser.add_argument("--model", default=MODEL_ID, help="Explicit registered version; mmso-joint-v3 is the new confirmed candidate")
     parser.add_argument("--write-request", help="Write inline JSON suitable for curl and exit")
     args = parser.parse_args()
     payload = example_payload()
+    payload["model"] = args.model
     if args.write_request:
         from pathlib import Path
         Path(args.write_request).write_text(json.dumps(payload) + "\n")

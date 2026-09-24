@@ -68,9 +68,37 @@ V2_REGISTRATION = ModelRegistration(
     ),
 )
 
-# A new checkpoint requires a reviewed code registration with measured metadata and hashes.
-# No speculative model aliases, directory scanning, or automatic 'latest' selection.
-MODEL_REGISTRY = MappingProxyType({MODEL_ID: V2_REGISTRATION})
+V3_REGISTRATION = ModelRegistration(
+    id="mmso-joint-v3",
+    checkpoint="artifacts/optimization-primitive-s24-v1/model.safetensors",
+    checkpoint_sha256="4284d30920615018b500716d406236d919f5e38e268fdc5490c6f559af612bfa",
+    config_sha256="c61ae17776932f842c0c03d67e740e252e82f9bc4b511cb7349e05dc9b82d94a",
+    architecture="native-decision-v1",
+    factory=make_native_v1,
+    calibration_scope="Temperature fitted on separate familiar/compositional calibration panels after development selection; arbitrary rubrics, candidate subsets and new task families remain uncalibrated",
+    known_limitations=(
+        "Eight spoken keywords, generated 2x2 panels and a limited learned question vocabulary",
+        "No demonstrated native real-browser or general image understanding; OCR control results are separate",
+        "The composition-gap identities were previously known; confirmation voices and images are fresh",
+        "Only two recipe seeds; substantial remaining errors and seed variability",
+        "Confidence is categorical concentration, not epistemic uncertainty or an unknown-input detector",
+        "Noul and numeric Score transform the same candidate distribution; changing candidates changes probabilities",
+    ),
+    measured_results={
+        "report": "reports/optimization-v1/README.md",
+        "familiar_accuracy": 0.8131510416666666,
+        "known_composition_gap_accuracy": 0.669921875,
+        "paraphrase_accuracy": 0.8170572916666666,
+        "fresh_speakers": 58,
+        "fresh_recordings": 256,
+        "primary_questions_per_slice": 1536,
+        "seeds_per_recipe": 2,
+        "selection": "Nominated on development before confirmation; inference has no temporary primitive heads",
+    },
+)
+
+# Explicit reviewed versions; preserve v2 as the compatibility default.
+MODEL_REGISTRY = MappingProxyType({MODEL_ID: V2_REGISTRATION, V3_REGISTRATION.id: V3_REGISTRATION})
 
 
 def registry_snapshot(registry=None):

@@ -8,7 +8,7 @@ import torch
 
 from mmso.api import MODEL_ID
 from mmso.api.app import create_app
-from mmso.api.registry import MODEL_REGISTRY, V2_REGISTRATION, make_native_v1
+from mmso.api.registry import MODEL_REGISTRY, V2_REGISTRATION, V3_REGISTRATION, make_native_v1
 from mmso.api.runtime import NativeRuntime, CHECKPOINT_SHA256, CONFIG_SHA256
 from mmso.api.schema import DecisionResponse
 from test_api import payload
@@ -19,17 +19,24 @@ class RegistryTests(unittest.TestCase):
     def setUpClass(cls):
         torch.set_num_threads(2)
 
-    def test_production_registry_retains_only_v2_and_historical_fingerprints(self):
-        self.assertEqual(list(MODEL_REGISTRY), [MODEL_ID])
+    def test_production_registry_adds_confirmed_v3_and_retains_v2_default(self):
+        self.assertEqual(list(MODEL_REGISTRY), [MODEL_ID, "mmso-joint-v3"])
         self.assertEqual(MODEL_ID, "mmso-joint-v2")
         self.assertEqual(V2_REGISTRATION.checkpoint_sha256, CHECKPOINT_SHA256)
         self.assertEqual(V2_REGISTRATION.config_sha256, CONFIG_SHA256)
         with TestClient(create_app(device="cpu", api_key="")) as client:
-            self.assertEqual([m["id"] for m in client.get("/v1/models").json()["data"]], [MODEL_ID])
+            self.assertEqual([m["id"] for m in client.get("/v1/models").json()["data"]], [MODEL_ID, "mmso-joint-v3"])
             body = payload();body.pop("model")
             response = client.post("/v1/decisions", json=body)
             self.assertEqual(response.status_code, 200, response.text)
             self.assertEqual(response.json()["model"], MODEL_ID)
+            body["model"] = "mmso-joint-v3"
+            response = client.post("/v1/decisions", json=body)
+            self.assertEqual(response.status_code, 200, response.text)
+            self.assertEqual(response.json()["model"], "mmso-joint-v3")
+            self.assertEqual(response.json()["checkpoint_sha256"], V3_REGISTRATION.checkpoint_sha256)
+            self.assertNotEqual(response.json()["checkpoint_sha256"], CHECKPOINT_SHA256)
+            self.assertEqual(client.get("/v1/models/mmso-joint-v3").json()["parameters"], 668097)
 
     def test_two_startup_cached_models_dispatch_and_keep_cards_isolated(self):
         loaded = []
