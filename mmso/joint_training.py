@@ -17,7 +17,7 @@ from .artifacts import ROOT, provenance, read_manifest, sha256, write_json, writ
 from .audio import choose_device, synchronize
 from .joint_data import MANIFEST, audit_joint, expand_scenes
 from .joint_model import NativeDecisionModel, Vocabulary, audio_tensor, encode_requests, image_tensor
-from .joint_world import JOINT_TASKS
+from .joint_world import JOINT_TASKS, WORDS, answer
 
 
 class PairedCache:
@@ -36,15 +36,31 @@ class PairedCache:
         self.audio=torch.stack(self.audio)
         self.question,self.candidates,self.mask=encode_requests(self.records,vocabulary)
         self.targets=torch.tensor([r["target_index"] for r in self.records])
+        self.audio_pools={w:[i for i,s in enumerate(self.scenes) if s["audio_word"]==w] for w in WORDS}
+        self.counterfactual_targets=None
+        if split=="train":
+            targets=[]
+            for r in self.records:
+                scene=self.scenes[self.scene_indices[r["scene_id"]]]
+                values=[c["text"] for c in r["candidates"]]
+                targets.append([r["target_index"] if r["task"]=="tile_word" else values.index(answer(scene["panel"],word,r["task"])) for word in WORDS])
+            self.counterfactual_targets=torch.tensor(targets)
 
-    def batch(self,indices,device,mode="full"):
+    def batch(self,indices,device,mode="full",pairing_generator=None):
         scenes=self.index[indices]
+        audio_indices=scenes;targets=self.targets[indices]
+        if pairing_generator is not None:
+            if self.counterfactual_targets is None:raise ValueError("Re-pairing is training-only")
+            words=torch.randint(len(WORDS),(len(indices),),generator=pairing_generator)
+            draws=torch.randint(2**30,(len(indices),),generator=pairing_generator)
+            audio_indices=torch.tensor([self.audio_pools[WORDS[int(w)]][int(draw)%len(self.audio_pools[WORDS[int(w)]])] for w,draw in zip(words,draws)])
+            targets=self.counterfactual_targets[indices,words]
         modality=torch.ones((len(indices),2),dtype=torch.bool)
         if mode=="audio_only":modality[:,0]=False
         elif mode=="image_only":modality[:,1]=False
         elif mode!="full":raise ValueError("Invalid modality control")
-        inputs=[self.images[scenes],self.audio[scenes],self.question[indices],self.candidates[indices],self.mask[indices],modality]
-        return [x.to(device) for x in inputs],self.targets[indices].to(device)
+        inputs=[self.images[scenes],self.audio[audio_indices],self.question[indices],self.candidates[indices],self.mask[indices],modality]
+        return [x.to(device) for x in inputs],targets.to(device)
 
 
 def decision_metrics(records,logits,temperature=1.):
@@ -95,7 +111,7 @@ def fit_joint_temperature(records,logits):
     return float(np.exp(result.x)) if result.success and result.fun<loss(0.) else 1.
 
 
-def train_joint(run_id,mode="full",device="auto",epochs=48,max_train_seconds=360,seed=20260924,width=128,layers=2,max_steps=None):
+def train_joint(run_id,mode="full",device="auto",epochs=48,max_train_seconds=360,seed=20260924,width=128,layers=2,max_steps=None,resample_pairs=False):
     report_dir=ROOT/"reports"/run_id;checkpoint_dir=ROOT/"artifacts"/run_id
     if report_dir.exists() or checkpoint_dir.exists():raise ValueError("Use a fresh immutable run ID")
     if mode not in {"full","audio_only","image_only"}:raise ValueError("Unknown modality condition")
@@ -108,13 +124,14 @@ def train_joint(run_id,mode="full",device="auto",epochs=48,max_train_seconds=360
     audio_params=list(model.audio.parameters());audio_ids={id(p) for p in audio_params}
     other=[p for p in model.parameters() if id(p) not in audio_ids]
     optimizer=torch.optim.AdamW([{"params":audio_params,"lr":1e-4},{"params":other,"lr":3e-4}],weight_decay=.01)
-    generator=torch.Generator().manual_seed(seed);history=[];spent=0.;steps=0;best=float("inf");best_state=None;best_epoch=0
+    generator=torch.Generator().manual_seed(seed);pairing_generator=torch.Generator().manual_seed(seed+1)
+    history=[];spent=0.;steps=0;best=float("inf");best_state=None;best_epoch=0
     for epoch in range(1,epochs+1):
         model.train();losses=[]
         for indices in torch.randperm(len(training.records),generator=generator).split(64):
             if spent>=max_train_seconds or (max_steps is not None and steps>=max_steps):break
             synchronize(chosen);t=time.perf_counter()
-            inputs,targets=training.batch(indices,chosen,mode)
+            inputs,targets=training.batch(indices,chosen,mode,pairing_generator=pairing_generator if resample_pairs else None)
             optimizer.zero_grad(set_to_none=True);logits=model(*inputs)
             loss=nn.functional.cross_entropy(logits,targets)
             if not torch.isfinite(loss):raise ValueError("Nonfinite joint loss")
@@ -135,7 +152,7 @@ def train_joint(run_id,mode="full",device="auto",epochs=48,max_train_seconds=360
     model.load_state_dict(best_state)
     dev_logits=evaluate_logits(model,development,chosen,mode);dev_metrics,dev_predictions=decision_metrics(development.records,dev_logits)
     config={"architecture":"native-decision-v1","width":width,"layers":layers,"vocabulary":vocabulary.tokens,
-            "mode":mode,"seed":seed,"epochs_cap":epochs,"train_seconds_cap":max_train_seconds,"actual_steps":steps,
+            "mode":mode,"seed":seed,"pairing_seed":seed+1,"epochs_cap":epochs,"train_seconds_cap":max_train_seconds,"actual_steps":steps,"resample_training_pairs":resample_pairs,
             "selected_epoch":best_epoch,"batch_size":64,"audio_initialization_sha256":sha256(initial),"temperature":1.,
             "scope":"Real one-word speech and generated 2x2 icon panels; limited learned vocabulary; no real-browser capability claim"}
     write_json(checkpoint_dir/"config.json",config)

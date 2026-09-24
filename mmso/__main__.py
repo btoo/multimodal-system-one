@@ -42,6 +42,7 @@ def main():
     p.add_argument("--max-train-seconds",type=float,default=360)
     p.add_argument("--seed",type=int,default=20260924)
     p.add_argument("--max-steps",type=int)
+    p.add_argument("--resample-pairs",action="store_true",help="Re-pair training words/recordings with panels; oracle updates targets")
     p=commands.add_parser("joint-evaluate",help="Calibrate and evaluate a frozen joint checkpoint once")
     p.add_argument("--run-id",required=True)
     p.add_argument("--device",choices=["auto","cpu","mps"],default="auto")
@@ -78,7 +79,7 @@ def main():
         smoke_joint(args.device,args.steps)
     elif args.command=="joint-train":
         from .joint_training import train_joint
-        train_joint(args.run_id,args.mode,args.device,args.epochs,args.max_train_seconds,args.seed,max_steps=args.max_steps)
+        train_joint(args.run_id,args.mode,args.device,args.epochs,args.max_train_seconds,args.seed,max_steps=args.max_steps,resample_pairs=args.resample_pairs)
     elif args.command=="joint-evaluate":
         from .joint_training import evaluate_joint
         evaluate_joint(args.run_id,args.device)

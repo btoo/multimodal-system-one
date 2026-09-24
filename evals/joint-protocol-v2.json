@@ -1,0 +1,13 @@
+{
+  "id": "native-question-conditioned-panels-v2",
+  "parent_protocol": "evals/joint-protocol-v1.json",
+  "parent_run": "joint-full-v1",
+  "frozen_on": "2026-09-24",
+  "hypothesis": "Fixed one-to-one audio/panel pairing permits sample memorization instead of cross-modal binding",
+  "change": "Uniformly draw a spoken word and a training recording for each training request independently of its panel; recompute the label using the training oracle",
+  "unchanged": ["architecture", "input data pools", "development/calibration/test inputs", "question semantics", "optimizer", "step time cap", "selection metric"],
+  "training": {"resample_pairs": true, "seed": 20260924, "max_epochs": 48, "max_train_seconds": 360},
+  "selection": "Nominate on development only; held-out test remains closed",
+  "controls": "Audio-only and image-only models use the same resampling stream and optimizer-step cap as the nominee",
+  "scope": "Second and final planned development attempt for this initial campaign"
+}
