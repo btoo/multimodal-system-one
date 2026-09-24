@@ -1,0 +1,19 @@
+{
+  "url": "https://miso-playground-nine.vercel.app",
+  "source_commit": "f86dfe6",
+  "external_provider_rejected_http": 400,
+  "historical_external_run_hidden_http": 410,
+  "historical_native_run_preserved_http": 200,
+  "native_run": {
+    "id": "wrun_01M3AJAT12901RJTPW6J1HKN4V",
+    "status": "completed",
+    "model": "mmso-joint-v3",
+    "answers": 4,
+    "modalities": [
+      "audio",
+      "image",
+      "text"
+    ]
+  },
+  "research_credential_preserved_separately": true
+}

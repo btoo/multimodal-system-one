@@ -2,7 +2,7 @@
 
 **A research project for learning fast, typed decisions directly from speech, sounds, screenshots, and language on a MacBook.**
 
-[**Open the MiSO playground →**](https://miso-playground-nine.vercel.app) · Audio, image, and native text inputs, editable typed questions, probability views, and saved Workflow runs. Live calls require an owner session. [Deployment evidence](reports/playground-v1/README.md).
+[**Open the MiSO playground →**](https://miso-playground-nine.vercel.app) · Audio, image, and native text inputs, editable typed questions, probability views, and saved Workflow runs. Live calls require an owner session. [Deployment evidence](reports/playground-miso-only-v1/README.md).
 
 ![Project overview: visual observations and language enter a jointly trained model that predicts answer probabilities.](docs/assets/overview.svg)
 

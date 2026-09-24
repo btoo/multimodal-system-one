@@ -1,5 +1,7 @@
 # MiSO playground deployment verification
 
+Historical initial deployment. The [current playground is MiSO-only](../playground-miso-only-v1/README.md); comparison-model UI and execution were removed.
+
 The [MiSO playground](https://miso-playground-nine.vercel.app) is published on Vercel. It uses React Server Components for page composition and server-side session checks, with a real `use workflow` / `use step` path for durable model calls and saved result URLs. MiSO inference runs on the authenticated, scale-to-zero Modal CPU service; Jev is called from the server with its pinned version.
 
 | User path | Observed result |
