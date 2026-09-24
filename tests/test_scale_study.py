@@ -5,7 +5,7 @@ import numpy as np
 import torch
 
 from mmso.joint_model import NativeDecisionModel, Vocabulary, encode_requests
-from mmso.joint_world import COLORS, make_panel, render_panel
+from mmso.joint_world import COLORS, WORDS, make_panel, render_panel
 from mmso.scale_study import FactorizedVision, make_model, selection_score
 
 
@@ -18,13 +18,16 @@ class ScaleStudyTests(unittest.TestCase):
         return torch.from_numpy(np.array(render_panel(panel)).copy()).permute(2, 0, 1).float()[None] / 127.5 - 1
 
     def test_shape_prior_is_identical_under_palette_intervention(self):
-        panel = make_panel(53)
-        expected = FactorizedVision.ink_map(self.pixels(panel))
-        for color in COLORS:
-            altered = copy.deepcopy(panel)
-            for tile in altered["tiles"]:
-                tile["color"] = color
-            self.assertTrue(torch.equal(expected, FactorizedVision.ink_map(self.pixels(altered))))
+        for word in WORDS:
+            panel = make_panel(53)
+            for tile in panel["tiles"]:
+                tile["word"] = word
+            expected = FactorizedVision.ink_map(self.pixels(panel))
+            for color in COLORS:
+                altered = copy.deepcopy(panel)
+                for tile in altered["tiles"]:
+                    tile["color"] = color
+                self.assertTrue(torch.equal(expected, FactorizedVision.ink_map(self.pixels(altered))))
 
     def test_factorized_encoder_retains_color_information(self):
         panel = make_panel(53)

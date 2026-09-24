@@ -140,11 +140,17 @@ def source_snapshot():
         blob = subprocess.check_output(["git", "show", f"{snapshot['git_revision']}:{path}"], cwd=ROOT)
         if hashlib.sha256(blob).hexdigest() != digest:
             raise ValueError(f"Commit source before training or evaluation: {path}")
-    protocol_blob = subprocess.check_output(["git", "show", f"{snapshot['git_revision']}:evals/scale-protocol-v1.json"], cwd=ROOT)
-    if hashlib.sha256(protocol_blob).hexdigest() != sha256(PROTOCOL):
-        raise ValueError("Commit protocol before starting")
+    for path in [PROTOCOL, MANIFEST]:
+        blob = subprocess.check_output(["git", "show", f"{snapshot['git_revision']}:{path.relative_to(ROOT)}"], cwd=ROOT)
+        if hashlib.sha256(blob).hexdigest() != sha256(path):
+            raise ValueError("Commit protocol and manifest before starting")
     snapshot["protocol_sha256"] = sha256(PROTOCOL)
     return snapshot
+
+
+def verify_lineage(record):
+    if record["manifest_sha256"] != sha256(MANIFEST) or record["protocol_sha256"] != sha256(PROTOCOL):
+        raise ValueError("Dataset or protocol changed after the frozen experiment")
 
 
 def train_scale(run_id, device="mps"):
@@ -247,6 +253,9 @@ def nominate_scale():
     rows = []
     for run_id in protocol["conditions"]:
         report = json.loads((ROOT / "reports" / run_id / "training.json").read_text())
+        verify_lineage(report["provenance"])
+        if sha256(ROOT / report["checkpoint"]) != report["checkpoint_sha256"]:
+            raise ValueError("Training checkpoint changed before nomination")
         if report["test_evaluated"]:
             raise ValueError("Nominate before test")
         rows.append({"run_id": run_id, "development_score": report["selection_normalized_nll"],
@@ -265,6 +274,7 @@ def nominate_scale():
 def evaluate_scale(run_id, device="mps"):
     snapshot = source_snapshot()
     nomination = json.loads(NOMINATION.read_text())
+    verify_lineage(nomination)
     blob = subprocess.check_output(["git", "show", f"{snapshot['git_revision']}:evals/scale-nomination-v1.json"], cwd=ROOT)
     if hashlib.sha256(blob).hexdigest() != sha256(NOMINATION):
         raise ValueError("Commit nomination before confirmation")
@@ -273,6 +283,8 @@ def evaluate_scale(run_id, device="mps"):
     if (report_dir / "evaluation.json").exists():
         raise ValueError("Confirmation already evaluated")
     training = json.loads((ROOT / "reports" / run_id / "training.json").read_text())
+    if not frozen_reference:
+        verify_lineage(training["provenance"])
     config = training["configuration"]
     checkpoint = ROOT / training["checkpoint"]
     nominated = training if frozen_reference else next(r for r in nomination["conditions"] if r["run_id"] == run_id)
