@@ -1,0 +1,74 @@
+{
+  "color": {
+    "type": "choice",
+    "question": "what color marks the spoken command",
+    "choices": [
+      {
+        "id": "color-red",
+        "text": "red"
+      },
+      {
+        "id": "color-green",
+        "text": "green"
+      },
+      {
+        "id": "color-blue",
+        "text": "blue"
+      },
+      {
+        "id": "color-yellow",
+        "text": "yellow"
+      },
+      {
+        "id": "color-not present",
+        "text": "not present"
+      }
+    ]
+  },
+  "opposite_ranked": {
+    "type": "ranking",
+    "question": "what color marks the opposite of the spoken command",
+    "choices": [
+      {
+        "id": "color-red",
+        "text": "red"
+      },
+      {
+        "id": "color-green",
+        "text": "green"
+      },
+      {
+        "id": "color-blue",
+        "text": "blue"
+      },
+      {
+        "id": "color-yellow",
+        "text": "yellow"
+      },
+      {
+        "id": "color-not present",
+        "text": "not present"
+      }
+    ]
+  },
+  "present": {
+    "type": "noul",
+    "question": "is the spoken command on the screen"
+  },
+  "presence_score": {
+    "type": "score",
+    "question": "is the spoken command on the screen",
+    "levels": [
+      {
+        "id": "absent",
+        "text": "no",
+        "value": 0.0
+      },
+      {
+        "id": "present",
+        "text": "yes",
+        "value": 1.0
+      }
+    ]
+  }
+}

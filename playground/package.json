@@ -1,0 +1,37 @@
+{
+  "name": "miso-playground",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1 --port 3000",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1 --port 3000",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.ts"
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "dependencies": {
+    "next": "16.3.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "workflow": "4.8.9",
+    "zod": "^4.0.0",
+    "lucide-react": "^0.577.0",
+    "server-only": "0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.9.0"
+  },
+  "overrides": {
+    "undici": "7.29.0",
+    "@workflow/core": {
+      "nanoid": "5.1.16"
+    }
+  },
+  "type": "module"
+}

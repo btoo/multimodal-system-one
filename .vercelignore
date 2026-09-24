@@ -1,0 +1,9 @@
+*
+!playground
+!playground/**
+playground/node_modules
+playground/.next
+playground/.vercel
+playground/.env*
+playground/.workflow-data
+playground/tests

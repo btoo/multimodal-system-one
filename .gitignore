@@ -6,3 +6,15 @@ data/
 checkpoints/
 runs/
 *.pyc
+node_modules/
+.next/
+.vercel/
+.workflow-data/
+.env*
+*.tsbuildinfo
+!playground/data/
+!playground/data/*.json
+!playground/app/runs/
+!playground/app/runs/**
+!playground/app/api/runs/
+!playground/app/api/runs/**

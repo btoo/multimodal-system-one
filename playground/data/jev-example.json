@@ -1,0 +1,27 @@
+{
+  "state": "The customer asks for a receipt for last month. They say there is no deadline.",
+  "questions": {
+    "route": {
+      "type": "choice",
+      "instructions": "Which category best describes the primary issue in this record?",
+      "criteria": {
+        "billing": "Payments, invoices, or refunds",
+        "technical": "Application defects or service outages",
+        "account": "Account settings or access"
+      }
+    },
+    "intervention": {
+      "type": "noul",
+      "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+    },
+    "urgency": {
+      "type": "score",
+      "instructions": "Rate only the urgency explicitly stated in the record.",
+      "criteria": [
+        "Explicitly no urgency or deadline",
+        "Soon, without an immediate deadline",
+        "Immediate action is explicitly requested"
+      ]
+    }
+  }
+}
