@@ -5,7 +5,7 @@ import torch
 from mmso.joint_world import COLORS,POSITIONS,OPPOSITE,WORDS,answer,make_panel,render_panel,held_pair
 from mmso.joint_data import expand_scenes,questions_for_scene
 from mmso.joint_model import NativeDecisionModel,Vocabulary,encode_requests
-from mmso.joint_training import decision_metrics
+from mmso.joint_training import PairedCache,decision_metrics
 
 
 class OracleTests(unittest.TestCase):
@@ -104,6 +104,36 @@ class CandidateModelTests(unittest.TestCase):
         with self.assertRaises(ValueError):decision_metrics([record],[])
         metrics,_=decision_metrics([record],[[5.,0.]])
         self.assertEqual(metrics['by_slice']['test']['joint_macro_accuracy'],1)
+
+
+class PairingTests(unittest.TestCase):
+    def fixture(self):
+        data=PairedCache.__new__(PairedCache)
+        data.index=torch.zeros(64,dtype=torch.long)
+        data.images=torch.zeros(1,3,2,2)
+        data.audio=torch.arange(8).float().reshape(8,1,1,1)
+        data.targets=torch.zeros(64,dtype=torch.long)
+        data.question=torch.zeros(64,2,dtype=torch.long)
+        data.candidates=torch.zeros(64,8,2,dtype=torch.long)
+        data.mask=torch.ones(64,8,dtype=torch.bool)
+        data.audio_pools={w:[i] for i,w in enumerate(WORDS)}
+        data.counterfactual_targets=torch.arange(8).repeat(64,1)
+        return data
+
+    def test_repair_changes_audio_and_updates_ground_truth(self):
+        data=self.fixture();indices=torch.arange(64)
+        x,y=data.batch(indices,torch.device('cpu'),pairing_generator=torch.Generator().manual_seed(27))
+        self.assertTrue(torch.equal(x[1].flatten().long(),y))
+        self.assertGreater(len(set(y.tolist())),4)
+        self.assertTrue(torch.equal(x[0],data.images[data.index]))
+
+    def test_matched_controls_use_identical_pairing_stream(self):
+        data=self.fixture();indices=torch.arange(64)
+        a,ya=data.batch(indices,torch.device('cpu'),'full',torch.Generator().manual_seed(27))
+        b,yb=data.batch(indices,torch.device('cpu'),'image_only',torch.Generator().manual_seed(27))
+        self.assertTrue(torch.equal(ya,yb))
+        self.assertTrue(all(torch.equal(x,y) for x,y in zip(a[:5],b[:5])))
+        self.assertTrue(a[5][:,1].all());self.assertFalse(b[5][:,1].any())
 
 
 if __name__=='__main__':unittest.main()

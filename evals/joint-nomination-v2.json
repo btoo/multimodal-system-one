@@ -1,0 +1,18 @@
+{
+  "selected_run": "joint-full-v2",
+  "selected_checkpoint_sha256": "9fa7f2c3b129340977a7bf7413044b27d5a4fb4c55eec748df289f8bc122a343",
+  "selected_epoch": 33,
+  "selection_metric": {
+    "joint_macro_accuracy": 0.7282986111111112,
+    "joint_macro_normalized_nll": 0.6429716476167886,
+    "joint_examples": 1152
+  },
+  "test_opened": false,
+  "controls": [
+    "joint-audio-only-v2",
+    "joint-image-only-v2"
+  ],
+  "control_optimizer_steps": 8822,
+  "control_time_guard_seconds": 480,
+  "note": "Guard permits identical optimizer-step counts despite runtime variation; it is not extra data or steps."
+}

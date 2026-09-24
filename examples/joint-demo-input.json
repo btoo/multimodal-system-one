@@ -1,0 +1,109 @@
+{
+  "checkpoint": "artifacts/joint-full-v2/model.safetensors",
+  "image": "examples/joint-panel.png",
+  "audio": "data/joint/audio/down/dabd70c2_nohash_0.wav",
+  "requests": [
+    {
+      "question": "what color marks the spoken command",
+      "candidates": [
+        {
+          "id": "color-red",
+          "text": "red"
+        },
+        {
+          "id": "color-green",
+          "text": "green"
+        },
+        {
+          "id": "color-blue",
+          "text": "blue"
+        },
+        {
+          "id": "color-yellow",
+          "text": "yellow"
+        },
+        {
+          "id": "color-not present",
+          "text": "not present"
+        }
+      ]
+    },
+    {
+      "question": "what color marks the opposite of the spoken command",
+      "candidates": [
+        {
+          "id": "color-red",
+          "text": "red"
+        },
+        {
+          "id": "color-green",
+          "text": "green"
+        },
+        {
+          "id": "color-blue",
+          "text": "blue"
+        },
+        {
+          "id": "color-yellow",
+          "text": "yellow"
+        },
+        {
+          "id": "color-not present",
+          "text": "not present"
+        }
+      ]
+    },
+    {
+      "question": "where is the spoken command on the screen",
+      "candidates": [
+        {
+          "id": "position-0",
+          "text": "top left"
+        },
+        {
+          "id": "position-1",
+          "text": "top right"
+        },
+        {
+          "id": "position-2",
+          "text": "bottom left"
+        },
+        {
+          "id": "position-3",
+          "text": "bottom right"
+        },
+        {
+          "id": "position-4",
+          "text": "not present"
+        }
+      ]
+    },
+    {
+      "question": "is the spoken command on the screen",
+      "candidates": [
+        {
+          "id": "true",
+          "text": "yes"
+        },
+        {
+          "id": "false",
+          "text": "no"
+        }
+      ]
+    },
+    {
+      "question": "is the spoken command missing from the screen",
+      "candidates": [
+        {
+          "id": "true",
+          "text": "yes"
+        },
+        {
+          "id": "false",
+          "text": "no"
+        }
+      ]
+    }
+  ],
+  "selection": "First in-distribution test scene; fixed before held-out evaluation"
+}

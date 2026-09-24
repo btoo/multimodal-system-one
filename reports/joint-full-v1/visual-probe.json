@@ -1,0 +1,12 @@
+{
+  "kind": "frozen_visual_representation_diagnostic",
+  "source_run": "joint-full-v1",
+  "source_checkpoint_sha256": "245969893cff7b868c86453583f1bd1cd4a72097373beb3df0819b036aae7b22",
+  "train_patches": 2048,
+  "dev_patches": 768,
+  "train_accuracy": 0.72021484375,
+  "development_accuracy": 0.70703125,
+  "method": "Ridge linear probe, lambda=1, normalization fitted on training patches only",
+  "test_used": false,
+  "checkpoint_saved": false
+}
