@@ -1,0 +1,10 @@
+{
+  "scope": "Implementation-only generated-text fixture; no benchmark labels or screenshots used",
+  "fixture": "800x400 white RGB PNG with Continue drawn at (100,150) in 48px Arial",
+  "attempts": [
+    {"recognition_level": "accurate", "revision": 3, "cpu_only_requested": true, "status": "failed", "error": "TextRecognition.CRImageReaderError error 1", "repeated_identical_attempts": 2},
+    {"recognition_level": "fast", "revision": 3, "cpu_only_requested": true, "status": "succeeded", "recognized": "Continue", "bbox_xyxy": [102,158,292,195], "native_ocr_seconds": 0.06991899013519287}
+  ],
+  "decision": "Use fast revision3 CPU-only for both registered ranking variants; amend protocol before any development OCR evaluation",
+  "limitations": "This is a functional fixture, not benchmark accuracy or comparative OCR-engine research"
+}

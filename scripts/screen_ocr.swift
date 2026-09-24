@@ -22,7 +22,7 @@ do {
     }
     let request = VNRecognizeTextRequest()
     request.revision = VNRecognizeTextRequestRevision3
-    request.recognitionLevel = .accurate
+    request.recognitionLevel = .fast
     request.recognitionLanguages = ["en-US"]
     request.usesLanguageCorrection = false
     request.minimumTextHeight = 0
@@ -45,7 +45,7 @@ do {
     }
     let result: [String: Any] = ["width": image.width, "height": image.height, "proposals": proposals,
         "ocr_seconds": Date().timeIntervalSince(start), "revision": request.revision,
-        "recognition_level": "accurate", "language": "en-US", "language_correction": false, "cpu_only_requested": true]
+        "recognition_level": "fast", "language": "en-US", "language_correction": false, "cpu_only_requested": true]
     let data = try JSONSerialization.data(withJSONObject: result, options: [.sortedKeys])
     print(String(data: data, encoding: .utf8)!)
 } catch {

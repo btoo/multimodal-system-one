@@ -35,6 +35,7 @@ def center(box):
 
 def clean_proposals(proposals, width, height):
     output = []
+    seen = {}
     for proposal in sorted(proposals, key=lambda p: (p["kind"] != "word", p["bbox_xyxy"][1], p["bbox_xyxy"][0])):
         if not tokens(proposal["text"]):
             continue
@@ -47,8 +48,9 @@ def clean_proposals(proposals, width, height):
             continue
         point = center(box)
         signature = tuple(tokens(proposal["text"]))
-        if any(tuple(tokens(p["text"])) == signature and np.linalg.norm(np.asarray(center(p["bbox_xyxy"])) - point) <= 2 for p in output):
+        if any(np.linalg.norm(np.asarray(previous) - point) <= 2 for previous in seen.get(signature, [])):
             continue
+        seen.setdefault(signature, []).append(point)
         output.append({"text": proposal["text"], "bbox_xyxy": box.tolist(),
                        "kind": proposal["kind"], "confidence": float(proposal["confidence"])})
     return output
@@ -103,7 +105,7 @@ class VisionOCR:
 
     def identity(self):
         return {"name": "Apple Vision VNRecognizeTextRequest", "revision": 3,
-                "recognition_level": "accurate", "language": "en-US", "language_correction": False,
+                "recognition_level": "fast", "language": "en-US", "language_correction": False,
                 "cpu_only_requested": True, "source_sha256": sha256(self.source), "binary_sha256": sha256(self.binary),
                 "macos": subprocess.check_output(["sw_vers"], text=True).strip(),
                 "swift": subprocess.check_output(["swift", "--version"], text=True).strip(),

@@ -17,7 +17,7 @@
   "ocr": {
     "engine": "VNRecognizeTextRequest",
     "revision": 3,
-    "recognition_level": "accurate",
+    "recognition_level": "fast",
     "language": "en-US",
     "language_correction": false,
     "minimum_text_height": 0,
@@ -26,6 +26,7 @@
     "instructions_enter_ocr": false,
     "targets_enter_proposal_generation_or_ranking": false
   },
+  "pre_measurement_amendment": "Accurate CPU-only Vision failed twice on a generated Continue fixture with TextRecognition.CRImageReaderError error 1. Fast CPU-only revision3 succeeded. Switched to fast before any development or fresh OCR benchmark evaluation; preserve setup-failure report.",
   "ranking": {
     "token_f1": "2*token intersection size / (query token count + proposal token count)",
     "idf_coverage": "Within-screen inverse-frequency weighted query coverage times (0.75 + 0.25*proposal token precision)",
