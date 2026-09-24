@@ -50,6 +50,11 @@ def main():
     p.add_argument("checkpoint");p.add_argument("image");p.add_argument("audio");p.add_argument("requests")
     p.add_argument("--device",choices=["auto","cpu","mps"],default="auto")
     p.add_argument("--threshold",type=float,default=0.)
+    p=commands.add_parser("serve",help="Serve the cached native multimodal decisions API")
+    p.add_argument("--host",default="127.0.0.1")
+    p.add_argument("--port",type=int,default=8000)
+    p.add_argument("--device",choices=["auto","cpu","mps"],default="auto")
+    p.add_argument("--threads",type=int,default=2,help="PyTorch CPU worker threads")
     args=parser.parse_args()
     if hasattr(args,"run_id") and (not args.run_id or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_" for c in args.run_id)):
         parser.error("run-id must contain only letters, digits, hyphens, or underscores")
@@ -87,6 +92,14 @@ def main():
         from .joint_model import predict_joint
         requests=json.loads((ROOT/args.requests).read_text())
         print(json.dumps(predict_joint(ROOT/args.checkpoint,ROOT/args.image,ROOT/args.audio,requests,args.device,args.threshold),indent=2))
+    elif args.command=="serve":
+        if args.threads<1 or not 1<=args.port<=65535:
+            parser.error("threads must be positive and port must be in 1..65535")
+        import torch
+        import uvicorn
+        from .api.app import create_app
+        torch.set_num_threads(args.threads)
+        uvicorn.run(create_app(device=args.device),host=args.host,port=args.port)
 
 
 if __name__=="__main__":

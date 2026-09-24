@@ -1,0 +1,180 @@
+{
+  "id": "dec_973c4c02ae074fdfb1a5efd063cfd0bd",
+  "object": "decision.response",
+  "created": 1790227947,
+  "model": "mmso-joint-v2",
+  "checkpoint_sha256": "9fa7f2c3b129340977a7bf7413044b27d5a4fb4c55eec748df289f8bc122a343",
+  "results": {
+    "color": {
+      "probabilities": {
+        "color-red": 0.021820230409502983,
+        "color-green": 0.4048422574996948,
+        "color-blue": 0.0290986318141222,
+        "color-yellow": 0.012330346740782261,
+        "color-not present": 0.5319085121154785
+      },
+      "ranking": [
+        {
+          "id": "color-not present",
+          "rank": 1,
+          "probability": 0.5319085121154785
+        },
+        {
+          "id": "color-green",
+          "rank": 2,
+          "probability": 0.4048422574996948
+        },
+        {
+          "id": "color-blue",
+          "rank": 3,
+          "probability": 0.0290986318141222
+        },
+        {
+          "id": "color-red",
+          "rank": 4,
+          "probability": 0.021820230409502983
+        },
+        {
+          "id": "color-yellow",
+          "rank": 5,
+          "probability": 0.012330346740782261
+        }
+      ],
+      "prediction": "color-not present",
+      "decision": "color-not present",
+      "abstained": false,
+      "ties": [],
+      "confidence": 0.5319085121154785,
+      "type": "choice"
+    },
+    "opposite_ranked": {
+      "probabilities": {
+        "color-red": 0.8872862458229065,
+        "color-green": 0.035405393689870834,
+        "color-blue": 0.0017152413493022323,
+        "color-yellow": 0.012649881653487682,
+        "color-not present": 0.06294320523738861
+      },
+      "ranking": [
+        {
+          "id": "color-red",
+          "rank": 1,
+          "probability": 0.8872862458229065
+        },
+        {
+          "id": "color-not present",
+          "rank": 2,
+          "probability": 0.06294320523738861
+        },
+        {
+          "id": "color-green",
+          "rank": 3,
+          "probability": 0.035405393689870834
+        },
+        {
+          "id": "color-yellow",
+          "rank": 4,
+          "probability": 0.012649881653487682
+        },
+        {
+          "id": "color-blue",
+          "rank": 5,
+          "probability": 0.0017152413493022323
+        }
+      ],
+      "prediction": "color-red",
+      "decision": "color-red",
+      "abstained": false,
+      "ties": [],
+      "confidence": 0.8872862458229065,
+      "type": "ranking"
+    },
+    "present": {
+      "probabilities": {
+        "true": 0.37021195888519287,
+        "false": 0.6297880411148071
+      },
+      "ranking": [
+        {
+          "id": "false",
+          "rank": 1,
+          "probability": 0.6297880411148071
+        },
+        {
+          "id": "true",
+          "rank": 2,
+          "probability": 0.37021195888519287
+        }
+      ],
+      "prediction": "false",
+      "decision": "false",
+      "abstained": false,
+      "ties": [],
+      "confidence": 0.6297880411148071,
+      "type": "noul",
+      "probability_true": 0.37021195888519287,
+      "value": false
+    },
+    "presence_score": {
+      "probabilities": {
+        "absent": 0.6297880411148071,
+        "present": 0.37021195888519287
+      },
+      "ranking": [
+        {
+          "id": "absent",
+          "rank": 1,
+          "probability": 0.6297880411148071
+        },
+        {
+          "id": "present",
+          "rank": 2,
+          "probability": 0.37021195888519287
+        }
+      ],
+      "prediction": "absent",
+      "decision": "absent",
+      "abstained": false,
+      "ties": [],
+      "confidence": 0.6297880411148071,
+      "type": "score",
+      "expected_value": 0.37021195888519287,
+      "value": 0.37021195888519287,
+      "range": [
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "input_summary": {
+    "image": {
+      "original_size": [
+        128,
+        128
+      ],
+      "model_size": [
+        128,
+        128
+      ],
+      "media_type": "image/png"
+    },
+    "audio": {
+      "duration_seconds": 0.882375,
+      "sample_rate": 16000,
+      "model_sample_rate": 16000,
+      "padded_to_seconds": 1.0,
+      "channels": 1,
+      "streaming": false
+    },
+    "questions": 4
+  },
+  "semantics": {
+    "confidence": "max categorical probability after temperature scaling",
+    "ranking": "descending probability, conditional on the supplied candidate set",
+    "score": "expected caller-supplied rubric value; not a separately trained regression head",
+    "noul": "P(yes) from the yes/no candidate distribution",
+    "abstention": "decision/value are null for ties or confidence below abstain_threshold",
+    "temperature": 3.1478261296632617,
+    "device": "cpu"
+  }
+}

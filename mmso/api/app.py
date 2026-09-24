@@ -1,0 +1,110 @@
+"""FastAPI application; model weights are loaded once at process startup."""
+from __future__ import annotations
+
+from contextlib import asynccontextmanager
+import hmac
+import os
+
+from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from starlette.exceptions import HTTPException as StarletteHTTPException
+
+from .runtime import NativeRuntime
+from .schema import MODEL_ID, DecisionRequest, DecisionResponse
+
+MAX_REQUEST_BYTES = 4 * 1024 * 1024
+
+
+class BodyLimitMiddleware:
+    """Bound a whole request before JSON parsing, including chunked transfers."""
+    def __init__(self, app, limit=MAX_REQUEST_BYTES):
+        self.app, self.limit = app, limit
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.app(scope, receive, send)
+        chunks, total = [], 0
+        while True:
+            message = await receive()
+            if message["type"] == "http.disconnect":
+                return
+            data = message.get("body", b"")
+            total += len(data)
+            if total > self.limit:
+                response = JSONResponse(status_code=413, content={"error": {
+                    "code": "request_too_large", "message": f"Request body exceeds {self.limit} bytes"}})
+                return await response(scope, receive, send)
+            chunks.append(data)
+            if not message.get("more_body", False):
+                break
+        body = b"".join(chunks)
+        delivered = False
+
+        async def bounded_receive():
+            nonlocal delivered
+            if not delivered:
+                delivered = True
+                return {"type": "http.request", "body": body, "more_body": False}
+            return await receive()
+        return await self.app(scope, bounded_receive, send)
+
+
+def create_app(device="auto", api_key=None):
+    key = os.environ.get("MMSO_API_KEY", "") if api_key is None else api_key
+
+    @asynccontextmanager
+    async def lifespan(app):
+        app.state.runtime = NativeRuntime(device)
+        yield
+        del app.state.runtime
+
+    app = FastAPI(title="Multimodal System One Decisions", version="0.1.0",
+        description="Experimental local audio/image/question classification. This is not an OpenAI, Claude, or Jev compatible server.",
+        lifespan=lifespan)
+    app.add_middleware(BodyLimitMiddleware)
+    bearer = HTTPBearer(auto_error=False)
+
+    def authorize(credentials: HTTPAuthorizationCredentials | None = Depends(bearer)):
+        if key and (credentials is None or not hmac.compare_digest(credentials.credentials.encode("utf-8"), key.encode("utf-8"))):
+            raise HTTPException(status_code=401, detail="A valid bearer API key is required", headers={"WWW-Authenticate": "Bearer"})
+
+    @app.exception_handler(RequestValidationError)
+    async def validation_error(request, error):
+        # Do not echo media payloads from Pydantic's error.input field.
+        details = [{"path": ".".join(map(str, item["loc"])), "message": item["msg"], "type": item["type"]}
+                   for item in error.errors()]
+        return JSONResponse(status_code=422, content={"error": {"code": "invalid_request",
+            "message": "Request does not match the API schema", "details": details}})
+
+    @app.exception_handler(StarletteHTTPException)
+    async def http_error(request, error):
+        return JSONResponse(status_code=error.status_code, headers=error.headers,
+            content={"error": {"code": {401: "unauthorized", 404: "not_found", 405: "method_not_allowed"}.get(error.status_code, "request_error"),
+                               "message": error.detail}})
+
+    @app.get("/healthz")
+    def health(request: Request):
+        return {"status": "ready", "loaded_models": 1 if hasattr(request.app.state, "runtime") else 0}
+
+    @app.get("/v1/models", dependencies=[Depends(authorize)])
+    def models(request: Request):
+        return {"object": "list", "data": [request.app.state.runtime.model_card()]}
+
+    @app.get("/v1/models/{model_id}", dependencies=[Depends(authorize)])
+    def model(model_id: str, request: Request):
+        if model_id != MODEL_ID:
+            raise HTTPException(404, "Unknown model; see /v1/models")
+        return request.app.state.runtime.model_card()
+
+    @app.post("/v1/decisions", response_model=DecisionResponse, dependencies=[Depends(authorize)])
+    def decide(body: DecisionRequest, request: Request):
+        if body.model != MODEL_ID:
+            raise HTTPException(404, "Unknown model; see /v1/models")
+        try:
+            return request.app.state.runtime.decide(body)
+        except ValueError as error:
+            return JSONResponse(status_code=422, content={"error": {"code": "invalid_input", "message": str(error)}})
+
+    return app
