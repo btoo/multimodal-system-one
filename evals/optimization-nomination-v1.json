@@ -1,0 +1,57 @@
+{
+  "protocol_sha256": "72ebd2b76d26c3852031442ce54f8a24444b126c9689f837d24de9695832d073",
+  "manifest_sha256": "6f3665e33c5df6e9a2746b3b1378ea382babc5b90349d7d91da49836e1a8663c",
+  "conditions": [
+    {
+      "run_id": "optimization-control-s24-v1",
+      "selection_key": [
+        0,
+        0.5160590277777778,
+        -1.9875015131418572
+      ],
+      "checkpoint_sha256": "fff0a07e6ffcf40b9152fd42f8f6bd1f8c703b3e213eb1324565bda5642a4128",
+      "matched_step_budget_completed": true,
+      "recipe": "joint_only",
+      "seed": 20260924
+    },
+    {
+      "run_id": "optimization-primitive-s24-v1",
+      "selection_key": [
+        1,
+        0.7630208333333334,
+        -2.1578193592142814
+      ],
+      "checkpoint_sha256": "4284d30920615018b500716d406236d919f5e38e268fdc5490c6f559af612bfa",
+      "matched_step_budget_completed": true,
+      "recipe": "primitive_supervision",
+      "seed": 20260924
+    },
+    {
+      "run_id": "optimization-control-s25-v1",
+      "selection_key": [
+        0,
+        0.4800347222222222,
+        -1.338844371003466
+      ],
+      "checkpoint_sha256": "041cd4ea8c9984ccd42c5b21f41fd5685b77917d46d03a7e7dd0ccf4ba7d1c62",
+      "matched_step_budget_completed": true,
+      "recipe": "joint_only",
+      "seed": 20260925
+    },
+    {
+      "run_id": "optimization-primitive-s25-v1",
+      "selection_key": [
+        1,
+        0.6979166666666666,
+        -1.7776204923323655
+      ],
+      "checkpoint_sha256": "4ccd7342519a0d5524d647d104d9e5003bb0ee9221c0776336efa35b24ad67c4",
+      "matched_step_budget_completed": true,
+      "recipe": "primitive_supervision",
+      "seed": 20260925
+    }
+  ],
+  "candidate_run": "optimization-primitive-s24-v1",
+  "test_opened": false,
+  "serving_default_changed": false
+}
