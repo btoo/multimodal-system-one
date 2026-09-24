@@ -1,0 +1,50 @@
+{
+  "version": 2,
+  "status": "registered_before_development_measurements",
+  "scope": "Separate pretrained Apple Vision OCR plus deterministic lexical GUI grounding controls; no native model or browser-action claim",
+  "source": {
+    "repository": "likaixin/ScreenSpot-Pro",
+    "revision": "210e78d3844251110bff86c95835ebd37a6930fa"
+  },
+  "development": {
+    "manifest": "evals/manifests/screen_grounding.jsonl",
+    "examples": 24,
+    "status": "exposed; all use is development only",
+    "reproduction": "Original 6-by-4 CLIP grid and center control; expected old results 0/24 hits and 1/24 grid point coverage",
+    "variants": ["token_f1", "idf_coverage"],
+    "selection": "Higher development grounding-hit count; tie favors token_f1; no candidate/threshold search beyond these two declared scorers"
+  },
+  "ocr": {
+    "engine": "VNRecognizeTextRequest",
+    "revision": 3,
+    "recognition_level": "accurate",
+    "language": "en-US",
+    "language_correction": false,
+    "minimum_text_height": 0,
+    "cpu_only_requested": true,
+    "proposals": "Whole-image line and word boxes, deduplicated by identical normalized text and center distance <=2 pixels; no target crops",
+    "instructions_enter_ocr": false,
+    "targets_enter_proposal_generation_or_ranking": false
+  },
+  "ranking": {
+    "token_f1": "2*token intersection size / (query token count + proposal token count)",
+    "idf_coverage": "Within-screen inverse-frequency weighted query coverage times (0.75 + 0.25*proposal token precision)",
+    "normalization": "Lowercase alphanumeric tokens, remove terminal s on words >4 characters except ss, fixed instruction stopword set in source",
+    "abstention": "No proposals or no positive lexical overlap",
+    "tie_break": "OCR confidence, fewer proposal tokens, top then left; no label-dependent choice",
+    "point": "Center of the selected OCR box"
+  },
+  "confirmation": {
+    "examples": 64,
+    "per_application": {"text": 4, "icon": 4},
+    "applications": ["macos_common_macos", "vscode_macos", "excel_macos", "word_macos", "powerpoint_windows", "pycharm_macos", "android_studio_macos", "blender_windows"],
+    "unseen_development_applications": ["android_studio_macos", "blender_windows"],
+    "selection": "SHA256 rank with prefix mmso-screen-v2-confirmation: over source ID; application/type quotas; exclude all development screen filenames and content hashes, deduplicate confirmation screen identities/hashes",
+    "no_selection_by": ["target geometry", "instruction contents", "OCR results", "model predictions"],
+    "run_policy": "One evaluation after source and development nomination are frozen; no retuning on confirmation failures",
+    "controls": ["selected OCR lexical scorer", "original fixed-grid CLIP", "screen center"],
+    "download_cap_bytes": 524288000
+  },
+  "metrics": ["grounding hit", "proposal-center recall upper bound", "zero-proposal rate", "abstention rate", "text/icon/application slices", "paired hit-rate difference", "complete per-case pipeline p50/p95 including OCR/process startup and preprocessing"],
+  "limitations": ["No paid API, no microphone/private-screen capture, no browser execution", "Apple OCR weights are OS-bundled and not independently downloadable/pinnable; record OS build, Vision revision, source and binary hash", "Balanced custom subset is not a full ScreenSpot-Pro leaderboard result", "Icons without visible text may have no OCR proposal or lexical evidence"]
+}
