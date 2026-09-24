@@ -73,6 +73,7 @@ export function RunResults({
         timer = setTimeout(poll, 1200);
       } catch (e) {
         if (cancelled) return;
+        setState({ id: runId!, status: "failed" });
         setError(e instanceof Error ? e.message : "Could not read this run.");
       }
     }
@@ -108,7 +109,7 @@ export function RunResults({
               Complete
             </>
           ) : (
-            "Ready"
+            state?.status === "failed" || state?.status === "cancelled" ? "Failed" : "Ready"
           )}
         </span>
       </div>

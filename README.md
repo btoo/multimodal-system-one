@@ -2,6 +2,8 @@
 
 **A research project for learning fast, typed decisions directly from speech, sounds, screenshots, and language on a MacBook.**
 
+[**Open the MiSO playground →**](https://miso-playground-nine.vercel.app) · Audio/image inputs, editable typed questions, probability views, and saved Workflow runs. Live calls require an owner session. [Deployment evidence](reports/playground-v1/README.md).
+
 ![Project overview: visual observations and language enter a jointly trained model that predicts answer probabilities.](docs/assets/overview.svg)
 
 > **Stage: confirmed native-model accuracy gains and broader real-screen evaluation.** The new `mmso-joint-v3` model scores **81.32% on familiar combinations and 66.99% on the known composition gap**, versus v2's 65.30% and 47.14% on identical fresh voices/panels. The inference model remains 668,097 parameters. A separate OCR control reaches 9/64 real-screen targets. General speech, reliable browser execution, and Jev-equivalent capabilities remain unestablished.

@@ -1,0 +1,251 @@
+{
+  "url": "https://miso-playground-nine.vercel.app",
+  "source_commit": "4ba196c",
+  "deployment": "dpl_9jf8xA2zoXP7BjToPcvSo1Jhcdzp",
+  "anonymous_run_status": 401,
+  "runs": [
+    {
+      "id": "wrun_01M3AFKC7FDCB9WNA8RRPVT12N",
+      "url": "https://miso-playground-nine.vercel.app/runs/wrun_01M3AFKC7FDCB9WNA8RRPVT12N",
+      "provider": "miso",
+      "model": "mmso-joint-v3",
+      "checkpoint": "4284d30920615018b500716d406236d919f5e38e268fdc5490c6f559af612bfa",
+      "inference_ms": 8379.091088999994,
+      "input_tokens": null,
+      "input_token_cost_usd": null,
+      "request_sha256": "85a2bec24f10cb20ca2a72210fa004520bfb334757bac0f01db5f29be74b5ab7",
+      "result_sha256": "4e9908082a142cc8327ad08cb40edb1086c9b7effc016871d2e8567b4d5c50ae",
+      "raw": {
+        "id": "dec_3dd862238b284dc48b85befd12b9c8e3",
+        "object": "decision.response",
+        "created": 1790279539,
+        "model": "mmso-joint-v3",
+        "checkpoint_sha256": "4284d30920615018b500716d406236d919f5e38e268fdc5490c6f559af612bfa",
+        "results": {
+          "color": {
+            "probabilities": {
+              "color-red": 0.01804593950510025,
+              "color-green": 0.03465777263045311,
+              "color-blue": 0.061515923589468,
+              "color-yellow": 0.02461814694106579,
+              "color-not present": 0.8611622452735901
+            },
+            "ranking": [
+              {
+                "id": "color-not present",
+                "rank": 1,
+                "probability": 0.8611622452735901
+              },
+              {
+                "id": "color-blue",
+                "rank": 2,
+                "probability": 0.061515923589468
+              },
+              {
+                "id": "color-green",
+                "rank": 3,
+                "probability": 0.03465777263045311
+              },
+              {
+                "id": "color-yellow",
+                "rank": 4,
+                "probability": 0.02461814694106579
+              },
+              {
+                "id": "color-red",
+                "rank": 5,
+                "probability": 0.01804593950510025
+              }
+            ],
+            "prediction": "color-not present",
+            "decision": "color-not present",
+            "abstained": false,
+            "ties": [],
+            "confidence": 0.8611622452735901,
+            "type": "choice"
+          },
+          "opposite_ranked": {
+            "probabilities": {
+              "color-red": 0.9490218162536621,
+              "color-green": 0.007422096561640501,
+              "color-blue": 0.00638758996501565,
+              "color-yellow": 0.009253577329218388,
+              "color-not present": 0.027914876118302345
+            },
+            "ranking": [
+              {
+                "id": "color-red",
+                "rank": 1,
+                "probability": 0.9490218162536621
+              },
+              {
+                "id": "color-not present",
+                "rank": 2,
+                "probability": 0.027914876118302345
+              },
+              {
+                "id": "color-yellow",
+                "rank": 3,
+                "probability": 0.009253577329218388
+              },
+              {
+                "id": "color-green",
+                "rank": 4,
+                "probability": 0.007422096561640501
+              },
+              {
+                "id": "color-blue",
+                "rank": 5,
+                "probability": 0.00638758996501565
+              }
+            ],
+            "prediction": "color-red",
+            "decision": "color-red",
+            "abstained": false,
+            "ties": [],
+            "confidence": 0.9490218162536621,
+            "type": "ranking"
+          },
+          "present": {
+            "probabilities": {
+              "true": 0.06873489171266556,
+              "false": 0.931265115737915
+            },
+            "ranking": [
+              {
+                "id": "false",
+                "rank": 1,
+                "probability": 0.931265115737915
+              },
+              {
+                "id": "true",
+                "rank": 2,
+                "probability": 0.06873489171266556
+              }
+            ],
+            "prediction": "false",
+            "decision": "false",
+            "abstained": false,
+            "ties": [],
+            "confidence": 0.931265115737915,
+            "type": "noul",
+            "probability_true": 0.06873489171266556,
+            "value": false
+          },
+          "presence_score": {
+            "probabilities": {
+              "absent": 0.931265115737915,
+              "present": 0.06873489171266556
+            },
+            "ranking": [
+              {
+                "id": "absent",
+                "rank": 1,
+                "probability": 0.931265115737915
+              },
+              {
+                "id": "present",
+                "rank": 2,
+                "probability": 0.06873489171266556
+              }
+            ],
+            "prediction": "absent",
+            "decision": "absent",
+            "abstained": false,
+            "ties": [],
+            "confidence": 0.931265115737915,
+            "type": "score",
+            "expected_value": 0.06873489171266556,
+            "value": 0.06873489171266556,
+            "range": [
+              0,
+              1
+            ]
+          }
+        },
+        "input_summary": {
+          "image": {
+            "original_size": [
+              128,
+              128
+            ],
+            "model_size": [
+              128,
+              128
+            ],
+            "media_type": "image/png"
+          },
+          "audio": {
+            "duration_seconds": 0.882375,
+            "sample_rate": 16000,
+            "model_sample_rate": 16000,
+            "padded_to_seconds": 1,
+            "channels": 1,
+            "streaming": false
+          },
+          "questions": 4
+        },
+        "semantics": {
+          "confidence": "max categorical probability after temperature scaling",
+          "ranking": "descending probability, conditional on the supplied candidate set",
+          "score": "expected caller-supplied rubric value; not a separately trained regression head",
+          "noul": "P(yes) from the yes/no candidate distribution",
+          "abstention": "decision/value are null for ties or confidence below abstain_threshold",
+          "temperature": 5.186910277762962,
+          "device": "cpu"
+        }
+      }
+    },
+    {
+      "id": "wrun_01M3AFP6AV75N3FGGHZEC1YRY2",
+      "url": "https://miso-playground-nine.vercel.app/runs/wrun_01M3AFP6AV75N3FGGHZEC1YRY2",
+      "provider": "jev",
+      "model": "jev-1.13.0",
+      "checkpoint": null,
+      "inference_ms": 275.59851899999194,
+      "input_tokens": 437,
+      "input_token_cost_usd": 0.000018354000000000004,
+      "request_sha256": "c0df53569f755229330fb0b4836514676de88f7532c265c8199be88cceabf6ed",
+      "result_sha256": "dadff42a4a920fe32cd662d82fffd6b5e4d01e93ae042359fbac84986ea6dba2",
+      "raw": {
+        "model": "jev-1.13.0",
+        "answers": {
+          "route": {
+            "type": "choice",
+            "choice": "technical",
+            "confidence": 1,
+            "probabilities": {
+              "billing": 0,
+              "account": 0,
+              "technical": 1
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "noul": 0.04
+          },
+          "urgency": {
+            "type": "score",
+            "score": 1,
+            "confidence": 1,
+            "legend": {
+              "0": "Explicitly no urgency or deadline",
+              "1": "Soon, without an immediate deadline",
+              "2": "Immediate action is explicitly requested"
+            },
+            "probabilities": {
+              "0": 0,
+              "1": 1,
+              "2": 0
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 437,
+          "output_tokens": 71
+        }
+      }
+    }
+  ],
+  "purpose": "deployment acceptance checks, not an accuracy or performance benchmark"
+}

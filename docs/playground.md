@@ -1,6 +1,6 @@
 # MiSO playground
 
-The Next.js application in `playground/` uses React Server Components for page composition, model documentation and session-aware rendering. Client components handle media previews, question editing and result inspection. Each live run starts a Vercel Workflow and receives a stable run URL; the model call runs in a `use step` function with `maxRetries = 0`.
+The Next.js application in `playground/` uses React Server Components for page composition, model documentation and session-aware rendering. Client components handle media previews, question editing and result inspection. Local Workflow records use `.workflow-data/`, outside Next build output, so a rebuild does not delete them. Each live run starts a Vercel Workflow and receives a stable run URL; the model call runs in a `use step` function with `maxRetries = 0`.
 
 ```mermaid
 flowchart LR
