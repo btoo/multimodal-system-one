@@ -27,6 +27,8 @@ uv run python examples/api_client.py
 
 The service loads our trained checkpoint once. It runs locally without calling OpenAI, Claude, or Jev. Read the [developer guide](docs/developer-api.md) for data preparation, Python and curl examples, authentication, validation, and the exact schemas. The [design rationale](docs/research/developer-interface.md) connects the interface to its primary sources.
 
+The real HTTP demo matches the saved neural output within `1.8e-7`. Warm CPU requests returning four typed answers measured **4.81 ms median / 5.60 ms p95** over 32 repeated-fixture requests, including HTTP, validation, decoding, and inference. Recording time, startup, and request assembly are excluded. See the [API evidence and reproduction commands](reports/api-v1/README.md).
+
 **The model's current scope still applies:** one short spoken keyword, one generated 2×2 panel, and a limited learned text vocabulary. Score is an expectation over declared candidate values; Ranking sorts the same candidate distribution. These output views do not establish arbitrary rubric understanding or general screenshot/speech capability.
 
 ## First unified model and original evaluation

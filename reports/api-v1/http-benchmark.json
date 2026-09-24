@@ -1,0 +1,450 @@
+{
+  "kind": "warm_local_http_benchmark",
+  "schema_version": 1,
+  "model": "mmso-joint-v2",
+  "model_card": {
+    "id": "mmso-joint-v2",
+    "object": "model",
+    "checkpoint_sha256": "9fa7f2c3b129340977a7bf7413044b27d5a4fb4c55eec748df289f8bc122a343",
+    "config_sha256": "59839e234b2c63eb61430f984356ffbf2a4e05bb125fa73df5a3111547fc9759",
+    "architecture": "native-decision-v1",
+    "parameters": 668097,
+    "device": "cpu",
+    "scope": "Real one-word speech and generated 2x2 icon panels; limited learned vocabulary; no real-browser capability claim",
+    "status": "experimental",
+    "capabilities": {
+      "input_modalities": [
+        "image",
+        "audio",
+        "text"
+      ],
+      "output_types": [
+        "choice",
+        "noul",
+        "score",
+        "ranking"
+      ],
+      "required_media": {
+        "image": 1,
+        "audio": 1
+      },
+      "text_role": "Each text block supplies a referenced question; no chat history or free context",
+      "image": {
+        "media_types": [
+          "image/png",
+          "image/jpeg"
+        ],
+        "max_bytes": 2097152,
+        "max_pixels": 4194304,
+        "max_edge": 4096,
+        "model_size": [
+          128,
+          128
+        ],
+        "layout": "generated 2x2 symbol panel",
+        "animation": false
+      },
+      "audio": {
+        "media_types": [
+          "audio/wav"
+        ],
+        "encoding": "PCM16",
+        "channels": 1,
+        "sample_rates": [
+          8000,
+          16000,
+          22050,
+          24000,
+          44100,
+          48000
+        ],
+        "max_bytes": 131072,
+        "max_seconds": 1.0,
+        "model_sample_rate": 16000,
+        "streaming": false,
+        "words": [
+          "down",
+          "go",
+          "left",
+          "no",
+          "right",
+          "stop",
+          "up",
+          "yes"
+        ]
+      },
+      "text": {
+        "vocabulary": [
+          "audio",
+          "blue",
+          "bottom",
+          "color",
+          "command",
+          "contains",
+          "does",
+          "down",
+          "from",
+          "go",
+          "green",
+          "in",
+          "is",
+          "left",
+          "marks",
+          "missing",
+          "no",
+          "not",
+          "of",
+          "on",
+          "opposite",
+          "position",
+          "present",
+          "red",
+          "represent",
+          "right",
+          "screen",
+          "spoken",
+          "stop",
+          "surrounds",
+          "symbol",
+          "the",
+          "top",
+          "up",
+          "visible",
+          "what",
+          "where",
+          "which",
+          "word",
+          "yellow",
+          "yes"
+        ],
+        "question_max_tokens": 24,
+        "candidate_max_tokens": 8,
+        "max_questions": 32,
+        "candidate_count": [
+          2,
+          32
+        ],
+        "tokenizer": "lowercase ASCII words; punctuation is ignored"
+      },
+      "remote_media_urls": false,
+      "video": false,
+      "generation": false,
+      "tool_execution": false
+    },
+    "calibration": {
+      "temperature": 3.1478261296632617,
+      "confidence": "maximum temperature-scaled categorical probability; not epistemic uncertainty",
+      "scope": "Fitted on the recorded joint-panel calibration partition; arbitrary rubrics and candidate subsets are not separately calibrated"
+    },
+    "known_limitations": [
+      "No demonstrated real-browser or general image understanding",
+      "45.66% on the exposed held-out compositional split; 72.92% in distribution",
+      "Noul and numeric Score are explicit transformations of the same candidate distribution",
+      "Changing the candidate set changes probabilities and confidence"
+    ]
+  },
+  "samples": 32,
+  "warmup_requests": 5,
+  "questions_per_request": 4,
+  "request_sha256": "fad93d896b685151062b8fcaabedd9445c64b6c466add29b1139f53c29e84948",
+  "request_bytes": 40229,
+  "response_bytes": [
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070,
+    3070
+  ],
+  "elapsed_ms": [
+    5.051417,
+    4.804917,
+    4.410333,
+    5.160334,
+    6.025375,
+    5.368125,
+    5.07075,
+    5.808333,
+    4.5695,
+    4.893042,
+    5.002208,
+    5.424708,
+    4.601041,
+    4.10625,
+    4.853333,
+    4.597708,
+    4.574084,
+    4.449084,
+    4.453125,
+    4.300375,
+    4.917083,
+    4.742541,
+    4.727459,
+    5.035625,
+    4.898417,
+    4.845292,
+    5.318541,
+    4.7655,
+    4.548291,
+    4.427458,
+    4.809417,
+    4.360166
+  ],
+  "latency_ms": {
+    "min": 4.10625,
+    "mean": 4.8412447499999995,
+    "p50": 4.807167,
+    "p95": 5.59733925,
+    "p99": 5.958091980000001,
+    "max": 6.025375
+  },
+  "timing_includes": [
+    "fresh loopback HTTP connection per request",
+    "request transmission",
+    "server validation and media decoding",
+    "model inference and synchronization",
+    "response serialization and transmission",
+    "client JSON decoding"
+  ],
+  "timing_excludes": [
+    "audio capture",
+    "request assembly and base64 encoding",
+    "server startup and checkpoint loading"
+  ],
+  "concurrency": 1,
+  "interpretation": "Repeated fixture, warm loaded model; not an accuracy, streaming, capacity, or independent-input benchmark.",
+  "first_response": {
+    "id": "dec_65e25def6efa4e0080327c08ba5672f7",
+    "object": "decision.response",
+    "created": 1790228632,
+    "model": "mmso-joint-v2",
+    "checkpoint_sha256": "9fa7f2c3b129340977a7bf7413044b27d5a4fb4c55eec748df289f8bc122a343",
+    "results": {
+      "color": {
+        "probabilities": {
+          "color-red": 0.021820230409502983,
+          "color-green": 0.4048422574996948,
+          "color-blue": 0.0290986318141222,
+          "color-yellow": 0.012330346740782261,
+          "color-not present": 0.5319085121154785
+        },
+        "ranking": [
+          {
+            "id": "color-not present",
+            "rank": 1,
+            "probability": 0.5319085121154785
+          },
+          {
+            "id": "color-green",
+            "rank": 2,
+            "probability": 0.4048422574996948
+          },
+          {
+            "id": "color-blue",
+            "rank": 3,
+            "probability": 0.0290986318141222
+          },
+          {
+            "id": "color-red",
+            "rank": 4,
+            "probability": 0.021820230409502983
+          },
+          {
+            "id": "color-yellow",
+            "rank": 5,
+            "probability": 0.012330346740782261
+          }
+        ],
+        "prediction": "color-not present",
+        "decision": "color-not present",
+        "abstained": false,
+        "ties": [],
+        "confidence": 0.5319085121154785,
+        "type": "choice"
+      },
+      "opposite_ranked": {
+        "probabilities": {
+          "color-red": 0.8872862458229065,
+          "color-green": 0.035405393689870834,
+          "color-blue": 0.0017152413493022323,
+          "color-yellow": 0.012649881653487682,
+          "color-not present": 0.06294320523738861
+        },
+        "ranking": [
+          {
+            "id": "color-red",
+            "rank": 1,
+            "probability": 0.8872862458229065
+          },
+          {
+            "id": "color-not present",
+            "rank": 2,
+            "probability": 0.06294320523738861
+          },
+          {
+            "id": "color-green",
+            "rank": 3,
+            "probability": 0.035405393689870834
+          },
+          {
+            "id": "color-yellow",
+            "rank": 4,
+            "probability": 0.012649881653487682
+          },
+          {
+            "id": "color-blue",
+            "rank": 5,
+            "probability": 0.0017152413493022323
+          }
+        ],
+        "prediction": "color-red",
+        "decision": "color-red",
+        "abstained": false,
+        "ties": [],
+        "confidence": 0.8872862458229065,
+        "type": "ranking"
+      },
+      "present": {
+        "probabilities": {
+          "true": 0.37021195888519287,
+          "false": 0.6297880411148071
+        },
+        "ranking": [
+          {
+            "id": "false",
+            "rank": 1,
+            "probability": 0.6297880411148071
+          },
+          {
+            "id": "true",
+            "rank": 2,
+            "probability": 0.37021195888519287
+          }
+        ],
+        "prediction": "false",
+        "decision": "false",
+        "abstained": false,
+        "ties": [],
+        "confidence": 0.6297880411148071,
+        "type": "noul",
+        "probability_true": 0.37021195888519287,
+        "value": false
+      },
+      "presence_score": {
+        "probabilities": {
+          "absent": 0.6297880411148071,
+          "present": 0.37021195888519287
+        },
+        "ranking": [
+          {
+            "id": "absent",
+            "rank": 1,
+            "probability": 0.6297880411148071
+          },
+          {
+            "id": "present",
+            "rank": 2,
+            "probability": 0.37021195888519287
+          }
+        ],
+        "prediction": "absent",
+        "decision": "absent",
+        "abstained": false,
+        "ties": [],
+        "confidence": 0.6297880411148071,
+        "type": "score",
+        "expected_value": 0.37021195888519287,
+        "value": 0.37021195888519287,
+        "range": [
+          0.0,
+          1.0
+        ]
+      }
+    },
+    "input_summary": {
+      "image": {
+        "original_size": [
+          128,
+          128
+        ],
+        "model_size": [
+          128,
+          128
+        ],
+        "media_type": "image/png"
+      },
+      "audio": {
+        "duration_seconds": 0.882375,
+        "sample_rate": 16000,
+        "model_sample_rate": 16000,
+        "padded_to_seconds": 1.0,
+        "channels": 1,
+        "streaming": false
+      },
+      "questions": 4
+    },
+    "semantics": {
+      "confidence": "max categorical probability after temperature scaling",
+      "ranking": "descending probability, conditional on the supplied candidate set",
+      "score": "expected caller-supplied rubric value; not a separately trained regression head",
+      "noul": "P(yes) from the yes/no candidate distribution",
+      "abstention": "decision/value are null for ties or confidence below abstain_threshold",
+      "temperature": 3.1478261296632617,
+      "device": "cpu"
+    }
+  },
+  "provenance": {
+    "git_revision": "a43707fec2188238b44c546ce3d3c5996038ec71",
+    "working_tree_dirty": false,
+    "source_hashes": {
+      "mmso/__init__.py": "d2df3b1f24aad519a417114c8a63489df9a18b66babfb5023b8b02c5ccff9626",
+      "mmso/__main__.py": "90e23a13957460dca0ffd41565cb7481ff3c7ec03f3e466730606afc62c09f3a",
+      "mmso/api/__init__.py": "1ba15fe3c2153f0b15f7248a3b064c17e05d68914193c898963f9330fa0f627d",
+      "mmso/api/app.py": "1c2d58b4e6bcd7480e73b5b4ef1506e947e67adc0094715b51366973d5e0cde9",
+      "mmso/api/client.py": "f750f032050f8ce16eab329f78cde0c7fc0bc1fc82260d4d5ea8b25a22b68670",
+      "mmso/api/media.py": "c2fc933ff1e09dc1eef46013cad352679d0ebf3ed3e32d467b2f64f94376c0c7",
+      "mmso/api/runtime.py": "779167805f7a3ab778717073e68e2fc791927621f210f44bf7adb566e18c025a",
+      "mmso/api/schema.py": "8b4abe8d71f6b9209e97f1ad4592acb73cdf853fa464e1aaa71da83112e9149b",
+      "mmso/artifacts.py": "bb7629e6507f6a67447c0773a4a4bdaa14354f26849ce47ee413a448170834f5",
+      "mmso/audio.py": "2dfec8cbb07d58db21b08d09b097422eaa627d3c5eb1c4e9af2cfd236da0ecc6",
+      "mmso/data.py": "2537c5762578d4814cb6690aa2c38941bd4235ffb17640856b433329b06ef8b5",
+      "mmso/joint_data.py": "ef51b8dae3bf4dd1e16f86378168e28fe9fe01ea1922831d971a8f07097bffb9",
+      "mmso/joint_model.py": "eb0322d4acd185281ed3bcc87ec4abc72c2431006d13846d241c92afd0846e49",
+      "mmso/joint_training.py": "a033a70cc86cc8dedb8fb9bdf178f4db78238b77bec2f6de8e6a4ced61e4e73a",
+      "mmso/joint_world.py": "9437ecb37f7cab13c6aa62b9e8c62cd60e2a9e46f6aea42df5839a4df94e06f9",
+      "mmso/metrics.py": "a887154d56e307fc6a2a54b9cef476964aa7e4a0e8660d50c8f63801f929767b",
+      "mmso/scoring.py": "28a864c140911eaf9568f60193de0fe430e24dadbbc5d0e19bc533981d6728bf",
+      "mmso/screen.py": "17c49e2bdb1d321aca118dbd0f23063f184fd640adc9daecce0f4da03750cc31",
+      "uv.lock": "2871c4d6a6e038b673df248b2c30932a9553c1d0be5115876235ad9d9447cf97",
+      "scripts/benchmark_api.py": "a6787a84360b2e852ea0a6fa339f398e7175d811a1af0673f39eb8504e83b09b"
+    },
+    "python": "3.12.12",
+    "platform": "macOS-27.0-arm64-arm-64bit"
+  }
+}
