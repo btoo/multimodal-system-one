@@ -13,7 +13,7 @@ app = modal.App("mmso-modal-pilot")
 volume = modal.Volume.from_name("mmso-pilot-checkpoints-v1", create_if_missing=True)
 image = (modal.Image.debian_slim(python_version="3.12")
          .uv_pip_install("torch==2.14.0", "numpy==2.5.3", "Pillow==12.3.0", "scipy==1.18.1", "safetensors==0.8.0")
-         .env({"CUBLAS_WORKSPACE_CONFIG": ":4096:8", "PYTHONPATH": "/workspace"})
+         .env({"CUBLAS_WORKSPACE_CONFIG": ":4096:8", "PYTHONPATH": "/workspace:/workspace/cloud"})
          .add_local_dir(BUNDLE, remote_path="/workspace"))
 
 

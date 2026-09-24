@@ -1,0 +1,9 @@
+{
+  "status": "failed_before_model_execution",
+  "app_url": "https://modal.com/apps/btoo/main/ap-KzumIJoOVOyUtAIzc8rRW4",
+  "source_commit": "7f9204ec453ca7f3e15302eb3403b039ff30cfed",
+  "error": "ModuleNotFoundError: No module named 'modal_pilot'",
+  "cause": "File-based Modal CLI imports the runner as modal_pilot; /workspace/cloud was absent from PYTHONPATH.",
+  "recovery": "Stopped the ephemeral app; add /workspace/cloud and use a fresh run ID.",
+  "note": "Modal retried container initialization despite retries=0; no training or inference executed."
+}
