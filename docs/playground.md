@@ -4,7 +4,7 @@ The Next.js application in `playground/` uses React Server Components for page c
 
 ```mermaid
 flowchart LR
-    B[Browser: media or text and typed questions] --> R[Next.js authenticated route]
+    B[Browser: audio, image and text instructions] --> R[Next.js authenticated route]
     R --> W[Vercel Workflow: durable run]
     W --> M[Modal: MiSO v3 on CPU]
     W --> J[Jev 1.13 API]
@@ -35,7 +35,7 @@ Credentials are excluded from Git and deployment uploads. The working private co
 
 ## Supported paths
 
-**MiSO:** one PNG/JPEG and one mono PCM16 WAV up to one second, with Choice, Noul, Score and Ranking views. Each upload is capped at 1 MB in the UI; the request is bounded and schema-validated again on the server. Up to eight named questions are accepted. The model still only understands its recorded keyword set, generated 2×2 panels and limited vocabulary. Arbitrary screenshots and natural speech are not established capabilities.
+**MiSO:** one PNG/JPEG, one mono PCM16 WAV up to one second, and visible text instructions, with Choice, Noul, Score and Ranking views. The playground sends each instruction as a native text content block and uses question references to bind the typed outputs. The Python model encodes that text jointly with the audio/image representations. Text is limited to the current checkpoint's learned question vocabulary; arbitrary text context is not trained. Each upload is capped at 1 MB in the UI; the request is bounded and schema-validated again on the server. Up to eight named questions are accepted. The model still only understands its recorded keyword set, generated 2×2 panels and limited vocabulary. Arbitrary screenshots and natural speech are not established capabilities.
 
 **Jev:** text state up to 12,000 characters and up to eight Noul, Choice or Score questions. The model is pinned to `jev-1.13.0`. Displayed inference cost uses returned input-token usage and the checked $0.042/M rate; it excludes Vercel hosting/Workflow costs. MiSO CPU serving costs are not estimated per request in the UI.
 

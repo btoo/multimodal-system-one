@@ -6,7 +6,7 @@ const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 export const metadata: Metadata = {
   title: "MiSO Playground",
   description:
-    "Explore a small native multimodal decision model. Audio and image inputs, typed probabilities, and reproducible runs.",
+    "Explore a small native multimodal decision model. Audio, image, and text inputs, typed probabilities, and reproducible runs.",
 };
 export default function RootLayout({
   children,

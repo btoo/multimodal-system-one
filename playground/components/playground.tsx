@@ -14,7 +14,12 @@ import {
 } from "lucide-react";
 import nativeDefault from "@/data/native-questions.json";
 import jevDefault from "@/data/jev-example.json";
-import { runInputSchema, type RunResult } from "@/lib/contracts";
+import {
+  runInputSchema,
+  makeNativePayload,
+  resolveNativeQuestions,
+  type RunResult,
+} from "@/lib/contracts";
 import { RunResults, rememberRun } from "./results";
 const wave = [
   18, 12, 10, 7, 8, 7, 6, 5, 6, 5, 6, 5, 6, 6, 6, 5, 5, 8, 42, 90, 68, 65, 54,
@@ -57,8 +62,11 @@ export function Playground({
       setText(input.payload.state);
       setJevQuestions(JSON.stringify(input.payload.questions, null, 2));
     } else {
-      setQuestions(JSON.stringify(input.payload.questions, null, 2));
+      setQuestions(
+        JSON.stringify(resolveNativeQuestions(input.payload), null, 2),
+      );
       for (const media of input.payload.input) {
+        if (media.type === "text") continue;
         const url = `data:${media.source.media_type};base64,${media.source.data}`;
         if (media.type === "image") {
           setImage(url);
@@ -133,16 +141,14 @@ export function Playground({
         provider === "miso"
           ? {
               provider,
-              label: "Audio + image decision",
-              payload: {
-                model: "mmso-joint-v3",
-                input: await Promise.all([
+              label: "Audio + image + text decision",
+              payload: makeNativePayload(
+                await Promise.all([
                   block(image, "image"),
                   block(audio, "audio"),
                 ]),
-                questions: JSON.parse(questions),
-                abstain_threshold: 0,
-              },
+                JSON.parse(questions),
+              ),
             }
           : {
               provider,
@@ -196,7 +202,14 @@ export function Playground({
     { type: string; question?: string; instructions?: string }
   > = {};
   try {
-    parsed = JSON.parse(provider === "miso" ? questions : jevQuestions);
+    const value = JSON.parse(provider === "miso" ? questions : jevQuestions);
+    if (
+      value &&
+      typeof value === "object" &&
+      !Array.isArray(value) &&
+      Object.values(value).every((q) => q && typeof q === "object")
+    )
+      parsed = value;
   } catch {
     /* The editor displays the parse error on Run. */
   }
@@ -211,7 +224,7 @@ export function Playground({
           <h1>Give MiSO something to decide.</h1>
           <p>
             {provider === "miso"
-              ? "Pair a picture with a voice, ask a question, and inspect the probabilities."
+              ? "Give MiSO audio, an image, and text instructions. Inspect how all three shape its decisions."
               : "Ask typed questions about text with Jev, then inspect its decisions."}
           </p>
         </div>
@@ -231,7 +244,7 @@ export function Playground({
               onClick={() => changeProvider("miso")}
             >
               <AudioLines size={15} />
-              Audio + image<span>MiSO v3</span>
+              Audio + image + text<span>MiSO v3</span>
             </button>
             <button
               role="tab"
@@ -240,7 +253,7 @@ export function Playground({
               onClick={() => changeProvider("jev")}
             >
               <Type size={15} />
-              Text<span>Jev</span>
+              Text reference<span>Jev</span>
             </button>
           </div>
           <div className="input-content">
@@ -369,6 +382,54 @@ export function Playground({
                     />
                   </div>
                 </div>
+                <section
+                  className="native-text-card"
+                  aria-labelledby="native-text-title"
+                >
+                  <div className="native-text-heading">
+                    <Type size={15} />
+                    <h2 id="native-text-title">Text instructions</h2>
+                    <span>Native text input</span>
+                  </div>
+                  <p>
+                    Each instruction is encoded by MiSO alongside the image and
+                    audio.
+                  </p>
+                  {Object.entries(parsed).map(([id, q]) => (
+                    <div className="native-text-field" key={id}>
+                      <label htmlFor={`text-${id}`}>
+                        {id.replaceAll("_", " ")}
+                      </label>
+                      <textarea
+                        id={`text-${id}`}
+                        aria-label={`Text instruction: ${id}`}
+                        value={q.question ?? ""}
+                        rows={2}
+                        maxLength={512}
+                        onChange={(event) => {
+                          try {
+                            const next = JSON.parse(questions);
+                            next[id] = {
+                              ...next[id],
+                              question: event.target.value,
+                            };
+                            delete next[id].question_ref;
+                            setQuestions(JSON.stringify(next, null, 2));
+                          } catch {
+                            setError(
+                              "Fix the question JSON before editing its text.",
+                            );
+                          }
+                        }}
+                      />
+                    </div>
+                  ))}
+                  <p className="text-scope">
+                    This checkpoint understands its learned question vocabulary.
+                    Free-form documents and text context still need a
+                    language-capable successor.
+                  </p>
+                </section>
                 <p className="input-help">
                   MiSO v3 understands eight spoken keywords and generated 2×2
                   symbol panels.{" "}
@@ -395,7 +456,8 @@ export function Playground({
             )}
             <div className="section-label questions-label">
               <span>
-                <span className="step-number">02</span>Questions
+                <span className="step-number">02</span>
+                {provider === "miso" ? "Answer schemas" : "Questions"}
                 <span className="count-badge">
                   {Object.keys(parsed).length}
                 </span>
@@ -426,7 +488,11 @@ export function Playground({
                       <span className={`type-badge ${q.type}`}>{q.type}</span>
                       <span>{id.replaceAll("_", " ")}</span>
                     </div>
-                    <p>{q.question ?? q.instructions}</p>
+                    <p>
+                      {provider === "miso"
+                        ? "Uses the text instruction above."
+                        : q.instructions}
+                    </p>
                   </div>
                 ))}
               </div>

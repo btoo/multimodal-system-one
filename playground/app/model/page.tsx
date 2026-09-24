@@ -38,7 +38,7 @@ export default function Page() {
               </div>
               <div>
                 <dt>Inputs required</dt>
-                <dd>One image and one audio clip</dd>
+                <dd>Image, audio, and text instructions</dd>
               </div>
             </dl>
             <p>
