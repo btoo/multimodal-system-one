@@ -19,4 +19,12 @@ elif args.stage == "nominate":
     result = nominate_optimization()
 else:
     result = evaluate_optimization(args.run_id, args.device)
-print(json.dumps({k: v for k, v in result.items() if k not in {"history", "by_task", "raw", "calibrated"}}, indent=2))
+if args.stage == "train":
+    result = {"run_id": result["run_id"], "steps": result["configuration"]["actual_steps"],
+              "selected_epoch": result["configuration"]["selected_epoch"], "development": result["development"]["by_slice"],
+              "train_seconds": result["train_seconds"], "matched": result["matched_step_budget_completed"]}
+elif args.stage == "evaluate":
+    result = {"run_id": result["run_id"], "raw": result["raw"]["by_slice"], "calibrated": result["calibrated"]["by_slice"]}
+elif args.stage == "prepare":
+    result = {k: result[k] for k in ("scenes", "questions", "confirmation_speakers", "confirmation_audio")}
+print(json.dumps(result, indent=2))
