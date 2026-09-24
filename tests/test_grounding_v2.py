@@ -60,5 +60,23 @@ class GroundingTests(unittest.TestCase):
             self.assertEqual(details["recognition_level"], "fast")
             self.assertTrue(details["cpu_only_requested"])
 
+    @unittest.skipUnless(platform.system() == "Darwin", "Apple Vision requires macOS")
+    def test_tiled_ocr_preserves_full_image_coordinates(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "fixture.png"
+            image = Image.new("RGB", (1400, 2200), "white")
+            drawing = ImageDraw.Draw(image)
+            font = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial.ttf", 48)
+            drawing.text((100, 150), "Continue", fill="black", font=font)
+            drawing.text((1000, 1800), "Cancel", fill="black", font=font)
+            image.save(path)
+            proposals, details = VisionOCR("fixed_1024").proposals(path)
+            found = [p for p in proposals if p["text"].lower() == "cancel"]
+            self.assertTrue(found)
+            for result in found:
+                point = center(result["bbox_xyxy"])
+                self.assertTrue(1000 <= point[0] <= 1200 and 1800 <= point[1] <= 1850)
+            self.assertEqual(details["tile_count"], 6)
+
 
 if __name__ == "__main__":unittest.main()

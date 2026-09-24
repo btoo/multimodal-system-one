@@ -85,9 +85,11 @@ def rank_proposals(proposals, instruction, variant="token_f1"):
 
 
 class VisionOCR:
-    def __init__(self):
+    def __init__(self, tiling="whole_image"):
         if platform.system() != "Darwin":
             raise ValueError("Apple Vision OCR requires macOS")
+        if tiling not in {"whole_image", "fixed_1024"}:raise ValueError("Unknown OCR tiling mode")
+        self.tiling = tiling
         self.source = ROOT / "scripts/screen_ocr.swift"
         self.binary = ROOT / "data/tools" / ("screen-ocr-" + sha256(self.source)[:16])
         self.binary.parent.mkdir(parents=True, exist_ok=True)
@@ -97,7 +99,8 @@ class VisionOCR:
     def proposals(self, image_path):
         # Only a local image path crosses the subprocess boundary. No instruction, type, or target.
         start = time.perf_counter()
-        result = subprocess.run([str(self.binary), str(image_path)], check=True, capture_output=True, text=True, timeout=60)
+        result = subprocess.run([str(self.binary), str(image_path), "1024" if self.tiling == "fixed_1024" else "0"],
+                                check=True, capture_output=True, text=True, timeout=60)
         data = json.loads(result.stdout)
         proposals = clean_proposals(data.pop("proposals"), data["width"], data["height"])
         data["complete_ocr_seconds"] = time.perf_counter() - start
@@ -107,6 +110,8 @@ class VisionOCR:
         return {"name": "Apple Vision VNRecognizeTextRequest", "revision": 3,
                 "recognition_level": "fast", "language": "en-US", "language_correction": False,
                 "cpu_only_requested": True, "source_sha256": sha256(self.source), "binary_sha256": sha256(self.binary),
+                "tiling": self.tiling, "tile_size": 1024 if self.tiling == "fixed_1024" else None,
+                "tile_overlap": 128 if self.tiling == "fixed_1024" else 0,
                 "macos": subprocess.check_output(["sw_vers"], text=True).strip(),
                 "swift": subprocess.check_output(["swift", "--version"], text=True).strip(),
                 "limitation": "OCR weights are bundled with macOS; OS build/revision recorded, no independently hashed OCR weight file"}

@@ -1,0 +1,334 @@
+{
+  "status": "completed",
+  "phase": "development",
+  "scope": "Separate pretrained OCR/CLIP controls on public real screenshots",
+  "provenance": {
+    "recorded_at_utc": "2026-09-24T12:39:10.248477+00:00",
+    "git_revision": "224bfdb5cbd83bd4c200505689d521cccae7d512",
+    "working_tree_dirty": false,
+    "source_hashes": {
+      "mmso/__init__.py": "d2df3b1f24aad519a417114c8a63489df9a18b66babfb5023b8b02c5ccff9626",
+      "mmso/__main__.py": "90e23a13957460dca0ffd41565cb7481ff3c7ec03f3e466730606afc62c09f3a",
+      "mmso/artifacts.py": "bb7629e6507f6a67447c0773a4a4bdaa14354f26849ce47ee413a448170834f5",
+      "mmso/audio.py": "2dfec8cbb07d58db21b08d09b097422eaa627d3c5eb1c4e9af2cfd236da0ecc6",
+      "mmso/data.py": "2537c5762578d4814cb6690aa2c38941bd4235ffb17640856b433329b06ef8b5",
+      "mmso/grounding.py": "81ad1fc5f2695cf727432fbee53640993047b71e4b0c9f9ba2e2314b90c624f7",
+      "mmso/grounding_data.py": "5b0b11e642807c7929709ab96097038a7cc4f81bb737cc28edce7b7a37fd4268",
+      "mmso/joint_data.py": "ef51b8dae3bf4dd1e16f86378168e28fe9fe01ea1922831d971a8f07097bffb9",
+      "mmso/joint_model.py": "eb0322d4acd185281ed3bcc87ec4abc72c2431006d13846d241c92afd0846e49",
+      "mmso/joint_training.py": "a033a70cc86cc8dedb8fb9bdf178f4db78238b77bec2f6de8e6a4ced61e4e73a",
+      "mmso/joint_world.py": "9437ecb37f7cab13c6aa62b9e8c62cd60e2a9e46f6aea42df5839a4df94e06f9",
+      "mmso/metrics.py": "a887154d56e307fc6a2a54b9cef476964aa7e4a0e8660d50c8f63801f929767b",
+      "mmso/scale_study.py": "f9c035d539dfbcda4291f7199bfcfae1a8cc2e30cf22d0a332aa94757c1614f1",
+      "mmso/scoring.py": "28a864c140911eaf9568f60193de0fe430e24dadbbc5d0e19bc533981d6728bf",
+      "mmso/screen.py": "17c49e2bdb1d321aca118dbd0f23063f184fd640adc9daecce0f4da03750cc31",
+      "uv.lock": "2871c4d6a6e038b673df248b2c30932a9553c1d0be5115876235ad9d9447cf97"
+    },
+    "manifest_sha256": "1dc26e4db232c1eb7ac499ea3afcbf3c0c29e6f9389da68933e2b4313ba29420",
+    "python": "3.12.12",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "additional_source_hashes": {
+      "scripts/screen_ocr.swift": "05763a7fdd379c7cccf50bf2efb863946fe2623e89d67502492fba2c11ab6a83",
+      "scripts/screen_grounding_v2.py": "8cfb2bac41e64f2f1b9363f4625196159efadd7c3cdf6c5f851c80b81280fdd1",
+      "scripts/screen_prepare.py": "2af31afcb888a69da96c78691d98acf572a5a54defdeb5d52b1979e7d126d8e0",
+      "evals/screen-protocol-v2.json": "bb15ea425897789d3e27d7e6628498476bba0e23915e3f0b2daf712e30277d8c"
+    }
+  },
+  "audit": {
+    "examples": 24,
+    "splits": {
+      "external_probe": 24
+    },
+    "groups": 24,
+    "unique_media_hashes": 24,
+    "support": {},
+    "media_verified": true,
+    "group_and_hash_disjoint": true
+  },
+  "protocol_sha256": "bb15ea425897789d3e27d7e6628498476bba0e23915e3f0b2daf712e30277d8c",
+  "ocr": {
+    "name": "Apple Vision VNRecognizeTextRequest",
+    "revision": 3,
+    "recognition_level": "fast",
+    "language": "en-US",
+    "language_correction": false,
+    "cpu_only_requested": true,
+    "source_sha256": "05763a7fdd379c7cccf50bf2efb863946fe2623e89d67502492fba2c11ab6a83",
+    "binary_sha256": "36ce3cc4a5780cc3284a2ef6890671df972de6b402b8c58f3a656ac442299a59",
+    "macos": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A428",
+    "swift": "Apple Swift version 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)\nTarget: arm64-apple-macosx27.0.0",
+    "limitation": "OCR weights are bundled with macOS; OS build/revision recorded, no independently hashed OCR weight file"
+  },
+  "results": {
+    "token_f1": {
+      "examples": 24,
+      "hits": 1,
+      "hit_rate": 0.041666666666666664,
+      "proposal_center_hits": 5,
+      "proposal_center_recall": 0.20833333333333334,
+      "abstentions": 11,
+      "zero_proposals": 0,
+      "inference_errors": 0,
+      "pipeline_p50_ms": 275.52822849247605,
+      "pipeline_p95_ms": 623.1272625547715
+    },
+    "idf_coverage": {
+      "examples": 24,
+      "hits": 1,
+      "hit_rate": 0.041666666666666664,
+      "proposal_center_hits": 5,
+      "proposal_center_recall": 0.20833333333333334,
+      "abstentions": 11,
+      "zero_proposals": 0,
+      "inference_errors": 0,
+      "pipeline_p50_ms": 275.3571869834559,
+      "pipeline_p95_ms": 623.0565740930613
+    }
+  },
+  "slices": {
+    "ui_type": {
+      "icon": {
+        "token_f1": {
+          "examples": 12,
+          "hits": 0,
+          "hit_rate": 0.0,
+          "proposal_center_hits": 0,
+          "proposal_center_recall": 0.0,
+          "abstentions": 6,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 273.3152080036234,
+          "pipeline_p95_ms": 577.5346293507026
+        },
+        "idf_coverage": {
+          "examples": 12,
+          "hits": 0,
+          "hit_rate": 0.0,
+          "proposal_center_hits": 0,
+          "proposal_center_recall": 0.0,
+          "abstentions": 6,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 273.1782704940997,
+          "pipeline_p95_ms": 577.4793236952974
+        }
+      },
+      "text": {
+        "token_f1": {
+          "examples": 12,
+          "hits": 1,
+          "hit_rate": 0.08333333333333333,
+          "proposal_center_hits": 5,
+          "proposal_center_recall": 0.4166666666666667,
+          "abstentions": 5,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 275.54522949503735,
+          "pipeline_p95_ms": 493.44047340709926
+        },
+        "idf_coverage": {
+          "examples": 12,
+          "hits": 1,
+          "hit_rate": 0.08333333333333333,
+          "proposal_center_hits": 5,
+          "proposal_center_recall": 0.4166666666666667,
+          "abstentions": 5,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 275.4706459818408,
+          "pipeline_p95_ms": 493.2291482473372
+        }
+      }
+    },
+    "application": {
+      "excel": {
+        "token_f1": {
+          "examples": 4,
+          "hits": 0,
+          "hit_rate": 0.0,
+          "proposal_center_hits": 0,
+          "proposal_center_recall": 0.0,
+          "abstentions": 4,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 254.01741699897684,
+          "pipeline_p95_ms": 277.79485729697626
+        },
+        "idf_coverage": {
+          "examples": 4,
+          "hits": 0,
+          "hit_rate": 0.0,
+          "proposal_center_hits": 0,
+          "proposal_center_recall": 0.0,
+          "abstentions": 4,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 253.05462499090936,
+          "pipeline_p95_ms": 277.5877010426484
+        }
+      },
+      "macos_common": {
+        "token_f1": {
+          "examples": 4,
+          "hits": 0,
+          "hit_rate": 0.0,
+          "proposal_center_hits": 0,
+          "proposal_center_recall": 0.0,
+          "abstentions": 3,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 293.2038540020585,
+          "pipeline_p95_ms": 499.5045795440091
+        },
+        "idf_coverage": {
+          "examples": 4,
+          "hits": 0,
+          "hit_rate": 0.0,
+          "proposal_center_hits": 0,
+          "proposal_center_recall": 0.0,
+          "abstentions": 3,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 293.266708496958,
+          "pipeline_p95_ms": 499.49491079751164
+        }
+      },
+      "powerpoint": {
+        "token_f1": {
+          "examples": 4,
+          "hits": 0,
+          "hit_rate": 0.0,
+          "proposal_center_hits": 1,
+          "proposal_center_recall": 0.25,
+          "abstentions": 3,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 229.20604249520693,
+          "pipeline_p95_ms": 242.1799206349533
+        },
+        "idf_coverage": {
+          "examples": 4,
+          "hits": 0,
+          "hit_rate": 0.0,
+          "proposal_center_hits": 1,
+          "proposal_center_recall": 0.25,
+          "abstentions": 3,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 229.1217084712116,
+          "pipeline_p95_ms": 242.09538298018742
+        }
+      },
+      "pycharm": {
+        "token_f1": {
+          "examples": 4,
+          "hits": 0,
+          "hit_rate": 0.0,
+          "proposal_center_hits": 1,
+          "proposal_center_recall": 0.25,
+          "abstentions": 1,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 573.0479165067663,
+          "pipeline_p95_ms": 647.8864714095835
+        },
+        "idf_coverage": {
+          "examples": 4,
+          "hits": 0,
+          "hit_rate": 0.0,
+          "proposal_center_hits": 1,
+          "proposal_center_recall": 0.25,
+          "abstentions": 1,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 572.9768754827091,
+          "pipeline_p95_ms": 647.7291921633878
+        }
+      },
+      "vscode": {
+        "token_f1": {
+          "examples": 4,
+          "hits": 0,
+          "hit_rate": 0.0,
+          "proposal_center_hits": 2,
+          "proposal_center_recall": 0.5,
+          "abstentions": 0,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 293.1071459897794,
+          "pipeline_p95_ms": 355.94015459937503
+        },
+        "idf_coverage": {
+          "examples": 4,
+          "hits": 0,
+          "hit_rate": 0.0,
+          "proposal_center_hits": 2,
+          "proposal_center_recall": 0.5,
+          "abstentions": 0,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 292.570229008561,
+          "pipeline_p95_ms": 355.71912323066493
+        }
+      },
+      "word": {
+        "token_f1": {
+          "examples": 4,
+          "hits": 1,
+          "hit_rate": 0.25,
+          "proposal_center_hits": 1,
+          "proposal_center_recall": 0.25,
+          "abstentions": 0,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 283.56145849102177,
+          "pipeline_p95_ms": 346.2715562956873
+        },
+        "idf_coverage": {
+          "examples": 4,
+          "hits": 1,
+          "hit_rate": 0.25,
+          "proposal_center_hits": 1,
+          "proposal_center_recall": 0.25,
+          "abstentions": 0,
+          "zero_proposals": 0,
+          "inference_errors": 0,
+          "pipeline_p50_ms": 283.47272898827214,
+          "pipeline_p95_ms": 346.4051275528618
+        }
+      }
+    }
+  },
+  "setup_seconds": 0.00010679199476726353,
+  "timing": {
+    "ocr_includes": [
+      "subprocess startup",
+      "image file decode",
+      "Vision CPU OCR",
+      "word/line box extraction",
+      "JSON serialization",
+      "proposal cleanup",
+      "lexical ranking"
+    ],
+    "grid_includes": [
+      "image read/decode",
+      "fixed crops",
+      "CLIP preprocessing",
+      "CPU scoring",
+      "argmax"
+    ],
+    "excludes": [
+      "model/compiler setup",
+      "manifest hash audit",
+      "report serialization"
+    ],
+    "center_timing": "not benchmarked; zero is an explicit sentinel"
+  },
+  "limitations": [
+    "Balanced custom subset, not the official full benchmark",
+    "Lexical OCR misses icons and semantic paraphrases",
+    "No trained joint/native model or browser execution evidence",
+    "OCR dependency includes the recorded macOS build"
+  ]
+}

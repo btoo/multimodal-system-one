@@ -30,20 +30,22 @@ def counts(predictions, variant):
             "pipeline_p95_ms": float(np.quantile([p["pipeline_seconds"] for p in values], .95) * 1000)}
 
 
-def source_snapshot(manifest):
+def source_snapshot(manifest, protocol):
     record = provenance(manifest)
     record["additional_source_hashes"] = {str(p.relative_to(ROOT)): sha256(p) for p in [
         ROOT / "scripts/screen_ocr.swift", ROOT / "scripts/screen_grounding_v2.py", ROOT / "scripts/screen_prepare.py",
-        ROOT / "evals/screen-protocol-v2.json"]}
+        protocol]}
     return record
 
 
-def evaluate(phase):
-    protocol = ROOT / "evals/screen-protocol-v2.json"
-    nomination_path = ROOT / "evals/screen-nomination-v2.json"
+def evaluate(phase, version=2):
+    protocol = ROOT / f"evals/screen-protocol-v{version}.json"
+    settings = json.loads(protocol.read_text())
+    nomination_path = ROOT / f"evals/screen-nomination-v{version}.json"
     if phase == "development":
         manifest = ROOT / "evals/manifests/screen_grounding.jsonl"
         variants = VARIANTS
+        tiling = settings["ocr"].get("tiling", "whole_image")
     else:
         nomination = json.loads(nomination_path.read_text())
         if sha256(protocol) != nomination["protocol_sha256"]:raise ValueError("Frozen protocol changed")
@@ -52,15 +54,16 @@ def evaluate(phase):
         manifest = ROOT / "evals/manifests/screen_grounding_v2.jsonl"
         if sha256(manifest) != nomination["confirmation_manifest_sha256"]:raise ValueError("Frozen confirmation identities changed")
         variants = [nomination["selected_variant"]]
-    output = ROOT / ("reports/screens-ocr-" + phase + "-v2")
+        tiling = nomination.get("selected_tiling", "whole_image")
+    output = ROOT / ("reports/screens-ocr-" + phase + f"-v{version}")
     if output.exists():raise ValueError("Run IDs are immutable; this evaluation already exists")
     rows = read_manifest(manifest)
     audit = validate_manifest(rows)
-    snapshot = source_snapshot(manifest)
+    snapshot = source_snapshot(manifest, protocol)
     write_json(output / "started.json", {"phase": phase, "provenance": snapshot,
         "policy": "Every started run retained; failed OCR cases abstain and remain in the denominator"})
     setup = time.perf_counter()
-    ocr = VisionOCR()
+    ocr = VisionOCR(tiling)
     model = None
     if phase == "confirmation":
         torch.set_num_threads(2)
@@ -139,9 +142,14 @@ def evaluate(phase):
     write_manifest(output / "proposals.jsonl", proposal_rows)
     write_json(output / "report.json", report)
     if phase == "development":
-        selected = max(VARIANTS, key=lambda name: (results[name]["hits"], -VARIANTS.index(name)))
+        options = [{"variant": name, "tiling": tiling, "hits": results[name]["hits"]} for name in VARIANTS]
+        if version == 3:
+            previous = json.loads((ROOT / "reports/screens-ocr-development-v2/report.json").read_text())
+            options += [{"variant": name, "tiling": "whole_image", "hits": previous["results"][name]["hits"]} for name in VARIANTS]
+        selected = max(options, key=lambda value: (value["hits"], value["tiling"] == "whole_image", -VARIANTS.index(value["variant"])))
         confirmation = ROOT / "evals/manifests/screen_grounding_v2.jsonl"
-        write_json(nomination_path, {"selected_variant": selected, "selection": "Development hit count; tie favors token_f1",
+        write_json(nomination_path, {"selected_variant": selected["variant"], "selected_tiling": selected["tiling"],
+            "selection": "Development hit count; ties favor whole-image OCR then token_f1", "all_attempts": options,
             "development_hits": {name: results[name]["hits"] for name in VARIANTS},
             "protocol_sha256": sha256(protocol), "confirmation_manifest_sha256": sha256(confirmation),
             "inference_source_sha256": {str(p.relative_to(ROOT)): sha256(p) for p in [
@@ -154,4 +162,6 @@ def evaluate(phase):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("phase", choices=["development", "confirmation"])
-    evaluate(parser.parse_args().phase)
+    parser.add_argument("--version", type=int, choices=[2, 3], default=2)
+    args = parser.parse_args()
+    evaluate(args.phase, args.version)
