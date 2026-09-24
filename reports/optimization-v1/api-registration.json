@@ -1,0 +1,16 @@
+{
+  "model_id": "mmso-joint-v3",
+  "candidate_run": "optimization-primitive-s24-v1",
+  "accuracy_summary_sha256": "2a893e1752981fe61e2942c5568ad19e89a85aa38f207668cd6a1ccecb687057",
+  "checkpoint_sha256": "4284d30920615018b500716d406236d919f5e38e268fdc5490c6f559af612bfa",
+  "config_sha256": "c61ae17776932f842c0c03d67e740e252e82f9bc4b511cb7349e05dc9b82d94a",
+  "accuracy_gates_passed": true,
+  "explicit_experimental_api_use_enabled": true,
+  "compatibility_default": "mmso-joint-v2",
+  "integrated_tests_passed": 78,
+  "cpu_http_probability_max_error": 0.0,
+  "mps_http_vs_cpu_probability_max_error": 2.384185791015625e-07,
+  "performance_evidence": "reports/api-comparison-v3/README.md",
+  "stable_latency_sla_established": false,
+  "scope": "Eight recorded keywords and generated2x2 panels; real-screen OCR is a separate control"
+}

@@ -45,6 +45,7 @@ The [frozen protocol](../../evals/optimization-protocol-v1.json) defines accurac
 ## Reproduction
 
 ```bash
+uv run python scripts/fetch_optimization_manifest.py
 uv run python scripts/run_optimization_study.py prepare
 # Commit source, protocol and manifest before starting a new versioned study.
 uv run python scripts/run_optimization_study.py train --run-id optimization-control-s24-v1
@@ -63,3 +64,5 @@ uv run python scripts/check_optimization_results.py
 ```
 
 Run IDs and recorded outcomes are immutable. A reproduction with new training must define new versioned IDs and a new confirmation policy. The checked-in reports can be verified without retraining or downloading raw media.
+
+On a fresh checkout, the acquisition helper restores the exact hash-pinned audio and regenerates the exact frozen panels before `prepare` audits them. It does not reselect confirmation examples. This is necessary because raw media is intentionally absent from Git.

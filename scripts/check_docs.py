@@ -48,24 +48,26 @@ def main():
     assert state["baseline_runs_completed"] == len(suites["results"]) == 3
     scale_training = suites.get("scale_training_results", [])
     scale_evaluation = suites.get("scale_evaluation_results", [])
-    joint_count = len(suites["joint_training_results"]) + len(scale_training)
+    optimization_training = suites.get("optimization_training_results", [])
+    optimization_evaluation = suites.get("optimization_evaluation_results", [])
+    joint_count = len(suites["joint_training_results"]) + len(scale_training) + len(optimization_training)
     assert state["joint_model_runs_completed"] == joint_count
     assert state["model_runs_completed"] == len(suites["results"]) + joint_count
-    assert state["joint_evaluation_runs_completed"] == len(suites["joint_evaluation_results"]) + len(scale_evaluation)
+    assert state["joint_evaluation_runs_completed"] == len(suites["joint_evaluation_results"]) + len(scale_evaluation) + len(optimization_evaluation)
     assert state["native_joint_model_trained"] is True
     for report in suites["joint_training_results"]:
         assert json.loads((ROOT/report).read_text())["status"] == "development_complete"
     for report in suites["joint_evaluation_results"]:
         assert json.loads((ROOT/report).read_text())["status"] == "held_out_evaluated"
-    for report in scale_training:
+    for report in [*scale_training, *optimization_training]:
         assert json.loads((ROOT/report).read_text())["status"] == "development_complete"
-    for report in scale_evaluation:
+    for report in [*scale_evaluation, *optimization_evaluation]:
         assert json.loads((ROOT/report).read_text())["status"] == "confirmation_complete"
     for report in suites["results"]:
         assert json.loads((ROOT / report).read_text())["status"] == "completed"
     assert {"speech_intent", "acoustic_events", "screen_understanding", "paired_audio_screen"} <= {x["id"] for x in suites["suites"]}
     catalog = json.loads((ROOT / "evals/dataset-catalog.json").read_text())
-    assert catalog["datasets_downloaded"] == sum(row["downloaded"] for row in catalog["records"]) == 3
+    assert catalog["datasets_downloaded"] == sum(row["downloaded"] for row in catalog["records"]) == 4
     if problems:
         raise SystemExit("\n".join(problems))
     print(f"Checked {len(markdown_files)} Markdown files, {len(manifest['figures'])} explanatory figures, campaign budget, baseline reports, and joint-model evidence.")

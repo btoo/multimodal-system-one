@@ -1,0 +1,12 @@
+{
+  "initial_round": "api-v2/3-varied-v1 overlapped the full test suite; parity remains valid, timing is observational",
+  "second_round": "api-v2/3-varied-v2 ran after tests and training, but the wider host was busy",
+  "load_average_observed_after_second_round": [
+    29.41259765625,
+    24.08251953125,
+    19.84423828125
+  ],
+  "swap_observed_after_second_round": "vm.swapusage: total = 4096.00M  used = 2435.12M  free = 1660.88M  (encrypted)",
+  "inference": "Background contention is a plausible cause of variation; it was not experimentally isolated. No other user workloads were stopped.",
+  "mps_check": "One additional MPS-backend measurement uses the same v3 weights,32 images and4 typed outputs; report every timing round, not the fastest as an SLA."
+}

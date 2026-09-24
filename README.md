@@ -4,13 +4,37 @@
 
 ![Project overview: visual observations and language enter a jointly trained model that predicts answer probabilities.](docs/assets/overview.svg)
 
-> **Stage: runnable developer API and controlled model experiments.** The API serves a 668,097-parameter model that reads recorded audio, pixels, question text, and candidate descriptions. A new study tested a 2.42× larger model and a shape/color visual prior; neither earned a promotion. General speech, real-browser grounding, and Jev-equivalent capabilities remain unestablished.
+> **Stage: confirmed native-model accuracy gains and broader real-screen evaluation.** The new `mmso-joint-v3` model scores **81.32% on familiar combinations and 66.99% on the known composition gap**, versus v2's 65.30% and 47.14% on identical fresh voices/panels. The inference model remains 668,097 parameters. A separate OCR control reaches 9/64 real-screen targets. General speech, reliable browser execution, and Jev-equivalent capabilities remain unestablished.
 
 The first goal is a small model whose weights, data, losses, and failure modes we can understand. It should answer bounded questions about observations, return a probability distribution over the declared answers, and support abstention in the surrounding software. The initial target machine is an Apple M4 Pro with 48 GB of unified memory. The reports below record training budgets and loaded inference latency for the implemented prototypes.
 
 **Current target:** speech/audio classification and screen understanding for computer/browser use. Define real-data evals for each modality and for paired audio–screen decisions before model search. Use compact pretrained input encoders with trainable fusion/decision heads for the practical track, while retaining small from-scratch controls to learn the fundamentals. The image/text shapes study below is an algorithm control, not the application acceptance test.
 
 This recommendation is an engineering judgment from the sources below. The best architecture for our data and compute budget remains an empirical question.
+
+## Latest optimization and real-world coverage
+
+![Two matched seeds and the harder present-target diagnostic](reports/optimization-v1/results.svg)
+
+The new training recipe directly supervises spoken word, visual symbol, and color before and during joint learning. Temporary training heads align observable concepts; the retained inference model has the same architecture and parameter count. Both treatment seeds improved mean familiar/held-combination accuracy by about **20 percentage points over their matched controls**.
+
+| Native checkpoint, same 256 fresh recordings | Familiar combinations | Known composition gap | New question phrasing |
+|---|---:|---:|---:|
+| Existing v2 | 65.30% | 47.14% | 64.78% |
+| **v3: nominated before confirmation** | **81.32%** | **66.99%** | **81.71%** |
+| Treatment replication, second seed | 74.35% | 63.22% | 63.74% |
+
+These recordings come from **58 speakers absent from all previous manifests**, using a pinned official Speech Commands test archive and newly generated panels. Each primary slice has 1,536 related questions. The same previously known word/color gap remains excluded from training. This is fresh voice/image confirmation of that known gap, not evidence for arbitrary images or unseen gap identities. The second seed's phrasing regression remains visible.
+
+V3 gains **16.02 points** on familiar combinations and **19.86 points** on the composition slice versus v2; paired speaker-cluster intervals exclude zero. Its present-target color/location accuracy improves from **47.56% to 75.75%** on familiar combinations and **12.99% to 50.20%** on the held combinations. Remaining errors are substantial.
+
+![Probability quality before and after separate calibration](reports/optimization-v1/probabilities.svg)
+
+Raw predictions became overconfident. A temperature fitted only on calibration data improves the reported confirmation NLL; the raw results remain available. Read the [full two-seed study](reports/optimization-v1/README.md), [training design](docs/research/primitive-supervision.md), and [primary-source optimization review](docs/research/optimization-review.md). The [independent diagnosis](reports/optimization-diagnosis-v1/README.md) explains why decodable visual information did not necessarily produce correct decisions.
+
+![Fresh real-screen outcomes and remaining proposal/ranking limits](reports/screens-ocr-confirmation-v3/results.svg)
+
+For real screenshots, fixed overlapping OCR tiles and a lexical ranker reach **9/64 targets (14.06%)**, versus 0/64 for the original grid on those same cases. Text targets score **9/32**; icons remain **0/32**. The full OCR pipeline measured about **519 ms median / 1,299 ms p95**. This is a separate pretrained OCR control, with 64 new screenshots across eight apps, including two apps absent from development. It does not establish the native model's real-screen capability. See the [real-screen report and preserved failed attempts](docs/research/screen-grounding-v2.md).
 
 ## Developer API
 
@@ -22,16 +46,16 @@ This recommendation is an engineering judgment from the sources below. The best 
 uv sync --locked
 uv run mmso serve --device cpu
 # In another terminal, using the prepared demo data:
-uv run python examples/api_client.py
+uv run python examples/api_client.py --model mmso-joint-v3
 ```
 
-The service loads our trained checkpoint once. It runs locally without calling OpenAI, Claude, or Jev. Read the [developer guide](docs/developer-api.md) for data preparation, Python and curl examples, authentication, validation, and the exact schemas. The [design rationale](docs/research/developer-interface.md) connects the interface to its primary sources.
+The service loads registered checkpoints once. Select `model: "mmso-joint-v3"` to use the new weights; v2 remains the compatibility default. It runs locally without calling OpenAI, Claude, or Jev. Read the [developer guide](docs/developer-api.md) for data preparation, Python and curl examples, authentication, validation, and the exact schemas. The [design rationale](docs/research/developer-interface.md) connects the interface to its primary sources.
 
-The real HTTP demo matches the saved neural output within `1.8e-7`. Warm CPU requests returning four typed answers measured **4.81 ms median / 5.60 ms p95** over 32 repeated-fixture requests, including HTTP, validation, decoding, and inference. Recording time, startup, and request assembly are excluded. See the [API evidence and reproduction commands](reports/api-v1/README.md).
+The original repeated-fixture v2 API measurement was **4.81 ms median / 5.60 ms p95**. New varied-input v3 rounds measured CPU p95 **5.50 ms and 145.17 ms**; an additional MPS round measured **111.24 ms** while the host was busy. These are descriptive measurements, not a stable latency guarantee or proof of a speedup. All cover four typed outputs and include HTTP, decoding and inference, excluding recording time, startup and client request assembly. [Current API evidence](reports/api-comparison-v3/README.md) preserves every timing round and exact native/HTTP parity.
 
 **The model's current scope still applies:** one short spoken keyword, one generated 2×2 panel, and a limited learned text vocabulary. Score is an expectation over declared candidate values; Ranking sorts the same candidate distribution. These output views do not establish arbitrary rubric understanding or general screenshot/speech capability.
 
-## Latest model iteration: size and visual structure
+## Earlier model iteration: size and visual structure
 
 ![Fresh-speaker model comparison and complete development learning curves](reports/scale-v1/results.svg)
 
@@ -109,6 +133,7 @@ See the [runnable eval guide](evals/README.md) for training, saved-checkpoint in
 ## Read the project
 
 - [Developer API](docs/developer-api.md), [interface design and sources](docs/research/developer-interface.md)
+- [Current optimization study](reports/optimization-v1/README.md), [research review](docs/research/optimization-review.md), [real-screen coverage](docs/research/screen-grounding-v2.md)
 - [Latest scale study and fresh confirmation](reports/scale-v1/README.md)
 - [The decision we want to learn](#the-decision-we-want-to-learn)
 - [Audio, screens, and real-world evals](#audio-screens-and-real-world-evals)
@@ -438,8 +463,10 @@ The figure generator writes SVGs and PNG previews. Sources are original code, wi
 | Real-data controls and independent metrics | Implemented; three acquired manifests, categorical/multi-label/grounding/joint scorers |
 | Trained checkpoints and measured baselines | Two small audio CNNs plus fixed CLIP screen controls; see report |
 | Paired generated-panel data and native fusion | Implemented and evaluated; one selected model, two matched controls, one retained failed development attempt |
-| Developer API | Running local checkpoint, typed HTTP/OpenAPI and Python client; measured warm HTTP p95 5.60 ms on the four-answer fixture |
+| Developer API | Versioned v2/v3 checkpoints, typed HTTP/OpenAPI and Python client; varied-input parity verified; latency varies with host conditions |
 | Size and representation follow-up | Three new training attempts, fresh confirmation, no promoted improvement; full negative evidence retained |
+| Primitive-supervision optimization | Two matched seeds, new voices/panels, confirmed accuracy gains; explicit v3 API version |
+| Broader real-screen control | 9/64 versus 0/64 on fresh screens; text-only gains, icon and application transfer still weak |
 | Sentence intent, real paired screens, and workflow success | Pending; the controlled prototype does not establish these |
 
 The next implementation gates are:

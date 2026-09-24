@@ -2,7 +2,7 @@
 
 The API runs the published native checkpoint on your machine. It accepts image pixels, a short WAV recording, and question text, then returns named classification distributions, Boolean probabilities, numeric rubric scores, and ranked candidates in one response. It makes no calls to OpenAI, Claude, or Jev.
 
-The transport is usable today; the model remains an experiment. `mmso-joint-v2` understands a small vocabulary, eight spoken keywords, and generated 2×2 symbol panels. Its recorded joint accuracy is **72.92% in distribution and 45.66% on the exposed compositional test**. Arbitrary screenshots and speech can fit a file format without being understood. See the [measured model report](../reports/joint-v2/README.md).
+The API serves two explicit versions, both limited to a small vocabulary, eight spoken keywords, and generated 2×2 symbol panels. The newer **`mmso-joint-v3` scores 81.32% on familiar combinations and 66.99% on the known composition gap**, versus v2's 65.30%/47.14% on identical fresh examples. V2 remains the compatibility default. Arbitrary screenshots and speech can fit a file format without being understood. See the [current accuracy study](../reports/optimization-v1/README.md) and [historical v2 report](../reports/joint-v2/README.md).
 
 ## Run it
 
@@ -19,9 +19,13 @@ For the recorded public speech + generated panel example, prepare the data if it
 uv run mmso prepare speech_keywords
 uv run mmso joint-prepare
 uv run python examples/api_client.py
+# Explicitly use the new confirmed weights:
+uv run python examples/api_client.py --model mmso-joint-v3
 ```
 
 The example returns all four output types from the same audio and image. It uses the same fixed scene as the [earlier joint demo](../examples/joint-demo-input.json), selected before its original evaluation. The example's presence score assigns `no → 0` and `yes → 1`, so its expected value is the estimated probability of presence. The [recorded HTTP response](../examples/api-response.json) predicts absence with probability 0.630, ranks red first for the opposite word with probability 0.887, and returns a presence score of 0.370. This is one illustrative scene, not a new accuracy evaluation.
+
+That saved response is v2. V3 has distinct weights and temperature; its model card and response identify the requested version. For new Python calls, pass `model="mmso-joint-v3"` to `Client.decide`. The [varied-input API report](../reports/api-comparison-v3/README.md) verifies CPU/MPS parity and records all latency rounds, including busy-host tails. Millisecond measurements are not a stable latency guarantee.
 
 To inspect a raw HTTP request:
 
@@ -183,7 +187,7 @@ The model's weights and configuration are both fingerprinted at startup, so chan
 
 ## Registering another confirmed native model
 
-The static registry in [`mmso/api/registry.py`](../mmso/api/registry.py) currently contains **only `mmso-joint-v2`**, which remains the request and Python-client default. `GET /v1/models` lists the registrations actually loaded by that server; `POST /v1/decisions` dispatches using the explicit `model` field and returns that same identity. There are no speculative production aliases, automatic newest-checkpoint discovery, or HTTP registration/checkpoint-path inputs.
+The static registry in [`mmso/api/registry.py`](../mmso/api/registry.py) contains **`mmso-joint-v2` and `mmso-joint-v3`**. V2 remains the request and Python-client default; explicitly select v3 for the improved weights. `GET /v1/models` lists the registrations actually loaded by that server; `POST /v1/decisions` dispatches using the explicit `model` field and returns that same identity. There are no speculative production aliases, automatic newest-checkpoint discovery, or HTTP registration/checkpoint-path inputs.
 
 A future confirmed checkpoint needs a distinct `ModelRegistration` with a repository-relative `.safetensors` path under `artifacts/`, weight and configuration SHA256 hashes, the expected architecture name, and a local `factory(config, vocabulary_size)`. The factory must provide the existing `encode_observations` / `decide` interface and compatible media/text behavior; changing those input semantics also requires changing and validating the API contract. Each registration can supply its own scope, calibration statement, limitations, and optional `measured_results` metadata. A new registration does not inherit v2's measured accuracy claims.
 

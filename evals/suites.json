@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "developer_api_and_scale_study_evaluated",
+  "status": "primitive_supervision_confirmed_and_real_screen_coverage_expanded",
   "execution_enabled": true,
   "data_populated": true,
   "results": [
@@ -202,7 +202,7 @@
     "chunk_latency",
     "real_time_factor"
   ],
-  "notes": "Earlier controls, native joint inference, HTTP API, and a three-condition scale study have run. No new model was promoted. Fresh voices/images confirm the known composition gap; real browser readiness remains unestablished.",
+  "notes": "Native v3 improved the controlled task in two seeds and fresh voice/image confirmation. Separate OCR achieved9/64 on real screens. General sentence/audio, icons and browser execution remain unestablished; timing depends on host conditions.",
   "joint_training_results": [
     "reports/joint-full-v1/training.json",
     "reports/joint-full-v2/training.json",
@@ -226,5 +226,24 @@
     "reports/scale-served-reference-v1/evaluation.json"
   ],
   "api_verification": "reports/api-v1/demo-verification.json",
-  "api_latency": "reports/api-v1/http-benchmark.json"
+  "api_latency": "reports/api-v1/http-benchmark.json",
+  "optimization_training_results": [
+    "reports/optimization-control-s24-v1/training.json",
+    "reports/optimization-primitive-s24-v1/training.json",
+    "reports/optimization-control-s25-v1/training.json",
+    "reports/optimization-primitive-s25-v1/training.json"
+  ],
+  "optimization_evaluation_results": [
+    "reports/optimization-control-s24-v1/evaluation.json",
+    "reports/optimization-primitive-s24-v1/evaluation.json",
+    "reports/optimization-control-s25-v1/evaluation.json",
+    "reports/optimization-primitive-s25-v1/evaluation.json",
+    "reports/optimization-served-reference-v1/evaluation.json"
+  ],
+  "additional_screen_results": [
+    "reports/screens-grid-reproduced-v2/report.json",
+    "reports/screens-ocr-development-v2/report.json",
+    "reports/screens-ocr-development-v3/report.json",
+    "reports/screens-ocr-confirmation-v3/report.json"
+  ]
 }

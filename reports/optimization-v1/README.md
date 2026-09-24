@@ -1,6 +1,6 @@
 # Primitive-supervision optimization study
 
-The primitive-supervision candidate passed the predeclared accuracy gates. Serving still requires separate compatibility and latency verification.
+The primitive-supervision candidate passed the predeclared accuracy gates and is available explicitly as `mmso-joint-v3` after CPU/MPS HTTP parity checks. V2 remains the compatibility default. The [API report](../api-comparison-v3/README.md) preserves substantial latency variation; no stable latency SLA is established.
 
 ![Matched seed results and present-target behavior](results.svg)
 

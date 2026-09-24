@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "reviewed_on": "2026-09-23",
-  "acquisition_status": "three_pilot_subsets_acquired",
-  "datasets_downloaded": 3,
+  "reviewed_on": "2026-09-24",
+  "acquisition_status": "four_versioned_source_subsets_acquired_with_expanded_confirmation",
+  "datasets_downloaded": 4,
   "records": [
     {
       "id": "speech_commands",
@@ -68,10 +68,12 @@
       "observed_terms": "Author dataset card lists MIT; pin and retain the exact release notice before use",
       "split_policy": "Evaluation-only official benchmark; adapted spoken variants are separately named and grouped",
       "downloaded": true,
-      "selected_subset": "24-case stratified external probe",
+      "selected_subset": "Original24-case exposed probe plus64 fresh screenshot identities across 8 applications",
       "acquisition_record": "evals/acquisition/screen_grounding.json",
       "manifest": "evals/manifests/screen_grounding.jsonl",
-      "revision": "210e78d3844251110bff86c95835ebd37a6930fa"
+      "revision": "210e78d3844251110bff86c95835ebd37a6930fa",
+      "additional_acquisition_record": "evals/acquisition/screen_grounding_v2.json",
+      "additional_manifest": "evals/manifests/screen_grounding_v2.jsonl"
     },
     {
       "id": "multimodal_mind2web",
@@ -100,6 +102,19 @@
       "observed_terms": "Official task/assets access is gated for current releases; exact release/access not provisioned",
       "split_policy": "Pin benchmark, task, asset, and environment image versions before any reported run",
       "downloaded": false
+    },
+    {
+      "id": "speech_commands_v002_test",
+      "source": "https://www.tensorflow.org/datasets/catalog/speech_commands",
+      "role": "fresh-speaker native-model confirmation",
+      "release": "Official v0.02 test archive; custom eight-word subset",
+      "observed_terms": "CC BY 4.0; archive README retained locally",
+      "split_policy": "Exclude all prior speakers and audio hashes;32 new speakers per word, 256 recordings/58 total speakers; no training on this archive",
+      "downloaded": true,
+      "selected_subset": "256 human recordings from 58 previously unused speakers paired with 512 generated panels",
+      "acquisition_record": "evals/acquisition/optimization_panels_v1.json",
+      "manifest": "evals/manifests/optimization_panels_v1.jsonl",
+      "revision": "cc2a00c1147c2254e9be3fa0f779d8c17421dc349b86366567a8edfa9acd51df"
     }
   ]
 }

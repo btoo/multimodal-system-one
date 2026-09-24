@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "as_of": "2026-09-24",
-  "phase": "developer_api_and_controlled_scale_study",
+  "phase": "confirmed_primitive_supervision_and_real_screen_control",
   "method": "Primary-source claim verification, evidence retention, and targeted follow-up",
-  "model_runs_completed": 10,
+  "model_runs_completed": 14,
   "claims": [
     {
       "id": "C01",
@@ -174,6 +174,34 @@
       "evidence": "reports/scale-v1/summary.json",
       "observed_difference_percentage_points": 0.2849002849002849,
       "limit": "Renderer-specific pixel prior; paired interval includes zero; new checkpoints lose about twenty points of familiar-combination accuracy versus the served model."
+    },
+    {
+      "id": "C24",
+      "claim": "Primitive supervision improved balanced joint accuracy over a matched control in both of two seeds.",
+      "status": "measured_two_seed_evidence",
+      "evidence": "reports/optimization-v1/summary.json",
+      "limit": "Controlled generated panels, eight real keywords, changed common selection rule; not a component-wise ablation or general language capability."
+    },
+    {
+      "id": "C25",
+      "claim": "The pre-test nominated v3 scores 81.32% familiar and 66.99% known-gap accuracy versus v2 65.30% and 47.14% on identical fresh examples.",
+      "status": "fresh_speaker_confirmation",
+      "evidence": "reports/optimization-v1/summary.json",
+      "limit": "256 recordings from 58 new speakers; known held tuple identities; examples within speaker/scenes are dependent."
+    },
+    {
+      "id": "C26",
+      "claim": "A separate tiled OCR plus lexical control grounds 9/64 fresh real-screen targets versus grid0/64.",
+      "status": "measured_controlled_screen_evidence",
+      "evidence": "reports/screens-ocr-confirmation-v3/report.json",
+      "limit": "Text 9/32, icons 0/32; eight apps,  only 1/16 on the two new apps; not native-model or browser-execution performance."
+    },
+    {
+      "id": "C27",
+      "claim": "V3 has a stable sub-100ms API p95 on the current laptop.",
+      "status": "not_established_under_variable_host_load",
+      "evidence": "reports/api-comparison-v3/README.md",
+      "limit": "Observed CPU p95 varied 5.50 to 145.17ms; MPS 111.24ms in a busy-host round. No isolated speedup or latency-SLA claim."
     }
   ],
   "completed_research_actions": [
@@ -195,17 +223,32 @@
     "Measured actual HTTP parity and warm processing on the recorded demo",
     "Compared 668k and 1.62M models with a separate shape/color visual-prior condition",
     "Reserved 80 previously unused speakers and confirmed all three conditions plus the frozen served reference",
-    "Retained the negative scale-study results and kept the established serving default"
+    "Retained the negative scale-study results and kept the established serving default",
+    "Reviewed five optimization methods and measured the absence shortcut, primitive decodability and routing bottleneck",
+    "Ran a frozen two-seed primitive-supervision study with selected and final checkpoints retained",
+    "Acquired a checksum-pinned compact official speech test archive and reserved new speakers",
+    "Confirmed the nominated model on new voices/images and registered explicit API version v3",
+    "Reproduced the grid failure and evaluated a stronger OCR control on 64 fresh public screenshots",
+    "Verified varied-input native/HTTP parity on CPU and MPS and retained latency variability"
   ],
-  "next_owned_action": "Study stable perception and cross-modal binding with repeated development seeds and a targeted curriculum; define fresh confirmation before further selection, and collect semantically paired real speech/screens for browser claims.",
+  "next_owned_action": "Improve compositional appearance invariance and language robustness across more seeds; obtain real paired speech/screens, improve semantic ranking and icon proposals, and measure latency with controlled/interleaved host-load conditions.",
   "application_target": "Speech meaning, acoustic-event classification, screen understanding, and joint audio-screen decisions for computer/browser use",
   "models_trained_from_scratch": 2,
   "native_joint_model_trained": true,
   "baseline_runs_completed": 3,
-  "joint_model_runs_completed": 7,
-  "joint_evaluation_runs_completed": 7,
+  "joint_model_runs_completed": 11,
+  "joint_evaluation_runs_completed": 12,
   "developer_api_implemented": true,
   "scale_training_runs_completed": 3,
   "scale_confirmation_runs_completed": 4,
-  "served_model": "mmso-joint-v2"
+  "served_model": "mmso-joint-v2",
+  "optimization_training_runs_completed": 4,
+  "optimization_confirmation_runs_completed": 5,
+  "additional_screen_evaluation_runs_completed": 4,
+  "recommended_model": "mmso-joint-v3",
+  "available_api_models": [
+    "mmso-joint-v2",
+    "mmso-joint-v3"
+  ],
+  "run_count_definition": "model_runs_completed retains the original three baseline controls plus native model-training attempts; additional screen pipeline evaluations and representation diagnostics are counted separately."
 }
