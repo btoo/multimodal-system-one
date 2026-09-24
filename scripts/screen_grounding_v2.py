@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import time
 from unittest.mock import patch
 
@@ -24,6 +25,7 @@ def counts(predictions, variant):
             "proposal_center_recall": float(np.mean([p["proposal_recall"] for p in values])),
             "abstentions": sum(p.get("abstained", False) for p in values),
             "zero_proposals": sum(p.get("zero_proposals", False) for p in values),
+            "inference_errors": sum(p.get("inference_error", False) for p in values),
             "pipeline_p50_ms": float(np.median([p["pipeline_seconds"] for p in values]) * 1000),
             "pipeline_p95_ms": float(np.quantile([p["pipeline_seconds"] for p in values], .95) * 1000)}
 
@@ -55,6 +57,8 @@ def evaluate(phase):
     rows = read_manifest(manifest)
     audit = validate_manifest(rows)
     snapshot = source_snapshot(manifest)
+    write_json(output / "started.json", {"phase": phase, "provenance": snapshot,
+        "policy": "Every started run retained; failed OCR cases abstain and remain in the denominator"})
     setup = time.perf_counter()
     ocr = VisionOCR()
     model = None
@@ -71,13 +75,18 @@ def evaluate(phase):
     for row in rows:
         path = local_media_path(ROOT, row["media"][0]["path"])
         start = time.perf_counter()
-        proposals, ocr_info = ocr.proposals(path)
+        try:
+            proposals, ocr_info = ocr.proposals(path)
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired, ValueError) as error:
+            proposals = []
+            ocr_info = {"error_type": type(error).__name__, "error": str(getattr(error, "stderr", None) or error)[:1000]}
         ocr_seconds = time.perf_counter() - start
         methods = {}
         for variant in variants:
             start = time.perf_counter()
             prediction = rank_proposals(proposals, row["instruction"], variant)
             prediction["pipeline_seconds"] = ocr_seconds + time.perf_counter() - start
+            prediction["inference_error"] = "error" in ocr_info
             methods[variant] = prediction
         if model:
             start = time.perf_counter()
@@ -101,6 +110,9 @@ def evaluate(phase):
             "image_sha256": row["media"][0]["sha256"], "target_bbox_xyxy": box,
             "proposal_count": len(proposals), "ocr_pipeline_seconds": ocr_seconds, "methods": methods})
         proposal_rows.append({"id": row["id"], "proposals": proposals, "ocr_info": ocr_info})
+        # Preserve partial attempts if the process stops; final scoring still demands every ID.
+        write_manifest(output / "predictions.jsonl", predictions)
+        write_manifest(output / "proposals.jsonl", proposal_rows)
         print(f"OCR {phase} {len(predictions)}/{len(rows)}", flush=True)
     names = list(predictions[0]["methods"])
     results = {name: counts(predictions, name) for name in names}
