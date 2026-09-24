@@ -56,6 +56,33 @@ def new_model(config, device):
     return model.to(device)
 
 
+class DivisibleAveragePool(torch.nn.Module):
+    """Equivalent nonoverlapping pooling for this model's fixed input shapes.
+
+    CUDA adaptive pooling backward rejects strict determinism. Ordinary average
+    pooling has a deterministic backward; only use it for divisible dimensions.
+    This module has no parameters or buffers, so checkpoint keys are unchanged.
+    """
+    def __init__(self, output_size):
+        super().__init__()
+        self.output_size = (output_size, output_size) if isinstance(output_size, int) else output_size
+
+    def forward(self, x):
+        height, width = x.shape[-2:]
+        out_height, out_width = self.output_size
+        if height % out_height or width % out_width:
+            raise ValueError("Deterministic pilot pooling requires divisible spatial sizes")
+        return torch.nn.functional.avg_pool2d(x, (height // out_height, width // out_width))
+
+
+def deterministic_pooling(model):
+    for module in list(model.modules()):
+        for name, child in list(module.named_children()):
+            if isinstance(child, torch.nn.AdaptiveAvgPool2d):
+                setattr(module, name, DivisibleAveragePool(child.output_size))
+    return model
+
+
 def percentile(values):
     return {"samples": len(values), "p50_ms": float(np.median(values) * 1000),
             "p95_ms": float(np.quantile(values, .95) * 1000)}
@@ -68,7 +95,7 @@ def inference_check(config, data, device):
     indices = torch.arange(64)
     inputs, _ = data.batch(indices, torch.device("cpu"))
     reference = (model(*inputs) / config["temperature"]).softmax(-1)
-    model.to(device)
+    deterministic_pooling(model).to(device)
     observed = (model(*[x.to(device) for x in inputs]) / config["temperature"]).softmax(-1).cpu()
     difference = float((reference - observed).abs().max())
     agreement = int((reference.argmax(-1) == observed.argmax(-1)).sum())
@@ -194,7 +221,7 @@ def run_phase(phase, output):
         if (output / "midpoint.pt").exists():
             raise ValueError("Partial run exists; retain it and use a fresh run ID")
         result["inference"] = inference_check(config, data, device)
-    model = new_model(config, device)
+    model = deterministic_pooling(new_model(config, device))
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=.01)
     generator = torch.Generator().manual_seed(SEED)
     step, losses = (restore_training(output / "midpoint.pt", model, optimizer, generator, device)

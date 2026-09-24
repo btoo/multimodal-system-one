@@ -6,7 +6,7 @@ from unittest.mock import patch
 import torch
 
 from mmso.audio import choose_device, synchronize
-from mmso.cloud_pilot import restore_training, save_training, tensor_tree_difference
+from mmso.cloud_pilot import DivisibleAveragePool, restore_training, save_training, tensor_tree_difference
 
 
 class DeviceTests(unittest.TestCase):
@@ -31,6 +31,19 @@ class DeviceTests(unittest.TestCase):
 
 
 class ResumeTests(unittest.TestCase):
+    def test_fixed_pool_matches_adaptive_forward_and_backward(self):
+        for shape, output_size in [((2, 64, 8, 16), (4, 4)), ((2, 64, 8, 8), 1)]:
+            x = torch.randn(shape, requires_grad=True)
+            reference = torch.nn.AdaptiveAvgPool2d(output_size)(x)
+            actual = DivisibleAveragePool(output_size)(x)
+            gradient = torch.randn_like(reference)
+            first = torch.autograd.grad(reference, x, gradient, retain_graph=True)[0]
+            second = torch.autograd.grad(actual, x, gradient)[0]
+            self.assertTrue(torch.allclose(actual, reference, atol=1e-6, rtol=0))
+            self.assertTrue(torch.equal(first, second))
+        with self.assertRaises(ValueError):
+            DivisibleAveragePool((4, 4))(torch.ones(1, 1, 7, 8))
+
     def test_optimizer_sampler_and_rng_restore_reproduce_next_update(self):
         torch.set_num_threads(2)
         torch.manual_seed(123)

@@ -1,0 +1,10 @@
+{
+  "status": "failed_on_first_backward",
+  "app_url": "https://modal.com/apps/btoo/main/ap-hI6bDVGEk1KaLYKA2CPYUL",
+  "source_commit": "0cc6fe0cec174f6eab476cd8914ccb13772fe403",
+  "error": "adaptive_avg_pool2d_backward_cuda does not have a deterministic implementation",
+  "cause": "Strict deterministic training rejected adaptive pooling backward on CUDA.",
+  "recovery": "Use mathematically equivalent nonoverlapping average pooling for the fixed divisible model shapes, verify CPU forward/backward equivalence, and retain strict determinism.",
+  "inference": "CPU/CUDA check completed before this error, but its result was not returned; no numeric result claimed for this attempt.",
+  "optimizer_updates": 0
+}
