@@ -1,6 +1,6 @@
 # Reading map
 
-Primary sources consulted on 2026-09-23. This is a scoped design review, not a claim to cover every relevant publication or to reproduce any paper. “Methods” means targeted sections of full text were inspected; “abstract” means claims are limited to the authors' summary. A model's reported scale or benchmark result is not evidence for the same result on our machine.
+Primary sources consulted on 2026-09-23, with the composition-study and developer-interface additions checked on 2026-09-24. This is a scoped design review, not a claim to cover every relevant publication or to reproduce any paper. “Methods” means targeted sections of full text were inspected; “abstract” means claims are limited to the authors' summary. A model's reported scale or benchmark result is not evidence for the same result on our machine.
 
 The current automated-research sources are assessed separately in [frontier-methods.md](frontier-methods.md). The table below records the model-side evidence and the decision each source informs.
 
@@ -28,6 +28,8 @@ The application-specific speech, sound, and screen datasets are reviewed in [aud
 | [Audio Spectrogram Transformer](https://arxiv.org/abs/2104.01778) | Abstract | Attention over spectrogram patches | Practical later audio input representation |
 | [Knowledge distillation](https://arxiv.org/abs/1503.02531) | Abstract | Transfer predictive distributions to a smaller model | Later teacher/student track, with teacher errors and cost measured separately |
 | [SmolVLM-256M model card](https://huggingface.co/HuggingFaceTB/SmolVLM-256M-Instruct) | Model card | An existing small generative VLM comparison candidate | No local speed or quality claim; inspect licensing/version when used |
+| [Are Object-Centric Representations Better At Compositional Generalization?](https://arxiv.org/html/2602.16689v1) | Problem setup §3 and experiment design | Separate representation structure, data diversity, downstream size, and compute in controlled composition tests | Motivates our size-versus-visual-prior comparison; their pretrained object slots differ from our hand-specified shape/color transform |
+| [Disentanglement of Color and Shape Representations for Continual Learning](https://arxiv.org/abs/2007.06356) | Abstract | Separate color and shape pathways as a representation hypothesis | Different learning setting; our local intervention needs its own evidence |
 
 ## Probability quality and evaluation
 
@@ -51,6 +53,8 @@ The application-specific speech, sound, and screen datasets are reviewed in [aud
 | [ARO / composition-aware negatives](https://arxiv.org/abs/2210.01936) | Methods §3.2–4 | Retrieval shortcuts and hard negative construction | Ensure plausible alternatives differ in the relevant relation or attribute |
 
 ## Platform and interface references
+
+The [developer interface design](developer-interface.md) additionally records current OpenAI and Claude media-block conventions and the Jev HTTP, rubric, and confidence contracts. Those interfaces inform our transport and result shapes; they do not confer their models' capabilities.
 
 | Source | Reading depth | What was established |
 |---|---|---|
