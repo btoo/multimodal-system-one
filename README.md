@@ -12,7 +12,24 @@ The first goal is a small model whose weights, data, losses, and failure modes w
 
 This recommendation is an engineering judgment from the sources below. The best architecture for our data and compute budget remains an empirical question.
 
-## The unified model is now implemented
+## Developer API
+
+![Developer API: media and named questions enter a cached checkpoint, which returns typed probability views.](docs/assets/developer-api.svg)
+
+`POST /v1/decisions` accepts inline image/audio content and named questions, returning **Choice, Noul, Score, and Ranking** results in one typed response. The Python client includes helpers for the supported OpenAI and Claude content-block formats. `/v1/models` exposes the checkpoint identity, vocabulary, and capability limits; `/docs` provides interactive OpenAPI documentation.
+
+```bash
+uv sync --locked
+uv run mmso serve --device cpu
+# In another terminal, using the prepared demo data:
+uv run python examples/api_client.py
+```
+
+The service loads our trained checkpoint once. It runs locally without calling OpenAI, Claude, or Jev. Read the [developer guide](docs/developer-api.md) for data preparation, Python and curl examples, authentication, validation, and the exact schemas. The [design rationale](docs/research/developer-interface.md) connects the interface to its primary sources.
+
+**The model's current scope still applies:** one short spoken keyword, one generated 2×2 panel, and a limited learned text vocabulary. Score is an expectation over declared candidate values; Ranking sorts the same candidate distribution. These output views do not establish arbitrary rubric understanding or general screenshot/speech capability.
+
+## First unified model and original evaluation
 
 ![Implemented neural architecture](docs/assets/implemented-joint.svg)
 
