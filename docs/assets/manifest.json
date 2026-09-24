@@ -98,6 +98,11 @@
       "kind": "design",
       "description": "Implemented native candidate scorer. Architecture diagram, not a performance claim.",
       "svg_sha256": "222ad7c987c5e6360dec8f3277747089cb996016f9f21956621744e6815231c2"
+    },
+    "developer-api": {
+      "kind": "design",
+      "description": "Multimodal input validation, cached neural scorer, and typed deterministic output views.",
+      "svg_sha256": "a274fc0d6c49b41cd3fb0901b4bf7e8c8b587026da47bc220cc0b53f9cafcae6"
     }
   }
 }

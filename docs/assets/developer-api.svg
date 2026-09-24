@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="619.2pt" viewBox="0 0 1008 619.2" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 619.2
+L 1008 619.2
+L 1008 0
+L 0 0
+z
+" style="fill: #f8fafc"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 45.72 276.12
+L 271.08 276.12
+Q 279.72 276.12 279.72 267.48
+L 279.72 164.52
+Q 279.72 155.88 271.08 155.88
+L 45.72 155.88
+Q 37.08 155.88 37.08 164.52
+L 37.08 267.48
+Q 37.08 276.12 45.72 276.12
+z
+" clip-path="url(#pcf10ebfcc5)" style="fill: #e6eefc; stroke: #2e62bc; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 45.72 445.32
+L 271.08 445.32
+Q 279.72 445.32 279.72 436.68
+L 279.72 330.12
+Q 279.72 321.48 271.08 321.48
+L 45.72 321.48
+Q 37.08 321.48 37.08 330.12
+L 37.08 436.68
+Q 37.08 445.32 45.72 445.32
+z
+" clip-path="url(#pcf10ebfcc5)" style="fill: #f0e9f7; stroke: #7850a8; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 333.72 276.12
+L 595.08 276.12
+Q 603.72 276.12 603.72 267.48
+L 603.72 164.52
+Q 603.72 155.88 595.08 155.88
+L 333.72 155.88
+Q 325.08 155.88 325.08 164.52
+L 325.08 267.48
+Q 325.08 276.12 333.72 276.12
+z
+" clip-path="url(#pcf10ebfcc5)" style="fill: #fff0d9; stroke: #b26614; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 333.72 445.32
+L 595.08 445.32
+Q 603.72 445.32 603.72 436.68
+L 603.72 330.12
+Q 603.72 321.48 595.08 321.48
+L 333.72 321.48
+Q 325.08 321.48 325.08 330.12
+L 325.08 436.68
+Q 325.08 445.32 333.72 445.32
+z
+" clip-path="url(#pcf10ebfcc5)" style="fill: #dff2ed; stroke: #007e78; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 661.32 276.12
+L 958.68 276.12
+Q 967.32 276.12 967.32 267.48
+L 967.32 164.52
+Q 967.32 155.88 958.68 155.88
+L 661.32 155.88
+Q 652.68 155.88 652.68 164.52
+L 652.68 267.48
+Q 652.68 276.12 661.32 276.12
+z
+" clip-path="url(#pcf10ebfcc5)" style="fill: #e6eefc; stroke: #2e62bc; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 661.32 445.32
+L 958.68 445.32
+Q 967.32 445.32 967.32 436.68
+L 967.32 330.12
+Q 967.32 321.48 958.68 321.48
+L 661.32 321.48
+Q 652.68 321.48 652.68 330.12
+L 652.68 436.68
+Q 652.68 445.32 661.32 445.32
+z
+" clip-path="url(#pcf10ebfcc5)" style="fill: #f0e9f7; stroke: #7850a8; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 282.198779 216
+Q 302.398498 216 320.809363 216
+" clip-path="url(#pcf10ebfcc5)" style="fill: none; stroke: #2e62bc; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 314.809363 213
+L 320.809363 216
+L 314.809363 219
+z
+" clip-path="url(#pcf10ebfcc5)" style="fill: #2e62bc; stroke: #2e62bc; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 464.4 278.598779
+Q 464.4 298.798498 464.4 317.209363
+" clip-path="url(#pcf10ebfcc5)" style="fill: none; stroke: #b26614; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 467.4 311.209363
+L 464.4 317.209363
+L 461.4 311.209363
+z
+" clip-path="url(#pcf10ebfcc5)" style="fill: #b26614; stroke: #b26614; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 282.198779 388.8
+Q 302.398498 388.8 320.809363 388.8
+" clip-path="url(#pcf10ebfcc5)" style="fill: none; stroke: #7850a8; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 314.809363 385.8
+L 320.809363 388.8
+L 314.809363 391.8
+z
+" clip-path="url(#pcf10ebfcc5)" style="fill: #7850a8; stroke: #7850a8; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 602.994617 362.533997
+Q 628.19955 297.001169 652.762323 233.137961
+" clip-path="url(#pcf10ebfcc5)" style="fill: none; stroke: #007e78; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 647.808411 237.661097
+L 652.762323 233.137961
+L 653.408485 239.814972
+z
+" clip-path="url(#pcf10ebfcc5)" style="fill: #007e78; stroke: #007e78; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 606.199878 388.8
+Q 628.201184 388.8 648.413636 388.8
+" clip-path="url(#pcf10ebfcc5)" style="fill: none; stroke: #007e78; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 642.413636 385.8
+L 648.413636 388.8
+L 642.413636 391.8
+z
+" clip-path="url(#pcf10ebfcc5)" style="fill: #007e78; stroke: #007e78; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #007e78" x="39.6" y="36.397656" transform="rotate(-0 39.6 36.397656)">15 / DEVELOPER INTERFACE</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="39.6" y="77.236406" transform="rotate(-0 39.6 77.236406)">Multimodal content in. Typed decisions out.</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="106.278281" transform="rotate(-0 39.6 106.278281)">HTTP transport wraps the neural scorer; candidate meanings determine the prediction task</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="52.56" y="184.877812" transform="rotate(-0 52.56 184.877812)">Observation blocks</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(52.56 214.050313)">Image pixels + recorded audio</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(52.56 230.000313)">Question text + answer meanings</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="52.56" y="349.717969" transform="rotate(-0 52.56 349.717969)">Named questions</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(52.56 379.650313)">Choice · Noul · Score · Ranking</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(52.56 395.600313)">Independent questions, shared input</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="340.56" y="184.117969" transform="rotate(-0 340.56 184.117969)">Validate the model contract</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(340.56 215.115938)">Decode bounded inline media</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(340.56 230.000313)">Check vocabulary and input limits</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="340.56" y="349.717969" transform="rotate(-0 340.56 349.717969)">Cached neural checkpoint</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(340.56 379.650313)">Encode audio and image once</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(340.56 395.600313)">Fuse each question; score candidates</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="668.16" y="184.877812" transform="rotate(-0 668.16 184.877812)">Typed result per question</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(668.16 214.050313)">Choice → categorical probabilities</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(668.16 230.000313)">Noul → probability of yes</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="668.16" y="349.717969" transform="rotate(-0 668.16 349.717969)">Deterministic result views</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(668.16 379.650313)">Score → weighted rubric values</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(668.16 395.600313)">Ranking → sorted candidate scores</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #007e78" x="46.8" y="511.2" transform="rotate(-0 46.8 511.2)">Model capability is versioned separately from API capability.</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="46.8" y="545.76" transform="rotate(-0 46.8 545.76)">v2: one spoken keyword + generated panel. Structured JSON and low latency do not establish task accuracy.</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="602.358047" transform="rotate(-0 39.6 602.358047)">Interface architecture, not a benchmark. The model predicts distributions; ordinary code applies ranking, rubric values, and abstention.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pcf10ebfcc5">
+   <rect x="0" y="0" width="1008" height="619.2"/>
+  </clipPath>
+ </defs>
+</svg>

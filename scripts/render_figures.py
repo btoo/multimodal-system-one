@@ -378,9 +378,29 @@ def implemented_joint():
     save(f,"implemented-joint","design","Implemented native candidate scorer. Architecture diagram, not a performance claim.")
 
 
+def developer_api():
+    f,a=canvas("15 / developer interface", "Multimodal content in. Typed decisions out.",
+               "HTTP transport wraps the neural scorer; candidate meanings determine the prediction task",height=8.6)
+    box(a,.55,4.8,3.3,1.6,"Observation blocks","Image pixels + recorded audio\nQuestion text + answer meanings",BLUE)
+    box(a,.55,2.45,3.3,1.65,"Named questions","Choice · Noul · Score · Ranking\nIndependent questions, shared input",PURPLE,title_size=13)
+    box(a,4.55,4.8,3.8,1.6,"Validate the model contract","Decode bounded inline media\nCheck vocabulary and input limits",GOLD,title_size=13)
+    box(a,4.55,2.45,3.8,1.65,"Cached neural checkpoint","Encode audio and image once\nFuse each question; score candidates",TEAL,title_size=13)
+    box(a,9.1,4.8,4.3,1.6,"Typed result per question","Choice → categorical probabilities\nNoul → probability of yes",BLUE)
+    box(a,9.1,2.45,4.3,1.65,"Deterministic result views","Score → weighted rubric values\nRanking → sorted candidate scores",PURPLE,title_size=13)
+    arrow(a,(3.85,5.6),(4.55,5.6),BLUE)
+    arrow(a,(6.45,4.8),(6.45,4.1),GOLD)
+    arrow(a,(3.85,3.2),(4.55,3.2),PURPLE)
+    arrow(a,(8.35,3.5),(9.1,5.45),TEAL)
+    arrow(a,(8.35,3.2),(9.1,3.2),TEAL)
+    a.text(.65,1.5,"Model capability is versioned separately from API capability.",fontsize=15,weight="bold",color=TEAL)
+    a.text(.65,1.02,"v2: one spoken keyword + generated panel. Structured JSON and low latency do not establish task accuracy.",fontsize=11,color=MUTED)
+    note(a,"Interface architecture, not a benchmark. The model predicts distributions; ordinary code applies ranking, rubric values, and abstention.")
+    save(f,"developer-api","design","Multimodal input validation, cached neural scorer, and typed deterministic output views.")
+
+
 if __name__ == "__main__":
     for make in [overview,fusion,architecture,candidate_equivariance,scaling,proper_scoring,
-                 calibration,counterfactuals,research_loop,firewall,two_level,eval_suites,audio_screen_architecture,implemented_joint]:
+                 calibration,counterfactuals,research_loop,firewall,two_level,eval_suites,audio_screen_architecture,implemented_joint,developer_api]:
         make()
     for name,item in MANIFEST.items():
         item['svg_sha256']=hashlib.sha256((OUT/f'{name}.svg').read_bytes()).hexdigest()

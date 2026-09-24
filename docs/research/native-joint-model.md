@@ -79,7 +79,7 @@ Use an exhaustive candidate set for an unconditional classification claim. A sub
 
 Candidates have no slot embeddings or mutual attention. Permuting them therefore only permutes scores up to floating-point tolerance. Adding/removing candidates leaves existing unnormalized scores unchanged, while the softmax denominator changes. Candidate IDs are mapping keys and can be renamed without changing the input tensors. Questions are independent batch items; observation encodings may be reused across questions.
 
-The implemented API is a choice scorer. Boolean questions use supplied `yes`/`no` candidates; a dedicated Noul/Score-compatible API and trained multi-label event outputs remain future work. The generic evaluation library's support for other metrics is not evidence that this checkpoint supports those capabilities.
+The neural prediction function is a choice scorer. The [HTTP developer API](../developer-api.md) exposes Choice, Noul, Score, and Ranking views over that scorer: Boolean questions use `yes`/`no` candidates; Score computes an expectation over declared rubric values; Ranking sorts candidate probabilities. These serializers do not add new learned tasks. Trained multi-label event outputs remain future work. The generic evaluation library's support for other metrics is not evidence that this checkpoint supports those capabilities.
 
 These properties are checked separately from accuracy. Structural invariance does not establish understanding of novel words, arbitrary rubrics, or unseen task types.
 

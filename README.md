@@ -6,7 +6,7 @@
 
 > **Stage: first unified neural prototype, with measured limits.** One 668,097-parameter model now reads recorded audio, pixels, question text, and candidate descriptions. It outperforms matched unimodal controls on the generated-panel task, but fails the held-out command–color composition test. General speech, real-browser grounding, and Jev-equivalent capabilities remain unestablished.
 
-The first goal is a small model whose weights, data, losses, and failure modes we can understand. It should answer bounded questions about observations, return a probability distribution over the declared answers, and support abstention in the surrounding software. The initial target machine is an Apple M4 Pro with 48 GB of unified memory. Training throughput and achievable latency are still unmeasured.
+The first goal is a small model whose weights, data, losses, and failure modes we can understand. It should answer bounded questions about observations, return a probability distribution over the declared answers, and support abstention in the surrounding software. The initial target machine is an Apple M4 Pro with 48 GB of unified memory. The reports below record training budgets and loaded inference latency for the implemented prototypes.
 
 **Current target:** speech/audio classification and screen understanding for computer/browser use. Define real-data evals for each modality and for paired audio–screen decisions before model search. Use compact pretrained input encoders with trainable fusion/decision heads for the practical track, while retaining small from-scratch controls to learn the fundamentals. The image/text shapes study below is an algorithm control, not the application acceptance test.
 
@@ -68,6 +68,7 @@ See the [runnable eval guide](evals/README.md) for training, saved-checkpoint in
 
 ## Read the project
 
+- [Developer API](docs/developer-api.md), [interface design and sources](docs/research/developer-interface.md)
 - [The decision we want to learn](#the-decision-we-want-to-learn)
 - [Audio, screens, and real-world evals](#audio-screens-and-real-world-evals)
 - [Architecture and alternatives](#architecture-and-alternatives)
