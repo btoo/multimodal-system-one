@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="576pt" viewBox="0 0 1008 576" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 576
+L 1008 576
+L 1008 0
+L 0 0
+z
+" style="fill: #f8fafc"/>
+  </g>
+  <g id="axes_1">
+   <g clip-path="url(#p1691f1588b)">
+    <image xlink:href="data:image/png;base64,
+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" id="image91a4274c6b" transform="scale(1 -1) translate(0 -187.2)" x="50.4" y="-190.8" width="187.2" height="187.2"/>
+   </g>
+   <g id="patch_2">
+    <path d="M 312.12 243.72
+L 602.28 243.72
+Q 610.92 243.72 610.92 235.08
+L 610.92 164.52
+Q 610.92 155.88 602.28 155.88
+L 312.12 155.88
+Q 303.48 155.88 303.48 164.52
+L 303.48 235.08
+Q 303.48 243.72 312.12 243.72
+z
+" clip-path="url(#p1691f1588b)" style="fill: #e6eefc; stroke: #2e62bc; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 312.12 387.72
+L 602.28 387.72
+Q 610.92 387.72 610.92 379.08
+L 610.92 308.52
+Q 610.92 299.88 602.28 299.88
+L 312.12 299.88
+Q 303.48 299.88 303.48 308.52
+L 303.48 379.08
+Q 303.48 387.72 312.12 387.72
+z
+" clip-path="url(#p1691f1588b)" style="fill: #fff0d9; stroke: #b26614; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 672.12 337.32
+L 951.48 337.32
+Q 960.12 337.32 960.12 328.68
+L 960.12 214.92
+Q 960.12 206.28 951.48 206.28
+L 672.12 206.28
+Q 663.48 206.28 663.48 214.92
+L 663.48 328.68
+Q 663.48 337.32 672.12 337.32
+z
+" clip-path="url(#p1691f1588b)" style="fill: #dff2ed; stroke: #007e78; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 241.929272 238.693579
+Q 271.800137 221.39992 300.122881 205.002543
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #2e62bc; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 293.427214 205.412481
+L 300.122881 205.002543
+L 296.433432 210.605039
+z
+" clip-path="url(#p1691f1588b)" style="fill: #2e62bc; stroke: #2e62bc; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 242.572192 338.923389
+Q 271.798769 341.99987 299.24632 344.889086
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #b26614; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 293.593342 341.277461
+L 299.24632 344.889086
+L 292.965233 347.244494
+z
+" clip-path="url(#p1691f1588b)" style="fill: #b26614; stroke: #b26614; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 612.516797 204.430298
+Q 637.196958 221.397909 660.403028 237.352082
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #2e62bc; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 657.158363 231.480783
+L 660.403028 237.352082
+L 653.75919 236.425034
+z
+" clip-path="url(#p1691f1588b)" style="fill: #2e62bc; stroke: #2e62bc; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 612.516797 342.769702
+Q 637.196958 325.802091 660.403028 309.847918
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #b26614; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 653.75919 310.774966
+L 660.403028 309.847918
+L 657.158363 315.719217
+z
+" clip-path="url(#p1691f1588b)" style="fill: #b26614; stroke: #b26614; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #007e78" x="39.6" y="36.397656" transform="rotate(-0 39.6 36.397656)">16 / VISUAL REPRESENTATION EXPERIMENT</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="39.6" y="77.236406" transform="rotate(-0 39.6 77.236406)">Test a visual prior separately from model size</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="106.278281" transform="rotate(-0 39.6 106.278281)">An explicit generated-panel assumption: dark glyphs can be separated from the colored tile fill</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #14283e" x="144" y="165.6" transform="rotate(-0 144 165.6)">Same glyph, four colors</text>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="318.96" y="184.877812" transform="rotate(-0 318.96 184.877812)">Dark-ink shape map</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="318.96" y="214.050312" transform="rotate(-0 318.96 214.050312)">Fixed pixel transform → learned CNN</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="318.96" y="328.877813" transform="rotate(-0 318.96 328.877813)">Pooled color</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="318.96" y="358.050313" transform="rotate(-0 318.96 358.050313)">Spatial RGB mean → learned MLP</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="678.96" y="234.517969" transform="rotate(-0 678.96 234.517969)">One visual token per tile</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(678.96 264.450313)">Concatenate shape + color</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(678.96 280.400313)">Then use the existing joint model</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #2e62bc" x="50.4" y="444.96" transform="rotate(-0 50.4 444.96)">Shape transform:</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="216" y="444.96" transform="rotate(-0 216 444.96)">clip((0.4 − max(R, G, B)) / 0.2, 0, 1)</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="50.4" y="489.6" transform="rotate(-0 50.4 489.6)">The shape map is invariant to these color interventions. This is a targeted prior, not general object segmentation.</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="559.158047" transform="rotate(-0 39.6 559.158047)">Original generated inputs and architecture diagram. No oracle labels enter inference; performance is reported separately.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p1691f1588b">
+   <rect x="0" y="0" width="1008" height="576"/>
+  </clipPath>
+ </defs>
+</svg>

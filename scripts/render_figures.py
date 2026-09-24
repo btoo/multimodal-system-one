@@ -378,6 +378,29 @@ def implemented_joint():
     save(f,"implemented-joint","design","Implemented native candidate scorer. Architecture diagram, not a performance claim.")
 
 
+def shape_color_factorization():
+    f,a=canvas("16 / visual representation experiment", "Test a visual prior separately from model size",
+               "An explicit generated-panel assumption: dark glyphs can be separated from the colored tile fill",height=8)
+    from mmso.joint_world import render_panel
+    colors=["red","green","blue","yellow"]
+    panel={"background":245,"tiles":[{"word":"down","color":color,"jitter":[0,0],"stroke":5} for color in colors]}
+    pixels=np.array(render_panel(panel))
+    a.imshow(pixels,extent=(.7,3.3,2.75,5.35),interpolation="nearest",aspect="auto")
+    a.text(2,5.7,"Same glyph, four colors",ha="center",fontsize=13,weight="bold")
+    box(a,4.25,4.65,4.2,1.15,"Dark-ink shape map","Fixed pixel transform → learned CNN",BLUE)
+    box(a,4.25,2.65,4.2,1.15,"Pooled color","Spatial RGB mean → learned MLP",GOLD)
+    box(a,9.25,3.35,4.05,1.75,"One visual token per tile","Concatenate shape + color\nThen use the existing joint model",TEAL,title_size=13)
+    arrow(a,(3.3,4.65),(4.25,5.2),BLUE)
+    arrow(a,(3.3,3.3),(4.25,3.2),GOLD)
+    arrow(a,(8.45,5.2),(9.25,4.65),BLUE)
+    arrow(a,(8.45,3.2),(9.25,3.75),GOLD)
+    a.text(.7,1.82,"Shape transform:",fontsize=13,weight="bold",color=BLUE)
+    a.text(3.0,1.82,"clip((0.4 − max(R, G, B)) / 0.2, 0, 1)",fontsize=13)
+    a.text(.7,1.2,"The shape map is invariant to these color interventions. This is a targeted prior, not general object segmentation.",fontsize=11,color=MUTED)
+    note(a,"Original generated inputs and architecture diagram. No oracle labels enter inference; performance is reported separately.")
+    save(f,"shape-color-prior","design","Renderer-specific fixed dark-ink map and learned shape/color branches; no performance claim.")
+
+
 def developer_api():
     f,a=canvas("15 / developer interface", "Multimodal content in. Typed decisions out.",
                "HTTP transport wraps the neural scorer; candidate meanings determine the prediction task",height=8.6)
@@ -400,7 +423,7 @@ def developer_api():
 
 if __name__ == "__main__":
     for make in [overview,fusion,architecture,candidate_equivariance,scaling,proper_scoring,
-                 calibration,counterfactuals,research_loop,firewall,two_level,eval_suites,audio_screen_architecture,implemented_joint,developer_api]:
+                 calibration,counterfactuals,research_loop,firewall,two_level,eval_suites,audio_screen_architecture,implemented_joint,developer_api,shape_color_factorization]:
         make()
     for name,item in MANIFEST.items():
         item['svg_sha256']=hashlib.sha256((OUT/f'{name}.svg').read_bytes()).hexdigest()

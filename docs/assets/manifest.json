@@ -103,6 +103,11 @@
       "kind": "design",
       "description": "Multimodal input validation, cached neural scorer, and typed deterministic output views.",
       "svg_sha256": "a274fc0d6c49b41cd3fb0901b4bf7e8c8b587026da47bc220cc0b53f9cafcae6"
+    },
+    "shape-color-prior": {
+      "kind": "design",
+      "description": "Renderer-specific fixed dark-ink map and learned shape/color branches; no performance claim.",
+      "svg_sha256": "3a6d3f6b96d3387616084ba8b576fba2add47b2a023a006d91b7e0928383c889"
     }
   }
 }
