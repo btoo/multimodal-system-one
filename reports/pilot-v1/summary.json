@@ -1,0 +1,21 @@
+{
+  "status": "measured_baseline_pilot",
+  "runs": {
+    "speech-cnn-v1": "c8c4fe9ef4b09f554ebff75a92b756098b2f728ac7e3a5dbdca58211610e1e10",
+    "sounds-cnn-v1": "38888d0f1786aa74a2f3488fad45b5e49039c866db9639e10a0f382a534e2e78",
+    "screens-clip-v1": "69f036fe279931aa145ad385aec0cae054aca9bb06d26cc78ee287095afe8234"
+  },
+  "official_benchmark_submission": false,
+  "native_joint_model_trained": false,
+  "speech_unique_media_sensitivity": {
+    "post_hoc": true,
+    "refit": false,
+    "retained_examples": 255,
+    "removed_duplicate_ids": [
+      "mini:go:cb8f8307_nohash_7.wav"
+    ],
+    "accuracy": 0.8117647058823529,
+    "nll": 0.6853750890140804
+  },
+  "note": "One exact duplicate pair is retained in the original speech test and one in calibration. Both pairs remain within a speaker and split; no train/test leakage. Original results are unchanged."
+}

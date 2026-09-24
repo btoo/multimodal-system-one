@@ -75,19 +75,31 @@ def validate_manifest(rows, root=ROOT, verify_media=True):
                     files[path] = sha256(path)
                 if files[path] != expected:
                     raise ValueError(f"Media hash mismatch: {row['id']}")
-        if row["kind"] == "categorical":
+        if row["kind"] in {"categorical", "multilabel"}:
             labels = row["labels"]
-            if len(labels) < 2 or len(set(labels)) != len(labels) or row["target"] not in labels:
+            if len(labels) < (2 if row["kind"] == "categorical" else 1) or len(set(labels)) != len(labels):
                 raise ValueError("Invalid categorical target/schema")
+            if row["kind"] == "categorical" and row["target"] not in labels:
+                raise ValueError("Target is absent from labels")
+            if row["kind"] == "multilabel" and (not isinstance(row["targets"],list) or len(set(row["targets"]))!=len(row["targets"]) or not set(row["targets"])<=set(labels)):
+                raise ValueError("Invalid event labels")
             if row["dataset"] in schemas and schemas[row["dataset"]] != labels:
                 raise ValueError("Inconsistent label order in dataset")
             schemas[row["dataset"]] = labels
-            supports[split][row["target"]] += 1
+            for target in [row["target"]] if row["kind"] == "categorical" else row["targets"]:
+                supports[split][target] += 1
         elif row["kind"] == "grounding":
             box = row["target_bbox_xyxy"]
             w, h = row["image_size"]
             if not (0 <= box[0] < box[2] <= w and 0 <= box[1] < box[3] <= h):
                 raise ValueError("Invalid screen bounds")
+        elif row["kind"] == "joint":
+            answers=row["acceptable_answers"]
+            if not isinstance(answers,list) or not answers:
+                raise ValueError("Joint task requires acceptable answers")
+            for answer in answers:
+                if not isinstance(answer,dict) or set(answer)!={"action","target"} or not isinstance(answer["action"],str) or not (answer["target"] is None or isinstance(answer["target"],str)):
+                    raise ValueError("Invalid joint target schema")
         else:
             raise ValueError("Unsupported populated manifest kind")
         counts[split] += 1

@@ -1,0 +1,32 @@
+{
+  "architecture": "AudioCNN-v1",
+  "labels": [
+    "down",
+    "go",
+    "left",
+    "no",
+    "right",
+    "stop",
+    "up",
+    "yes"
+  ],
+  "sample_rate": 16000,
+  "seconds": 1,
+  "frontend": {
+    "n_fft": 400,
+    "hop": 160,
+    "mel_bands": 64,
+    "normalization": "per-clip mean/std",
+    "offline_centered_stft": true,
+    "time_pad_multiple": 32
+  },
+  "seed": 20260923,
+  "max_epochs": 16,
+  "max_train_seconds": 120,
+  "chosen_epoch": 10,
+  "optimizer": "AdamW",
+  "learning_rate": 0.001,
+  "weight_decay": 0.01,
+  "batch_size": 32,
+  "temperature": 1.0516295528576776
+}

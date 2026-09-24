@@ -1,12 +1,12 @@
 # Research protocol
 
-Version 1 — research/design stage. This is a project-specific protocol drawing on the [frontier review](docs/research/frontier-methods.md). It is not executable training software or a claim to reproduce the cited systems.
+Version 2 — executable evals and baseline stage. This is a project-specific protocol drawing on the [frontier review](docs/research/frontier-methods.md). It governs the executable baseline harness; the evolutionary runner remains pending. It does not claim to reproduce the cited research systems.
 
 ## Objective
 
 Find a small native audio–image–text decision model whose probabilities, modality use, generalization, and resource costs are measured on real speech, sound, screen, and paired tasks, with controlled synthetic tests for mechanics. Improve the research procedure only through a separately evaluated method-level study.
 
-The present repository contains documentation and figure tools. Do not manufacture benchmark rows, trained weights, or a winner. When implementation begins, build the evaluator and a baseline before integrating an evolution runner.
+The repository includes audited data adapters, bounded audio training, screen controls, saved checkpoints, independent metrics, and measured reports. Preserve those results. Build semantically paired data and a stronger screen-grounding path before claiming native multimodal competence or integrating an evolution runner.
 
 ## Literature and theory phase
 
@@ -21,10 +21,10 @@ Read [the application eval contract](docs/research/audio-screen-evals.md) before
 
 ## Implementation phase prerequisites
 
-- The renderer, oracle, split policy, metrics, and timing boundaries exist and pass the mechanical checks in the experiment contract.
+- Each populated suite has verified source labels, split rules, metrics, and timing boundaries. Synthetic suites additionally need an independent renderer/oracle.
 - A baseline can train, save, reload, and evaluate on CPU/MPS as applicable.
 - A short pilot determines feasible data size, runtime, precision, and resource gates. Freeze them before comparative trials.
-- The campaign records task/evaluator hashes and explicit total compute and proposer-call budgets. The default manifest is disabled because no runner exists yet.
+- The campaign records task/evaluator hashes and explicit total compute and proposer-call budgets. The synthetic-search manifest remains disabled; the separate frozen baseline-pilot protocol has executed.
 - If ShinkaEvolve is adopted, pin a tested revision and run a deterministic, provider-free integration check first. Keep API model selection and spending explicit in the campaign rather than inheriting library defaults.
 
 ## Model-search loop

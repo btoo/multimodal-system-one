@@ -1,0 +1,297 @@
+{
+  "run_id": "screens-clip-v1",
+  "dataset": "screen_grounding",
+  "status": "completed",
+  "kind": "screen_controls",
+  "scope": "24-case stratified implementation probe; no training or tuning on this slice",
+  "provenance": {
+    "recorded_at_utc": "2026-09-24T03:05:04.813035+00:00",
+    "git_revision": "cf9c4e18d2de1cdd68061362fa41076d5524d503",
+    "working_tree_dirty": true,
+    "source_hashes": {
+      "mmso/__init__.py": "d2df3b1f24aad519a417114c8a63489df9a18b66babfb5023b8b02c5ccff9626",
+      "mmso/__main__.py": "ef220f1975478d9cf43e728deff2c47662d3c8d66363c9d3c6183c2d49045d38",
+      "mmso/artifacts.py": "e08cf5c54639962b6953615da916861843c4efe117b229ebbbd7bc5e5bb0edb7",
+      "mmso/audio.py": "2dfec8cbb07d58db21b08d09b097422eaa627d3c5eb1c4e9af2cfd236da0ecc6",
+      "mmso/data.py": "3e71fe11b4fb8c13b1419b8620c76bdd025c543c77aad48cd34c516810b6d5b0",
+      "mmso/metrics.py": "8742d42f6ba4da5d96d0e75609eb980202f17d166e8d5a4386f39f73b23bb7c0",
+      "mmso/screen.py": "17c49e2bdb1d321aca118dbd0f23063f184fd640adc9daecce0f4da03750cc31",
+      "uv.lock": "b126105a74730299d150393eb76294ecb7d4161389356116089779239e2433fb"
+    },
+    "manifest_sha256": "1dc26e4db232c1eb7ac499ea3afcbf3c0c29e6f9389da68933e2b4313ba29420",
+    "python": "3.12.12",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64"
+  },
+  "dataset_audit": {
+    "examples": 24,
+    "splits": {
+      "external_probe": 24
+    },
+    "groups": 24,
+    "unique_media_hashes": 24,
+    "support": {},
+    "media_verified": true,
+    "group_and_hash_disjoint": true
+  },
+  "model": {
+    "id": "openai/clip-vit-base-patch32",
+    "revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "weights_sha256": "a63082132ba4f97a80bea76823f544493bffa8082296d62d71581a4feff1576f",
+    "parameters": 151277313,
+    "trainable_parameters": 0,
+    "device": "mps"
+  },
+  "center_point": {
+    "examples": 24,
+    "hits": 0,
+    "hit_rate": 0.0
+  },
+  "clip_grid": {
+    "examples": 24,
+    "hits": 0,
+    "hit_rate": 0.0
+  },
+  "grid_point_coverage_ceiling": {
+    "examples": 24,
+    "hits": 1,
+    "rate": 0.041666666666666664
+  },
+  "oracle_crop_type": {
+    "examples": 24,
+    "accuracy": 0.8333333333333334,
+    "macro_f1": 0.8321678321678322,
+    "nll": 0.6364554541462926,
+    "normalized_nll": 0.9182111274435893,
+    "brier_sum_over_classes": 0.32926208713232064,
+    "ece": 0.19199399153391516,
+    "probability_log_floor": 1e-12,
+    "labels": [
+      "text",
+      "icon"
+    ],
+    "per_class": {
+      "text": {
+        "support": 12,
+        "precision": 0.9,
+        "recall": 0.75,
+        "f1": 0.8181818181818182
+      },
+      "icon": {
+        "support": 12,
+        "precision": 0.7857142857142857,
+        "recall": 0.9166666666666666,
+        "f1": 0.8461538461538461
+      }
+    },
+    "confusion_matrix": [
+      [
+        9,
+        3
+      ],
+      [
+        1,
+        11
+      ]
+    ],
+    "reliability": [
+      {
+        "lower": 0.0,
+        "upper": 0.1,
+        "count": 0,
+        "accuracy": null,
+        "mean_confidence": null
+      },
+      {
+        "lower": 0.1,
+        "upper": 0.2,
+        "count": 0,
+        "accuracy": null,
+        "mean_confidence": null
+      },
+      {
+        "lower": 0.2,
+        "upper": 0.3,
+        "count": 0,
+        "accuracy": null,
+        "mean_confidence": null
+      },
+      {
+        "lower": 0.3,
+        "upper": 0.4,
+        "count": 0,
+        "accuracy": null,
+        "mean_confidence": null
+      },
+      {
+        "lower": 0.4,
+        "upper": 0.5,
+        "count": 0,
+        "accuracy": null,
+        "mean_confidence": null
+      },
+      {
+        "lower": 0.5,
+        "upper": 0.6,
+        "count": 4,
+        "accuracy": 0.75,
+        "mean_confidence": 0.5335004180669785
+      },
+      {
+        "lower": 0.6,
+        "upper": 0.7,
+        "count": 4,
+        "accuracy": 0.75,
+        "mean_confidence": 0.6545886993408203
+      },
+      {
+        "lower": 0.7,
+        "upper": 0.8,
+        "count": 3,
+        "accuracy": 1.0,
+        "mean_confidence": 0.7344398299853007
+      },
+      {
+        "lower": 0.8,
+        "upper": 0.9,
+        "count": 6,
+        "accuracy": 1.0,
+        "mean_confidence": 0.8450455864270529
+      },
+      {
+        "lower": 0.9,
+        "upper": 1.0,
+        "count": 7,
+        "accuracy": 0.7142857142857143,
+        "mean_confidence": 0.9476864678519112
+      }
+    ],
+    "risk_coverage": [
+      {
+        "threshold": 0.0,
+        "accepted": 24,
+        "coverage": 1.0,
+        "risk": 0.16666666666666663
+      },
+      {
+        "threshold": 0.25,
+        "accepted": 24,
+        "coverage": 1.0,
+        "risk": 0.16666666666666663
+      },
+      {
+        "threshold": 0.5,
+        "accepted": 24,
+        "coverage": 1.0,
+        "risk": 0.16666666666666663
+      },
+      {
+        "threshold": 0.6,
+        "accepted": 20,
+        "coverage": 0.8333333333333334,
+        "risk": 0.15000000000000002
+      },
+      {
+        "threshold": 0.7,
+        "accepted": 16,
+        "coverage": 0.6666666666666666,
+        "risk": 0.125
+      },
+      {
+        "threshold": 0.8,
+        "accepted": 13,
+        "coverage": 0.5416666666666666,
+        "risk": 0.15384615384615385
+      },
+      {
+        "threshold": 0.9,
+        "accepted": 7,
+        "coverage": 0.2916666666666667,
+        "risk": 0.2857142857142857
+      },
+      {
+        "threshold": 0.95,
+        "accepted": 2,
+        "coverage": 0.08333333333333333,
+        "risk": 0.5
+      },
+      {
+        "threshold": 0.99,
+        "accepted": 1,
+        "coverage": 0.041666666666666664,
+        "risk": 1.0
+      },
+      {
+        "threshold": 1.0,
+        "accepted": 0,
+        "coverage": 0.0,
+        "risk": null
+      }
+    ]
+  },
+  "per_application": {
+    "excel": {
+      "examples": 4,
+      "center_hits": 0,
+      "clip_grid_hits": 0
+    },
+    "macos_common": {
+      "examples": 4,
+      "center_hits": 0,
+      "clip_grid_hits": 0
+    },
+    "powerpoint": {
+      "examples": 4,
+      "center_hits": 0,
+      "clip_grid_hits": 0
+    },
+    "pycharm": {
+      "examples": 4,
+      "center_hits": 0,
+      "clip_grid_hits": 0
+    },
+    "vscode": {
+      "examples": 4,
+      "center_hits": 0,
+      "clip_grid_hits": 0
+    },
+    "word": {
+      "examples": 4,
+      "center_hits": 0,
+      "clip_grid_hits": 0
+    }
+  },
+  "configuration": {
+    "grid_columns": 6,
+    "grid_rows": 4,
+    "image_batch_size": 8,
+    "output_point": "center of highest scoring fixed tile",
+    "crop_type_task": "ground truth crop supplied, classify text versus icon; separate diagnostic"
+  },
+  "timing": {
+    "setup_including_download_seconds": 2.5899238330021035,
+    "total_wall_seconds": 11.248378166987095,
+    "grounding_pipeline_p50_ms": 214.43399949930608,
+    "grounding_pipeline_p95_ms": 607.0121036085764,
+    "includes": [
+      "image read/decode",
+      "grid crops",
+      "CLIP preprocessing",
+      "model scoring",
+      "argmax",
+      "device synchronization"
+    ],
+    "excludes": [
+      "model download/load",
+      "separate oracle-crop diagnostic"
+    ],
+    "cold_process_latency_ms": null
+  },
+  "limitations": [
+    "Coarse grid centers cannot hit most small controls even with perfect tile ranking",
+    "CLIP is a generic pretrained similarity model, not a trained GUI grounder",
+    "Oracle-crop type accuracy is conditional image classification, not complete grounding",
+    "Only six applications and 24 cases; not the full ScreenSpot-Pro benchmark",
+    "No speech, browser execution, or joint-model evidence"
+  ]
+}

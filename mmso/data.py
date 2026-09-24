@@ -20,6 +20,7 @@ from .artifacts import ROOT, sha256, validate_manifest, write_json, write_manife
 
 MINI_URL = "https://storage.googleapis.com/download.tensorflow.org/data/mini_speech_commands.zip"
 MINI_MD5 = "4b8a67bae2973844e84fa7ac988d1a44"
+MINI_SHA256 = '49650f2341b26d886b46b3f4fb8fed59e30300b17550f1ee4a768b3106cf93a0'
 ESC_REVISION = "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6"
 SCREEN_REVISION = "210e78d3844251110bff86c95835ebd37a6930fa"
 SCREEN_APPS = ["macos_common_macos", "vscode_macos", "excel_macos", "word_macos", "powerpoint_windows", "pycharm_macos"]
@@ -82,7 +83,7 @@ def finish(name, rows, source):
 
 
 def prepare_speech():
-    archive = download(MINI_URL, ROOT / "data/downloads/mini_speech_commands.zip", max_bytes=190_000_000)
+    archive = download(MINI_URL, ROOT / "data/downloads/mini_speech_commands.zip", expected_sha=MINI_SHA256, max_bytes=190_000_000)
     with archive.open("rb") as f:
         actual_md5 = hashlib.file_digest(f, "md5").hexdigest()
     if actual_md5 != MINI_MD5:

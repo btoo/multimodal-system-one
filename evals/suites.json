@@ -1,69 +1,206 @@
 {
   "schema_version": 1,
-  "status": "planned",
-  "execution_enabled": false,
-  "data_populated": false,
-  "results": [],
+  "status": "baseline_pilot_executed",
+  "execution_enabled": true,
+  "data_populated": true,
+  "results": [
+    "reports/speech-cnn-v1/report.json",
+    "reports/sounds-cnn-v1/report.json",
+    "reports/screens-clip-v1/report.json"
+  ],
   "application_contract": "docs/research/audio-screen-evals.md",
   "suite_aggregation": "Separate scorecards; no combined score before task weights and baselines are frozen",
   "suites": [
     {
       "id": "speech_intent",
       "priority": "core",
-      "inputs": ["audio", "optional_declared_context"],
-      "outputs": ["intent", "bounded_arguments", "unknown_or_wait"],
-      "primary_metrics": ["macro_f1", "joint_intent_argument_accuracy"],
-      "controls": ["audio_only", "asr_transcript", "oracle_transcript"],
-      "holdouts": ["speaker", "session", "utterance_family", "recording_device"]
+      "inputs": [
+        "audio",
+        "optional_declared_context"
+      ],
+      "outputs": [
+        "intent",
+        "bounded_arguments",
+        "unknown_or_wait"
+      ],
+      "primary_metrics": [
+        "macro_f1",
+        "joint_intent_argument_accuracy"
+      ],
+      "controls": [
+        "audio_only",
+        "asr_transcript",
+        "oracle_transcript"
+      ],
+      "holdouts": [
+        "speaker",
+        "session",
+        "utterance_family",
+        "recording_device"
+      ],
+      "implementation_status": "keyword control only; sentence intent unpopulated"
     },
     {
       "id": "acoustic_events",
       "priority": "core",
-      "inputs": ["audio"],
-      "outputs": ["independent_event_probabilities"],
-      "primary_metrics": ["macro_average_precision", "per_class_recall", "false_activations_per_negative_hour"],
-      "controls": ["class_priors", "silence", "overlap"],
-      "holdouts": ["source_recording", "session", "device", "background_source"]
+      "inputs": [
+        "audio"
+      ],
+      "outputs": [
+        "independent_event_probabilities"
+      ],
+      "primary_metrics": [
+        "macro_average_precision",
+        "per_class_recall",
+        "false_activations_per_negative_hour"
+      ],
+      "controls": [
+        "class_priors",
+        "silence",
+        "overlap"
+      ],
+      "holdouts": [
+        "source_recording",
+        "session",
+        "device",
+        "background_source"
+      ],
+      "implementation_status": "exclusive-label sound control only; overlap/streams unpopulated"
     },
     {
       "id": "screen_understanding",
       "priority": "core",
-      "inputs": ["screenshot", "question", "declared_candidates_if_used"],
-      "outputs": ["screen_state", "target"],
-      "primary_metrics": ["state_macro_f1", "grounding_hit_rate", "proposal_recall", "conditional_selection_accuracy"],
-      "controls": ["pixel_only", "pixels_plus_dom", "oracle_candidates", "generated_candidates"],
-      "holdouts": ["application_or_site", "ui_template", "workflow", "screenshot_family"]
+      "inputs": [
+        "screenshot",
+        "question",
+        "declared_candidates_if_used"
+      ],
+      "outputs": [
+        "screen_state",
+        "target"
+      ],
+      "primary_metrics": [
+        "state_macro_f1",
+        "grounding_hit_rate",
+        "proposal_recall",
+        "conditional_selection_accuracy"
+      ],
+      "controls": [
+        "pixel_only",
+        "pixels_plus_dom",
+        "oracle_candidates",
+        "generated_candidates"
+      ],
+      "holdouts": [
+        "application_or_site",
+        "ui_template",
+        "workflow",
+        "screenshot_family"
+      ],
+      "implementation_status": "grounding and oracle-crop probe executed; screen-state labels unpopulated"
     },
     {
       "id": "paired_audio_screen",
       "priority": "first_application",
-      "inputs": ["audio", "screenshot", "optional_declared_history", "timestamps", "presence_masks"],
-      "outputs": ["action_type", "target", "abstain_or_wait"],
-      "primary_metrics": ["joint_exact_match", "counterfactual_consistency", "risk_coverage"],
-      "controls": ["audio_only", "image_only", "asr_plus_image", "native_audio_plus_image", "modality_shuffle"],
-      "holdouts": ["speaker", "recording_session", "application_or_site", "utterance_and_screenshot_family"],
-      "pilot_episodes_proposal": {"min": 200, "max": 500}
+      "inputs": [
+        "audio",
+        "screenshot",
+        "optional_declared_history",
+        "timestamps",
+        "presence_masks"
+      ],
+      "outputs": [
+        "action_type",
+        "target",
+        "abstain_or_wait"
+      ],
+      "primary_metrics": [
+        "joint_exact_match",
+        "counterfactual_consistency",
+        "risk_coverage"
+      ],
+      "controls": [
+        "audio_only",
+        "image_only",
+        "asr_plus_image",
+        "native_audio_plus_image",
+        "modality_shuffle"
+      ],
+      "holdouts": [
+        "speaker",
+        "recording_session",
+        "application_or_site",
+        "utterance_and_screenshot_family"
+      ],
+      "pilot_episodes_proposal": {
+        "min": 200,
+        "max": 500
+      },
+      "implementation_status": "generic joint scorer implemented; paired data and model unpopulated"
     },
     {
       "id": "workflow_execution",
       "priority": "later_integration",
-      "inputs": ["timestamped_observations", "task", "action_history"],
-      "outputs": ["executed_workflow"],
-      "primary_metrics": ["execution_verified_task_success", "recovery_success", "mistake_count"],
-      "controls": ["fixed_planner_and_tools"],
-      "holdouts": ["task_family", "environment_release"]
+      "inputs": [
+        "timestamped_observations",
+        "task",
+        "action_history"
+      ],
+      "outputs": [
+        "executed_workflow"
+      ],
+      "primary_metrics": [
+        "execution_verified_task_success",
+        "recovery_success",
+        "mistake_count"
+      ],
+      "controls": [
+        "fixed_planner_and_tools"
+      ],
+      "holdouts": [
+        "task_family",
+        "environment_release"
+      ],
+      "implementation_status": "not implemented"
     },
     {
       "id": "synthetic_mechanics",
       "priority": "control",
-      "inputs": ["rendered_scene", "question", "candidates"],
-      "outputs": ["answer_probabilities"],
-      "primary_metrics": ["macro_normalized_nll", "accuracy"],
-      "controls": ["unimodal", "candidate_permutation"],
-      "holdouts": ["scene_family", "composition", "template"]
+      "inputs": [
+        "rendered_scene",
+        "question",
+        "candidates"
+      ],
+      "outputs": [
+        "answer_probabilities"
+      ],
+      "primary_metrics": [
+        "macro_normalized_nll",
+        "accuracy"
+      ],
+      "controls": [
+        "unimodal",
+        "candidate_permutation"
+      ],
+      "holdouts": [
+        "scene_family",
+        "composition",
+        "template"
+      ],
+      "implementation_status": "not implemented"
     }
   ],
-  "required_common_metrics": ["task_appropriate_calibration", "cold_and_warm_latency", "complete_pipeline_memory"],
-  "audio_timing": ["observed_audio_duration", "endpointing_delay", "post_endpoint_processing", "chunk_latency", "real_time_factor"],
-  "notes": "No populated evals or collected media. First application priority is a provisional default; audio events remain core."
+  "required_common_metrics": [
+    "task_appropriate_calibration",
+    "cold_and_warm_latency",
+    "complete_pipeline_memory"
+  ],
+  "audio_timing": [
+    "observed_audio_duration",
+    "endpointing_delay",
+    "post_endpoint_processing",
+    "chunk_latency",
+    "real_time_factor"
+  ],
+  "notes": "Only the three named baseline controls have populated data/results. Core application readiness and native joint modeling remain unestablished."
 }

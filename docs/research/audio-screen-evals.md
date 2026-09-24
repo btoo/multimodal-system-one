@@ -2,7 +2,7 @@
 
 This is the current application target. **Audio is a core modality.** The earlier image/text shapes experiment remains a mechanics and algorithm control; success there does not establish real-world speech or computer-use capability.
 
-Status: evaluation specification and source shortlist. No data has been downloaded or recorded, no split has been populated, and no evaluator or model has been run. The default first application is spoken commands grounded in screenshots, with sound events evaluated independently. Start with English while recording language coverage explicitly; multilingual performance is a separate claim.
+Status: the [first baseline pilot](../../reports/pilot-v1/README.md) has executed on 2,816 real keyword records, 400 sound clips, and 24 screen examples. Generic categorical, multi-label, grounding, and joint scorers are implemented. Sentence-intent data, overlapping-event streams, paired human-audio/screens, and executed workflows are still unpopulated. The default first application is spoken commands grounded in screenshots, with sound events evaluated independently. Initial language coverage is English.
 
 ## Four capabilities to evaluate separately
 
@@ -28,7 +28,7 @@ End-to-end computer/browser use is a fifth, later integration suite. A grounded 
 | [Multimodal-Mind2Web](https://huggingface.co/datasets/osunlp/Multimodal-Mind2Web) | Screenshot/action data with task, website, and domain splits | Spoken instructions or current live-site behavior | Its card is marked OpenRAIL, while the original Mind2Web repository lists CC BY 4.0; resolve the selected release's exact terms before acquisition |
 | [WebArena](https://github.com/web-arena-x/webarena) / [OSWorld](https://github.com/xlang-ai/OSWorld-V2) | Later execution-based workflow evaluation | Isolated model quality | Pin environment/task releases and use resettable test environments; do not import leaderboard scores |
 
-The metadata-only shortlist is in [dataset-catalog.json](../../evals/dataset-catalog.json). These datasets are task-specific controls; pairing an unrelated sound clip with a screenshot would not create a meaningful joint label.
+The acquisition catalog is in [dataset-catalog.json](../../evals/dataset-catalog.json). These datasets are task-specific controls; pairing an unrelated sound clip with a screenshot would not create a meaningful joint label.
 
 The first acquisition should be a small speech benchmark, a manageable acoustic-event subset, and a screen-understanding evaluation slice. Preserve untouched official test partitions. Data used repeatedly to select the model is development data; report public benchmark exposure and known pretrained-checkpoint provenance. Large test sets are not automatically contamination-free.
 
@@ -113,4 +113,4 @@ The old 100 ms / 64×64-image target belongs only to the toy workload. Freeze ne
 4. Collect the paired pilot and train/evaluate native fusion with a fixed task definition.
 5. Run the architecture/objective search against these evals, then add an execution-based agent test.
 
-No universal accuracy threshold is claimed yet. Baseline results and pilot variance should set task-specific acceptance targets before model selection; the final holdout must remain outside that process.
+The baseline results do not meet an application acceptance test. No universal accuracy threshold is claimed yet. Baseline results and pilot variance should set task-specific acceptance targets before model selection; the final holdout must remain outside that process.

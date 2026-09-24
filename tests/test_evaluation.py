@@ -11,7 +11,7 @@ from mmso.artifacts import local_media_path, sha256, validate_manifest
 from mmso.audio import AudioCNN, LogMel, fit_temperature
 from mmso.data import speaker_split
 from mmso.metrics import (aligned_predictions, average_precision, categorical_metrics,
-    clustered_accuracy_interval, grounding_metrics, multilabel_metrics, point_hit)
+    clustered_accuracy_interval, grounding_metrics, joint_metrics, multilabel_metrics, point_hit)
 from mmso.screen import grid_regions, region_center
 
 
@@ -60,6 +60,23 @@ class ProbabilityTests(unittest.TestCase):
         result=multilabel_metrics([[1,1],[0,0]],[[.9,.8],[.1,.2]])
         self.assertEqual(result['macro_ap'],1)
         self.assertEqual(result['exact_match_at_half'],1)
+
+    def test_joint_accepts_multiple_valid_answers(self):
+        a={'action':'click','target':'one'};b={'action':'click','target':'two'}
+        result=joint_metrics([[a,b]],[{'answer':b,'confidence':.7}])
+        self.assertEqual(result['joint_exact_match'],1)
+
+    def test_joint_abstention_is_not_free_success(self):
+        a={'action':'click','target':'one'};reject={'action':'abstain','target':None}
+        result=joint_metrics([[a]],[{'answer':reject,'confidence':1}])
+        self.assertEqual(result['joint_exact_match'],0)
+        self.assertEqual(result['decision_coverage'],0)
+        self.assertIsNone(result['risk_coverage'][0]['risk'])
+
+    def test_joint_requires_target_even_when_action_matches(self):
+        result=joint_metrics([[{'action':'click','target':'one'}]],
+                            [{'answer':{'action':'click','target':'two'},'confidence':.9}])
+        self.assertEqual(result['joint_exact_match'],0)
 
     def test_all_prediction_ids_required(self):
         records=[{'id':'a'},{'id':'b'}]

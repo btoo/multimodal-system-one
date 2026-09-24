@@ -118,6 +118,32 @@ def grounding_metrics(target_boxes, points):
     return {"examples": len(hits), "hits": sum(hits), "hit_rate": float(np.mean(hits))}
 
 
+def joint_metrics(acceptable_answers, predictions):
+    """Exact action/target decisions, with explicitly labeled acceptable abstentions."""
+    if len(acceptable_answers) != len(predictions) or not predictions:
+        raise ValueError("Joint predictions must cover every example")
+    correct=[];accepted=[];confidence=[]
+    for answers,prediction in zip(acceptable_answers,predictions):
+        answer=prediction["answer"]
+        if not isinstance(answer,dict) or set(answer) != {"action","target"}:
+            raise ValueError("Joint answer requires exactly action and target")
+        if not isinstance(answer["action"],str) or not (answer["target"] is None or isinstance(answer["target"],str)):
+            raise ValueError("Invalid action/target types")
+        c=float(prediction["confidence"])
+        if not np.isfinite(c) or not 0 <= c <= 1:
+            raise ValueError("Invalid joint confidence")
+        correct.append(answer in answers);accepted.append(answer["action"]!="abstain");confidence.append(c)
+    correct=np.array(correct);accepted=np.array(accepted);confidence=np.array(confidence)
+    curve=[]
+    for threshold in [0.,.5,.7,.9,.95,.99]:
+        keep=accepted & (confidence>=threshold)
+        curve.append({"threshold":threshold,"accepted":int(keep.sum()),"coverage":float(keep.mean()),
+                      "risk":float(1-correct[keep].mean()) if keep.any() else None})
+    return {"examples":len(predictions),"joint_exact_match":float(correct.mean()),
+            "decision_coverage":float(accepted.mean()),"risk_coverage":curve,
+            "note":"Abstention is correct only when explicitly included in acceptable answers; confidence is supplied, not inferred by multiplying heads."}
+
+
 def aligned_predictions(records, predictions):
     """Reject duplicate, missing, and extra outputs before any metric is computed."""
     expected = [r["id"] for r in records]

@@ -1,4 +1,4 @@
-"""Check local documentation links, figure provenance, and research-only status."""
+"""Check documentation links, explanatory figures, and baseline evidence links."""
 from pathlib import Path
 import csv
 import hashlib
@@ -11,7 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     problems = []
-    markdown_files = [ROOT / "README.md", ROOT / "program.md", *sorted((ROOT / "docs/research").glob("*.md"))]
+    markdown_files = [ROOT / "README.md", ROOT / "program.md", ROOT / "evals/README.md",
+                      *sorted((ROOT / "docs/research").glob("*.md")), *sorted((ROOT / "reports").glob("*/README.md"))]
     for path in markdown_files:
         text = path.read_text()
         if text.count("```") % 2:
@@ -39,19 +40,19 @@ def main():
     assert budget == campaign["total_allocated_training_seconds"] == 24000
     with (ROOT / "experiments/results.tsv").open() as f:
         rows = list(csv.DictReader(f, delimiter="\t"))
-    assert rows == [], "Research-only foundation must not contain fabricated model runs."
+    assert rows == [], "Synthetic-search campaign has not executed; baseline evidence lives under reports/."
     state = json.loads((ROOT / "docs/research/research-state.json").read_text())
-    assert state["model_runs_completed"] == 0
     suites = json.loads((ROOT / "evals/suites.json").read_text())
-    assert suites["execution_enabled"] is False and suites["data_populated"] is False
-    assert suites["results"] == []
+    assert suites["execution_enabled"] is True and suites["data_populated"] is True
+    assert state["model_runs_completed"] == len(suites["results"]) == 3
+    for report in suites["results"]:
+        assert json.loads((ROOT / report).read_text())["status"] == "completed"
     assert {"speech_intent", "acoustic_events", "screen_understanding", "paired_audio_screen"} <= {x["id"] for x in suites["suites"]}
     catalog = json.loads((ROOT / "evals/dataset-catalog.json").read_text())
-    assert catalog["datasets_downloaded"] == 0
-    assert all(row["downloaded"] is False for row in catalog["records"])
+    assert catalog["datasets_downloaded"] == sum(row["downloaded"] for row in catalog["records"]) == 3
     if problems:
         raise SystemExit("\n".join(problems))
-    print(f"Checked {len(markdown_files)} Markdown files, {len(manifest['figures'])} figures, campaign budget, and empty results ledger.")
+    print(f"Checked {len(markdown_files)} Markdown files, {len(manifest['figures'])} explanatory figures, campaign budget, and three baseline evidence links.")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 # Decision register
 
-Status: proposed for implementation. No model comparison has run. References are collected in the [reading map](reading-map.md) and [frontier review](frontier-methods.md).
+Status: architecture recommendations remain proposed. Three baseline controls have run; this is not an architecture-comparison campaign. See [results](../../reports/pilot-v1/README.md). References are collected in the [reading map](reading-map.md) and [frontier review](frontier-methods.md).
 
 | Decision | Rationale | What could change it |
 |---|---|---|

@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "as_of": "2026-09-23",
-  "phase": "research_and_design",
+  "phase": "implemented_evals_and_baseline_pilot",
   "method": "Primary-source claim verification, evidence retention, and targeted follow-up",
-  "model_runs_completed": 0,
+  "model_runs_completed": 3,
   "claims": [
     {
       "id": "C01",
@@ -108,6 +108,27 @@
       "status": "not_established",
       "source": null,
       "test": "Collect semantically paired episodes requiring both modalities and audit coverage."
+    },
+    {
+      "id": "C15",
+      "claim": "Small from-scratch speech CNN achieved 81.25% accuracy on 256 speaker-disjoint test records.",
+      "status": "measured_baseline",
+      "evidence": "reports/speech-cnn-v1/report.json",
+      "limit": "Eight keywords, one seed, one same-split exact duplicate pair; unique-media sensitivity is reported separately."
+    },
+    {
+      "id": "C16",
+      "claim": "Small from-scratch sound CNN achieved 66.25% accuracy on 80 held-out source-fold clips.",
+      "status": "measured_baseline",
+      "evidence": "reports/sounds-cnn-v1/report.json",
+      "limit": "Ten exclusive sound classes, not overlapping events or official five-fold CV."
+    },
+    {
+      "id": "C17",
+      "claim": "Coarse-grid CLIP grounding hit 0/24 screen targets; only 1/24 is reachable by any candidate point.",
+      "status": "measured_baseline_and_geometric_audit",
+      "evidence": "reports/screens-clip-v1/report.json",
+      "limit": "Small disclosed external probe; supplied-crop type classification is separate."
     }
   ],
   "completed_research_actions": [
@@ -116,8 +137,14 @@
     "Reviewed September 2026 RSI methods and contrary evidence",
     "Inspected ShinkaEvolve source and maintenance revision",
     "Derived probability-versus-action example",
-    "Specified falsification tests and two-level evaluation boundaries"
+    "Specified falsification tests and two-level evaluation boundaries",
+    "Implemented executable data and evaluation harness",
+    "Acquired pinned real speech, sound, and screen controls",
+    "Passed real CPU/MPS and checkpoint checks",
+    "Recorded three baseline runs with complete predictions and source fingerprints"
   ],
-  "next_owned_action": "Implement task-specific eval/data adapters, pin small public datasets, freeze grouped eval splits, and establish audio/screen baselines before training joint fusion.",
-  "application_target": "Speech meaning, acoustic-event classification, screen understanding, and joint audio-screen decisions for computer/browser use"
+  "next_owned_action": "Extend spoken intent and paired human-audio/screen coverage; replace coarse-grid proposals and evaluate on a fresh untouched screen sample before joint fusion training.",
+  "application_target": "Speech meaning, acoustic-event classification, screen understanding, and joint audio-screen decisions for computer/browser use",
+  "models_trained_from_scratch": 2,
+  "native_joint_model_trained": false
 }

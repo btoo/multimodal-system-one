@@ -4,13 +4,35 @@
 
 ![Project overview: visual observations and language enter a jointly trained model that predicts answer probabilities.](docs/assets/overview.svg)
 
-> **Stage: research and design.** No decision model has been implemented or trained. Architecture choices are hypotheses; all numerical figures below are analytical illustrations or explicitly labeled simulations. The repository currently contains the literature synthesis, original diagrams, a reproducible figure generator, and the proposed experiment protocol. The method now draws on current automated-research and recursive self-improvement work, including September 2026 preprints.
+> **Stage: runnable evals and measured baseline controls.** The repository now contains audited real-data manifests, two trained audio CNN checkpoints, local CLIP screen controls, independent scoring, and a measured report. A native audio–screen fusion model, sentence-level speech understanding, and workflow execution are still pending. The architecture/theory figures remain proposals and illustrations.
 
 The first goal is a small model whose weights, data, losses, and failure modes we can understand. It should answer bounded questions about observations, return a probability distribution over the declared answers, and support abstention in the surrounding software. The initial target machine is an Apple M4 Pro with 48 GB of unified memory. Training throughput and achievable latency are still unmeasured.
 
 **Current target:** speech/audio classification and screen understanding for computer/browser use. Define real-data evals for each modality and for paired audio–screen decisions before model search. Use compact pretrained input encoders with trainable fusion/decision heads for the practical track, while retaining small from-scratch controls to learn the fundamentals. The image/text shapes study below is an algorithm control, not the application acceptance test.
 
 This recommendation is an engineering judgment from the sources below. The best architecture for our data and compute budget remains an empirical question.
+
+## Run it and inspect the evidence
+
+![Measured first baseline results](reports/pilot-v1/results.svg)
+
+| Pilot task | Held-out result | Scope |
+|---|---|---|
+| Eight spoken keywords | **81.25%** on 256 records | Custom speaker-disjoint split; 89,640 parameters trained from scratch |
+| Ten environmental sounds | **66.25%** on 80 clips | Custom source-fold split; 89,770 parameters trained from scratch |
+| Text/icon classification | **20/24** supplied target crops | Generic frozen CLIP; target location is given |
+| Screen grounding | **0/24** | Center and coarse-grid controls; only 1/24 targets is reachable by a grid-center candidate |
+
+These are three separate baseline runs, not a joint multimodal model or official benchmark result. One duplicate pair exists within speech test and another within calibration; no media or speaker group crosses splits. The [full report](reports/pilot-v1/README.md) includes a unique-media sensitivity, confidence quality, timing boundaries, provenance, and limitations.
+
+```bash
+uv sync --locked --group docs
+uv run mmso prepare all
+uv run python -m unittest discover -s tests -v
+uv run mmso score evals/manifests/speech_keywords.jsonl reports/speech-cnn-v1/predictions.jsonl
+```
+
+See the [runnable eval guide](evals/README.md) for training, saved-checkpoint inference, and scoring all four task kinds. Downloads stay local under `data/`; the small trained checkpoints, manifests, predictions, and reports are versioned.
 
 ## Read the project
 
@@ -88,7 +110,7 @@ Abstention is separate from the candidate labels. A softmax always allocates its
 | Screen understanding | [ScreenSpot-Pro](https://github.com/likaixin2000/ScreenSpot-Pro-GUI-Grounding) and [Multimodal-Mind2Web](https://huggingface.co/datasets/osunlp/Multimodal-Mind2Web) | State labels, target grounding, unfamiliar apps/sites |
 | Joint decisions | A purpose-built human-audio + screenshot pilot | Correct action and target, contradictory cues, ambiguity, abstention |
 
-The [detailed eval/data plan](docs/research/audio-screen-evals.md) specifies datasets, access terms, splits, baselines, and collection. The [suite manifest](evals/suites.json) and [dataset catalog](evals/dataset-catalog.json) are planned metadata; no data or evaluator has been run.
+The [detailed eval/data plan](docs/research/audio-screen-evals.md) specifies datasets, access terms, splits, baselines, and collection. The [suite manifest](evals/suites.json) and [dataset catalog](evals/dataset-catalog.json) distinguish acquired baseline controls from still-unpopulated application tasks. See [measured results](reports/pilot-v1/README.md).
 
 **We need some new paired data.** Start with existing public datasets for the individual capabilities, then collect a few hundred episodes in a controlled test workspace. Examples should make both modalities necessary: “close the other tab,” a spoken correction, or an alert sound whose meaning depends on the visible application. Hold out speakers, recording sessions, and app/site families. TTS and UI simulation can supplement training; retain real human recordings for evaluation.
 
@@ -275,7 +297,7 @@ These systems are not interchangeable, and some of the papers are very recent pr
 
 **Practical choice:** use an archive-based, evidence-driven experiment process for the proof of concept, with ShinkaEvolve as the preferred runner candidate after a local compatibility check. Keep the initial research policy fixed for comparison. A later meta-study may change that policy, but must use separate task suites and account for both training compute and proposer cost. This avoids confusing a lucky model trial with a better research method.
 
-The [research state](docs/research/research-state.json) already applies claim-by-claim verification to this literature pass. Its unresolved entries remain hypotheses. The [protocol](program.md) specifies how the same discipline will govern future experiments. There is no training or evolution runner in this repository yet.
+The [research state](docs/research/research-state.json) already applies claim-by-claim verification to this literature pass. Its unresolved entries remain hypotheses. The [protocol](program.md) specifies how the same discipline will govern future experiments. A bounded baseline trainer and independent scorer now exist. The population/evolution runner is still pending.
 
 ![Proposed experiment cycle: literature and archive inform a hypothesis, frozen measurements create evidence, and several useful lineages remain available.](docs/assets/research-loop.svg)
 
@@ -339,14 +361,14 @@ The figure generator writes SVGs and PNG previews. Sources are original code, wi
 | Primary literature and upstream source review | Documented in the reading map |
 | Architecture and loss recommendation | Proposed; untested on our task |
 | Original explanatory figures | Reproducible documentation artifacts |
-| Task data, evaluator, model, and training loop | Not implemented |
-| Trained checkpoints and benchmark results | None |
-| Proof of multimodal generalization or calibration | Pending experiments |
+| Real-data controls and independent metrics | Implemented; three acquired manifests, categorical/multi-label/grounding/joint scorers |
+| Trained checkpoints and measured baselines | Two small audio CNNs plus fixed CLIP screen controls; see report |
+| Paired data, native fusion, sentence intent, and workflow success | Pending; baseline controls do not establish these |
 
-Implementation should proceed through four gates:
+The next implementation gates are:
 
-1. **Make the evals trustworthy.** Implement audio, screen, and paired-example manifests and task-specific metrics; freeze real-data evaluation groups. Retain the scene oracle as a mechanics control.
-2. **Establish modality baselines.** Build small learnability controls, pretrained audio/screen baselines, and an ASR-plus-vision comparison. Verify gradients, checkpoints, and CPU/MPS behavior.
+1. **Extend application coverage.** Retain the implemented data audits and metrics; populate sentence-intent and paired audio–screen evals. Keep future confirmation samples untouched.
+2. **Improve the weak baseline.** The coarse grid is inadequate for small UI targets. Evaluate element proposals or spatial grounding with a fresh confirmation sample, alongside an ASR-plus-vision comparison.
 3. **Evaluate native fusion.** Collect the paired pilot and compare joint predictions with unimodal and cascade baselines. Run bounded architecture studies with realistic input costs, preserving failures.
 4. **Publish the actual evidence.** Report all planned slices, calibrated and raw metrics, timings, resource use, counterexamples, and an interactive local demo using a real checkpoint.
 
@@ -369,7 +391,11 @@ docs/research/autoresearch-source.json  Historical source inspection
 docs/research/shinka-source.json   Inspected runner candidate and hashes
 docs/assets/                      Original SVG figures and PNG previews
 experiments/campaign.json          Disabled, proposed campaign configuration
-experiments/results.tsv            Empty result ledger; no measured runs
+experiments/results.tsv            Reserved synthetic-search ledger; baseline reports are separate
+mmso/                             Data adapters, models, metrics, CLI
+artifacts/                        Small trained audio checkpoints and configs
+reports/pilot-v1/                  Measured results and plots
+evals/README.md                    Reproduction and prediction-format guide
 scripts/render_figures.py          Reproducible diagrams and analytical plots
 scripts/check_docs.py              Documentation integrity checks
 ```

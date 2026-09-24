@@ -25,6 +25,11 @@ def main():
     p=commands.add_parser("predict-audio",help="Use a saved local audio checkpoint on a WAV clip")
     p.add_argument("checkpoint");p.add_argument("audio")
     p.add_argument("--device",choices=["auto","cpu","mps"],default="auto")
+    p=commands.add_parser("score",help="Score an exact-ID prediction file independently of the model")
+    p.add_argument("manifest");p.add_argument("predictions")
+    p.add_argument("--split",default="test")
+    p.add_argument("--field",default="probabilities")
+    p.add_argument("--metadata-only",action="store_true",help="Skip local media existence/hash checks; never claims media verification")
     args=parser.parse_args()
     if hasattr(args,"run_id") and (not args.run_id or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_" for c in args.run_id)):
         parser.error("run-id must contain only letters, digits, hyphens, or underscores")
@@ -43,6 +48,9 @@ def main():
     elif args.command=="predict-audio":
         from .audio import predict_audio
         print(json.dumps(predict_audio(args.checkpoint,args.audio,args.device),indent=2))
+    elif args.command=="score":
+        from .scoring import score_files
+        print(json.dumps(score_files(ROOT/args.manifest,ROOT/args.predictions,args.split,args.field,not args.metadata_only),indent=2))
 
 
 if __name__=="__main__":

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "reviewed_on": "2026-09-23",
-  "acquisition_status": "metadata_only",
-  "datasets_downloaded": 0,
+  "acquisition_status": "three_pilot_subsets_acquired",
+  "datasets_downloaded": 3,
   "records": [
     {
       "id": "speech_commands",
@@ -12,7 +12,11 @@
       "license_source": "https://huggingface.co/datasets/google/speech_commands/blob/main/README.md",
       "observed_terms": "CC BY 4.0",
       "split_policy": "Preserve official splits and audit speaker grouping",
-      "downloaded": false
+      "downloaded": true,
+      "selected_subset": "Mini Speech Commands, custom speaker split, 2816 records",
+      "acquisition_record": "evals/acquisition/speech_keywords.json",
+      "manifest": "evals/manifests/speech_keywords.jsonl",
+      "revision": "49650f2341b26d886b46b3f4fb8fed59e30300b17550f1ee4a768b3106cf93a0"
     },
     {
       "id": "fluent_speech_commands",
@@ -40,7 +44,11 @@
       "release": null,
       "observed_terms": "ESC-50 CC BY-NC 3.0; source README distinguishes ESC-10 subset terms",
       "split_policy": "Use original source-recording folds for official comparison; adapted holdouts get a separate name",
-      "downloaded": false
+      "downloaded": true,
+      "selected_subset": "ESC-10 only, 400 clips",
+      "acquisition_record": "evals/acquisition/sound_events.json",
+      "manifest": "evals/manifests/sound_events.jsonl",
+      "revision": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6"
     },
     {
       "id": "audioset",
@@ -59,7 +67,11 @@
       "release": null,
       "observed_terms": "Author dataset card lists MIT; pin and retain the exact release notice before use",
       "split_policy": "Evaluation-only official benchmark; adapted spoken variants are separately named and grouped",
-      "downloaded": false
+      "downloaded": true,
+      "selected_subset": "24-case stratified external probe",
+      "acquisition_record": "evals/acquisition/screen_grounding.json",
+      "manifest": "evals/manifests/screen_grounding.jsonl",
+      "revision": "210e78d3844251110bff86c95835ebd37a6930fa"
     },
     {
       "id": "multimodal_mind2web",
