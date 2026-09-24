@@ -359,9 +359,28 @@ def audio_screen_architecture():
     save(f,"audio-screen-architecture","design","Proposed native speech/audio and screenshot fusion, distinct from the synthetic control.")
 
 
+def implemented_joint():
+    f,a=canvas("14 / implemented neural prototype", "One model. A question. Supplied answer meanings.",
+               "668,097 trainable parameters · eight recorded keywords · generated panels · learned text vocabulary")
+    box(a,.55,4.65,3.2,1.15,"Image pixels","Four fixed quadrants → CNN",BLUE)
+    box(a,.55,2.95,3.2,1.15,"Recorded audio","Log-mel → acoustic encoder",GOLD)
+    box(a,.55,1.25,3.2,1.15,"Question text","Shared learned text encoder",PURPLE)
+    box(a,5.0,2.95,3.35,2.85,"Joint state · 6 tokens",
+        "4 visual + position tokens\n1 acoustic representation\n1 question representation\n2 transformer fusion blocks",TEAL)
+    arrow(a,(3.75,5.2),(5,5.0),BLUE);arrow(a,(3.75,3.5),(5,3.9),GOLD)
+    arrow(a,(3.75,1.8),(5,3.15),PURPLE)
+    box(a,9.55,4.65,3.8,1.15,"Candidate descriptions","Same text encoder · arbitrary IDs",PURPLE)
+    box(a,9.55,2.45,3.8,1.35,"One shared scalar scorer","Each candidate reads joint state\nSoftmax over supplied answers",TEAL)
+    arrow(a,(11.5,4.65),(11.5,3.8),PURPLE);arrow(a,(8.35,4.05),(9.55,3.2),TEAL)
+    a.text(5.0,1.75,"Joint end-to-end training",fontsize=14,weight="bold",color=TEAL)
+    a.text(5.0,1.2,"Acoustic initialization reused; its fixed class head removed",fontsize=11,color=MUTED)
+    note(a,"No transcript, task ID, scene graph, oracle answer, or candidate ID enters the neural forward pass.")
+    save(f,"implemented-joint","design","Implemented native candidate scorer. Architecture diagram, not a performance claim.")
+
+
 if __name__ == "__main__":
     for make in [overview,fusion,architecture,candidate_equivariance,scaling,proper_scoring,
-                 calibration,counterfactuals,research_loop,firewall,two_level,eval_suites,audio_screen_architecture]:
+                 calibration,counterfactuals,research_loop,firewall,two_level,eval_suites,audio_screen_architecture,implemented_joint]:
         make()
     for name,item in MANIFEST.items():
         item['svg_sha256']=hashlib.sha256((OUT/f'{name}.svg').read_bytes()).hexdigest()

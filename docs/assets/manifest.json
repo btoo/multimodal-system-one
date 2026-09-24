@@ -93,6 +93,11 @@
       "kind": "design",
       "description": "Proposed native speech/audio and screenshot fusion, distinct from the synthetic control.",
       "svg_sha256": "cce2a1bf2b8a925f1011cfb22e6a5c1ed16bf6fce06703fe4dd902294801ad41"
+    },
+    "implemented-joint": {
+      "kind": "design",
+      "description": "Implemented native candidate scorer. Architecture diagram, not a performance claim.",
+      "svg_sha256": "222ad7c987c5e6360dec8f3277747089cb996016f9f21956621744e6815231c2"
     }
   }
 }

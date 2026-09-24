@@ -147,6 +147,7 @@ def predict_joint(checkpoint,image_path,audio_path,requests,device="auto",thresh
     checkpoint=Path(checkpoint)
     if not 0<=threshold<=1:raise ValueError("Threshold must be in [0,1]")
     config=json.loads(checkpoint.with_name("config.json").read_text())
+    if not np.isfinite(config["temperature"]) or config["temperature"]<=0:raise ValueError("Invalid checkpoint temperature")
     vocabulary=Vocabulary(config["vocabulary"]);chosen=choose_device(device)
     model=NativeDecisionModel(len(vocabulary.tokens),config["width"],config["layers"]).to(chosen)
     model.load_state_dict(load_file(str(checkpoint)));model.eval()
@@ -168,4 +169,6 @@ def predict_joint(checkpoint,image_path,audio_path,requests,device="auto",thresh
                         "prediction":ids[best] if len(ties)==1 else None,"decision":"abstain" if abstain else ids[best],
                         "ties":[ids[i] for i in ties] if len(ties)>1 else [],"confidence":float(p[best])})
     return {"answers":answers,"scope":config["scope"],"model":"native-decision-v1",
+            "input_contract":{"offline_audio_window_seconds":1,"audio_sample_rate":16000,"image_resized_to":[128,128],
+                              "layout":"generated 2x2 symbol panels","text_vocabulary_tokens":len(vocabulary.tokens)},
             "note":"Raw audio and pixels enter the network; no transcript or scene oracle is used."}

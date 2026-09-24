@@ -102,6 +102,7 @@ class CandidateModelTests(unittest.TestCase):
     def test_metric_rejects_dropped_rows(self):
         record={'candidates':[{'text':'red'},{'text':'blue'}],'target_index':0,'target_text':'red','id':'a','task':'color','slice':'test'}
         with self.assertRaises(ValueError):decision_metrics([record],[])
+        with self.assertRaises(ValueError):decision_metrics([record],[[float('nan'),0.]])
         metrics,_=decision_metrics([record],[[5.,0.]])
         self.assertEqual(metrics['by_slice']['test']['joint_macro_accuracy'],1)
 

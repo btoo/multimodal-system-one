@@ -68,6 +68,8 @@ def decision_metrics(records,logits,temperature=1.):
         raise ValueError("Require complete predictions and positive finite temperature")
     grouped=defaultdict(list);all_rows=[]
     for record,z in zip(records,logits):
+        if len(z)<len(record["candidates"]) or not np.isfinite(np.asarray(z[:len(record["candidates"])] )).all():
+            raise ValueError("Candidate logits must completely cover the request and be finite")
         z=np.asarray(z[:len(record["candidates"])],dtype=float)/temperature
         p=softmax(z);target=record["target_index"];pred=int(p.argmax())
         nll=float(logsumexp(z)-z[target]);brier=float(np.square(p-np.eye(len(p))[target]).sum())
