@@ -1,0 +1,784 @@
+{
+  "kind": "frozen_representation_ridge_diagnostic",
+  "git_revision": "d370cef22600abb881d8c097e7c4ece33006bb10",
+  "script_sha256": "bf329c770f2d0a22f4115e84fe2f65811c82a013789c8dc4ca82eb3537c23940",
+  "manifest_sha256": "4d520fa33392dcd3c1f08abbbb8eaecd0256e58506e784897bc8dc80d9f2dad8",
+  "neural_optimizer_updates": 0,
+  "closed_form_probe_fits": 12,
+  "device": "cpu",
+  "torch_threads": 2,
+  "training_panels": 256,
+  "training_scene_ids": [
+    "joint-v1:train:in_distribution:00000",
+    "joint-v1:train:in_distribution:00001",
+    "joint-v1:train:in_distribution:00002",
+    "joint-v1:train:in_distribution:00003",
+    "joint-v1:train:in_distribution:00004",
+    "joint-v1:train:in_distribution:00005",
+    "joint-v1:train:in_distribution:00006",
+    "joint-v1:train:in_distribution:00007",
+    "joint-v1:train:in_distribution:00008",
+    "joint-v1:train:in_distribution:00009",
+    "joint-v1:train:in_distribution:00010",
+    "joint-v1:train:in_distribution:00011",
+    "joint-v1:train:in_distribution:00012",
+    "joint-v1:train:in_distribution:00013",
+    "joint-v1:train:in_distribution:00014",
+    "joint-v1:train:in_distribution:00015",
+    "joint-v1:train:in_distribution:00016",
+    "joint-v1:train:in_distribution:00017",
+    "joint-v1:train:in_distribution:00018",
+    "joint-v1:train:in_distribution:00019",
+    "joint-v1:train:in_distribution:00020",
+    "joint-v1:train:in_distribution:00021",
+    "joint-v1:train:in_distribution:00022",
+    "joint-v1:train:in_distribution:00023",
+    "joint-v1:train:in_distribution:00024",
+    "joint-v1:train:in_distribution:00025",
+    "joint-v1:train:in_distribution:00026",
+    "joint-v1:train:in_distribution:00027",
+    "joint-v1:train:in_distribution:00028",
+    "joint-v1:train:in_distribution:00029",
+    "joint-v1:train:in_distribution:00030",
+    "joint-v1:train:in_distribution:00031",
+    "joint-v1:train:in_distribution:00032",
+    "joint-v1:train:in_distribution:00033",
+    "joint-v1:train:in_distribution:00034",
+    "joint-v1:train:in_distribution:00035",
+    "joint-v1:train:in_distribution:00036",
+    "joint-v1:train:in_distribution:00037",
+    "joint-v1:train:in_distribution:00038",
+    "joint-v1:train:in_distribution:00039",
+    "joint-v1:train:in_distribution:00040",
+    "joint-v1:train:in_distribution:00041",
+    "joint-v1:train:in_distribution:00042",
+    "joint-v1:train:in_distribution:00043",
+    "joint-v1:train:in_distribution:00044",
+    "joint-v1:train:in_distribution:00045",
+    "joint-v1:train:in_distribution:00046",
+    "joint-v1:train:in_distribution:00047",
+    "joint-v1:train:in_distribution:00048",
+    "joint-v1:train:in_distribution:00049",
+    "joint-v1:train:in_distribution:00050",
+    "joint-v1:train:in_distribution:00051",
+    "joint-v1:train:in_distribution:00052",
+    "joint-v1:train:in_distribution:00053",
+    "joint-v1:train:in_distribution:00054",
+    "joint-v1:train:in_distribution:00055",
+    "joint-v1:train:in_distribution:00056",
+    "joint-v1:train:in_distribution:00057",
+    "joint-v1:train:in_distribution:00058",
+    "joint-v1:train:in_distribution:00059",
+    "joint-v1:train:in_distribution:00060",
+    "joint-v1:train:in_distribution:00061",
+    "joint-v1:train:in_distribution:00062",
+    "joint-v1:train:in_distribution:00063",
+    "joint-v1:train:in_distribution:00064",
+    "joint-v1:train:in_distribution:00065",
+    "joint-v1:train:in_distribution:00066",
+    "joint-v1:train:in_distribution:00067",
+    "joint-v1:train:in_distribution:00068",
+    "joint-v1:train:in_distribution:00069",
+    "joint-v1:train:in_distribution:00070",
+    "joint-v1:train:in_distribution:00071",
+    "joint-v1:train:in_distribution:00072",
+    "joint-v1:train:in_distribution:00073",
+    "joint-v1:train:in_distribution:00074",
+    "joint-v1:train:in_distribution:00075",
+    "joint-v1:train:in_distribution:00076",
+    "joint-v1:train:in_distribution:00077",
+    "joint-v1:train:in_distribution:00078",
+    "joint-v1:train:in_distribution:00079",
+    "joint-v1:train:in_distribution:00080",
+    "joint-v1:train:in_distribution:00081",
+    "joint-v1:train:in_distribution:00082",
+    "joint-v1:train:in_distribution:00083",
+    "joint-v1:train:in_distribution:00084",
+    "joint-v1:train:in_distribution:00085",
+    "joint-v1:train:in_distribution:00086",
+    "joint-v1:train:in_distribution:00087",
+    "joint-v1:train:in_distribution:00088",
+    "joint-v1:train:in_distribution:00089",
+    "joint-v1:train:in_distribution:00090",
+    "joint-v1:train:in_distribution:00091",
+    "joint-v1:train:in_distribution:00092",
+    "joint-v1:train:in_distribution:00093",
+    "joint-v1:train:in_distribution:00094",
+    "joint-v1:train:in_distribution:00095",
+    "joint-v1:train:in_distribution:00096",
+    "joint-v1:train:in_distribution:00097",
+    "joint-v1:train:in_distribution:00098",
+    "joint-v1:train:in_distribution:00099",
+    "joint-v1:train:in_distribution:00100",
+    "joint-v1:train:in_distribution:00101",
+    "joint-v1:train:in_distribution:00102",
+    "joint-v1:train:in_distribution:00103",
+    "joint-v1:train:in_distribution:00104",
+    "joint-v1:train:in_distribution:00105",
+    "joint-v1:train:in_distribution:00106",
+    "joint-v1:train:in_distribution:00107",
+    "joint-v1:train:in_distribution:00108",
+    "joint-v1:train:in_distribution:00109",
+    "joint-v1:train:in_distribution:00110",
+    "joint-v1:train:in_distribution:00111",
+    "joint-v1:train:in_distribution:00112",
+    "joint-v1:train:in_distribution:00113",
+    "joint-v1:train:in_distribution:00114",
+    "joint-v1:train:in_distribution:00115",
+    "joint-v1:train:in_distribution:00116",
+    "joint-v1:train:in_distribution:00117",
+    "joint-v1:train:in_distribution:00118",
+    "joint-v1:train:in_distribution:00119",
+    "joint-v1:train:in_distribution:00120",
+    "joint-v1:train:in_distribution:00121",
+    "joint-v1:train:in_distribution:00122",
+    "joint-v1:train:in_distribution:00123",
+    "joint-v1:train:in_distribution:00124",
+    "joint-v1:train:in_distribution:00125",
+    "joint-v1:train:in_distribution:00126",
+    "joint-v1:train:in_distribution:00127",
+    "joint-v1:train:in_distribution:00128",
+    "joint-v1:train:in_distribution:00129",
+    "joint-v1:train:in_distribution:00130",
+    "joint-v1:train:in_distribution:00131",
+    "joint-v1:train:in_distribution:00132",
+    "joint-v1:train:in_distribution:00133",
+    "joint-v1:train:in_distribution:00134",
+    "joint-v1:train:in_distribution:00135",
+    "joint-v1:train:in_distribution:00136",
+    "joint-v1:train:in_distribution:00137",
+    "joint-v1:train:in_distribution:00138",
+    "joint-v1:train:in_distribution:00139",
+    "joint-v1:train:in_distribution:00140",
+    "joint-v1:train:in_distribution:00141",
+    "joint-v1:train:in_distribution:00142",
+    "joint-v1:train:in_distribution:00143",
+    "joint-v1:train:in_distribution:00144",
+    "joint-v1:train:in_distribution:00145",
+    "joint-v1:train:in_distribution:00146",
+    "joint-v1:train:in_distribution:00147",
+    "joint-v1:train:in_distribution:00148",
+    "joint-v1:train:in_distribution:00149",
+    "joint-v1:train:in_distribution:00150",
+    "joint-v1:train:in_distribution:00151",
+    "joint-v1:train:in_distribution:00152",
+    "joint-v1:train:in_distribution:00153",
+    "joint-v1:train:in_distribution:00154",
+    "joint-v1:train:in_distribution:00155",
+    "joint-v1:train:in_distribution:00156",
+    "joint-v1:train:in_distribution:00157",
+    "joint-v1:train:in_distribution:00158",
+    "joint-v1:train:in_distribution:00159",
+    "joint-v1:train:in_distribution:00160",
+    "joint-v1:train:in_distribution:00161",
+    "joint-v1:train:in_distribution:00162",
+    "joint-v1:train:in_distribution:00163",
+    "joint-v1:train:in_distribution:00164",
+    "joint-v1:train:in_distribution:00165",
+    "joint-v1:train:in_distribution:00166",
+    "joint-v1:train:in_distribution:00167",
+    "joint-v1:train:in_distribution:00168",
+    "joint-v1:train:in_distribution:00169",
+    "joint-v1:train:in_distribution:00170",
+    "joint-v1:train:in_distribution:00171",
+    "joint-v1:train:in_distribution:00172",
+    "joint-v1:train:in_distribution:00173",
+    "joint-v1:train:in_distribution:00174",
+    "joint-v1:train:in_distribution:00175",
+    "joint-v1:train:in_distribution:00176",
+    "joint-v1:train:in_distribution:00177",
+    "joint-v1:train:in_distribution:00178",
+    "joint-v1:train:in_distribution:00179",
+    "joint-v1:train:in_distribution:00180",
+    "joint-v1:train:in_distribution:00181",
+    "joint-v1:train:in_distribution:00182",
+    "joint-v1:train:in_distribution:00183",
+    "joint-v1:train:in_distribution:00184",
+    "joint-v1:train:in_distribution:00185",
+    "joint-v1:train:in_distribution:00186",
+    "joint-v1:train:in_distribution:00187",
+    "joint-v1:train:in_distribution:00188",
+    "joint-v1:train:in_distribution:00189",
+    "joint-v1:train:in_distribution:00190",
+    "joint-v1:train:in_distribution:00191",
+    "joint-v1:train:in_distribution:00192",
+    "joint-v1:train:in_distribution:00193",
+    "joint-v1:train:in_distribution:00194",
+    "joint-v1:train:in_distribution:00195",
+    "joint-v1:train:in_distribution:00196",
+    "joint-v1:train:in_distribution:00197",
+    "joint-v1:train:in_distribution:00198",
+    "joint-v1:train:in_distribution:00199",
+    "joint-v1:train:in_distribution:00200",
+    "joint-v1:train:in_distribution:00201",
+    "joint-v1:train:in_distribution:00202",
+    "joint-v1:train:in_distribution:00203",
+    "joint-v1:train:in_distribution:00204",
+    "joint-v1:train:in_distribution:00205",
+    "joint-v1:train:in_distribution:00206",
+    "joint-v1:train:in_distribution:00207",
+    "joint-v1:train:in_distribution:00208",
+    "joint-v1:train:in_distribution:00209",
+    "joint-v1:train:in_distribution:00210",
+    "joint-v1:train:in_distribution:00211",
+    "joint-v1:train:in_distribution:00212",
+    "joint-v1:train:in_distribution:00213",
+    "joint-v1:train:in_distribution:00214",
+    "joint-v1:train:in_distribution:00215",
+    "joint-v1:train:in_distribution:00216",
+    "joint-v1:train:in_distribution:00217",
+    "joint-v1:train:in_distribution:00218",
+    "joint-v1:train:in_distribution:00219",
+    "joint-v1:train:in_distribution:00220",
+    "joint-v1:train:in_distribution:00221",
+    "joint-v1:train:in_distribution:00222",
+    "joint-v1:train:in_distribution:00223",
+    "joint-v1:train:in_distribution:00224",
+    "joint-v1:train:in_distribution:00225",
+    "joint-v1:train:in_distribution:00226",
+    "joint-v1:train:in_distribution:00227",
+    "joint-v1:train:in_distribution:00228",
+    "joint-v1:train:in_distribution:00229",
+    "joint-v1:train:in_distribution:00230",
+    "joint-v1:train:in_distribution:00231",
+    "joint-v1:train:in_distribution:00232",
+    "joint-v1:train:in_distribution:00233",
+    "joint-v1:train:in_distribution:00234",
+    "joint-v1:train:in_distribution:00235",
+    "joint-v1:train:in_distribution:00236",
+    "joint-v1:train:in_distribution:00237",
+    "joint-v1:train:in_distribution:00238",
+    "joint-v1:train:in_distribution:00239",
+    "joint-v1:train:in_distribution:00240",
+    "joint-v1:train:in_distribution:00241",
+    "joint-v1:train:in_distribution:00242",
+    "joint-v1:train:in_distribution:00243",
+    "joint-v1:train:in_distribution:00244",
+    "joint-v1:train:in_distribution:00245",
+    "joint-v1:train:in_distribution:00246",
+    "joint-v1:train:in_distribution:00247",
+    "joint-v1:train:in_distribution:00248",
+    "joint-v1:train:in_distribution:00249",
+    "joint-v1:train:in_distribution:00250",
+    "joint-v1:train:in_distribution:00251",
+    "joint-v1:train:in_distribution:00252",
+    "joint-v1:train:in_distribution:00253",
+    "joint-v1:train:in_distribution:00254",
+    "joint-v1:train:in_distribution:00255"
+  ],
+  "training_glyphs": 1024,
+  "ridge_lambda": 1.0,
+  "standardization": "training feature mean/std only; unpenalized intercept",
+  "readout_weights_retained": false,
+  "consumed_partitions": [
+    "train",
+    "dev"
+  ],
+  "runs": {
+    "joint-full-v2": {
+      "checkpoint_sha256": "9fa7f2c3b129340977a7bf7413044b27d5a4fb4c55eec748df289f8bc122a343",
+      "training_report_sha256": "ac85823dc0bc4f6c70416d48b36f8397fe7269558af682d13179ca06dd6d3581",
+      "training": {
+        "glyph": {
+          "examples": 1024,
+          "accuracy": 0.833984375,
+          "per_class_accuracy": {
+            "0": 0.7213114754098361,
+            "1": 0.7022900763358778,
+            "2": 0.6953125,
+            "3": 0.9453125,
+            "4": 0.6475409836065574,
+            "5": 1.0,
+            "6": 0.9855072463768116,
+            "7": 0.9555555555555556
+          }
+        },
+        "color": {
+          "examples": 1024,
+          "accuracy": 1.0,
+          "per_class_accuracy": {
+            "0": 1.0,
+            "1": 1.0,
+            "2": 1.0,
+            "3": 1.0
+          }
+        },
+        "audio_word": {
+          "examples": 256,
+          "accuracy": 1.0,
+          "per_class_accuracy": {
+            "0": 1.0,
+            "1": 1.0,
+            "2": 1.0,
+            "3": 1.0,
+            "4": 1.0,
+            "5": 1.0,
+            "6": 1.0,
+            "7": 1.0
+          }
+        }
+      },
+      "development": {
+        "in_distribution": {
+          "glyph": {
+            "examples": 768,
+            "accuracy": 0.796875,
+            "per_class_accuracy": {
+              "0": 0.6,
+              "1": 0.6923076923076923,
+              "2": 0.7282608695652174,
+              "3": 0.9081632653061225,
+              "4": 0.5882352941176471,
+              "5": 1.0,
+              "6": 0.9655172413793104,
+              "7": 0.9081632653061225
+            }
+          },
+          "color": {
+            "examples": 768,
+            "accuracy": 1.0,
+            "per_class_accuracy": {
+              "0": 1.0,
+              "1": 1.0,
+              "2": 1.0,
+              "3": 1.0
+            }
+          },
+          "audio_word": {
+            "examples": 192,
+            "accuracy": 0.8333333333333334,
+            "per_class_accuracy": {
+              "0": 0.7083333333333334,
+              "1": 0.7916666666666666,
+              "2": 0.875,
+              "3": 0.8333333333333334,
+              "4": 0.8333333333333334,
+              "5": 0.9166666666666666,
+              "6": 0.875,
+              "7": 0.8333333333333334
+            }
+          }
+        },
+        "compositional": {
+          "glyph": {
+            "examples": 768,
+            "accuracy": 0.3919270833333333,
+            "per_class_accuracy": {
+              "0": 0.4020618556701031,
+              "1": 0.8041237113402062,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.03225806451612903,
+              "5": 1.0,
+              "6": 0.8679245283018868,
+              "7": 0.0
+            }
+          },
+          "color": {
+            "examples": 768,
+            "accuracy": 1.0,
+            "per_class_accuracy": {
+              "0": 1.0,
+              "1": 1.0,
+              "2": 1.0,
+              "3": 1.0
+            }
+          },
+          "audio_word": {
+            "examples": 192,
+            "accuracy": 0.8333333333333334,
+            "per_class_accuracy": {
+              "0": 0.7083333333333334,
+              "1": 0.7916666666666666,
+              "2": 0.875,
+              "3": 0.8333333333333334,
+              "4": 0.8333333333333334,
+              "5": 0.9166666666666666,
+              "6": 0.875,
+              "7": 0.8333333333333334
+            }
+          }
+        }
+      }
+    },
+    "scale-small-v1": {
+      "checkpoint_sha256": "9f452b659d9e3f878aaa2c927c8a440253c1714ce5f1ab7f64bd59d853de0903",
+      "training_report_sha256": "518838c72918890d66e0798042f43a9153956fbae43520de4d57cd2230c94fcd",
+      "training": {
+        "glyph": {
+          "examples": 1024,
+          "accuracy": 0.6748046875,
+          "per_class_accuracy": {
+            "0": 0.4098360655737705,
+            "1": 0.5954198473282443,
+            "2": 0.671875,
+            "3": 0.671875,
+            "4": 0.4426229508196721,
+            "5": 1.0,
+            "6": 0.6304347826086957,
+            "7": 0.9629629629629629
+          }
+        },
+        "color": {
+          "examples": 1024,
+          "accuracy": 1.0,
+          "per_class_accuracy": {
+            "0": 1.0,
+            "1": 1.0,
+            "2": 1.0,
+            "3": 1.0
+          }
+        },
+        "audio_word": {
+          "examples": 256,
+          "accuracy": 0.9921875,
+          "per_class_accuracy": {
+            "0": 1.0,
+            "1": 0.96875,
+            "2": 1.0,
+            "3": 0.96875,
+            "4": 1.0,
+            "5": 1.0,
+            "6": 1.0,
+            "7": 1.0
+          }
+        }
+      },
+      "development": {
+        "in_distribution": {
+          "glyph": {
+            "examples": 768,
+            "accuracy": 0.6419270833333334,
+            "per_class_accuracy": {
+              "0": 0.2777777777777778,
+              "1": 0.6153846153846154,
+              "2": 0.6739130434782609,
+              "3": 0.6224489795918368,
+              "4": 0.3235294117647059,
+              "5": 1.0,
+              "6": 0.6551724137931034,
+              "7": 0.9591836734693877
+            }
+          },
+          "color": {
+            "examples": 768,
+            "accuracy": 1.0,
+            "per_class_accuracy": {
+              "0": 1.0,
+              "1": 1.0,
+              "2": 1.0,
+              "3": 1.0
+            }
+          },
+          "audio_word": {
+            "examples": 192,
+            "accuracy": 0.8072916666666666,
+            "per_class_accuracy": {
+              "0": 0.8333333333333334,
+              "1": 0.7083333333333334,
+              "2": 0.7083333333333334,
+              "3": 0.75,
+              "4": 0.9583333333333334,
+              "5": 0.7916666666666666,
+              "6": 0.7916666666666666,
+              "7": 0.9166666666666666
+            }
+          }
+        },
+        "compositional": {
+          "glyph": {
+            "examples": 768,
+            "accuracy": 0.10416666666666667,
+            "per_class_accuracy": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.0380952380952381,
+              "4": 0.0,
+              "5": 0.8539325842696629,
+              "6": 0.0,
+              "7": 0.0
+            }
+          },
+          "color": {
+            "examples": 768,
+            "accuracy": 1.0,
+            "per_class_accuracy": {
+              "0": 1.0,
+              "1": 1.0,
+              "2": 1.0,
+              "3": 1.0
+            }
+          },
+          "audio_word": {
+            "examples": 192,
+            "accuracy": 0.8072916666666666,
+            "per_class_accuracy": {
+              "0": 0.8333333333333334,
+              "1": 0.7083333333333334,
+              "2": 0.7083333333333334,
+              "3": 0.75,
+              "4": 0.9583333333333334,
+              "5": 0.7916666666666666,
+              "6": 0.7916666666666666,
+              "7": 0.9166666666666666
+            }
+          }
+        }
+      }
+    },
+    "scale-large-v1": {
+      "checkpoint_sha256": "c7ec3a7523660aeede02ab8a439bc501fc22304a60c70d4b290ec1446f87f120",
+      "training_report_sha256": "c90ed953d0f47de7d951cf96e51e9a3601f98be096cd5ecd3f8922264da4fdc2",
+      "training": {
+        "glyph": {
+          "examples": 1024,
+          "accuracy": 0.701171875,
+          "per_class_accuracy": {
+            "0": 0.4344262295081967,
+            "1": 0.7251908396946565,
+            "2": 0.6875,
+            "3": 0.78125,
+            "4": 0.3524590163934426,
+            "5": 1.0,
+            "6": 0.6811594202898551,
+            "7": 0.9259259259259259
+          }
+        },
+        "color": {
+          "examples": 1024,
+          "accuracy": 1.0,
+          "per_class_accuracy": {
+            "0": 1.0,
+            "1": 1.0,
+            "2": 1.0,
+            "3": 1.0
+          }
+        },
+        "audio_word": {
+          "examples": 256,
+          "accuracy": 0.9921875,
+          "per_class_accuracy": {
+            "0": 1.0,
+            "1": 0.96875,
+            "2": 1.0,
+            "3": 0.96875,
+            "4": 1.0,
+            "5": 1.0,
+            "6": 1.0,
+            "7": 1.0
+          }
+        }
+      },
+      "development": {
+        "in_distribution": {
+          "glyph": {
+            "examples": 768,
+            "accuracy": 0.68359375,
+            "per_class_accuracy": {
+              "0": 0.3333333333333333,
+              "1": 0.7115384615384616,
+              "2": 0.75,
+              "3": 0.7448979591836735,
+              "4": 0.3627450980392157,
+              "5": 1.0,
+              "6": 0.6206896551724138,
+              "7": 0.9285714285714286
+            }
+          },
+          "color": {
+            "examples": 768,
+            "accuracy": 1.0,
+            "per_class_accuracy": {
+              "0": 1.0,
+              "1": 1.0,
+              "2": 1.0,
+              "3": 1.0
+            }
+          },
+          "audio_word": {
+            "examples": 192,
+            "accuracy": 0.8177083333333334,
+            "per_class_accuracy": {
+              "0": 0.7916666666666666,
+              "1": 0.7083333333333334,
+              "2": 0.7916666666666666,
+              "3": 0.75,
+              "4": 0.9166666666666666,
+              "5": 0.8333333333333334,
+              "6": 0.8333333333333334,
+              "7": 0.9166666666666666
+            }
+          }
+        },
+        "compositional": {
+          "glyph": {
+            "examples": 768,
+            "accuracy": 0.061197916666666664,
+            "per_class_accuracy": {
+              "0": 0.0,
+              "1": 0.0,
+              "2": 0.0,
+              "3": 0.0,
+              "4": 0.0,
+              "5": 0.5280898876404494,
+              "6": 0.0,
+              "7": 0.0
+            }
+          },
+          "color": {
+            "examples": 768,
+            "accuracy": 1.0,
+            "per_class_accuracy": {
+              "0": 1.0,
+              "1": 1.0,
+              "2": 1.0,
+              "3": 1.0
+            }
+          },
+          "audio_word": {
+            "examples": 192,
+            "accuracy": 0.8177083333333334,
+            "per_class_accuracy": {
+              "0": 0.7916666666666666,
+              "1": 0.7083333333333334,
+              "2": 0.7916666666666666,
+              "3": 0.75,
+              "4": 0.9166666666666666,
+              "5": 0.8333333333333334,
+              "6": 0.8333333333333334,
+              "7": 0.9166666666666666
+            }
+          }
+        }
+      }
+    },
+    "scale-factorized-v1": {
+      "checkpoint_sha256": "5e41bccc90c3edab32dabdb45faadfa9961dae884c67db9089da272e61f65951",
+      "training_report_sha256": "57346e0db91761313ad0e4448fd3d3d626710ad2478279baf21df013eeea0b7f",
+      "training": {
+        "glyph": {
+          "examples": 1024,
+          "accuracy": 0.9775390625,
+          "per_class_accuracy": {
+            "0": 0.9426229508196722,
+            "1": 1.0,
+            "2": 1.0,
+            "3": 1.0,
+            "4": 0.8688524590163934,
+            "5": 1.0,
+            "6": 1.0,
+            "7": 1.0
+          }
+        },
+        "color": {
+          "examples": 1024,
+          "accuracy": 1.0,
+          "per_class_accuracy": {
+            "0": 1.0,
+            "1": 1.0,
+            "2": 1.0,
+            "3": 1.0
+          }
+        },
+        "audio_word": {
+          "examples": 256,
+          "accuracy": 0.9921875,
+          "per_class_accuracy": {
+            "0": 1.0,
+            "1": 0.96875,
+            "2": 1.0,
+            "3": 0.96875,
+            "4": 1.0,
+            "5": 1.0,
+            "6": 1.0,
+            "7": 1.0
+          }
+        }
+      },
+      "development": {
+        "in_distribution": {
+          "glyph": {
+            "examples": 768,
+            "accuracy": 0.9791666666666666,
+            "per_class_accuracy": {
+              "0": 0.9222222222222223,
+              "1": 1.0,
+              "2": 1.0,
+              "3": 1.0,
+              "4": 0.9117647058823529,
+              "5": 1.0,
+              "6": 1.0,
+              "7": 1.0
+            }
+          },
+          "color": {
+            "examples": 768,
+            "accuracy": 1.0,
+            "per_class_accuracy": {
+              "0": 1.0,
+              "1": 1.0,
+              "2": 1.0,
+              "3": 1.0
+            }
+          },
+          "audio_word": {
+            "examples": 192,
+            "accuracy": 0.8020833333333334,
+            "per_class_accuracy": {
+              "0": 0.7916666666666666,
+              "1": 0.75,
+              "2": 0.6666666666666666,
+              "3": 0.7916666666666666,
+              "4": 0.9166666666666666,
+              "5": 0.875,
+              "6": 0.75,
+              "7": 0.875
+            }
+          }
+        },
+        "compositional": {
+          "glyph": {
+            "examples": 768,
+            "accuracy": 0.92578125,
+            "per_class_accuracy": {
+              "0": 0.7319587628865979,
+              "1": 1.0,
+              "2": 0.9545454545454546,
+              "3": 1.0,
+              "4": 0.7419354838709677,
+              "5": 1.0,
+              "6": 0.9716981132075472,
+              "7": 1.0
+            }
+          },
+          "color": {
+            "examples": 768,
+            "accuracy": 1.0,
+            "per_class_accuracy": {
+              "0": 1.0,
+              "1": 1.0,
+              "2": 1.0,
+              "3": 1.0
+            }
+          },
+          "audio_word": {
+            "examples": 192,
+            "accuracy": 0.8020833333333334,
+            "per_class_accuracy": {
+              "0": 0.7916666666666666,
+              "1": 0.75,
+              "2": 0.6666666666666666,
+              "3": 0.7916666666666666,
+              "4": 0.9166666666666666,
+              "5": 0.875,
+              "6": 0.75,
+              "7": 0.875
+            }
+          }
+        }
+      }
+    }
+  },
+  "limits": "Fixed small training subset and linear readouts. These are diagnostic classifiers on frozen features, not the served model's question-conditioned outputs. Development has already been exposed. They do not establish real-screenshot or open-vocabulary recognition."
+}
