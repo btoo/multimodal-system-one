@@ -117,8 +117,15 @@ def load_suite(path=SUITE):
 class JevAdapter:
     name = MODEL
 
-    def __init__(self, max_spend_usd=.1):
+    def __init__(self, max_spend_usd=.1, key_file=None):
         self.key = os.environ.get('TYPESAFE_API_KEY')
+        if key_file is not None:
+            path = Path(key_file).expanduser()
+            if path.stat().st_mode & 0o077:
+                raise ValueError('Credential file must be private to its owner (chmod 600)')
+            self.key = json.loads(path.read_text()).get('api_key')
+        if self.key is not None and not isinstance(self.key, str):
+            raise ValueError('Invalid credential format')
         if not self.key:
             raise ValueError('Set TYPESAFE_API_KEY locally; do not put credentials in reports or Git')
         self.budget = number(max_spend_usd)
@@ -236,7 +243,7 @@ def comparable_frontier(points):
         for q in points)]
 
 
-def run(provider, run_id, execute=False, max_spend_usd=.1):
+def run(provider, run_id, execute=False, max_spend_usd=.1, key_file=None):
     import re
     if re.fullmatch(r'[a-zA-Z0-9_-]+',run_id) is None:
         raise ValueError('Invalid run ID')
@@ -248,7 +255,7 @@ def run(provider, run_id, execute=False, max_spend_usd=.1):
         raise ValueError('Unknown provider')
     if provider=='jev' and not execute:
         raise ValueError('Use --execute to make bounded external API requests')
-    adapter=JevAdapter(max_spend_usd) if provider=='jev' else None
+    adapter=JevAdapter(max_spend_usd,key_file) if provider=='jev' else None
     support=miso_v3_support({'questions':{f"{c['id']}-{k}":v for c in suite['cases'] for k,v in c['request']['questions'].items()}}) if provider=='miso-v3' else None
     directory.mkdir(parents=True)
     for case in suite['cases']:

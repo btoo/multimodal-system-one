@@ -18,7 +18,19 @@ This recommendation is an engineering judgment from the sources below. The best 
 
 Jev's published chart evaluates four text-based business workflows against a reference-model consensus. Our current keyword/panel accuracy and warm GPU timings are different tasks and measurement boundaries. **MiSO v3 does not yet support those text workflows**: the [capability audit](reports/miso-jev-readiness-v1/README.md) records 12 unsupported smoke inputs and no fabricated frontier score.
 
-The [comparison design](docs/research/jev-comparison.md) documents the publisher's benchmark, the missing reproduction artifacts, independent real-world evaluation tracks, and the proposed language-capable multimodal successor. A version-pinned Jev adapter and bounded original workflow smoke are implemented; the smoke is explicitly excluded from research leaderboards. See the [machine-readable contract](evals/jev-comparison-v1.json).
+The [comparison design](docs/research/jev-comparison.md) documents the publisher's benchmark, the missing reproduction artifacts, independent real-world evaluation tracks, and the proposed language-capable multimodal successor. The [live, version-pinned Jev integration](reports/jev-engineering-smoke-v1/README.md) completed 12/12 original engineering fixtures at 365 ms median client latency and $0.000217686 total input-token cost. The smoke is explicitly excluded from research leaderboards. See the [machine-readable contract](evals/jev-comparison-v1.json).
+
+The shared text comparison is the next target; MiSO v3 does not yet qualify:
+
+```mermaid
+flowchart LR
+    A[Frozen cases and workflow] --> B[MiSO language-capable successor]
+    A --> C[Pinned Jev]
+    B --> D[Identical scoring and complete traces]
+    C --> D
+    D --> E[Quality versus inference cost]
+    D --> F[Quality versus client latency]
+```
 
 ## Latest optimization and real-world coverage
 

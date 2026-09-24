@@ -1,6 +1,8 @@
 from copy import deepcopy
 import json
 import os
+from pathlib import Path
+import tempfile
 from unittest.mock import patch
 import unittest
 
@@ -83,6 +85,16 @@ class WorkflowTests(unittest.TestCase):
                 self.assertEqual(request.full_url,'https://api.typesafe.ai/v1/systemone')
                 self.assertEqual(adapter.calls,1)
                 self.assertAlmostEqual(result['cost_usd'],.0000042)
+
+    def test_explicit_private_key_file_overrides_environment(self):
+        with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ,{'TYPESAFE_API_KEY':'environment-placeholder'}):
+            path=Path(directory)/'credential.json'
+            path.write_text(json.dumps({'api_key':'file-placeholder'}));path.chmod(0o600)
+            adapter=JevAdapter(key_file=path)
+            self.assertEqual(adapter.key,'file-placeholder')
+            self.assertEqual(adapter.calls,0)
+            path.chmod(0o644)
+            with self.assertRaises(ValueError):JevAdapter(key_file=path)
 
     def test_frontier_rejects_mixed_tasks_or_inference_timing_boundaries(self):
         base={'model':'a','eligible':True,'coverage':1,'quality':.8,'cost_usd':.01,'latency_ms':100,

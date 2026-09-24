@@ -43,6 +43,8 @@ The diagram is the intended comparison system, not a completed evaluation. The p
 
 ## Current implementation
 
+The [live Jev smoke](../../reports/jev-engineering-smoke-v1/README.md) completed 12/12 requests, with 365 ms median client latency and $0.000217686 total inference cost calculated from returned token usage. These fixtures establish integration, not research quality.
+
 `mmso/workflow_benchmark.py` provides a version-pinned Jev HTTP adapter for Noul, Choice and Score, strict validation, a small deterministic routing policy, request hashes, cost/latency recording, and complete case accounting. Wrong schemas, missing answers, nonfinite values and unnormalized probabilities are rejected. Provider confidence is retained separately from the underlying probability vector. No policy action is executed outside the benchmark.
 
 The 12 [original fictional fixtures](../../evals/workflows/smoke-v1.json) exercise three primitives across four domains. Their obvious labels test plumbing. They are not the publisher's dataset, independent human adjudication, a training set or a frontier-quality benchmark. The result is explicitly ineligible for a frontier even if every fixture passes.
@@ -55,6 +57,8 @@ uv run --locked python scripts/run_workflow_benchmark.py \
 # Requires TYPESAFE_API_KEY in the process environment.
 uv run --locked python scripts/run_workflow_benchmark.py \
   --provider jev --execute --max-spend-usd 0.10 --run-id my-jev-smoke
+# Or pass a private, owner-readable JSON file with an api_key field:
+# --key-file ~/.config/miso/typesafe-brian-test.json
 ```
 
 The adapter makes at most 12 calls, with no automatic retries. It reserves the price of a complete 65,536-token context before each call and stops at the configured spend threshold. The rate is the $0.042/M input tokens published for the pinned version on the checked date; refresh it if pricing changes. Missing usage, uncertain errors or malformed responses stop further calls and leave total cost unknown. Credentials never enter the report. The HTTP contract is checked against the [TypeSafe API](https://docs.typesafe.ai/api); its [MIT-licensed Python SDK](https://github.com/typesafe-ai/typesafe-sdk-python/tree/0ffd094c72ed9445223060b24ffd7a56aa781fb4) and [LLM comparison adapter](https://github.com/typesafe-ai/system-one-adapter-python/tree/e1d4cc938204b22fc5a3c3aca7044072fe3f712d) are pinned references.

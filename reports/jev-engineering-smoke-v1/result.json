@@ -1,0 +1,31 @@
+{
+  "suite": "miso-workflow-smoke-v1",
+  "suite_sha256": "3f67afe93f522b2b438b3698ceaded8efa4b745e6d18125b0a745e8cb4616915",
+  "attempted_cases": 12,
+  "completed_cases": 12,
+  "statuses": {
+    "completed": 12
+  },
+  "coverage": 1.0,
+  "workflow_macro_success_including_failures": 1.0,
+  "question_nll_on_completed": 0.015029741939875746,
+  "question_brier_on_completed": 0.0011944444444444457,
+  "p50_workflow_ms": 365.42293746606447,
+  "p95_workflow_ms": 507.71373314200895,
+  "known_successful_call_cost_usd": 0.000217686,
+  "total_cost_usd": 0.000217686,
+  "cost_per_completed_workflow_usd": 1.81405e-05,
+  "pareto_eligible": false,
+  "reference_kind": "project-authored engineering fixtures",
+  "note": "Smoke only. Unsupported cases are coverage gaps, not measured wrong predictions. Errors retain denominator; unknown charges are not zero.",
+  "provider": "jev",
+  "support": null,
+  "source": {
+    "runner_sha256": "0ec541601c0c3eaff354647b83728e84d399a09e0941a54b346babbd71dc247b",
+    "suite_file_sha256": "e62d2321732f55f9b6d3696719ad228fddca00d6f802828fb576c113ac42a00b",
+    "source_commit": "b108d5e342f9b4ca69c817c1f53fcbb6a768dedd"
+  },
+  "maximum_calls": 12,
+  "max_spend_usd": 0.1,
+  "api_calls_made": 12
+}
