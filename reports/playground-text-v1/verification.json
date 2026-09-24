@@ -1,0 +1,113 @@
+{
+  "site": "https://miso-playground-nine.vercel.app",
+  "source_commit": "e8e156b",
+  "checkpoint": "4284d30920615018b500716d406236d919f5e38e268fdc5490c6f559af612bfa",
+  "input_modalities": [
+    "audio",
+    "image",
+    "text"
+  ],
+  "text_blocks": 4,
+  "image_sha256": "ee2f19e58fd36928c57ac21a9c0b28adb7a5823c11bdc594009ff9a3f262a9ea",
+  "audio_sha256": "6988c697615ceec989f6f694a186c4e1b0932fb2ca623ad6f7e77a91582f504b",
+  "only_text_changed": true,
+  "maximum_color_probability_change": 0.9309758767485619,
+  "maximum_unchanged_question_difference": 0.0,
+  "runs": [
+    {
+      "id": "wrun_01M3AHDDSS6ZQ9A918W9KWJ9XX",
+      "url": "https://miso-playground-nine.vercel.app/runs/wrun_01M3AHDDSS6ZQ9A918W9KWJ9XX",
+      "color": {
+        "probabilities": {
+          "color-red": 0.01804593950510025,
+          "color-green": 0.03465777263045311,
+          "color-blue": 0.061515923589468,
+          "color-yellow": 0.02461814694106579,
+          "color-not present": 0.8611622452735901
+        },
+        "ranking": [
+          {
+            "id": "color-not present",
+            "rank": 1,
+            "probability": 0.8611622452735901
+          },
+          {
+            "id": "color-blue",
+            "rank": 2,
+            "probability": 0.061515923589468
+          },
+          {
+            "id": "color-green",
+            "rank": 3,
+            "probability": 0.03465777263045311
+          },
+          {
+            "id": "color-yellow",
+            "rank": 4,
+            "probability": 0.02461814694106579
+          },
+          {
+            "id": "color-red",
+            "rank": 5,
+            "probability": 0.01804593950510025
+          }
+        ],
+        "prediction": "color-not present",
+        "decision": "color-not present",
+        "abstained": false,
+        "ties": [],
+        "confidence": 0.8611622452735901,
+        "type": "choice"
+      },
+      "text": "what color marks the spoken command"
+    },
+    {
+      "id": "wrun_01M3AHDSAXRRADFQD289SHJY25",
+      "url": "https://miso-playground-nine.vercel.app/runs/wrun_01M3AHDSAXRRADFQD289SHJY25",
+      "color": {
+        "probabilities": {
+          "color-red": 0.9490218162536621,
+          "color-green": 0.007422096561640501,
+          "color-blue": 0.00638758996501565,
+          "color-yellow": 0.009253577329218388,
+          "color-not present": 0.027914876118302345
+        },
+        "ranking": [
+          {
+            "id": "color-red",
+            "rank": 1,
+            "probability": 0.9490218162536621
+          },
+          {
+            "id": "color-not present",
+            "rank": 2,
+            "probability": 0.027914876118302345
+          },
+          {
+            "id": "color-yellow",
+            "rank": 3,
+            "probability": 0.009253577329218388
+          },
+          {
+            "id": "color-green",
+            "rank": 4,
+            "probability": 0.007422096561640501
+          },
+          {
+            "id": "color-blue",
+            "rank": 5,
+            "probability": 0.00638758996501565
+          }
+        ],
+        "prediction": "color-red",
+        "decision": "color-red",
+        "abstained": false,
+        "ties": [],
+        "confidence": 0.9490218162536621,
+        "type": "choice"
+      },
+      "text": "what color marks the opposite of the spoken command"
+    }
+  ],
+  "scope": "Existing trained question vocabulary; not a general text-context or new accuracy evaluation"
+}

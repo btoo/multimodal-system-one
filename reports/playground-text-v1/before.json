@@ -1,0 +1,11 @@
+{
+  "status": 400,
+  "error": "payload.input.2.type: Invalid option: expected one of \"image\"|\"audio\"; payload.input.2.source: Invalid input: expected object, received undefined; payload.input.2: Unrecognized keys: \"id\", \"text\"",
+  "modalities": [
+    "image",
+    "audio",
+    "text"
+  ],
+  "expected": "Existing Python API text-block request should pass the playground gateway",
+  "model_call_started": false
+}

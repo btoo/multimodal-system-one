@@ -1,0 +1,12 @@
+{
+  "http_status": 202,
+  "run_status": "completed",
+  "run_id": "wrun_01M3AHG0QK0VVPMNWYA7XDGJM3",
+  "input_modalities": [
+    "image",
+    "audio",
+    "text"
+  ],
+  "model": "mmso-joint-v3",
+  "same_original_rejected_request_now_succeeds": true
+}
