@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     problems = []
     markdown_files = [ROOT / "README.md", ROOT / "program.md", ROOT / "evals/README.md",
-                      *sorted((ROOT / "docs/research").glob("*.md")), *sorted((ROOT / "reports").glob("*/README.md")),
+                      *sorted((ROOT / "docs").rglob("*.md")), *sorted((ROOT / "reports").glob("*/README.md")),
                       *sorted((ROOT / "artifacts").glob("*/README.md"))]
     for path in markdown_files:
         text = path.read_text()
@@ -46,12 +46,21 @@ def main():
     suites = json.loads((ROOT / "evals/suites.json").read_text())
     assert suites["execution_enabled"] is True and suites["data_populated"] is True
     assert state["baseline_runs_completed"] == len(suites["results"]) == 3
-    assert state["joint_model_runs_completed"] == len(suites["joint_training_results"]) == 4
-    assert state["model_runs_completed"] == 7 and state["native_joint_model_trained"] is True
+    scale_training = suites.get("scale_training_results", [])
+    scale_evaluation = suites.get("scale_evaluation_results", [])
+    joint_count = len(suites["joint_training_results"]) + len(scale_training)
+    assert state["joint_model_runs_completed"] == joint_count
+    assert state["model_runs_completed"] == len(suites["results"]) + joint_count
+    assert state["joint_evaluation_runs_completed"] == len(suites["joint_evaluation_results"]) + len(scale_evaluation)
+    assert state["native_joint_model_trained"] is True
     for report in suites["joint_training_results"]:
         assert json.loads((ROOT/report).read_text())["status"] == "development_complete"
     for report in suites["joint_evaluation_results"]:
         assert json.loads((ROOT/report).read_text())["status"] == "held_out_evaluated"
+    for report in scale_training:
+        assert json.loads((ROOT/report).read_text())["status"] == "development_complete"
+    for report in scale_evaluation:
+        assert json.loads((ROOT/report).read_text())["status"] == "confirmation_complete"
     for report in suites["results"]:
         assert json.loads((ROOT / report).read_text())["status"] == "completed"
     assert {"speech_intent", "acoustic_events", "screen_understanding", "paired_audio_screen"} <= {x["id"] for x in suites["suites"]}
