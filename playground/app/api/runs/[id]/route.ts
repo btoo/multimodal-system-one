@@ -1,6 +1,6 @@
 import { getRun } from "workflow/api";
 import { isOwner } from "@/lib/auth";
-import type { RunResult } from "@/lib/contracts";
+import { isMisoResult, type RunResult } from "@/lib/contracts";
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> },
@@ -15,11 +15,18 @@ export async function GET(
     if (!(await run.exists))
       return Response.json({ error: "Run not found." }, { status: 404 });
     const status = await run.status;
-    if (status === "completed")
+    if (status === "completed") {
+      const result = await run.returnValue;
+      if (!isMisoResult(result))
+        return Response.json(
+          { error: "This saved run is not part of the MiSO playground." },
+          { status: 410, headers: { "Cache-Control": "no-store" } },
+        );
       return Response.json(
-        { id, status, result: await run.returnValue },
+        { id, status, result },
         { headers: { "Cache-Control": "no-store" } },
       );
+    }
     if (status === "failed" || status === "cancelled")
       return Response.json(
         {

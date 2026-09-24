@@ -13,16 +13,11 @@ import {
   AlertCircle,
 } from "lucide-react";
 import type { RunResult, RunState } from "@/lib/contracts";
-export type HistoryItem = {
-  id: string;
-  provider: string;
-  label: string;
-  createdAt: string;
-};
+import { misoHistory, type HistoryItem } from "@/lib/history";
 export function rememberRun(item: HistoryItem) {
   try {
-    const prior: HistoryItem[] = JSON.parse(
-      localStorage.getItem("miso:runs:v1") ?? "[]",
+    const prior = misoHistory(
+      JSON.parse(localStorage.getItem("miso:runs:v1") ?? "[]"),
     );
     localStorage.setItem(
       "miso:runs:v1",
@@ -108,8 +103,10 @@ export function RunResults({
               <Check size={12} />
               Complete
             </>
+          ) : state?.status === "failed" || state?.status === "cancelled" ? (
+            "Failed"
           ) : (
-            state?.status === "failed" || state?.status === "cancelled" ? "Failed" : "Ready"
+            "Ready"
           )}
         </span>
       </div>
@@ -193,13 +190,9 @@ export function ResultBody({
           </strong>
         </div>
         <div>
-          <span>
-            {result.provider === "jev" ? "INPUT TOKEN COST" : "CHECKPOINT"}
-          </span>
-          <strong className={result.provider === "miso" ? "small-stat" : ""}>
-            {result.costUsd !== null
-              ? `$${result.costUsd.toFixed(6)}`
-              : (result.checkpoint?.slice(0, 8) ?? "v3")}
+          <span>CHECKPOINT</span>
+          <strong className="small-stat">
+            {result.checkpoint?.slice(0, 8) ?? "v3"}
           </strong>
         </div>
         <div>

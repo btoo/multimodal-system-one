@@ -7,9 +7,7 @@ flowchart LR
     B[Browser: audio, image and text instructions] --> R[Next.js authenticated route]
     R --> W[Vercel Workflow: durable run]
     W --> M[Modal: MiSO v3 on CPU]
-    W --> J[Jev 1.13 API]
     M --> O[Persisted result and request snapshot]
-    J --> O
     O --> V[Probability views, JSON and saved run page]
 ```
 
@@ -28,7 +26,6 @@ Set these server-side environment variables in `playground/.env.local`:
 - `PLAYGROUND_ACCESS_KEY`: owner access key for live runs.
 - `SESSION_SECRET`: independent random signing secret for the seven-day HttpOnly owner session.
 - `MISO_BACKEND_URL` and `MISO_BACKEND_KEY`: authenticated MiSO API connection.
-- `TYPESAFE_API_KEY`: Jev credential.
 - `WORKFLOW_LOCAL_BASE_URL=http://127.0.0.1:3047`: local Workflow callback target when using that port.
 
 Credentials are excluded from Git and deployment uploads. The working private configuration is outside the repo under the owner's `.config/miso/` directory. Production/preview secrets are configured in the dedicated Vercel project, never in `NEXT_PUBLIC_*` variables or Workflow inputs. The initial Vercel project uses `playground` as its Git root directory and `iad1` for Workflow locality.
@@ -37,7 +34,7 @@ Credentials are excluded from Git and deployment uploads. The working private co
 
 **MiSO:** one PNG/JPEG, one mono PCM16 WAV up to one second, and visible text instructions, with Choice, Noul, Score and Ranking views. The playground sends each instruction as a native text content block and uses question references to bind the typed outputs. The Python model encodes that text jointly with the audio/image representations. Text is limited to the current checkpoint's learned question vocabulary; arbitrary text context is not trained. Each upload is capped at 1 MB in the UI; the request is bounded and schema-validated again on the server. Up to eight named questions are accepted. The model still only understands its recorded keyword set, generated 2×2 panels and limited vocabulary. Arbitrary screenshots and natural speech are not established capabilities.
 
-**Jev:** text state up to 12,000 characters and up to eight Noul, Choice or Score questions. The model is pinned to `jev-1.13.0`. Displayed inference cost uses returned input-token usage and the checked $0.042/M rate; it excludes Vercel hosting/Workflow costs. MiSO CPU serving costs are not estimated per request in the UI.
+The hosted playground runs MiSO only. External-model comparison code and credentials belong to the independent research benchmark tooling. Historical non-MiSO runs are excluded from the playground history and result API; their original research records remain preserved.
 
 The page is public to inspect; starting a run or reading a saved run requires an owner session. The native backend independently requires its own bearer credential. Requests and outputs are retained in the private Workflow store. The run-history list stores recent run links in the current browser; it is not an account-wide database. Inputs in a reopened current-version run can be restored from its saved snapshot. The sample voice's source and CC BY 4.0 attribution are in `playground/public/examples/ATTRIBUTION.txt`.
 
@@ -65,4 +62,4 @@ npm run build
 npm audit --omit=dev
 ```
 
-Also verify through the browser: anonymous live calls rejected, owner unlock, both model paths, saved-run reload, question editing, JSON/download controls and responsive layout. Inspect the actual Workflow status and returned checkpoint/model identity. Build success alone does not establish deployed execution.
+Also verify through the browser: anonymous live calls rejected, owner unlock, the native audio/image/text path, saved-run reload, question editing, JSON/download controls and responsive layout. Inspect the actual Workflow status and returned checkpoint/model identity. Build success alone does not establish deployed execution.

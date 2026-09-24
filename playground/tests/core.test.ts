@@ -31,7 +31,7 @@ test("provider identity and input contracts fail before any paid call", () => {
       questions: { q: { type: "noul", instructions: "Is this a greeting?" } },
     },
   };
-  assert.equal(runInputSchema.safeParse(text).success, true);
+  assert.equal(runInputSchema.safeParse(text).success, false);
   assert.equal(
     runInputSchema.safeParse({
       ...text,
@@ -191,4 +191,21 @@ test("changing only text preserves the raw media and answer schemas", () => {
   assert.deepEqual(first.input.slice(0, 2), second.input.slice(0, 2));
   assert.deepEqual(first.questions, second.questions);
   assert.notDeepEqual(first.input[2], second.input[2]);
+});
+
+import {isMisoResult} from '../lib/contracts.ts';
+import {misoHistory} from '../lib/history.ts';
+test('non-MiSO providers cannot start or render in the playground',()=>{
+ const payload=makeNativePayload(mediaFixture,{present:{type:'noul',question:'is the spoken command on the screen'}});
+ assert.equal(runInputSchema.safeParse({provider:'miso',label:'Native',payload}).success,true);
+ for(const provider of ['jev','openai','other'])assert.equal(runInputSchema.safeParse({provider,label:'No',payload}).success,false);
+ assert.equal(isMisoResult({provider:'miso',model:'mmso-joint-v3'}),true);
+ assert.equal(isMisoResult({provider:'jev',model:'jev-1.13.0'}),false);
+ assert.equal(isMisoResult({provider:'miso',model:'jev-1.13.0'}),false);
+});
+test('run history filters historical comparison entries',()=>{
+ const native={id:'wrun_native',provider:'miso',label:'Native',createdAt:'2026-09-24'};
+ const comparison={id:'wrun_comparison',provider:'jev',label:'Comparison',createdAt:'2026-09-24'};
+ assert.deepEqual(misoHistory([native,comparison,null,{}]),[native]);
+ assert.deepEqual(misoHistory({}),[]);
 });

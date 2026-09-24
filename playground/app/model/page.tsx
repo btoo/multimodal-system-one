@@ -18,7 +18,7 @@ export default function Page() {
         <div className="model-grid">
           <article className="evidence-card">
             <span className="type-badge choice">MiSO v3</span>
-            <h2>Native audio + image</h2>
+            <h2>Audio + image + text</h2>
             <dl>
               <div>
                 <dt>Parameters</dt>
@@ -73,20 +73,20 @@ export default function Page() {
               Read the full evaluation <ArrowUpRight size={15} />
             </a>
             <hr />
-            <h3>Jev is a separate text baseline.</h3>
+            <h3>Text is part of the native model.</h3>
             <p>
-              The text tab calls jev-1.13.0 with your typed state and questions.
-              Its results are not directly comparable to MiSO’s audio/image
-              scores. Its displayed cost covers input tokens at the checked
-              published rate.
+              MiSO encodes each text instruction with the image and audio.
+              Choice, Noul, Score and Ranking are views of its candidate
+              probabilities. The checkpoint supports its learned question
+              vocabulary; general text context remains future model work.
             </p>
             <a
               className="evidence-link"
-              href="https://github.com/btoo/multimodal-system-one/blob/codex/research-foundation/docs/research/jev-comparison.md"
+              href="https://github.com/btoo/multimodal-system-one/blob/codex/research-foundation/reports/playground-text-v1/README.md"
               target="_blank"
               rel="noreferrer"
             >
-              Comparison protocol <ArrowUpRight size={15} />
+              Native text verification <ArrowUpRight size={15} />
             </a>
           </article>
         </div>

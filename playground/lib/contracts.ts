@@ -68,27 +68,6 @@ const nativeQuestions = z
     (q) => Object.keys(q).length > 0 && Object.keys(q).length <= 8,
     "Use 1 to 8 questions",
   );
-const jevQuestion = z.discriminatedUnion("type", [
-  z.object({ type: z.literal("noul"), instructions: description }).strict(),
-  z
-    .object({
-      type: z.literal("choice"),
-      instructions: description,
-      criteria: z
-        .record(z.string().min(1).max(64), description)
-        .refine(
-          (c) => Object.keys(c).length >= 2 && Object.keys(c).length <= 32,
-        ),
-    })
-    .strict(),
-  z
-    .object({
-      type: z.literal("score"),
-      instructions: description,
-      criteria: z.array(description).min(2).max(10),
-    })
-    .strict(),
-]);
 export const nativePayloadSchema = z
   .object({
     model: z.literal("mmso-joint-v3"),
@@ -172,31 +151,23 @@ export function resolveNativeQuestions(payload: NativePayload) {
     }),
   );
 }
-export const runInputSchema = z.discriminatedUnion("provider", [
-  z
-    .object({
-      provider: z.literal("miso"),
-      label: z.string().max(80),
-      payload: nativePayloadSchema,
-    })
-    .strict(),
-  z
-    .object({
-      provider: z.literal("jev"),
-      label: z.string().max(80),
-      payload: z
-        .object({
-          state: z.string().min(1).max(12000),
-          questions: z
-            .record(key, jevQuestion)
-            .refine(
-              (q) => Object.keys(q).length > 0 && Object.keys(q).length <= 8,
-            ),
-        })
-        .strict(),
-    })
-    .strict(),
-]);
+export const runInputSchema = z
+  .object({
+    provider: z.literal("miso"),
+    label: z.string().max(80),
+    payload: nativePayloadSchema,
+  })
+  .strict();
+export function isMisoResult(value: unknown): value is RunResult {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "provider" in value &&
+    value.provider === "miso" &&
+    "model" in value &&
+    value.model === "mmso-joint-v3"
+  );
+}
 export type RunInput = z.infer<typeof runInputSchema>;
 export type Answer = {
   id: string;
@@ -208,13 +179,11 @@ export type Answer = {
 };
 export type RunResult = {
   request?: RunInput;
-  provider: "miso" | "jev";
+  provider: "miso";
   label: string;
   model: string;
   completedAt: string;
   inferenceMs: number;
-  inputTokens: number | null;
-  costUsd: number | null;
   checkpoint: string | null;
   answers: Answer[];
   raw: unknown;
