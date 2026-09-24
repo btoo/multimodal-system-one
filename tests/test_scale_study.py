@@ -1,12 +1,15 @@
 import copy
 import unittest
+from unittest.mock import patch
 
 import numpy as np
 import torch
 
 from mmso.joint_model import NativeDecisionModel, Vocabulary, encode_requests
 from mmso.joint_world import COLORS, WORDS, make_panel, render_panel
-from mmso.scale_study import FactorizedVision, make_model, selection_score
+from mmso.artifacts import read_manifest
+from mmso.joint_data import MANIFEST as OLD_MANIFEST
+from mmso.scale_study import FactorizedVision, audit_scale, make_model, selection_score, verify_lineage
 
 
 class ScaleStudyTests(unittest.TestCase):
@@ -71,6 +74,27 @@ class ScaleStudyTests(unittest.TestCase):
     def test_selection_gives_equal_weight_to_id_and_composition(self):
         metrics = {"by_slice": {"in_distribution": {"joint_macro_normalized_nll": 0.2}, "compositional": {"joint_macro_normalized_nll": 1.4}}}
         self.assertAlmostEqual(selection_score(metrics), 0.8)
+
+    def test_frozen_lineage_rejects_changed_manifest_or_protocol(self):
+        with patch("mmso.scale_study.sha256", return_value="frozen"):
+            verify_lineage({"manifest_sha256": "frozen", "protocol_sha256": "frozen"})
+            for field in ["manifest_sha256", "protocol_sha256"]:
+                changed = {"manifest_sha256": "frozen", "protocol_sha256": "frozen", field: "changed"}
+                with self.assertRaisesRegex(ValueError, "changed"):
+                    verify_lineage(changed)
+
+    def test_audit_rejects_reusing_a_prior_confirmation_speaker(self):
+        previous = read_manifest(OLD_MANIFEST)
+        old_test = next(s for s in previous if s["split"] == "test")
+        with self.assertRaisesRegex(ValueError, "prior manifest"):
+            audit_scale([old_test], verify_media=False)
+
+    def test_audit_rejects_held_pairs_in_training(self):
+        previous = read_manifest(OLD_MANIFEST)
+        training = copy.deepcopy(next(s for s in previous if s["split"] == "train"))
+        training["panel"] = make_panel(17, compositional=True)
+        with self.assertRaisesRegex(ValueError, "Held composition"):
+            audit_scale([training], verify_media=False)
 
 
 if __name__ == "__main__":

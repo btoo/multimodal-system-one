@@ -34,6 +34,9 @@ def source_check(prov):
     for path, digest in prov["source_hashes"].items():
         blob = subprocess.check_output(["git", "show", f"{prov['git_revision']}:{path}"], cwd=ROOT)
         assert hashlib.sha256(blob).hexdigest() == digest, path
+    for path in [PROTOCOL, MANIFEST]:
+        blob = subprocess.check_output(["git", "show", f"{prov['git_revision']}:{path.relative_to(ROOT)}"], cwd=ROOT)
+        assert hashlib.sha256(blob).hexdigest() == sha256(path), path
 
 
 scenes = read_manifest(MANIFEST)
