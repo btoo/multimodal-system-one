@@ -57,7 +57,9 @@ The original repeated-fixture v2 API measurement was **4.81 ms median / 5.60 ms 
 
 ## Cloud GPU experiments
 
-The [Modal pilot](docs/modal.md) runs our existing native model on a single L4, checks CPU/CUDA predictions, and verifies that training resumes in a fresh container with matching optimizer and random state. The first run is bounded to 32 training updates and a target below $1. It is a portability test; it does not change the accuracy claims above.
+The [first successful Modal L4 run](reports/modal-l4-pilot-v3/README.md) matches CPU decisions on **64/64 requests** and reproduces a 32-update training run **exactly** after a fresh-container restart at update 16. Warm inference measured **3.64 ms median / 4.72 ms p95** for one question, or **5,694 decisions/second** in batches of 32. Timings exclude media decoding, startup and network traffic.
+
+All containers stopped after the experiment. A lifetime-based compute estimate is about **$0.04**, including two documented failed setup attempts; final billing had not reconciled. The [bounded runner and recovery design](docs/modal.md) provide the starting point for larger GPU experiments. This is a portability/resume test on existing training examples; the accuracy claims above are unchanged.
 
 ## Earlier model iteration: size and visual structure
 

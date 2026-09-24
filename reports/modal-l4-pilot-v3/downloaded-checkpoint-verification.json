@@ -1,0 +1,16 @@
+{
+  "hashes_verified": {
+    "midpoint.pt": "6f1d2953b7bc93da861c37b35913672c248939745cea38dc687e0a07965baca9",
+    "reference.pt": "e09aa7ee94e491db17cb61d253c9023ff680e021fa68ca20b40369c43cbc71b5",
+    "resume.pt": "932343c21924098b2d987f5f3d4c07b744fe8803674153cf4684ede5acbd0a07"
+  },
+  "maximum_differences": {
+    "model": 0.0,
+    "optimizer": 0.0,
+    "generator": 0.0,
+    "cpu_rng": 0.0,
+    "cuda_rng": 0.0
+  },
+  "model_change_after_midpoint": 0.0011423826217651367,
+  "step16_to_step32_verified": true
+}

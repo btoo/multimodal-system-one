@@ -14,6 +14,8 @@ flowchart LR
     G --> H[Local immutable report]
 ```
 
+The [first successful run and both setup failures](../reports/modal-l4-pilot-v3/README.md) are preserved, including timings, source hashes, downloaded-checkpoint checks and shutdown evidence.
+
 ## Run
 
 ```bash

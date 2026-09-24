@@ -1,0 +1,64 @@
+{
+  "captured_at_utc": "2026-09-24T17:35:37.166711+00:00",
+  "pricing_url": "https://modal.com/pricing",
+  "workspace_summary": {
+    "metered_cost": "0E-8",
+    "billed_cost": "0E-8",
+    "adjustments": {
+      "plan_cost": "0E-8",
+      "reservation_adjustment": "-0E-8",
+      "credits": "-0E-8",
+      "free_storage": "-0E-8"
+    },
+    "metered_cost_breakdown": {
+      "llm_tokens": "0E-8",
+      "volumes": "0E-8",
+      "ephemeral_apps": "0.00469021"
+    }
+  },
+  "app_states": [
+    {
+      "app_id": "ap-R2EIEU2rGMrlIxEtHpwAN9",
+      "description": "mmso-modal-pilot",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-24 13:32:03-04:00",
+      "stopped_at": "2026-09-24 13:32:44-04:00"
+    },
+    {
+      "app_id": "ap-hI6bDVGEk1KaLYKA2CPYUL",
+      "description": "mmso-modal-pilot",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-24 13:30:08-04:00",
+      "stopped_at": "2026-09-24 13:30:29-04:00"
+    },
+    {
+      "app_id": "ap-KzumIJoOVOyUtAIzc8rRW4",
+      "description": "mmso-modal-pilot",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-24 13:28:33-04:00",
+      "stopped_at": "2026-09-24 13:29:52-04:00"
+    },
+    {
+      "app_id": "ap-p86nNKsCEvGbiCqoVDw8JZ",
+      "description": "mmso-gpu-preflight",
+      "state": "stopped",
+      "tasks": "0",
+      "created_at": "2026-09-24 13:23:18-04:00",
+      "stopped_at": "2026-09-24 13:23:24-04:00"
+    }
+  ],
+  "all_apps_stopped": true,
+  "observed_total_app_lifetime_seconds": 147.0,
+  "l4_cpu_ram_lifetime_proxy_usd": 0.03779076000000001,
+  "proxy_assumptions": {
+    "l4_usd_per_second": 0.000222,
+    "maximum_physical_cpu_cores": 2,
+    "cpu_usd_per_core_second": 1.31e-05,
+    "maximum_ram_gib": 4,
+    "ram_usd_per_gib_second": 2.22e-06
+  },
+  "interpretation": "Rough compute estimate using whole app lifetimes, including both failed attempts. This is not final metered usage. Excludes separately built images and persistent volume storage; some app lifetime was not GPU execution. Provider summary totals and breakdown have not yet reconciled."
+}

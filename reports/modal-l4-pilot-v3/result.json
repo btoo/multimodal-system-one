@@ -1,0 +1,25 @@
+{
+  "status": "cloud_portability_and_resume_verified",
+  "phases": [
+    "reference",
+    "resume"
+  ],
+  "source_commit": "010266476fffd3c5eb4e92ebdb6baace5308b2a9",
+  "accuracy_trial": false,
+  "limits": {
+    "gpu": "L4",
+    "concurrent_containers": 1,
+    "phases": 2,
+    "function_timeout_seconds": 180,
+    "startup_timeout_seconds": 120,
+    "retries": 0
+  },
+  "cost": {
+    "budget_target_usd": 1,
+    "actual_billed_usd": null,
+    "note": "Billing must be verified separately; runtime limits are not an account spending cap.",
+    "lifetime_proxy_usd": 0.03779076000000001,
+    "billing_state": "pending reconciliation"
+  },
+  "app_url": "https://modal.com/apps/btoo/main/ap-R2EIEU2rGMrlIxEtHpwAN9"
+}
