@@ -1,4 +1,4 @@
-# Multimodal System One
+# MiSO — Multimodal System One
 
 **A research project for learning fast, typed decisions directly from speech, sounds, screenshots, and language on a MacBook.**
 
@@ -11,6 +11,14 @@ The first goal is a small model whose weights, data, losses, and failure modes w
 **Current target:** speech/audio classification and screen understanding for computer/browser use. Define real-data evals for each modality and for paired audio–screen decisions before model search. Use compact pretrained input encoders with trainable fusion/decision heads for the practical track, while retaining small from-scratch controls to learn the fundamentals. The image/text shapes study below is an algorithm control, not the application acceptance test.
 
 This recommendation is an engineering judgment from the sources below. The best architecture for our data and compute budget remains an empirical question.
+
+## Developing MiSO against Jev
+
+**MiSO** is our model name. The existing `mmso` package and checkpoint IDs remain compatible; `miso` is also available as a CLI command. We are building toward a comparison on the same inputs, workflow, reference labels, and complete inference cost/latency.
+
+Jev's published chart evaluates four text-based business workflows against a reference-model consensus. Our current keyword/panel accuracy and warm GPU timings are different tasks and measurement boundaries. **MiSO v3 does not yet support those text workflows**: the [capability audit](reports/miso-jev-readiness-v1/README.md) records 12 unsupported smoke inputs and no fabricated frontier score.
+
+The [comparison design](docs/research/jev-comparison.md) documents the publisher's benchmark, the missing reproduction artifacts, independent real-world evaluation tracks, and the proposed language-capable multimodal successor. A version-pinned Jev adapter and bounded original workflow smoke are implemented; the smoke is explicitly excluded from research leaderboards. See the [machine-readable contract](evals/jev-comparison-v1.json).
 
 ## Latest optimization and real-world coverage
 

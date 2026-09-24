@@ -1,0 +1,478 @@
+{
+  "id": "miso-workflow-smoke-v1",
+  "purpose": "engineering_smoke",
+  "official_typesafe_benchmark": false,
+  "origin": "Original fictional fixtures authored in this repository; not a vendor dataset or a held-out research benchmark",
+  "reference_kind": "Author-specified labels for explicit statements; not independent human adjudication",
+  "policy": "intervention>=0.8 => urgent_review; urgency>=1.5 or max route probability<0.6 => review; otherwise route category",
+  "cases": [
+    {
+      "id": "customer_service-0",
+      "family": "customer_service-0",
+      "workflow": "customer_service",
+      "split": "smoke",
+      "request": {
+        "state": "The customer asks for a receipt for last month. They say there is no deadline.",
+        "questions": {
+          "route": {
+            "type": "choice",
+            "instructions": "Which category best describes the primary issue in this record?",
+            "criteria": {
+              "billing": "Payments, invoices, or refunds",
+              "technical": "Application defects or service outages",
+              "account": "Account settings or access"
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+          },
+          "urgency": {
+            "type": "score",
+            "instructions": "Rate only the urgency explicitly stated in the record.",
+            "criteria": [
+              "Explicitly no urgency or deadline",
+              "Soon, without an immediate deadline",
+              "Immediate action is explicitly requested"
+            ]
+          }
+        }
+      },
+      "targets": {
+        "route": "billing",
+        "intervention": "false",
+        "urgency": "0"
+      },
+      "expected_action": "route:billing"
+    },
+    {
+      "id": "customer_service-1",
+      "family": "customer_service-1",
+      "workflow": "customer_service",
+      "split": "smoke",
+      "request": {
+        "state": "The customer reports that the upload feature fails. They ask for a fix soon, without immediate human intervention.",
+        "questions": {
+          "route": {
+            "type": "choice",
+            "instructions": "Which category best describes the primary issue in this record?",
+            "criteria": {
+              "billing": "Payments, invoices, or refunds",
+              "technical": "Application defects or service outages",
+              "account": "Account settings or access"
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+          },
+          "urgency": {
+            "type": "score",
+            "instructions": "Rate only the urgency explicitly stated in the record.",
+            "criteria": [
+              "Explicitly no urgency or deadline",
+              "Soon, without an immediate deadline",
+              "Immediate action is explicitly requested"
+            ]
+          }
+        }
+      },
+      "targets": {
+        "route": "technical",
+        "intervention": "false",
+        "urgency": "1"
+      },
+      "expected_action": "route:technical"
+    },
+    {
+      "id": "customer_service-2",
+      "family": "customer_service-2",
+      "workflow": "customer_service",
+      "split": "smoke",
+      "request": {
+        "state": "The customer reports account takeover and explicitly requests immediate human intervention now.",
+        "questions": {
+          "route": {
+            "type": "choice",
+            "instructions": "Which category best describes the primary issue in this record?",
+            "criteria": {
+              "billing": "Payments, invoices, or refunds",
+              "technical": "Application defects or service outages",
+              "account": "Account settings or access"
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+          },
+          "urgency": {
+            "type": "score",
+            "instructions": "Rate only the urgency explicitly stated in the record.",
+            "criteria": [
+              "Explicitly no urgency or deadline",
+              "Soon, without an immediate deadline",
+              "Immediate action is explicitly requested"
+            ]
+          }
+        }
+      },
+      "targets": {
+        "route": "account",
+        "intervention": "true",
+        "urgency": "2"
+      },
+      "expected_action": "urgent_review"
+    },
+    {
+      "id": "invoice_processing-0",
+      "family": "invoice_processing-0",
+      "workflow": "invoice_processing",
+      "split": "smoke",
+      "request": {
+        "state": "The vendor asks when a correctly matched invoice will be paid. There is no deadline.",
+        "questions": {
+          "route": {
+            "type": "choice",
+            "instructions": "Which category best describes the primary issue in this record?",
+            "criteria": {
+              "payment": "Payment timing or status",
+              "documents": "Missing or corrected supporting documents",
+              "identity": "Vendor identity or payment account identity"
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+          },
+          "urgency": {
+            "type": "score",
+            "instructions": "Rate only the urgency explicitly stated in the record.",
+            "criteria": [
+              "Explicitly no urgency or deadline",
+              "Soon, without an immediate deadline",
+              "Immediate action is explicitly requested"
+            ]
+          }
+        }
+      },
+      "targets": {
+        "route": "payment",
+        "intervention": "false",
+        "urgency": "0"
+      },
+      "expected_action": "route:payment"
+    },
+    {
+      "id": "invoice_processing-1",
+      "family": "invoice_processing-1",
+      "workflow": "invoice_processing",
+      "split": "smoke",
+      "request": {
+        "state": "A purchase-order attachment is missing. The vendor will provide it soon. Immediate human intervention is not requested.",
+        "questions": {
+          "route": {
+            "type": "choice",
+            "instructions": "Which category best describes the primary issue in this record?",
+            "criteria": {
+              "payment": "Payment timing or status",
+              "documents": "Missing or corrected supporting documents",
+              "identity": "Vendor identity or payment account identity"
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+          },
+          "urgency": {
+            "type": "score",
+            "instructions": "Rate only the urgency explicitly stated in the record.",
+            "criteria": [
+              "Explicitly no urgency or deadline",
+              "Soon, without an immediate deadline",
+              "Immediate action is explicitly requested"
+            ]
+          }
+        }
+      },
+      "targets": {
+        "route": "documents",
+        "intervention": "false",
+        "urgency": "1"
+      },
+      "expected_action": "route:documents"
+    },
+    {
+      "id": "invoice_processing-2",
+      "family": "invoice_processing-2",
+      "workflow": "invoice_processing",
+      "split": "smoke",
+      "request": {
+        "state": "The bank account belongs to an unknown entity. The reviewer explicitly requests immediate human intervention now.",
+        "questions": {
+          "route": {
+            "type": "choice",
+            "instructions": "Which category best describes the primary issue in this record?",
+            "criteria": {
+              "payment": "Payment timing or status",
+              "documents": "Missing or corrected supporting documents",
+              "identity": "Vendor identity or payment account identity"
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+          },
+          "urgency": {
+            "type": "score",
+            "instructions": "Rate only the urgency explicitly stated in the record.",
+            "criteria": [
+              "Explicitly no urgency or deadline",
+              "Soon, without an immediate deadline",
+              "Immediate action is explicitly requested"
+            ]
+          }
+        }
+      },
+      "targets": {
+        "route": "identity",
+        "intervention": "true",
+        "urgency": "2"
+      },
+      "expected_action": "urgent_review"
+    },
+    {
+      "id": "security_incidents-0",
+      "family": "security_incidents-0",
+      "workflow": "security_incidents",
+      "split": "smoke",
+      "request": {
+        "state": "An approved password reset completed. The record explicitly states no urgency.",
+        "questions": {
+          "route": {
+            "type": "choice",
+            "instructions": "Which category best describes the primary issue in this record?",
+            "criteria": {
+              "identity": "Login or credential activity",
+              "network": "Connections or traffic",
+              "process": "Executable or process activity"
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+          },
+          "urgency": {
+            "type": "score",
+            "instructions": "Rate only the urgency explicitly stated in the record.",
+            "criteria": [
+              "Explicitly no urgency or deadline",
+              "Soon, without an immediate deadline",
+              "Immediate action is explicitly requested"
+            ]
+          }
+        }
+      },
+      "targets": {
+        "route": "identity",
+        "intervention": "false",
+        "urgency": "0"
+      },
+      "expected_action": "route:identity"
+    },
+    {
+      "id": "security_incidents-1",
+      "family": "security_incidents-1",
+      "workflow": "security_incidents",
+      "split": "smoke",
+      "request": {
+        "state": "Unexpected outbound traffic needs investigation soon. The analyst does not request immediate human intervention.",
+        "questions": {
+          "route": {
+            "type": "choice",
+            "instructions": "Which category best describes the primary issue in this record?",
+            "criteria": {
+              "identity": "Login or credential activity",
+              "network": "Connections or traffic",
+              "process": "Executable or process activity"
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+          },
+          "urgency": {
+            "type": "score",
+            "instructions": "Rate only the urgency explicitly stated in the record.",
+            "criteria": [
+              "Explicitly no urgency or deadline",
+              "Soon, without an immediate deadline",
+              "Immediate action is explicitly requested"
+            ]
+          }
+        }
+      },
+      "targets": {
+        "route": "network",
+        "intervention": "false",
+        "urgency": "1"
+      },
+      "expected_action": "route:network"
+    },
+    {
+      "id": "security_incidents-2",
+      "family": "security_incidents-2",
+      "workflow": "security_incidents",
+      "split": "smoke",
+      "request": {
+        "state": "An unapproved process is encrypting files. The analyst explicitly requests immediate human intervention now.",
+        "questions": {
+          "route": {
+            "type": "choice",
+            "instructions": "Which category best describes the primary issue in this record?",
+            "criteria": {
+              "identity": "Login or credential activity",
+              "network": "Connections or traffic",
+              "process": "Executable or process activity"
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+          },
+          "urgency": {
+            "type": "score",
+            "instructions": "Rate only the urgency explicitly stated in the record.",
+            "criteria": [
+              "Explicitly no urgency or deadline",
+              "Soon, without an immediate deadline",
+              "Immediate action is explicitly requested"
+            ]
+          }
+        }
+      },
+      "targets": {
+        "route": "process",
+        "intervention": "true",
+        "urgency": "2"
+      },
+      "expected_action": "urgent_review"
+    },
+    {
+      "id": "agent_trace_observability-0",
+      "family": "agent_trace_observability-0",
+      "workflow": "agent_trace_observability",
+      "split": "smoke",
+      "request": {
+        "state": "The final answer has a harmless formatting typo. The feedback explicitly states no urgency.",
+        "questions": {
+          "route": {
+            "type": "choice",
+            "instructions": "Which category best describes the primary issue in this record?",
+            "criteria": {
+              "tool": "A tool invocation or tool result",
+              "answer": "The final answer to the user",
+              "permission": "Authorization for an action"
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+          },
+          "urgency": {
+            "type": "score",
+            "instructions": "Rate only the urgency explicitly stated in the record.",
+            "criteria": [
+              "Explicitly no urgency or deadline",
+              "Soon, without an immediate deadline",
+              "Immediate action is explicitly requested"
+            ]
+          }
+        }
+      },
+      "targets": {
+        "route": "answer",
+        "intervention": "false",
+        "urgency": "0"
+      },
+      "expected_action": "route:answer"
+    },
+    {
+      "id": "agent_trace_observability-1",
+      "family": "agent_trace_observability-1",
+      "workflow": "agent_trace_observability",
+      "split": "smoke",
+      "request": {
+        "state": "A read-only tool returned stale data. Please investigate soon; immediate human intervention is not requested.",
+        "questions": {
+          "route": {
+            "type": "choice",
+            "instructions": "Which category best describes the primary issue in this record?",
+            "criteria": {
+              "tool": "A tool invocation or tool result",
+              "answer": "The final answer to the user",
+              "permission": "Authorization for an action"
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+          },
+          "urgency": {
+            "type": "score",
+            "instructions": "Rate only the urgency explicitly stated in the record.",
+            "criteria": [
+              "Explicitly no urgency or deadline",
+              "Soon, without an immediate deadline",
+              "Immediate action is explicitly requested"
+            ]
+          }
+        }
+      },
+      "targets": {
+        "route": "tool",
+        "intervention": "false",
+        "urgency": "1"
+      },
+      "expected_action": "route:tool"
+    },
+    {
+      "id": "agent_trace_observability-2",
+      "family": "agent_trace_observability-2",
+      "workflow": "agent_trace_observability",
+      "split": "smoke",
+      "request": {
+        "state": "The trace says a destructive action lacked authorization. The reviewer explicitly requests immediate human intervention now.",
+        "questions": {
+          "route": {
+            "type": "choice",
+            "instructions": "Which category best describes the primary issue in this record?",
+            "criteria": {
+              "tool": "A tool invocation or tool result",
+              "answer": "The final answer to the user",
+              "permission": "Authorization for an action"
+            }
+          },
+          "intervention": {
+            "type": "noul",
+            "instructions": "Does the record explicitly request immediate human intervention? Treat a negated request as false."
+          },
+          "urgency": {
+            "type": "score",
+            "instructions": "Rate only the urgency explicitly stated in the record.",
+            "criteria": [
+              "Explicitly no urgency or deadline",
+              "Soon, without an immediate deadline",
+              "Immediate action is explicitly requested"
+            ]
+          }
+        }
+      },
+      "targets": {
+        "route": "permission",
+        "intervention": "true",
+        "urgency": "2"
+      },
+      "expected_action": "urgent_review"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Local developer API
 
-The API runs the published native checkpoint on your machine. It accepts image pixels, a short WAV recording, and question text, then returns named classification distributions, Boolean probabilities, numeric rubric scores, and ranked candidates in one response. It makes no calls to OpenAI, Claude, or Jev.
+The MiSO API runs the published native checkpoint on your machine. Model cards include a MiSO display name; historical `mmso-joint-v2` and `mmso-joint-v3` IDs remain stable. It accepts image pixels, a short WAV recording, and question text, then returns named classification distributions, Boolean probabilities, numeric rubric scores, and ranked candidates in one response. It makes no calls to OpenAI, Claude, or Jev.
 
 The API serves two explicit versions, both limited to a small vocabulary, eight spoken keywords, and generated 2×2 symbol panels. The newer **`mmso-joint-v3` scores 81.32% on familiar combinations and 66.99% on the known composition gap**, versus v2's 65.30%/47.14% on identical fresh examples. V2 remains the compatibility default. Arbitrary screenshots and speech can fit a file format without being understood. See the [current accuracy study](../reports/optimization-v1/README.md) and [historical v2 report](../reports/joint-v2/README.md).
 

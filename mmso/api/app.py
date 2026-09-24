@@ -71,7 +71,7 @@ def create_app(device="auto", api_key=None, *, registry=None):
             del app.state.runtime
             del app.state.runtimes
 
-    app = FastAPI(title="Multimodal System One Decisions", version="0.1.0",
+    app = FastAPI(title="MiSO Decisions", version="0.1.0",
         description="Experimental local audio/image/question classification. This is not an OpenAI, Claude, or Jev compatible server.",
         lifespan=lifespan)
     app.add_middleware(BodyLimitMiddleware)

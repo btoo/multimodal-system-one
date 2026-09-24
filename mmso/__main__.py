@@ -6,7 +6,7 @@ from .artifacts import ROOT, read_manifest, validate_manifest
 
 
 def main():
-    parser=argparse.ArgumentParser(description="Real-data evaluation controls for Multimodal System One")
+    parser=argparse.ArgumentParser(description="MiSO: Multimodal System One research and evaluation")
     commands=parser.add_subparsers(dest="command",required=True)
     p=commands.add_parser("prepare",help="Acquire pinned pilot data and write audited manifests")
     p.add_argument("suite",choices=["speech_keywords","sound_events","screen_grounding","all"])

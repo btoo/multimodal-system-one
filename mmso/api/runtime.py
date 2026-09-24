@@ -72,7 +72,8 @@ class NativeRuntime:
         self.lock = inference_lock if inference_lock is not None else threading.Lock()
 
     def model_card(self):
-        card = {"id": self.registration.id, "object": "model", "checkpoint_sha256": self.checkpoint_sha256,
+        card = {"id": self.registration.id, "display_name": "MiSO " + self.registration.id.rsplit("-", 1)[-1],
+                "object": "model", "checkpoint_sha256": self.checkpoint_sha256,
                 "config_sha256": self.config_sha256, "architecture": self.config["architecture"],
                 "parameters": sum(p.numel() for p in self.model.parameters()), "device": str(self.device),
                 "scope": self.registration.scope if self.registration.scope is not None else self.config["scope"], "status": "experimental",

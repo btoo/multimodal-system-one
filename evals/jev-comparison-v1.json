@@ -1,0 +1,65 @@
+{
+  "id": "miso-jev-comparison-v1",
+  "created": "2026-09-24",
+  "status": "comparison_preparation",
+  "miso_checkpoint": "mmso-joint-v3",
+  "jev_model": "jev-1.13.0",
+  "official_comparison_executed": false,
+  "tracks": [
+    {
+      "id": "typesafe-published-workflows",
+      "source": "https://evals.typesafe.ai/",
+      "workflows": ["security_incidents", "agent_trace_observability", "invoice_processing", "customer_service"],
+      "reference_kind": "vendor reference-model consensus",
+      "aggregation": "equal weight across four workflows, according to publisher",
+      "export_status": "Browsable examples verified; complete versioned cases, executable harness, reference tensors and scorer not located in the inspected public pages/repositories",
+      "execution_ready": false,
+      "miso_supported": false
+    },
+    {
+      "id": "independent-text-workflows",
+      "reference_kind": "human-adjudicated outcomes plus executable checks where possible",
+      "dataset_status": "not yet populated",
+      "execution_ready": false,
+      "miso_supported": false
+    },
+    {
+      "id": "native-multimodal",
+      "sources": ["https://github.com/likaixin2000/ScreenSpot-Pro-GUI-Grounding", "https://arxiv.org/abs/1804.03209"],
+      "existing_evidence": ["reports/optimization-v1/README.md", "docs/research/screen-grounding-v2.md"],
+      "jev_track": "fixed ASR/OCR or visual-description preprocessing plus Jev; measure preprocessing failures, latency and cost",
+      "oracle_transcript_track": "diagnostic ceiling only, distinct from deployable pipeline",
+      "direct_native_jev_support": false
+    }
+  ],
+  "engineering_smoke": {
+    "manifest": "evals/workflows/smoke-v1.json",
+    "purpose": "credential, primitive, cost, failure and policy plumbing only",
+    "eligible_for_frontier": false,
+    "eligible_for_training": false
+  },
+  "required_for_same_frontier": [
+    "same versioned cases and input information",
+    "same executable workflow and thresholds",
+    "same reference source and scoring implementation",
+    "same input track and preprocessing policy",
+    "same concurrency and client-visible latency boundary",
+    "complete results including unsupported inputs, failures and retries",
+    "actual API input usage or allocated self-hosted serving cost per completed workflow",
+    "separate quality-cost, quality-latency and joint Pareto analyses",
+    "paired family-level uncertainty intervals before declaring a gain"
+  ],
+  "test_firewall": {
+    "published_examples": "diagnosis only; never count as fresh confirmation",
+    "training": "separate licensed sources and development workflows",
+    "model_selection": "development only",
+    "calibration": "separate partition",
+    "confirmation": "fresh grouped cases; freeze checkpoint, prompts, policy and thresholds before opening labels"
+  },
+  "next_model_gate": {
+    "name": "MiSO language-capable candidate",
+    "requirements": ["general text tokenizer", "state/context input", "text-only and missing-modality support", "independent question outputs", "variable candidate semantics", "calibration evaluated separately"],
+    "approach": "Compare compact pretrained language backbones and direct typed decision heads before a larger multimodal training run",
+    "jev_internals_reproduced": false
+  }
+}
