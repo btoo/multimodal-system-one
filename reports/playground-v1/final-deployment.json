@@ -1,0 +1,13 @@
+{
+  "application_source_commit": "918624bba7ac508b465dbd4cc1cbadf495f35c70",
+  "deployment": "dpl_FLEijvEWigdHviabhVz41Hz2UXAk",
+  "url": "https://miso-playground-nine.vercel.app",
+  "old_results_unchanged_after_redeployment": true,
+  "final_deployment_new_run": {
+    "id": "wrun_01M3AG6GSESJM1DYG1HKRH5GDM",
+    "model": "jev-1.13.0",
+    "answers": 3,
+    "status": "completed"
+  },
+  "owner_session_verified": true
+}

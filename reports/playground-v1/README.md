@@ -27,3 +27,7 @@ The Workflow Next integration initially chose `.next/workflow-data`, which was c
 The build, type checks and four focused tests passed. The dependency audit reports zero known vulnerabilities after pinning patched, compatible transitive `undici` and `nanoid` versions. UI verification used the in-app browser on the local server and the production site. Media upload and JSON download controls are implemented; the recorded end-to-end media run used the shipped public sample files.
 
 See [architecture, setup, data handling and operating limits](../../docs/playground.md).
+
+![The published MiSO playground showing an actual native response](playground.png)
+
+The [final deployment check](final-deployment.json) also verifies a new Workflow run on the updated app and unchanged stored results across redeployment.
