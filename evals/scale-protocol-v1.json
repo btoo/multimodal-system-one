@@ -1,0 +1,41 @@
+{
+  "id": "native-scale-study-v1",
+  "frozen_on": "2026-09-24",
+  "motivation": "The exposed joint-v2 compositional failure motivates testing size separately from a shape/color visual inductive bias.",
+  "conditions": {
+    "scale-small-v1": {"width": 128, "layers": 2, "vision": "rgb"},
+    "scale-large-v1": {"width": 192, "layers": 3, "vision": "rgb"},
+    "scale-factorized-v1": {"width": 128, "layers": 2, "vision": "factorized"}
+  },
+  "training": {
+    "seed": 20260925,
+    "pairing_seed": 20260926,
+    "optimizer_steps": 8192,
+    "batch_size": 64,
+    "max_train_seconds_per_condition": 600,
+    "total_synchronized_training_seconds_cap": 1800,
+    "resample_pairs": true,
+    "audio_learning_rate": 0.0001,
+    "other_learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "gradient_clip": 1.0,
+    "initialization": "Same existing speech-CNN features; all other parameters initialized from one fixed seed; all trainable",
+    "data": "Exactly the existing 2048 training scenes, with independently resampled speech as in joint-v2; all held word/color tuples excluded"
+  },
+  "development": "New ID and compositional panels paired with existing dev recordings; select checkpoint by equal mean of six-family normalized NLL across ID and compositional slices",
+  "calibration": "New ID and compositional panels paired with existing calibration recordings; scalar temperature fitted after nomination",
+  "confirmation": {
+    "audio": "All 117 remaining recordings from 80 speakers absent from every previous baseline and joint manifest",
+    "panels": "One new ID panel and one new compositional panel per recording; deterministic independent seeds",
+    "scope": "Same-gap confirmation on fresh speakers/images. The held tuple identities were exposed in joint-v2, and are now in development; this is NOT a new-gap generalization claim.",
+    "opening": "Only after all three checkpoints and the development nomination are committed",
+    "evaluation": "Evaluate all three predeclared conditions once, retain every result",
+    "uncertainty": "Paired bootstrap over speakers, 2000 resamples, fixed seed 20260925; describes checkpoints, not training-seed variance"
+  },
+  "comparison": "Optimizer updates and sampled requests are matched, not FLOPs or time. Report parameters and actual synchronized training time separately. A time-capped incomplete run is retained and labelled unmatched.",
+  "frozen_reference": "Evaluate existing served joint-full-v2 on the same fresh confirmation rows after nomination, with its existing calibration temperature. It is not a new training or selection candidate.",
+  "promotion": "No automatic serving default promotion. A candidate needs positive compositional paired interval and no more than one percentage point ID regression against the matched small baseline; scope remains generated panels.",
+  "factorized_prior": "Fixed pixel-only dark-ink map (max RGB intensity <= 0.2 gives 1, >= 0.4 gives 0, linear between), shape CNN and separate spatially pooled RGB branch, concatenated into each tile token. Renderer-specific prior, not general segmentation and not a paper reproduction.",
+  "sources": ["https://arxiv.org/abs/2602.16689", "https://arxiv.org/abs/2007.06356"],
+  "limits": ["One seed per condition", "Real speech but generated 2x2 panels", "No paid APIs or new large downloads", "No claim to reproduce Jev or recursive self-improvement"]
+}

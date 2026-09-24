@@ -1,0 +1,27 @@
+{
+  "protocol_sha256": "fb4c803868e3c72c699098207b09aff33c4bd9bab757eefbd8ce7a13c3c083e0",
+  "manifest_sha256": "4d520fa33392dcd3c1f08abbbb8eaecd0256e58506e784897bc8dc80d9f2dad8",
+  "selected_run": "scale-small-v1",
+  "conditions": [
+    {
+      "run_id": "scale-small-v1",
+      "development_score": 0.9354171166559273,
+      "checkpoint_sha256": "9f452b659d9e3f878aaa2c927c8a440253c1714ce5f1ab7f64bd59d853de0903",
+      "matched_step_budget_completed": true
+    },
+    {
+      "run_id": "scale-large-v1",
+      "development_score": 0.949089932370128,
+      "checkpoint_sha256": "c7ec3a7523660aeede02ab8a439bc501fc22304a60c70d4b290ec1446f87f120",
+      "matched_step_budget_completed": true
+    },
+    {
+      "run_id": "scale-factorized-v1",
+      "development_score": 0.9459219082109299,
+      "checkpoint_sha256": "5e41bccc90c3edab32dabdb45faadfa9961dae884c67db9089da272e61f65951",
+      "matched_step_budget_completed": true
+    }
+  ],
+  "test_opened": false,
+  "serving_default_changed": false
+}
