@@ -49,6 +49,7 @@ for ext in ["svg", "png"]:
 plt.close(fig)
 
 lines = ["# Scale and visual-prior study", "",
+         "**Neither intervention established a compositional gain, and no new checkpoint replaces the served model.** The 2.42× larger model and the small factorized visual model finish near the matched small baseline. All three selected checkpoints lose about 20 percentage points of ID accuracy against the existing served checkpoint on identical fresh confirmation rows.", "",
          "Three predeclared training conditions compare model size with a targeted visual prior. The existing served checkpoint is a frozen reference on the same new confirmation examples.", "",
          "![Measured scale-study results](results.svg)", "",
          "| Condition | Parameters | Budget updates (selected checkpoint) | Train seconds | Selected epoch | ID accuracy | Composition accuracy |",
@@ -60,6 +61,7 @@ for name, label in zip(names, ["Small RGB", "Larger RGB", "Factorized shape/colo
     lines.append(f"| {label} | {r['parameters']:,} | {r['actual_steps']:,} ({r['selected_steps']:,}) | {seconds} | {r['selected_epoch']} | {a:.2%} | {b:.2%} |")
 lines += ["", f"Development nominated **{summary['selected_run']}** by mean normalized NLL across the ID and compositional development slices before confirmation was opened. Every condition is retained, including inferior or incomplete outcomes. The default served model remains `joint-full-v2`.", "",
           "The new training attempts each consume the same 8,192-update budget and sampled data stream. Development selects among epoch checkpoints, so selected weights may represent different numbers of updates, shown in parentheses. FLOPs and time are not matched. The older served checkpoint used a different seed, an ID-only selection objective, and more updates; it is an operational reference, not the matched size control.", "",
+          "The new selector chose early checkpoints because later training made the models increasingly overconfident on the known composition shift. The visual prior eventually improved ID development accuracy, but its shifted normalized NLL deteriorated. A color-invariant intermediate image view did not establish compositionally reliable final decisions. This does not prove scaling or factorization never helps; it is one bounded, single-seed outcome with this optimizer and representation.", "",
           "## Paired fixed-checkpoint differences", "",
           "| Candidate | Reference | Slice | Difference (percentage points) | Speaker-cluster 95% interval |",
           "|---|---|---|---:|---:|"]
@@ -73,6 +75,7 @@ lines += ["", "Intervals use 2,000 paired bootstrap resamples over 80 speaker cl
           "Confirmation uses 117 human recordings from 80 speakers absent from every previous manifest. Each recording has a new ID panel and a new panel containing held command/color combinations, for 702 primary questions per slice. Related questions and repeated recordings are not independent samples. All held tuples are excluded from training.", "",
           "**The composition gap is already known.** Its eight tuple identities were exposed by the earlier 45.66% failure and now appear in development. This test measures the same gap on fresh speakers/images, not transfer to previously unexamined gap identities. It contains generated panels, not real screenshots. The old real-screen grounding failure remains unresolved.", "",
           "The factorized visual encoder imposes a fixed dark-ink threshold suitable for this renderer. It separates a learned shape CNN from a spatially pooled color MLP. No transcript, scene metadata, symbolic labels, or oracle enters inference. This controlled prior is not a general segmentation model.", "",
+          "The next development question is how to train stable perception and cross-modal binding before committing more compute. Repeated development seeds and a perception/binding curriculum are testable follow-ups. A new real-screenshot confirmation set is still needed for browser claims; these results do not justify increasing production scope.", "",
           "## Evidence", "",
           "- [Design, sources and reproduction](../../docs/research/scale-study.md)",
           "- [Frozen protocol](../../evals/scale-protocol-v1.json) and [pre-test nomination](../../evals/scale-nomination-v1.json)",

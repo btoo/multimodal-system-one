@@ -58,3 +58,9 @@ uv run python scripts/check_scale_results.py
 ```
 
 Run IDs and final reports are immutable. Repeating the study requires a new version and fresh run IDs. Existing checkpoints and the serving default remain unchanged.
+
+## Recorded outcome
+
+All three attempts completed their 8,192-update budgets. Neither the 2.42× size increase nor the visual prior established a composition-accuracy improvement over the matched small baseline; both paired speaker intervals include zero. The stricter development objective selected early checkpoints because later training became overconfident under the known composition shift. On identical fresh confirmation rows, the existing served checkpoint retained about a 20-point ID accuracy advantage. The default therefore stays `joint-full-v2`. See the [measured report, complete comparisons and learning curves](../../reports/scale-v1/README.md).
+
+This is evidence to investigate optimization and cross-modal binding before spending more on scale. It is not a general conclusion that bigger models or separated visual features cannot work. One training seed, a fixed optimizer, and generated panels leave those broader questions open.

@@ -1,0 +1,239 @@
+{
+  "protocol_sha256": "fb4c803868e3c72c699098207b09aff33c4bd9bab757eefbd8ce7a13c3c083e0",
+  "manifest_sha256": "4d520fa33392dcd3c1f08abbbb8eaecd0256e58506e784897bc8dc80d9f2dad8",
+  "selected_run": "scale-small-v1",
+  "conditions": {
+    "scale-small-v1": {
+      "parameters": 668097,
+      "temperature": 1.0779995246822411,
+      "selected_epoch": 1,
+      "selected_steps": 256,
+      "actual_steps": 8192,
+      "train_seconds": 319.683408257406,
+      "selection_normalized_nll": 0.9354171166559273,
+      "by_slice": {
+        "in_distribution": {
+          "joint_macro_accuracy": 0.51994301994302,
+          "joint_macro_normalized_nll": 0.8890793868912216,
+          "joint_examples": 702
+        },
+        "paraphrase": {
+          "joint_macro_accuracy": 0.5227920227920227,
+          "joint_macro_normalized_nll": 0.8889843226697304,
+          "joint_examples": 702
+        },
+        "compositional": {
+          "joint_macro_accuracy": 0.47863247863247865,
+          "joint_macro_normalized_nll": 0.9311917611321849,
+          "joint_examples": 702
+        }
+      },
+      "checkpoint_sha256": "9f452b659d9e3f878aaa2c927c8a440253c1714ce5f1ab7f64bd59d853de0903"
+    },
+    "scale-large-v1": {
+      "parameters": 1616001,
+      "temperature": 1.3810413256419707,
+      "selected_epoch": 2,
+      "selected_steps": 512,
+      "actual_steps": 8192,
+      "train_seconds": 375.5192521313729,
+      "selection_normalized_nll": 0.949089932370128,
+      "by_slice": {
+        "in_distribution": {
+          "joint_macro_accuracy": 0.51994301994302,
+          "joint_macro_normalized_nll": 0.8818498084108328,
+          "joint_examples": 702
+        },
+        "paraphrase": {
+          "joint_macro_accuracy": 0.5227920227920227,
+          "joint_macro_normalized_nll": 0.8850994780960036,
+          "joint_examples": 702
+        },
+        "compositional": {
+          "joint_macro_accuracy": 0.4743589743589743,
+          "joint_macro_normalized_nll": 0.9719108644305173,
+          "joint_examples": 702
+        }
+      },
+      "checkpoint_sha256": "c7ec3a7523660aeede02ab8a439bc501fc22304a60c70d4b290ec1446f87f120"
+    },
+    "scale-factorized-v1": {
+      "parameters": 666769,
+      "temperature": 1.2748444281522358,
+      "selected_epoch": 2,
+      "selected_steps": 512,
+      "actual_steps": 8192,
+      "train_seconds": 330.6332645818766,
+      "selection_normalized_nll": 0.9459219082109299,
+      "by_slice": {
+        "in_distribution": {
+          "joint_macro_accuracy": 0.5213675213675214,
+          "joint_macro_normalized_nll": 0.8906490260287732,
+          "joint_examples": 702
+        },
+        "paraphrase": {
+          "joint_macro_accuracy": 0.5227920227920227,
+          "joint_macro_normalized_nll": 0.8941487720987563,
+          "joint_examples": 702
+        },
+        "compositional": {
+          "joint_macro_accuracy": 0.48148148148148145,
+          "joint_macro_normalized_nll": 0.946297234875176,
+          "joint_examples": 702
+        }
+      },
+      "checkpoint_sha256": "5e41bccc90c3edab32dabdb45faadfa9961dae884c67db9089da272e61f65951"
+    },
+    "scale-served-reference-v1": {
+      "parameters": 668097,
+      "temperature": 3.1478261296632617,
+      "selected_epoch": 33,
+      "selected_steps": 8448,
+      "actual_steps": 8822,
+      "train_seconds": null,
+      "selection_normalized_nll": null,
+      "by_slice": {
+        "in_distribution": {
+          "joint_macro_accuracy": 0.7250712250712251,
+          "joint_macro_normalized_nll": 0.5609751346930888,
+          "joint_examples": 702
+        },
+        "paraphrase": {
+          "joint_macro_accuracy": 0.7222222222222223,
+          "joint_macro_normalized_nll": 0.563483108237269,
+          "joint_examples": 702
+        },
+        "compositional": {
+          "joint_macro_accuracy": 0.45584045584045585,
+          "joint_macro_normalized_nll": 1.3167955849305908,
+          "joint_examples": 702
+        }
+      },
+      "checkpoint_sha256": "9fa7f2c3b129340977a7bf7413044b27d5a4fb4c55eec748df289f8bc122a343"
+    }
+  },
+  "paired_comparisons": {
+    "scale-small-v1": {
+      "scale-served-reference-v1": {
+        "in_distribution": {
+          "mean_percentage_points": -20.51282051282051,
+          "interval_percentage_points": [
+            -26.69753086419753,
+            -14.511302316399053
+          ],
+          "speaker_clusters": 80,
+          "bootstrap_resamples": 2000,
+          "method": "Paired speaker-cluster percentile bootstrap for fixed checkpoints; not training-seed variance"
+        },
+        "compositional": {
+          "mean_percentage_points": 2.2792022792022792,
+          "interval_percentage_points": [
+            -3.1423534189927635,
+            7.843725490196075
+          ],
+          "speaker_clusters": 80,
+          "bootstrap_resamples": 2000,
+          "method": "Paired speaker-cluster percentile bootstrap for fixed checkpoints; not training-seed variance"
+        }
+      }
+    },
+    "scale-large-v1": {
+      "scale-small-v1": {
+        "in_distribution": {
+          "mean_percentage_points": 0.0,
+          "interval_percentage_points": [
+            -0.6775067750677507,
+            0.7246376811594203
+          ],
+          "speaker_clusters": 80,
+          "bootstrap_resamples": 2000,
+          "method": "Paired speaker-cluster percentile bootstrap for fixed checkpoints; not training-seed variance"
+        },
+        "compositional": {
+          "mean_percentage_points": -0.4273504273504274,
+          "interval_percentage_points": [
+            -1.4008026287438053,
+            0.5748375812093945
+          ],
+          "speaker_clusters": 80,
+          "bootstrap_resamples": 2000,
+          "method": "Paired speaker-cluster percentile bootstrap for fixed checkpoints; not training-seed variance"
+        }
+      },
+      "scale-served-reference-v1": {
+        "in_distribution": {
+          "mean_percentage_points": -20.51282051282051,
+          "interval_percentage_points": [
+            -26.791367121974595,
+            -14.424974535268655
+          ],
+          "speaker_clusters": 80,
+          "bootstrap_resamples": 2000,
+          "method": "Paired speaker-cluster percentile bootstrap for fixed checkpoints; not training-seed variance"
+        },
+        "compositional": {
+          "mean_percentage_points": 1.8518518518518516,
+          "interval_percentage_points": [
+            -3.2745468682968686,
+            7.1821172660879125
+          ],
+          "speaker_clusters": 80,
+          "bootstrap_resamples": 2000,
+          "method": "Paired speaker-cluster percentile bootstrap for fixed checkpoints; not training-seed variance"
+        }
+      }
+    },
+    "scale-factorized-v1": {
+      "scale-small-v1": {
+        "in_distribution": {
+          "mean_percentage_points": 0.14245014245014245,
+          "interval_percentage_points": [
+            -0.45055282555282555,
+            0.8014112903225799
+          ],
+          "speaker_clusters": 80,
+          "bootstrap_resamples": 2000,
+          "method": "Paired speaker-cluster percentile bootstrap for fixed checkpoints; not training-seed variance"
+        },
+        "compositional": {
+          "mean_percentage_points": 0.2849002849002849,
+          "interval_percentage_points": [
+            -0.45464970809007504,
+            1.100661416913561
+          ],
+          "speaker_clusters": 80,
+          "bootstrap_resamples": 2000,
+          "method": "Paired speaker-cluster percentile bootstrap for fixed checkpoints; not training-seed variance"
+        }
+      },
+      "scale-served-reference-v1": {
+        "in_distribution": {
+          "mean_percentage_points": -20.37037037037037,
+          "interval_percentage_points": [
+            -26.537503221926283,
+            -14.511302316399053
+          ],
+          "speaker_clusters": 80,
+          "bootstrap_resamples": 2000,
+          "method": "Paired speaker-cluster percentile bootstrap for fixed checkpoints; not training-seed variance"
+        },
+        "compositional": {
+          "mean_percentage_points": 2.564102564102564,
+          "interval_percentage_points": [
+            -2.820621468926554,
+            7.989256198347106
+          ],
+          "speaker_clusters": 80,
+          "bootstrap_resamples": 2000,
+          "method": "Paired speaker-cluster percentile bootstrap for fixed checkpoints; not training-seed variance"
+        }
+      }
+    }
+  },
+  "fresh_confirmation_speakers": 80,
+  "fresh_confirmation_recordings": 117,
+  "composition_gap_previously_exposed": true,
+  "serving_default_changed": false,
+  "training_seeds_per_condition": 1,
+  "real_browser_generalization_established": false
+}
