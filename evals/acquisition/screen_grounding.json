@@ -1,0 +1,25 @@
+{
+  "dataset": "screen_grounding",
+  "source": {
+    "repository": "https://huggingface.co/datasets/likaixin/ScreenSpot-Pro",
+    "revision": "210e78d3844251110bff86c95835ebd37a6930fa",
+    "card_sha256": "76ae2231564fe84af029f8625c02d9cd7fb6cf85c5f8af1b2a2593e2107719d9",
+    "license": "Author dataset card: MIT",
+    "split_policy": "24-case app/type-stratified external implementation probe; no training/tuning, not full benchmark",
+    "scope": "Six apps; 2 icon and 2 text cases each. Not browser workflows or screen-state classification."
+  },
+  "manifest_sha256": "1dc26e4db232c1eb7ac499ea3afcbf3c0c29e6f9389da68933e2b4313ba29420",
+  "audit": {
+    "examples": 24,
+    "splits": {
+      "external_probe": 24
+    },
+    "groups": 24,
+    "unique_media_hashes": 24,
+    "support": {},
+    "media_verified": true,
+    "group_and_hash_disjoint": true
+  },
+  "selection": "Deterministic pilot; split before sample selection. See adapter source.",
+  "official_benchmark_result": false
+}

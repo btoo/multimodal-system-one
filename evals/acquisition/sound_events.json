@@ -1,0 +1,78 @@
+{
+  "dataset": "sound_events",
+  "source": {
+    "repository": "https://github.com/karolpiczak/ESC-50",
+    "revision": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6",
+    "metadata_sha256": "ca660da60191a97de289983a05821c9382d852a38a2ba8428980816b68cf6246",
+    "license_sha256": "f6aec3a3283a2efdcbb1feff334adad7ab17c097bdec0cbb4eebdb9e16886074",
+    "license": "ESC-10 subset marked CC BY in source README; per-clip notices retained locally",
+    "split_policy": "Preserved source-recording folds: 1+2 train, 3 dev, 4 calibration, 5 test; not five-fold CV",
+    "scope": "Single-label environmental sound control; not overlapping-event or streaming evaluation"
+  },
+  "manifest_sha256": "102ff7eb2b768225c8887d94008b93247205879bc4463eb2641eb059d6f6f461",
+  "audit": {
+    "examples": 400,
+    "splits": {
+      "train": 160,
+      "dev": 80,
+      "calibration": 80,
+      "test": 80
+    },
+    "groups": 304,
+    "unique_media_hashes": 400,
+    "support": {
+      "train": {
+        "dog": 16,
+        "chainsaw": 16,
+        "crackling_fire": 16,
+        "helicopter": 16,
+        "rain": 16,
+        "crying_baby": 16,
+        "clock_tick": 16,
+        "sneezing": 16,
+        "rooster": 16,
+        "sea_waves": 16
+      },
+      "dev": {
+        "crackling_fire": 8,
+        "rooster": 8,
+        "chainsaw": 8,
+        "rain": 8,
+        "dog": 8,
+        "sneezing": 8,
+        "clock_tick": 8,
+        "sea_waves": 8,
+        "helicopter": 8,
+        "crying_baby": 8
+      },
+      "calibration": {
+        "helicopter": 8,
+        "chainsaw": 8,
+        "sneezing": 8,
+        "rain": 8,
+        "rooster": 8,
+        "crackling_fire": 8,
+        "sea_waves": 8,
+        "crying_baby": 8,
+        "clock_tick": 8,
+        "dog": 8
+      },
+      "test": {
+        "crying_baby": 8,
+        "chainsaw": 8,
+        "helicopter": 8,
+        "rain": 8,
+        "crackling_fire": 8,
+        "sneezing": 8,
+        "rooster": 8,
+        "sea_waves": 8,
+        "clock_tick": 8,
+        "dog": 8
+      }
+    },
+    "media_verified": true,
+    "group_and_hash_disjoint": true
+  },
+  "selection": "Deterministic pilot; split before sample selection. See adapter source.",
+  "official_benchmark_result": false
+}

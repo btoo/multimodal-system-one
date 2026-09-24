@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "real-data-controls-v1",
+  "purpose": "Implementation baseline; no architecture or hyperparameter search",
+  "frozen_before_model_runs": true,
+  "audio": {
+    "datasets": ["speech_keywords", "sound_events"],
+    "run_ids": ["speech-cnn-v1", "sounds-cnn-v1"],
+    "architecture": "AudioCNN-v1",
+    "seed": 20260923,
+    "max_epochs": 16,
+    "max_synchronized_training_seconds_per_dataset": 120,
+    "batch_size": 32,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "selection": "Lowest development NLL within fixed training budget",
+    "calibration": "One scalar temperature fitted to calibration split only",
+    "test": "Evaluate frozen selected checkpoint once; do not tune from outcomes",
+    "latency_examples": 32,
+    "output_head": "Mutually exclusive class softmax; no overlapping-event claim"
+  },
+  "screen": {
+    "run_id": "screens-clip-v1",
+    "examples": 24,
+    "selection": "Two text and two icon examples from each of six fixed apps, hashed IDs",
+    "baselines": ["screen center", "fixed-grid CLIP ranking", "separate oracle-crop type classification"],
+    "clip_model": "openai/clip-vit-base-patch32",
+    "clip_revision": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+    "grid_columns": 6,
+    "grid_rows": 4,
+    "grounding_inputs": ["image", "instruction"],
+    "crop_type_inputs": ["oracle target crop"],
+    "crop_type_prompts": ["a text label in a computer interface", "a graphical icon in a computer interface"],
+    "scope": "Diagnostic external probe, not an official full benchmark or final model acceptance set"
+  },
+  "failure_policy": "Fix implementation errors with regression checks. Preserve any completed result; use a new run ID for reruns. Do not tune to held-out scores.",
+  "remote_model_api_calls": 0,
+  "joint_model_training": false,
+  "human_audio_collection": false
+}

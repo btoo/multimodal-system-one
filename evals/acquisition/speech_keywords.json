@@ -1,0 +1,69 @@
+{
+  "dataset": "speech_keywords",
+  "source": {
+    "url": "https://storage.googleapis.com/download.tensorflow.org/data/mini_speech_commands.zip",
+    "archive_sha256": "49650f2341b26d886b46b3f4fb8fed59e30300b17550f1ee4a768b3106cf93a0",
+    "archive_md5": "4b8a67bae2973844e84fa7ac988d1a44",
+    "license": "CC BY 4.0; source notice retained locally",
+    "split_policy": "Custom SHA256-speaker split 70/10/10/10; per-class caps 256/32/32/32; not official splits",
+    "scope": "8-word recognition; does not measure sentence intent or unknown commands"
+  },
+  "manifest_sha256": "54d69b6c4a8dd93575f5f6ec08778c362c0a3ddf56cde588fc970bf3ba1871fc",
+  "audit": {
+    "examples": 2816,
+    "splits": {
+      "train": 2048,
+      "dev": 256,
+      "calibration": 256,
+      "test": 256
+    },
+    "groups": 1283,
+    "unique_media_hashes": 2814,
+    "support": {
+      "train": {
+        "down": 256,
+        "go": 256,
+        "left": 256,
+        "no": 256,
+        "right": 256,
+        "stop": 256,
+        "up": 256,
+        "yes": 256
+      },
+      "dev": {
+        "down": 32,
+        "go": 32,
+        "left": 32,
+        "no": 32,
+        "right": 32,
+        "stop": 32,
+        "up": 32,
+        "yes": 32
+      },
+      "calibration": {
+        "down": 32,
+        "go": 32,
+        "left": 32,
+        "no": 32,
+        "right": 32,
+        "stop": 32,
+        "up": 32,
+        "yes": 32
+      },
+      "test": {
+        "down": 32,
+        "go": 32,
+        "left": 32,
+        "no": 32,
+        "right": 32,
+        "stop": 32,
+        "up": 32,
+        "yes": 32
+      }
+    },
+    "media_verified": true,
+    "group_and_hash_disjoint": true
+  },
+  "selection": "Deterministic pilot; split before sample selection. See adapter source.",
+  "official_benchmark_result": false
+}
