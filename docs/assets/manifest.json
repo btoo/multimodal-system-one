@@ -1,0 +1,88 @@
+{
+  "model_results": false,
+  "figures": {
+    "overview": {
+      "kind": "design",
+      "description": "Proposed multimodal prediction and policy separation.",
+      "svg_sha256": "74243b8dacdb4f7fc3e3c430015ea1139d0e70ba12e70a33c8b122e06fdd93d1"
+    },
+    "fusion-families": {
+      "kind": "design",
+      "description": "Four architecture families to compare under the same contract.",
+      "svg_sha256": "48e8c2b937a0ebefcd161e6d8ab8ef46d03888594d0211e991577164d58fd726"
+    },
+    "architecture": {
+      "kind": "design",
+      "description": "Proposed joint transformer and independent semantic candidate scoring.",
+      "svg_sha256": "774d05d0d176a819190ea4e9694176e82e3c1001892ca0b2b326a93849419f4d"
+    },
+    "candidate-equivariance": {
+      "kind": "analytic",
+      "description": "Softmax values of fixed illustrative logits; not model predictions.",
+      "svg_sha256": "7b4fe4e6e59df99cff29a00b9eba1a1f13bf91b7c7d45724914256442745ba6c"
+    },
+    "attention-scaling": {
+      "kind": "analytic",
+      "description": "Pair counts: 6*N^2 versus N*32+6*32^2+8*32. Not a hardware benchmark.",
+      "svg_sha256": "33468e316939ded5df839aff5a975a5530c8242c77d07462647f1ae4812c3695"
+    },
+    "proper-scoring": {
+      "kind": "analytic",
+      "description": "True q=.7; log/Brier regret is minimized at p=q; sampled correctness reward is maximized at p=1.",
+      "svg_sha256": "9e6f1fb0120ef9e36dbbc5ab4a9f372a97c631371dea526451281c17e3933fa5"
+    },
+    "calibration": {
+      "kind": "simulation",
+      "description": "Seed 20260923; q~Beta(2,2); y~Bernoulli(q); raw=sigmoid(2*logit(q)); corrected=q.",
+      "bin_counts": {
+        "raw": [
+          6355,
+          4092,
+          3416,
+          3127,
+          3077,
+          2980,
+          3198,
+          3440,
+          4164,
+          6151
+        ],
+        "corrected": [
+          1095,
+          3128,
+          4462,
+          5419,
+          5963,
+          5946,
+          5447,
+          4477,
+          2987,
+          1076
+        ]
+      },
+      "samples": 40000,
+      "seed": 20260923,
+      "svg_sha256": "18728a654a176504c6e22be7da4d7f81e9b466dd1d9d0faffd045f0a4e8516e1"
+    },
+    "counterfactuals": {
+      "kind": "design",
+      "description": "Hand-built task illustrations with deterministic scene-oracle labels.",
+      "svg_sha256": "48d86e4b0b85bfec588f1ed4314e2c97e07b2bccd3d62b5bb86c6a8adb61b0f8"
+    },
+    "research-loop": {
+      "kind": "design",
+      "description": "Proposed evidence-driven population search; no loop has executed.",
+      "svg_sha256": "f77b0dd5133bbf7e55ec128e3f92636416118368ed9960a290b0c72e4d123a55"
+    },
+    "evaluation-firewall": {
+      "kind": "design",
+      "description": "Four distinct split roles with a one-way model-selection flow.",
+      "svg_sha256": "b27e0578ae278e3d0a19718bb142f07af55f051b9c505fc1d11bf32914bb9593"
+    },
+    "two-level-research": {
+      "kind": "design",
+      "description": "Proposed separation of model optimization and later research-policy optimization.",
+      "svg_sha256": "be3375a87ef27e22cde297a8440c87574ebf8542cfbaf09cca955a44502511fe"
+    }
+  }
+}

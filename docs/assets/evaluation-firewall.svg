@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="576pt" viewBox="0 0 1008 576" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 576 
+L 1008 576 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #f8fafc"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 49.32 348.12 
+L 232.92 348.12 
+Q 241.56 348.12 241.56 339.48 
+L 241.56 160.92 
+Q 241.56 152.28 232.92 152.28 
+L 49.32 152.28 
+Q 40.68 152.28 40.68 160.92 
+L 40.68 339.48 
+Q 40.68 348.12 49.32 348.12 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #dff2ed; stroke: #007e78; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 290.52 348.12 
+L 474.12 348.12 
+Q 482.76 348.12 482.76 339.48 
+L 482.76 160.92 
+Q 482.76 152.28 474.12 152.28 
+L 290.52 152.28 
+Q 281.88 152.28 281.88 160.92 
+L 281.88 339.48 
+Q 281.88 348.12 290.52 348.12 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #e6eefc; stroke: #2e62bc; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 531.72 348.12 
+L 715.32 348.12 
+Q 723.96 348.12 723.96 339.48 
+L 723.96 160.92 
+Q 723.96 152.28 715.32 152.28 
+L 531.72 152.28 
+Q 523.08 152.28 523.08 160.92 
+L 523.08 339.48 
+Q 523.08 348.12 531.72 348.12 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #fff0d9; stroke: #b26614; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 772.92 348.12 
+L 956.52 348.12 
+Q 965.16 348.12 965.16 339.48 
+L 965.16 160.92 
+Q 965.16 152.28 956.52 152.28 
+L 772.92 152.28 
+Q 764.28 152.28 764.28 160.92 
+L 764.28 339.48 
+Q 764.28 348.12 772.92 348.12 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #f0e9f7; stroke: #7850a8; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 244.039658 252 
+Q 261.360533 252 276.892553 252 
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 270.892553 249 
+L 276.892553 252 
+L 270.892553 255 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #506477; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 485.239658 252 
+Q 502.560533 252 518.092553 252 
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 512.092553 249 
+L 518.092553 252 
+L 512.092553 255 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #506477; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 726.439658 252 
+Q 743.760533 252 759.292553 252 
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 753.292553 249 
+L 759.292553 252 
+L 753.292553 255 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #506477; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #007e78" x="39.6" y="36.397656" transform="rotate(-0 39.6 36.397656)">10 / EVALUATION DESIGN</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="39.6" y="77.236406" transform="rotate(-0 39.6 77.236406)">Four data roles. Four different permissions.</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="106.278281" transform="rotate(-0 39.6 106.278281)">Scene families are separated before rendering, paraphrasing, or candidate generation</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="56.16" y="180.516953" transform="rotate(-0 56.16 180.516953)">TRAIN</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(56.16 210.450313)">Update model weights</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(56.16 226.400313)">Generate learning examples</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="297.36" y="180.516953" transform="rotate(-0 297.36 180.516953)">DEVELOPMENT</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(297.36 210.450313)">Compare hypotheses</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(297.36 227.465938)">Choose a model</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="538.56" y="180.516953" transform="rotate(-0 538.56 180.516953)">CALIBRATION</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(538.56 210.450313)">Fit temperature</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(538.56 227.465938)">Set decision thresholds</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="779.76" y="180.516953" transform="rotate(-0 779.76 180.516953)">FINAL TEST</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(779.76 210.450313)">Report frozen decisions</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(779.76 226.400313)">No tuning feedback</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #007e78" x="46.8" y="414" transform="rotate(-0 46.8 414)">Optimize</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #2e62bc" x="288" y="414" transform="rotate(-0 288 414)">Select</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #b26614" x="529.2" y="414" transform="rotate(-0 529.2 414)">Adjust probabilities</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #7850a8" x="770.4" y="414" transform="rotate(-0 770.4 414)">Measure transfer</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="46.8" y="489.6" transform="rotate(-0 46.8 489.6)">A final test used to revise the design becomes development evidence for the next campaign.</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="559.158047" transform="rotate(-0 39.6 559.158047)">Procedural separation only. A file named 'test' is not a security boundary, and repeated selection can still overfit.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p1691f1588b">
+   <rect x="0" y="0" width="1008" height="576"/>
+  </clipPath>
+ </defs>
+</svg>

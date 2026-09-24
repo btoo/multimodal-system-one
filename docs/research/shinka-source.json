@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/SakanaAI/ShinkaEvolve",
+  "commit": "9912af12d423504b8d580f4179fd15f5f88b8c50",
+  "commit_date": "2026-08-21T15:07:37+02:00",
+  "inspected_on": "2026-09-23",
+  "files": {
+    "README.md": "59479b30a6292024ee0d32ccf156e96539d7221ca259402b1dc41aa59ebb666c",
+    "pyproject.toml": "33660cab1b163f95e190105b2720b2b7a75e27cdb09bc385f60b5287fee83095",
+    "docs/configuration.md": "2e50d389f240dcbca978234f1855b298c277e5ea90869d45a95361f03acae1a5",
+    "shinka/core/novelty_judge.py": "5369cb0665883f6e4395c3d9825e7668a2aa14d89f5382a8ba82824053f2e60a"
+  },
+  "use": "Runner candidate and design reference. Source-inspected only; not installed or executed."
+}

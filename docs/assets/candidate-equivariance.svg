@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="576pt" viewBox="0 0 1008 576" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 576 
+L 1008 576 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #f8fafc"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 144 244.8 
+L 335.589395 244.8 
+L 335.589395 207.36 
+L 144 207.36 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #ba4563; stroke: #ba4563; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 144 324 
+L 214.4818 324 
+L 214.4818 286.56 
+L 144 286.56 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #2e62bc; stroke: #2e62bc; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 144 403.2 
+L 169.928805 403.2 
+L 169.928805 365.76 
+L 144 365.76 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #007e78; stroke: #007e78; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 648 244.8 
+L 673.928805 244.8 
+L 673.928805 207.36 
+L 648 207.36 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #007e78; stroke: #007e78; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 648 324 
+L 839.589395 324 
+L 839.589395 286.56 
+L 648 286.56 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #ba4563; stroke: #ba4563; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 648 403.2 
+L 718.4818 403.2 
+L 718.4818 365.76 
+L 648 365.76 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #2e62bc; stroke: #2e62bc; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 437.001526 298.8 
+Q 477.001494 298.8 515.212609 298.8 
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #007e78; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 509.212609 295.8 
+L 515.212609 298.8 
+L 509.212609 301.8 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #007e78; stroke: #007e78; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #007e78" x="39.6" y="36.397656" transform="rotate(-0 39.6 36.397656)">04 / A TESTABLE INVARIANT</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="39.6" y="77.236406" transform="rotate(-0 39.6 77.236406)">Reordering answers must only reorder probabilities</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="106.278281" transform="rotate(-0 39.6 106.278281)">Illustrative logits [3, 2, 1] · deterministic inference · candidate IDs carry no evidence</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="72" y="162" transform="rotate(-0 72 162)">Original candidate order</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="72" y="231.84" transform="rotate(-0 72 231.84)">red</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="341.349395" y="229.197188" transform="rotate(-0 341.349395 229.197188)">0.665</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="72" y="311.04" transform="rotate(-0 72 311.04)">blue</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="220.2418" y="308.397188" transform="rotate(-0 220.2418 308.397188)">0.245</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="72" y="390.24" transform="rotate(-0 72 390.24)">green</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="175.688805" y="387.597188" transform="rotate(-0 175.688805 387.597188)">0.090</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="576" y="162" transform="rotate(-0 576 162)">Permuted candidate order</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="576" y="231.84" transform="rotate(-0 576 231.84)">green</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="679.688805" y="229.197188" transform="rotate(-0 679.688805 229.197188)">0.090</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="576" y="311.04" transform="rotate(-0 576 311.04)">red</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="845.349395" y="308.397188" transform="rotate(-0 845.349395 308.397188)">0.665</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="576" y="390.24" transform="rotate(-0 576 390.24)">blue</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="724.2418" y="387.597188" transform="rotate(-0 724.2418 387.597188)">0.245</text>
+   </g>
+   <g id="text_18">
+    <!-- $p(x,q,\pi C)=\pi p(x,q,C)$ -->
+    <g style="fill: #007e78" transform="translate(375.545 482.4)">
+     <text>
+      <tspan x="0" y="-0.546875" style="font-style: oblique; font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">p</tspan>
+      <tspan x="23.572754" y="-0.546875" style="font-style: oblique; font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">x</tspan>
+      <tspan x="48.976074" y="-0.546875" style="font-style: oblique; font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">q</tspan>
+      <tspan x="75.367676" y="-0.546875" style="font-style: oblique; font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">π</tspan>
+      <tspan x="89.214844" y="-0.546875" style="font-style: oblique; font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">C</tspan>
+      <tspan x="142.480957" y="-0.546875" style="font-style: oblique; font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">π</tspan>
+      <tspan x="156.328125" y="-0.546875" style="font-style: oblique; font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">p</tspan>
+      <tspan x="179.900879" y="-0.546875" style="font-style: oblique; font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">x</tspan>
+      <tspan x="205.304199" y="-0.546875" style="font-style: oblique; font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">q</tspan>
+      <tspan x="231.695801" y="-0.546875" style="font-style: oblique; font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">C</tspan>
+      <tspan x="14.599609" y="-0.546875" style="font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">(</tspan>
+      <tspan x="37.184082" y="-0.546875" style="font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">,</tspan>
+      <tspan x="63.575684" y="-0.546875" style="font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">,</tspan>
+      <tspan x="105.274414" y="-0.546875" style="font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">)</tspan>
+      <tspan x="118.728516" y="-0.546875" style="font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">=</tspan>
+      <tspan x="170.927734" y="-0.546875" style="font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">(</tspan>
+      <tspan x="193.512207" y="-0.546875" style="font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">,</tspan>
+      <tspan x="219.903809" y="-0.546875" style="font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">,</tspan>
+      <tspan x="247.755371" y="-0.546875" style="font-size: 23px; font-family: 'DejaVu Sans'; fill: #007e78">)</tspan>
+     </text>
+    </g>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="559.158047" transform="rotate(-0 39.6 559.158047)">The same candidate set is assumed. Adding candidates changes normalization; ties need order-independent handling.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p1691f1588b">
+   <rect x="0" y="0" width="1008" height="576"/>
+  </clipPath>
+ </defs>
+</svg>

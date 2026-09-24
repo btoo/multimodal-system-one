@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="576pt" viewBox="0 0 1008 576" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 576 
+L 1008 576 
+L 1008 0 
+L 0 0 
+z
+" style="fill: #f8fafc"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 52.92 290.52 
+L 263.88 290.52 
+Q 272.52 290.52 272.52 281.88 
+L 272.52 182.52 
+Q 272.52 173.88 263.88 173.88 
+L 52.92 173.88 
+Q 44.28 173.88 44.28 182.52 
+L 44.28 281.88 
+Q 44.28 290.52 52.92 290.52 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #f0e9f7; stroke: #7850a8; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 366.12 290.52 
+L 613.08 290.52 
+Q 621.72 290.52 621.72 281.88 
+L 621.72 182.52 
+Q 621.72 173.88 613.08 173.88 
+L 366.12 173.88 
+Q 357.48 173.88 357.48 182.52 
+L 357.48 281.88 
+Q 357.48 290.52 366.12 290.52 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #f0e9f7; stroke: #7850a8; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 715.32 290.52 
+L 955.08 290.52 
+Q 963.72 290.52 963.72 281.88 
+L 963.72 182.52 
+Q 963.72 173.88 955.08 173.88 
+L 715.32 173.88 
+Q 706.68 173.88 706.68 182.52 
+L 706.68 281.88 
+Q 706.68 290.52 715.32 290.52 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #fff0d9; stroke: #b26614; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 275.001526 230.4 
+Q 315.001494 230.4 353.212609 230.4 
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 347.212609 227.4 
+L 353.212609 230.4 
+L 347.212609 233.4 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #506477; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 624.201526 230.4 
+Q 664.201494 230.4 702.412609 230.4 
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 696.412609 227.4 
+L 702.412609 230.4 
+L 696.412609 233.4 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #506477; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 52.92 492.12 
+L 263.88 492.12 
+Q 272.52 492.12 272.52 483.48 
+L 272.52 384.12 
+Q 272.52 375.48 263.88 375.48 
+L 52.92 375.48 
+Q 44.28 375.48 44.28 384.12 
+L 44.28 483.48 
+Q 44.28 492.12 52.92 492.12 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #dff2ed; stroke: #007e78; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 366.12 492.12 
+L 613.08 492.12 
+Q 621.72 492.12 621.72 483.48 
+L 621.72 384.12 
+Q 621.72 375.48 613.08 375.48 
+L 366.12 375.48 
+Q 357.48 375.48 357.48 384.12 
+L 357.48 483.48 
+Q 357.48 492.12 366.12 492.12 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #dff2ed; stroke: #007e78; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 715.32 492.12 
+L 955.08 492.12 
+Q 963.72 492.12 963.72 483.48 
+L 963.72 384.12 
+Q 963.72 375.48 955.08 375.48 
+L 715.32 375.48 
+Q 706.68 375.48 706.68 384.12 
+L 706.68 483.48 
+Q 706.68 492.12 715.32 492.12 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #e6eefc; stroke: #2e62bc; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 275.001526 432 
+Q 315.001494 432 353.212609 432 
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 347.212609 429 
+L 353.212609 432 
+L 347.212609 435 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #506477; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 624.201526 432 
+Q 664.201494 432 702.412609 432 
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 696.412609 429 
+L 702.412609 432 
+L 696.412609 435 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #506477; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 154.8 293.001526 
+Q 154.8 333.001494 154.8 371.212609 
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #7850a8; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 157.8 365.212609 
+L 154.8 371.212609 
+L 151.8 365.212609 
+z
+" clip-path="url(#p1691f1588b)" style="fill: #7850a8; stroke: #7850a8; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #007e78" x="39.6" y="36.397656" transform="rotate(-0 39.6 36.397656)">11 / RESEARCH ABOUT RESEARCH</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="39.6" y="77.236406" transform="rotate(-0 39.6 77.236406)">A better model is not yet a better researcher</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="106.278281" transform="rotate(-0 39.6 106.278281)">Two separately versioned objects · two evaluation suites · resource accounting at both levels</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="59.76" y="202.877813" transform="rotate(-0 59.76 202.877813)">Research policy φ</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(59.76 232.050313)">Proposal · selection · analysis</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(59.76 249.065938)">Later: editable method</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="372.96" y="202.877813" transform="rotate(-0 372.96 202.877813)">New task-suite trials</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(372.96 232.050313)">Compare policy versions</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(372.96 248.000313)">Matched total budgets</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="722.16" y="202.877813" transform="rotate(-0 722.16 202.877813)">Method transfer check</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(722.16 232.050313)">More discovery per budget?</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(722.16 248.000313)">Promote only with evidence</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="59.76" y="404.587188" transform="rotate(-0 59.76 404.587188)">Candidate model θ</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(59.76 433.650313)">Architecture · loss · training</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(59.76 449.600313)">First implementation target</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="372.96" y="404.477813" transform="rotate(-0 372.96 404.477813)">Model experiments</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(372.96 434.715937)">Train on controlled scenes</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(372.96 449.600313)">Score on fixed development</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="722.16" y="404.477813" transform="rotate(-0 722.16 404.477813)">Model transfer check</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(722.16 434.715937)">New combinations and seeds</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(722.16 449.600313)">Final quality and calibration</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #7850a8" x="176.4" y="339.84" transform="rotate(-0 176.4 339.84)">guides</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="559.158047" transform="rotate(-0 39.6 559.158047)">The first campaign holds φ fixed. Its optional evolution needs a separate budget and a held-out family of tasks.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p1691f1588b">
+   <rect x="0" y="0" width="1008" height="576"/>
+  </clipPath>
+ </defs>
+</svg>

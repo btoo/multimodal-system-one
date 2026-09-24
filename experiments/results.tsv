@@ -1,0 +1,1 @@
+run_id	campaign_id	parent_id	code_sha	config_sha	evaluator_sha	seed	status	macro_nll_norm	accuracy	brier	train_seconds	total_seconds	p95_ms	process_rss_gib	mps_driver_gib	proposer_tokens	proposer_cost_usd	analysis_path
