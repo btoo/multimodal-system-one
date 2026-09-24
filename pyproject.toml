@@ -1,0 +1,13 @@
+[project]
+name = "multimodal-system-one"
+version = "0.0.1"
+description = "Research and experimental design for a small native multimodal decision model"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+docs = ["matplotlib>=3.10,<4"]
+research = ["beautifulsoup4>=4.13,<5", "pypdf>=6,<7"]
+
+[tool.uv]
+package = false
