@@ -1,0 +1,259 @@
+{
+  "kind": "varied_confirmation_http_benchmark",
+  "model": "mmso-joint-v3",
+  "model_card": {
+    "id": "mmso-joint-v3",
+    "object": "model",
+    "checkpoint_sha256": "4284d30920615018b500716d406236d919f5e38e268fdc5490c6f559af612bfa",
+    "config_sha256": "c61ae17776932f842c0c03d67e740e252e82f9bc4b511cb7349e05dc9b82d94a",
+    "architecture": "native-decision-v1",
+    "parameters": 668097,
+    "device": "cpu",
+    "scope": "Eight human spoken keywords and generated 2x2 panels; training-only primitive heads discarded for inference",
+    "status": "experimental",
+    "capabilities": {
+      "input_modalities": [
+        "image",
+        "audio",
+        "text"
+      ],
+      "output_types": [
+        "choice",
+        "noul",
+        "score",
+        "ranking"
+      ],
+      "required_media": {
+        "image": 1,
+        "audio": 1
+      },
+      "text_role": "Each text block supplies a referenced question; no chat history or free context",
+      "image": {
+        "media_types": [
+          "image/png",
+          "image/jpeg"
+        ],
+        "max_bytes": 2097152,
+        "max_pixels": 4194304,
+        "max_edge": 4096,
+        "model_size": [
+          128,
+          128
+        ],
+        "layout": "generated 2x2 symbol panel",
+        "animation": false
+      },
+      "audio": {
+        "media_types": [
+          "audio/wav"
+        ],
+        "encoding": "PCM16",
+        "channels": 1,
+        "sample_rates": [
+          8000,
+          16000,
+          22050,
+          24000,
+          44100,
+          48000
+        ],
+        "max_bytes": 131072,
+        "max_seconds": 1.0,
+        "model_sample_rate": 16000,
+        "streaming": false,
+        "words": [
+          "down",
+          "go",
+          "left",
+          "no",
+          "right",
+          "stop",
+          "up",
+          "yes"
+        ]
+      },
+      "text": {
+        "vocabulary": [
+          "audio",
+          "blue",
+          "bottom",
+          "color",
+          "command",
+          "contains",
+          "does",
+          "down",
+          "from",
+          "go",
+          "green",
+          "in",
+          "is",
+          "left",
+          "marks",
+          "missing",
+          "no",
+          "not",
+          "of",
+          "on",
+          "opposite",
+          "position",
+          "present",
+          "red",
+          "represent",
+          "right",
+          "screen",
+          "spoken",
+          "stop",
+          "surrounds",
+          "symbol",
+          "the",
+          "top",
+          "up",
+          "visible",
+          "what",
+          "where",
+          "which",
+          "word",
+          "yellow",
+          "yes"
+        ],
+        "question_max_tokens": 24,
+        "candidate_max_tokens": 8,
+        "max_questions": 32,
+        "candidate_count": [
+          2,
+          32
+        ],
+        "tokenizer": "lowercase ASCII words; punctuation is ignored"
+      },
+      "remote_media_urls": false,
+      "video": false,
+      "generation": false,
+      "tool_execution": false
+    },
+    "calibration": {
+      "temperature": 5.186910277762962,
+      "confidence": "maximum temperature-scaled categorical probability; not epistemic uncertainty",
+      "scope": "Temperature fitted on separate familiar/compositional calibration panels after development selection; arbitrary rubrics, candidate subsets and new task families remain uncalibrated"
+    },
+    "known_limitations": [
+      "Eight spoken keywords, generated 2x2 panels and a limited learned question vocabulary",
+      "No demonstrated native real-browser or general image understanding; OCR control results are separate",
+      "The composition-gap identities were previously known; confirmation voices and images are fresh",
+      "Only two recipe seeds; substantial remaining errors and seed variability",
+      "Confidence is categorical concentration, not epistemic uncertainty or an unknown-input detector",
+      "Noul and numeric Score transform the same candidate distribution; changing candidates changes probabilities"
+    ],
+    "measured_results": {
+      "report": "reports/optimization-v1/README.md",
+      "familiar_accuracy": 0.8131510416666666,
+      "known_composition_gap_accuracy": 0.669921875,
+      "paraphrase_accuracy": 0.8170572916666666,
+      "fresh_speakers": 58,
+      "fresh_recordings": 256,
+      "primary_questions_per_slice": 1536,
+      "seeds_per_recipe": 2,
+      "selection": "Nominated on development before confirmation; inference has no temporary primitive heads"
+    }
+  },
+  "samples": 32,
+  "warmup_requests": 5,
+  "typed_answers_per_request": 4,
+  "distinct_questions_per_request": 3,
+  "unique_images": 32,
+  "unique_audio": 30,
+  "scene_ids": [
+    "optimization-v1:test:in_distribution:00010",
+    "optimization-v1:test:in_distribution:00011",
+    "optimization-v1:test:compositional:00011",
+    "optimization-v1:test:compositional:00006",
+    "optimization-v1:test:in_distribution:00053",
+    "optimization-v1:test:in_distribution:00033",
+    "optimization-v1:test:compositional:00044",
+    "optimization-v1:test:compositional:00045",
+    "optimization-v1:test:in_distribution:00083",
+    "optimization-v1:test:in_distribution:00092",
+    "optimization-v1:test:compositional:00074",
+    "optimization-v1:test:compositional:00084",
+    "optimization-v1:test:in_distribution:00108",
+    "optimization-v1:test:in_distribution:00097",
+    "optimization-v1:test:compositional:00097",
+    "optimization-v1:test:compositional:00115",
+    "optimization-v1:test:in_distribution:00147",
+    "optimization-v1:test:in_distribution:00134",
+    "optimization-v1:test:compositional:00132",
+    "optimization-v1:test:compositional:00153",
+    "optimization-v1:test:in_distribution:00162",
+    "optimization-v1:test:in_distribution:00175",
+    "optimization-v1:test:compositional:00161",
+    "optimization-v1:test:compositional:00170",
+    "optimization-v1:test:in_distribution:00192",
+    "optimization-v1:test:in_distribution:00220",
+    "optimization-v1:test:compositional:00207",
+    "optimization-v1:test:compositional:00196",
+    "optimization-v1:test:in_distribution:00249",
+    "optimization-v1:test:in_distribution:00230",
+    "optimization-v1:test:compositional:00246",
+    "optimization-v1:test:compositional:00240"
+  ],
+  "latency_ms": {
+    "mean": 5.1332929375,
+    "p50": 5.1605419999999995,
+    "p95": 5.50338735,
+    "min": 4.594542,
+    "max": 6.038583
+  },
+  "max_native_http_probability_error": 0.0,
+  "native_parity_examples": 3,
+  "mean_recording_seconds": 1.0,
+  "includes": [
+    "fresh loopback HTTP connection",
+    "transmission",
+    "server validation/media decoding/preprocessing",
+    "neural inference and synchronization",
+    "typed result serialization",
+    "client JSON decoding"
+  ],
+  "excludes": [
+    "recording time",
+    "client file read/base64/request assembly",
+    "server/model startup"
+  ],
+  "concurrency": 1,
+  "accuracy_evaluation": false,
+  "timing_selection": "Two scenes per word and slice, deterministic hash order; 32 different images",
+  "provenance": {
+    "git_revision": "336879a3ffef9513f9505973b05cb2faa097944f",
+    "working_tree_dirty": true,
+    "source_hashes": {
+      "mmso/__init__.py": "d2df3b1f24aad519a417114c8a63489df9a18b66babfb5023b8b02c5ccff9626",
+      "mmso/__main__.py": "90e23a13957460dca0ffd41565cb7481ff3c7ec03f3e466730606afc62c09f3a",
+      "mmso/api/__init__.py": "1ba15fe3c2153f0b15f7248a3b064c17e05d68914193c898963f9330fa0f627d",
+      "mmso/api/app.py": "7a3cb6049088271ea8720ba1e46b30a5cf2796fabc514e6e5292ba633ca56527",
+      "mmso/api/client.py": "f750f032050f8ce16eab329f78cde0c7fc0bc1fc82260d4d5ea8b25a22b68670",
+      "mmso/api/media.py": "c2fc933ff1e09dc1eef46013cad352679d0ebf3ed3e32d467b2f64f94376c0c7",
+      "mmso/api/registry.py": "417cfde3e95e39a275377e90b7c2c9c0a131cc0b0574710aceb0fb190de790f3",
+      "mmso/api/runtime.py": "eb7e91eb647717478243a7ada0a77b3e4d58de2e8dc1cee506319180b628684b",
+      "mmso/api/schema.py": "8b4abe8d71f6b9209e97f1ad4592acb73cdf853fa464e1aaa71da83112e9149b",
+      "mmso/artifacts.py": "bb7629e6507f6a67447c0773a4a4bdaa14354f26849ce47ee413a448170834f5",
+      "mmso/audio.py": "2dfec8cbb07d58db21b08d09b097422eaa627d3c5eb1c4e9af2cfd236da0ecc6",
+      "mmso/data.py": "2537c5762578d4814cb6690aa2c38941bd4235ffb17640856b433329b06ef8b5",
+      "mmso/grounding.py": "46613c5f8986afae90e43fbb5a75bcb9e8b6943dab5c089711792b2296dd004e",
+      "mmso/grounding_data.py": "5b0b11e642807c7929709ab96097038a7cc4f81bb737cc28edce7b7a37fd4268",
+      "mmso/joint_data.py": "ef51b8dae3bf4dd1e16f86378168e28fe9fe01ea1922831d971a8f07097bffb9",
+      "mmso/joint_model.py": "eb0322d4acd185281ed3bcc87ec4abc72c2431006d13846d241c92afd0846e49",
+      "mmso/joint_training.py": "a033a70cc86cc8dedb8fb9bdf178f4db78238b77bec2f6de8e6a4ced61e4e73a",
+      "mmso/joint_world.py": "9437ecb37f7cab13c6aa62b9e8c62cd60e2a9e46f6aea42df5839a4df94e06f9",
+      "mmso/metrics.py": "a887154d56e307fc6a2a54b9cef476964aa7e4a0e8660d50c8f63801f929767b",
+      "mmso/optimization_study.py": "cee029957ea852badaf450964becb84f09aecb83d6d708a98d2ada0a99e0d34b",
+      "mmso/scale_study.py": "f9c035d539dfbcda4291f7199bfcfae1a8cc2e30cf22d0a332aa94757c1614f1",
+      "mmso/scoring.py": "28a864c140911eaf9568f60193de0fe430e24dadbbc5d0e19bc533981d6728bf",
+      "mmso/screen.py": "17c49e2bdb1d321aca118dbd0f23063f184fd640adc9daecce0f4da03750cc31",
+      "uv.lock": "2871c4d6a6e038b673df248b2c30932a9553c1d0be5115876235ad9d9447cf97",
+      "scripts/benchmark_model_api.py": "c4ae8a37506bb8eb7ce38d3bf63a6d6393af66fa5dc03507702a48f6c7c93a5a",
+      "scripts/benchmark_api.py": "a6787a84360b2e852ea0a6fa339f398e7175d811a1af0673f39eb8504e83b09b"
+    },
+    "manifest_sha256": "6f3665e33c5df6e9a2746b3b1378ea382babc5b90349d7d91da49836e1a8663c",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "torch_version": "2.14.0"
+  }
+}

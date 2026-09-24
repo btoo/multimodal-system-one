@@ -26,6 +26,7 @@ def main():
     parser.add_argument("--checkpoint", type=Path, required=True)
     parser.add_argument("--base-url", default="http://127.0.0.1:8000")
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--context", default="Unspecified background load", help="Record known measurement conditions")
     args = parser.parse_args()
     host = urlsplit(args.base_url)
     if host.scheme != "http" or host.hostname not in {"localhost", "127.0.0.1", "::1"} or host.username or host.password or host.query or host.fragment or host.path not in {"", "/"}:
@@ -96,7 +97,8 @@ def main():
               "includes": ["fresh loopback HTTP connection", "transmission", "server validation/media decoding/preprocessing",
                            "neural inference and synchronization", "typed result serialization", "client JSON decoding"],
               "excludes": ["recording time", "client file read/base64/request assembly", "server/model startup"],
-              "concurrency": 1, "accuracy_evaluation": False, "timing_selection": "Two scenes per word and slice, deterministic hash order; 32 different images",
+              "concurrency": 1, "accuracy_evaluation": False, "measurement_context": args.context,
+              "timing_selection": "Two scenes per word and slice, deterministic hash order; 32 different images",
               "provenance": {"git_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
                   "working_tree_dirty": bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip()),
                   "source_hashes": {str(path.relative_to(ROOT)): sha256(path) for path in files}, "manifest_sha256": sha256(MANIFEST),

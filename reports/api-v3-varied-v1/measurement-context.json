@@ -1,0 +1,4 @@
+{
+  "condition": "The full test suite was launched while this initial timing sequence ran. Preserve these samples as contended measurements; the subsequent sequential timing round is the reported comparison.",
+  "reason_for_repeat": "Known overlapping verification workload identified before inspecting the first timing values. No model or data changes are involved."
+}
