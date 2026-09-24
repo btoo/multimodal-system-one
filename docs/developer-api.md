@@ -32,7 +32,7 @@ curl --fail-with-body http://127.0.0.1:8000/v1/decisions \
   --data-binary @/tmp/mmso-request.json
 ```
 
-`/docs` exposes interactive OpenAPI documentation; `/openapi.json` contains the typed schemas. `GET /healthz` returns readiness after the checkpoint has loaded. `GET /v1/models` and `GET /v1/models/mmso-joint-v2` return its capabilities, full learned vocabulary, calibration definition, and pinned weight/configuration hashes.
+`/docs` exposes interactive OpenAPI documentation; `/openapi.json` contains the typed schemas. A [checked-in OpenAPI snapshot](openapi.json) is also available for client tooling. `GET /healthz` returns readiness after the checkpoint has loaded. `GET /v1/models` and `GET /v1/models/mmso-joint-v2` return its capabilities, full learned vocabulary, calibration definition, and pinned weight/configuration hashes.
 
 Set the same `MMSO_API_KEY` environment variable in the server and client processes to enable bearer authentication. Model and decision endpoints then require `Authorization: Bearer …`; the Python client reads that variable automatically. Health and API documentation remain public. Loopback is the default; configure a key before intentionally exposing another interface. This repository does not supply hosted deployment, TLS, accounts, or usage billing.
 

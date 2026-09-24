@@ -1,0 +1,1122 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Multimodal System One Decisions",
+    "description": "Experimental local audio/image/question classification. This is not an OpenAI, Claude, or Jev compatible server.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/healthz": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_healthz_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/models": {
+      "get": {
+        "summary": "Models",
+        "operationId": "models_v1_models_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/v1/models/{model_id}": {
+      "get": {
+        "summary": "Model",
+        "operationId": "model_v1_models__model_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Model Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/decisions": {
+      "post": {
+        "summary": "Decide",
+        "operationId": "decide_v1_decisions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DecisionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AudioBlock": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "audio",
+            "title": "Type"
+          },
+          "source": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Base64Source"
+              },
+              {
+                "$ref": "#/components/schemas/DataURLSource"
+              }
+            ],
+            "title": "Source",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "base64": "#/components/schemas/Base64Source",
+                "data_url": "#/components/schemas/DataURLSource"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "source"
+        ],
+        "title": "AudioBlock"
+      },
+      "Base64Source": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "base64",
+            "title": "Type"
+          },
+          "media_type": {
+            "type": "string",
+            "enum": [
+              "image/png",
+              "image/jpeg",
+              "audio/wav"
+            ],
+            "title": "Media Type"
+          },
+          "data": {
+            "type": "string",
+            "maxLength": 2800000,
+            "minLength": 1,
+            "title": "Data"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "media_type",
+          "data"
+        ],
+        "title": "Base64Source"
+      },
+      "Candidate": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Id"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Text"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "text"
+        ],
+        "title": "Candidate"
+      },
+      "ChoiceQuestion": {
+        "properties": {
+          "question": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 512,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Question"
+          },
+          "question_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Question Ref"
+          },
+          "type": {
+            "type": "string",
+            "const": "choice",
+            "title": "Type"
+          },
+          "choices": {
+            "items": {
+              "$ref": "#/components/schemas/Candidate"
+            },
+            "type": "array",
+            "maxItems": 32,
+            "minItems": 2,
+            "title": "Choices"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "choices"
+        ],
+        "title": "ChoiceQuestion"
+      },
+      "ChoiceResult": {
+        "properties": {
+          "probabilities": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Probabilities"
+          },
+          "ranking": {
+            "items": {
+              "$ref": "#/components/schemas/RankedCandidate"
+            },
+            "type": "array",
+            "title": "Ranking"
+          },
+          "prediction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prediction"
+          },
+          "decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decision"
+          },
+          "abstained": {
+            "type": "boolean",
+            "title": "Abstained"
+          },
+          "ties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Ties"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence"
+          },
+          "type": {
+            "type": "string",
+            "const": "choice",
+            "title": "Type",
+            "default": "choice"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "probabilities",
+          "ranking",
+          "prediction",
+          "decision",
+          "abstained",
+          "ties",
+          "confidence"
+        ],
+        "title": "ChoiceResult"
+      },
+      "DataURLSource": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "data_url",
+            "title": "Type"
+          },
+          "url": {
+            "type": "string",
+            "maxLength": 2800100,
+            "minLength": 1,
+            "title": "Url"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "url"
+        ],
+        "title": "DataURLSource"
+      },
+      "DecisionRequest": {
+        "properties": {
+          "model": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Model",
+            "default": "mmso-joint-v2"
+          },
+          "input": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ImageBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/AudioBlock"
+                },
+                {
+                  "$ref": "#/components/schemas/TextBlock"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "audio": "#/components/schemas/AudioBlock",
+                  "image": "#/components/schemas/ImageBlock",
+                  "text": "#/components/schemas/TextBlock"
+                }
+              }
+            },
+            "type": "array",
+            "maxItems": 34,
+            "minItems": 2,
+            "title": "Input"
+          },
+          "questions": {
+            "patternProperties": {
+              "^[A-Za-z0-9_-]+$": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ChoiceQuestion"
+                  },
+                  {
+                    "$ref": "#/components/schemas/RankingQuestion"
+                  },
+                  {
+                    "$ref": "#/components/schemas/NoulQuestion"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ScoreQuestion"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "type",
+                  "mapping": {
+                    "choice": "#/components/schemas/ChoiceQuestion",
+                    "noul": "#/components/schemas/NoulQuestion",
+                    "ranking": "#/components/schemas/RankingQuestion",
+                    "score": "#/components/schemas/ScoreQuestion"
+                  }
+                }
+              }
+            },
+            "propertyNames": {
+              "maxLength": 64,
+              "minLength": 1
+            },
+            "type": "object",
+            "maxProperties": 32,
+            "minProperties": 1,
+            "title": "Questions"
+          },
+          "abstain_threshold": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Abstain Threshold",
+            "default": 0.0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "input",
+          "questions"
+        ],
+        "title": "DecisionRequest"
+      },
+      "DecisionResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "object": {
+            "type": "string",
+            "const": "decision.response",
+            "title": "Object",
+            "default": "decision.response"
+          },
+          "created": {
+            "type": "integer",
+            "title": "Created"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "checkpoint_sha256": {
+            "type": "string",
+            "title": "Checkpoint Sha256"
+          },
+          "results": {
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ChoiceResult"
+                },
+                {
+                  "$ref": "#/components/schemas/RankingResult"
+                },
+                {
+                  "$ref": "#/components/schemas/NoulResult"
+                },
+                {
+                  "$ref": "#/components/schemas/ScoreResult"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "choice": "#/components/schemas/ChoiceResult",
+                  "noul": "#/components/schemas/NoulResult",
+                  "ranking": "#/components/schemas/RankingResult",
+                  "score": "#/components/schemas/ScoreResult"
+                }
+              }
+            },
+            "type": "object",
+            "title": "Results"
+          },
+          "input_summary": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Input Summary"
+          },
+          "semantics": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Semantics"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "created",
+          "model",
+          "checkpoint_sha256",
+          "results",
+          "input_summary",
+          "semantics"
+        ],
+        "title": "DecisionResponse"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ImageBlock": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "image",
+            "title": "Type"
+          },
+          "source": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Base64Source"
+              },
+              {
+                "$ref": "#/components/schemas/DataURLSource"
+              }
+            ],
+            "title": "Source",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "base64": "#/components/schemas/Base64Source",
+                "data_url": "#/components/schemas/DataURLSource"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "source"
+        ],
+        "title": "ImageBlock"
+      },
+      "Level": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Id"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Text"
+          },
+          "value": {
+            "type": "number",
+            "maximum": 1000000000.0,
+            "minimum": -1000000000.0,
+            "title": "Value"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "text",
+          "value"
+        ],
+        "title": "Level"
+      },
+      "NoulQuestion": {
+        "properties": {
+          "question": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 512,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Question"
+          },
+          "question_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Question Ref"
+          },
+          "type": {
+            "type": "string",
+            "const": "noul",
+            "title": "Type"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "title": "NoulQuestion"
+      },
+      "NoulResult": {
+        "properties": {
+          "probabilities": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Probabilities"
+          },
+          "ranking": {
+            "items": {
+              "$ref": "#/components/schemas/RankedCandidate"
+            },
+            "type": "array",
+            "title": "Ranking"
+          },
+          "prediction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prediction"
+          },
+          "decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decision"
+          },
+          "abstained": {
+            "type": "boolean",
+            "title": "Abstained"
+          },
+          "ties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Ties"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence"
+          },
+          "type": {
+            "type": "string",
+            "const": "noul",
+            "title": "Type",
+            "default": "noul"
+          },
+          "probability_true": {
+            "type": "number",
+            "title": "Probability True"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "probabilities",
+          "ranking",
+          "prediction",
+          "decision",
+          "abstained",
+          "ties",
+          "confidence",
+          "probability_true",
+          "value"
+        ],
+        "title": "NoulResult"
+      },
+      "RankedCandidate": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "rank": {
+            "type": "integer",
+            "title": "Rank"
+          },
+          "probability": {
+            "type": "number",
+            "title": "Probability"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "rank",
+          "probability"
+        ],
+        "title": "RankedCandidate"
+      },
+      "RankingQuestion": {
+        "properties": {
+          "question": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 512,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Question"
+          },
+          "question_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Question Ref"
+          },
+          "type": {
+            "type": "string",
+            "const": "ranking",
+            "title": "Type"
+          },
+          "choices": {
+            "items": {
+              "$ref": "#/components/schemas/Candidate"
+            },
+            "type": "array",
+            "maxItems": 32,
+            "minItems": 2,
+            "title": "Choices"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "choices"
+        ],
+        "title": "RankingQuestion"
+      },
+      "RankingResult": {
+        "properties": {
+          "probabilities": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Probabilities"
+          },
+          "ranking": {
+            "items": {
+              "$ref": "#/components/schemas/RankedCandidate"
+            },
+            "type": "array",
+            "title": "Ranking"
+          },
+          "prediction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prediction"
+          },
+          "decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decision"
+          },
+          "abstained": {
+            "type": "boolean",
+            "title": "Abstained"
+          },
+          "ties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Ties"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence"
+          },
+          "type": {
+            "type": "string",
+            "const": "ranking",
+            "title": "Type",
+            "default": "ranking"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "probabilities",
+          "ranking",
+          "prediction",
+          "decision",
+          "abstained",
+          "ties",
+          "confidence"
+        ],
+        "title": "RankingResult"
+      },
+      "ScoreQuestion": {
+        "properties": {
+          "question": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 512,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Question"
+          },
+          "question_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Question Ref"
+          },
+          "type": {
+            "type": "string",
+            "const": "score",
+            "title": "Type"
+          },
+          "levels": {
+            "items": {
+              "$ref": "#/components/schemas/Level"
+            },
+            "type": "array",
+            "maxItems": 32,
+            "minItems": 2,
+            "title": "Levels"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "levels"
+        ],
+        "title": "ScoreQuestion"
+      },
+      "ScoreResult": {
+        "properties": {
+          "probabilities": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Probabilities"
+          },
+          "ranking": {
+            "items": {
+              "$ref": "#/components/schemas/RankedCandidate"
+            },
+            "type": "array",
+            "title": "Ranking"
+          },
+          "prediction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prediction"
+          },
+          "decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decision"
+          },
+          "abstained": {
+            "type": "boolean",
+            "title": "Abstained"
+          },
+          "ties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Ties"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence"
+          },
+          "type": {
+            "type": "string",
+            "const": "score",
+            "title": "Type",
+            "default": "score"
+          },
+          "expected_value": {
+            "type": "number",
+            "title": "Expected Value"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "range": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Range"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "probabilities",
+          "ranking",
+          "prediction",
+          "decision",
+          "abstained",
+          "ties",
+          "confidence",
+          "expected_value",
+          "value",
+          "range"
+        ],
+        "title": "ScoreResult"
+      },
+      "TextBlock": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "text",
+            "title": "Type"
+          },
+          "id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "title": "Id"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 512,
+            "minLength": 1,
+            "title": "Text"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "text"
+        ],
+        "title": "TextBlock"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
