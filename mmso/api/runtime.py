@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 import threading
 import time
 from uuid import uuid4
@@ -10,14 +11,12 @@ import numpy as np
 from safetensors.torch import load_file
 import torch
 
-from ..artifacts import ROOT, sha256
+from ..artifacts import sha256
 from ..audio import choose_device
-from ..joint_model import NativeDecisionModel, Vocabulary, encode_requests
+from ..joint_model import Vocabulary, encode_requests
 from .media import decode_audio, decode_image, MAX_AUDIO_BYTES, MAX_IMAGE_BYTES, MAX_IMAGE_PIXELS, SAMPLE_RATES
 from .schema import (MODEL_ID, DecisionRequest, DecisionResponse, NoulQuestion, ScoreQuestion)
-
-CHECKPOINT_SHA256 = "9fa7f2c3b129340977a7bf7413044b27d5a4fb4c55eec748df289f8bc122a343"
-CONFIG_SHA256 = "59839e234b2c63eb61430f984356ffbf2a4e05bb125fa73df5a3111547fc9759"
+from .registry import (CHECKPOINT_SHA256, CONFIG_SHA256, ModelRegistration, V2_REGISTRATION)
 
 
 def format_result(question, candidates, probabilities, threshold):
@@ -47,33 +46,36 @@ def format_result(question, candidates, probabilities, threshold):
 
 
 class NativeRuntime:
-    def __init__(self, device="auto"):
-        self.checkpoint = ROOT / "artifacts/joint-full-v2/model.safetensors"
+    def __init__(self, device="auto", registration: ModelRegistration = V2_REGISTRATION, *, inference_lock=None):
+        self.registration = registration
+        self.checkpoint = registration.checkpoint_path()
         self.checkpoint_sha256 = sha256(self.checkpoint)
-        if self.checkpoint_sha256 != CHECKPOINT_SHA256:
-            raise ValueError("The registered mmso-joint-v2 checkpoint fingerprint does not match")
+        if self.checkpoint_sha256 != registration.checkpoint_sha256:
+            raise ValueError(f"The registered {registration.id} checkpoint fingerprint does not match")
         config_path = self.checkpoint.with_name("config.json")
         self.config_sha256 = sha256(config_path)
-        if self.config_sha256 != CONFIG_SHA256:
-            raise ValueError("The registered mmso-joint-v2 configuration fingerprint does not match")
+        if self.config_sha256 != registration.config_sha256:
+            raise ValueError(f"The registered {registration.id} configuration fingerprint does not match")
         self.config = json.loads(config_path.read_text())
-        if self.config["architecture"] != "native-decision-v1" or self.config.get("mode") != "full":
+        if self.config["architecture"] != registration.architecture or self.config.get("mode") != "full":
             raise ValueError("Unsupported registered checkpoint architecture or modality mode")
         self.temperature = self.config["temperature"]
         if not np.isfinite(self.temperature) or self.temperature <= 0:
             raise ValueError("Invalid checkpoint calibration temperature")
         self.vocabulary = Vocabulary(self.config["vocabulary"])
         self.device = choose_device(device)
-        self.model = NativeDecisionModel(len(self.vocabulary.tokens), self.config["width"], self.config["layers"])
+        self.model = registration.factory(self.config, len(self.vocabulary.tokens))
+        if not all(callable(getattr(self.model, method, None)) for method in ("encode_observations", "decide")):
+            raise ValueError("Registered factory must implement the native observation/candidate interface")
         self.model.load_state_dict(load_file(str(self.checkpoint)))
         self.model.to(self.device).eval()
-        self.lock = threading.Lock()
+        self.lock = inference_lock if inference_lock is not None else threading.Lock()
 
     def model_card(self):
-        return {"id": MODEL_ID, "object": "model", "checkpoint_sha256": self.checkpoint_sha256,
+        card = {"id": self.registration.id, "object": "model", "checkpoint_sha256": self.checkpoint_sha256,
                 "config_sha256": self.config_sha256, "architecture": self.config["architecture"],
                 "parameters": sum(p.numel() for p in self.model.parameters()), "device": str(self.device),
-                "scope": self.config["scope"], "status": "experimental",
+                "scope": self.registration.scope if self.registration.scope is not None else self.config["scope"], "status": "experimental",
                 "capabilities": {"input_modalities": ["image", "audio", "text"],
                     "output_types": ["choice", "noul", "score", "ranking"],
                     "required_media": {"image": 1, "audio": 1},
@@ -91,13 +93,15 @@ class NativeRuntime:
                     "remote_media_urls": False, "video": False, "generation": False, "tool_execution": False},
                 "calibration": {"temperature": self.temperature,
                     "confidence": "maximum temperature-scaled categorical probability; not epistemic uncertainty",
-                    "scope": "Fitted on the recorded joint-panel calibration partition; arbitrary rubrics and candidate subsets are not separately calibrated"},
-                "known_limitations": ["No demonstrated real-browser or general image understanding",
-                    "45.66% on the exposed held-out compositional split; 72.92% in distribution",
-                    "Noul and numeric Score are explicit transformations of the same candidate distribution",
-                    "Changing the candidate set changes probabilities and confidence"]}
+                    "scope": self.registration.calibration_scope},
+                "known_limitations": list(self.registration.known_limitations)}
+        if self.registration.measured_results is not None:
+            card["measured_results"] = deepcopy(dict(self.registration.measured_results))
+        return card
 
     def decide(self, request: DecisionRequest):
+        if request.model != self.registration.id:
+            raise ValueError("Request model does not match this loaded runtime")
         neural = request.neural_requests()
         question, candidates, mask = encode_requests(neural, self.vocabulary)
         # Only one device inference at a time; each HTTP request has fresh observation tensors.
@@ -114,7 +118,7 @@ class NativeRuntime:
         results = {}
         for (name, typed), item, p in zip(request.questions.items(), neural, probabilities):
             results[name] = format_result(typed, item["candidates"], p[:len(item["candidates"])], request.abstain_threshold)
-        return DecisionResponse(id="dec_" + uuid4().hex, created=int(time.time()), model=MODEL_ID,
+        return DecisionResponse(id="dec_" + uuid4().hex, created=int(time.time()), model=self.registration.id,
             checkpoint_sha256=self.checkpoint_sha256, results=results,
             input_summary={"image": image_info, "audio": audio_info, "questions": len(neural)},
             semantics={"confidence": "max categorical probability after temperature scaling",

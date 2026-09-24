@@ -180,3 +180,17 @@ uv run --locked python -m unittest discover -s tests -p 'test_api.py' -v
 The tests use the actual published CPU checkpoint and a deterministic synthetic WAV, compare HTTP probabilities against the existing native inference implementation, and verify candidate-order/ID invariance, question isolation, scoring/ranking/abstention, media/schema bounds, bearer authentication, OpenAPI result schemas, and provider adapters. A subprocess test launches the real CLI server and uses the Python client over a loopback TCP connection. These establish transport/inference correctness, not new model-accuracy measurements. The recorded public-speech example and separate HTTP benchmark supplement those checks.
 
 The model's weights and configuration are both fingerprinted at startup, so changing its vocabulary, temperature, or weights requires explicitly updating its versioned registration. Training and the API do not share a mutable in-process model.
+
+## Registering another confirmed native model
+
+The static registry in [`mmso/api/registry.py`](../mmso/api/registry.py) currently contains **only `mmso-joint-v2`**, which remains the request and Python-client default. `GET /v1/models` lists the registrations actually loaded by that server; `POST /v1/decisions` dispatches using the explicit `model` field and returns that same identity. There are no speculative production aliases, automatic newest-checkpoint discovery, or HTTP registration/checkpoint-path inputs.
+
+A future confirmed checkpoint needs a distinct `ModelRegistration` with a repository-relative `.safetensors` path under `artifacts/`, weight and configuration SHA256 hashes, the expected architecture name, and a local `factory(config, vocabulary_size)`. The factory must provide the existing `encode_observations` / `decide` interface and compatible media/text behavior; changing those input semantics also requires changing and validating the API contract. Each registration can supply its own scope, calibration statement, limitations, and optional `measured_results` metadata. A new registration does not inherit v2's measured accuracy claims.
+
+The app snapshots this registry and eagerly loads every registered runtime at startup. Each runtime owns its model, vocabulary, temperature, and card; a shared inference lock serializes work on the selected device. Any fingerprint or architecture mismatch prevents readiness. Adding a registration requires a restart; it does not change v2's default or fingerprint. The typed Choice/Noul/Score/Ranking response schema stays the same. For library/test callers, `create_app(..., registry=...)` supplies a static registry snapshot, and `app.state.runtime` remains an alias for the historical default runtime alongside `app.state.runtimes`.
+
+Registry tests load two isolated CPU runtimes from the same verified weights under a temporary test-only second ID, prove dispatch and cache reuse, check card isolation, and reject unknown models and corrupt registrations. The second ID is never added to the production registry.
+
+```bash
+uv run --locked python -m unittest discover -s tests -p 'test_api*.py' -v
+```

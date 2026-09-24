@@ -4,6 +4,8 @@ from __future__ import annotations
 from contextlib import asynccontextmanager
 import hmac
 import os
+import threading
+from types import MappingProxyType
 
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
@@ -12,6 +14,7 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .runtime import NativeRuntime
+from .registry import registry_snapshot
 from .schema import MODEL_ID, DecisionRequest, DecisionResponse
 
 MAX_REQUEST_BYTES = 4 * 1024 * 1024
@@ -51,14 +54,22 @@ class BodyLimitMiddleware:
         return await self.app(scope, bounded_receive, send)
 
 
-def create_app(device="auto", api_key=None):
+def create_app(device="auto", api_key=None, *, registry=None):
     key = os.environ.get("MMSO_API_KEY", "") if api_key is None else api_key
+    registrations = registry_snapshot(registry)
 
     @asynccontextmanager
     async def lifespan(app):
-        app.state.runtime = NativeRuntime(device)
-        yield
-        del app.state.runtime
+        inference_lock = threading.Lock()
+        runtimes = {name: NativeRuntime(device, registration, inference_lock=inference_lock)
+                    for name, registration in registrations.items()}
+        app.state.runtimes = MappingProxyType(runtimes)
+        app.state.runtime = runtimes[MODEL_ID]  # Historical default-runtime Python attribute.
+        try:
+            yield
+        finally:
+            del app.state.runtime
+            del app.state.runtimes
 
     app = FastAPI(title="Multimodal System One Decisions", version="0.1.0",
         description="Experimental local audio/image/question classification. This is not an OpenAI, Claude, or Jev compatible server.",
@@ -86,24 +97,26 @@ def create_app(device="auto", api_key=None):
 
     @app.get("/healthz")
     def health(request: Request):
-        return {"status": "ready", "loaded_models": 1 if hasattr(request.app.state, "runtime") else 0}
+        return {"status": "ready", "loaded_models": len(getattr(request.app.state, "runtimes", {}))}
 
     @app.get("/v1/models", dependencies=[Depends(authorize)])
     def models(request: Request):
-        return {"object": "list", "data": [request.app.state.runtime.model_card()]}
+        return {"object": "list", "data": [runtime.model_card() for runtime in request.app.state.runtimes.values()]}
 
     @app.get("/v1/models/{model_id}", dependencies=[Depends(authorize)])
     def model(model_id: str, request: Request):
-        if model_id != MODEL_ID:
+        runtime = request.app.state.runtimes.get(model_id)
+        if runtime is None:
             raise HTTPException(404, "Unknown model; see /v1/models")
-        return request.app.state.runtime.model_card()
+        return runtime.model_card()
 
     @app.post("/v1/decisions", response_model=DecisionResponse, dependencies=[Depends(authorize)])
     def decide(body: DecisionRequest, request: Request):
-        if body.model != MODEL_ID:
+        runtime = request.app.state.runtimes.get(body.model)
+        if runtime is None:
             raise HTTPException(404, "Unknown model; see /v1/models")
         try:
-            return request.app.state.runtime.decide(body)
+            return runtime.decide(body)
         except ValueError as error:
             return JSONResponse(status_code=422, content={"error": {"code": "invalid_input", "message": str(error)}})
 

@@ -1,0 +1,50 @@
+{
+  "repository": "https://huggingface.co/datasets/likaixin/ScreenSpot-Pro",
+  "revision": "210e78d3844251110bff86c95835ebd37a6930fa",
+  "license": "MIT per pinned author dataset card",
+  "card_sha256": "76ae2231564fe84af029f8625c02d9cd7fb6cf85c5f8af1b2a2593e2107719d9",
+  "annotation_sha256": {
+    "macos_common_macos": "1cc16a816a9d791cf7bbd2f8a1de5964d0ccbc3f9aefc800983e74a829b74666",
+    "vscode_macos": "55f9b91d3986d8fb027c76b0518b2eb8aa94139601014c4125f81bf839a4667a",
+    "excel_macos": "b14145a4efe356c13129d708218d1722a1f03578775ea2dacd22f48c9287d382",
+    "word_macos": "a5547fe13b7eab2f1945fd7e7afa5bd2c97d157e442f79a71e1ac9fae3e23208",
+    "powerpoint_windows": "0ab08a5a474050feb102b1b334d924f7e688c47d4fe3374a8aba5b99362aa32b",
+    "pycharm_macos": "6f9d19cf3993ce5d3e834a7787c80d01ae0299a3f8323c911a0fba268a70c363",
+    "android_studio_macos": "659a925e7373ae8980037d1b0c5eb45b365a3a6281a3fd23098efe125bc3b453",
+    "blender_windows": "4cfa940040f129dd1c4b1209972fb0ac6f0b5af0ee5d5ea167a34465834673c8"
+  },
+  "manifest_sha256": "c8c5e976aa2ab76a8ee39a4bf122e1f7a1f058ca8b6b96eb6938bb63109083eb",
+  "protocol_sha256": "bb15ea425897789d3e27d7e6628498476bba0e23915e3f0b2daf712e30277d8c",
+  "audit": {
+    "examples": 64,
+    "splits": {
+      "test": 64
+    },
+    "groups": 64,
+    "unique_media_hashes": 64,
+    "support": {},
+    "media_verified": true,
+    "group_and_hash_disjoint": true
+  },
+  "combined_old_new_audit": {
+    "examples": 88,
+    "splits": {
+      "external_probe": 24,
+      "test": 64
+    },
+    "groups": 88,
+    "unique_media_hashes": 88,
+    "support": {},
+    "media_verified": true,
+    "group_and_hash_disjoint": true
+  },
+  "development_disjoint_image_names": true,
+  "development_disjoint_content_hashes": true,
+  "all_confirmation_image_names_and_hashes_unique": true,
+  "download_bytes_this_invocation": 225341638,
+  "cache_bytes": 225341638,
+  "duplicate_skips": [],
+  "selection": "SHA256 rank with prefix mmso-screen-v2-confirmation: over source ID; application/type quotas; exclude all development screen filenames and content hashes, deduplicate confirmation screen identities/hashes",
+  "official_benchmark_result": false,
+  "freshness": "Unseen by this project's previous probes; not a claim about upstream OCR/CLIP pretraining"
+}

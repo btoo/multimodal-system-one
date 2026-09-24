@@ -1,0 +1,40 @@
+{
+  "selected_variant": "token_f1",
+  "selected_tiling": "fixed_1024",
+  "selection": "Development hit count; ties favor whole-image OCR then token_f1",
+  "all_attempts": [
+    {
+      "variant": "token_f1",
+      "tiling": "fixed_1024",
+      "hits": 3
+    },
+    {
+      "variant": "idf_coverage",
+      "tiling": "fixed_1024",
+      "hits": 3
+    },
+    {
+      "variant": "token_f1",
+      "tiling": "whole_image",
+      "hits": 1
+    },
+    {
+      "variant": "idf_coverage",
+      "tiling": "whole_image",
+      "hits": 1
+    }
+  ],
+  "development_hits": {
+    "token_f1": 3,
+    "idf_coverage": 3
+  },
+  "protocol_sha256": "86c33907aa230e6fb8ee63d57cc7541f11ad51650f87b2dace103d80126d9483",
+  "confirmation_manifest_sha256": "c8c5e976aa2ab76a8ee39a4bf122e1f7a1f058ca8b6b96eb6938bb63109083eb",
+  "inference_source_sha256": {
+    "mmso/grounding.py": "46613c5f8986afae90e43fbb5a75bcb9e8b6943dab5c089711792b2296dd004e",
+    "scripts/screen_ocr.swift": "90a1b4cbf90a26f2ea103f39780e00ae07b34b97e2068a383ebd63579f75cae0",
+    "scripts/screen_grounding_v2.py": "108ff12d2c3bcaf09c802990b858af610c87ac12b4042b28ce38d2e0d8bc5a9f"
+  },
+  "development_report_sha256": "43c9d927750ed786706227a2c8457f1f6522f50d6de735cef8fa69dd84ba0e17",
+  "confirmation_status_at_nomination": "not evaluated"
+}
