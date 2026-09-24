@@ -1,0 +1,17 @@
+{
+  "reason": "Independent review found binary rounding can bypass NLL tiebreak for mathematically equal accuracy counts. Corrected between seeds without changing the declared selection rule. Both completed seed24 winners match exact-count selection. No test inference had run.",
+  "completed_run_audit": [
+    {
+      "run_id": "optimization-control-s24-v1",
+      "selected_epoch": 32,
+      "integer_equivalent_selection_unchanged": true
+    },
+    {
+      "run_id": "optimization-primitive-s24-v1",
+      "selected_epoch": 28,
+      "integer_equivalent_selection_unchanged": true
+    }
+  ],
+  "before_commit": "0b82bcb",
+  "neural_training_algorithm_changed": false
+}

@@ -32,6 +32,14 @@ class OptimizationTests(unittest.TestCase):
         self.assertGreater(float(acoustic.grad.norm()), 0)
         self.assertEqual(set(losses), {"visual_word", "visual_color", "audio_word"})
 
+    def test_equal_accuracy_counts_use_nll_despite_float_roundoff(self):
+        def metric(accuracy, nll):
+            return {"by_slice": {name: {"joint_macro_accuracy": accuracy, "joint_macro_normalized_nll": nll}
+                                 for name in ("in_distribution", "compositional")}}
+        high_roundoff = metric(.7000000000000001, 1.1)
+        lower_loss = metric(.7, .9)
+        self.assertGreater(selection_key(lower_loss), selection_key(high_roundoff))
+
     def test_training_sampler_matches_existing_resampling_and_labels(self):
         scenes = [s for s in read_manifest(ROOT / "evals/manifests/joint_panels_v1.jsonl") if s["split"] == "train"][:8]
         if not all((ROOT / s["audio"]["path"]).exists() for s in scenes):

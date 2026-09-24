@@ -6,6 +6,7 @@ inference checkpoint has exactly the original native candidate architecture.
 from __future__ import annotations
 
 from collections import Counter, defaultdict
+from fractions import Fraction
 import hashlib
 import json
 import re
@@ -24,7 +25,7 @@ from .data import audio_media, download, rank
 from .joint_data import audit_joint, expand_scenes, seed_for
 from .joint_model import NativeDecisionModel, Vocabulary
 from .joint_training import PairedCache, decision_metrics, evaluate_logits, fit_joint_temperature
-from .joint_world import COLORS, WORDS, held_pair, make_panel, render_panel
+from .joint_world import COLORS, JOINT_TASKS, WORDS, held_pair, make_panel, render_panel
 
 MANIFEST = ROOT / "evals/manifests/optimization_panels_v1.jsonl"
 PROTOCOL = ROOT / "evals/optimization-protocol-v1.json"
@@ -134,10 +135,17 @@ def prepare_optimization():
 
 def selection_key(metrics):
     slices = metrics["by_slice"]
-    identity = slices["in_distribution"]["joint_macro_accuracy"]
-    composition = slices["compositional"]["joint_macro_accuracy"]
+    def accuracy(slice_name):
+        if "by_task" in metrics:
+            tasks = [metrics["by_task"][slice_name][name] for name in JOINT_TASKS]
+            return sum((Fraction(round(t["correct"] * t["examples"]), t["examples"]) for t in tasks), Fraction()) / len(tasks)
+        # Summary-only callers cannot recover counts; remove meaningless binary
+        # roundoff so equal reported accuracies still use the NLL tiebreak.
+        return Fraction(str(round(slices[slice_name]["joint_macro_accuracy"], 12)))
+    identity = accuracy("in_distribution")
+    composition = accuracy("compositional")
     nll = np.mean([slices[s]["joint_macro_normalized_nll"] for s in ("in_distribution", "compositional")])
-    return (int(identity >= .65), (identity + composition) / 2, -float(nll))
+    return (int(identity >= Fraction(65, 100)), float((identity + composition) / 2), -float(nll))
 
 
 def snapshot():
