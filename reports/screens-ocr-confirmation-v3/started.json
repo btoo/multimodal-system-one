@@ -1,0 +1,37 @@
+{
+  "phase": "confirmation",
+  "provenance": {
+    "recorded_at_utc": "2026-09-24T12:44:12.164894+00:00",
+    "git_revision": "50b27244ecf7ee6671006303128c857371f9b83c",
+    "working_tree_dirty": false,
+    "source_hashes": {
+      "mmso/__init__.py": "d2df3b1f24aad519a417114c8a63489df9a18b66babfb5023b8b02c5ccff9626",
+      "mmso/__main__.py": "90e23a13957460dca0ffd41565cb7481ff3c7ec03f3e466730606afc62c09f3a",
+      "mmso/artifacts.py": "bb7629e6507f6a67447c0773a4a4bdaa14354f26849ce47ee413a448170834f5",
+      "mmso/audio.py": "2dfec8cbb07d58db21b08d09b097422eaa627d3c5eb1c4e9af2cfd236da0ecc6",
+      "mmso/data.py": "2537c5762578d4814cb6690aa2c38941bd4235ffb17640856b433329b06ef8b5",
+      "mmso/grounding.py": "46613c5f8986afae90e43fbb5a75bcb9e8b6943dab5c089711792b2296dd004e",
+      "mmso/grounding_data.py": "5b0b11e642807c7929709ab96097038a7cc4f81bb737cc28edce7b7a37fd4268",
+      "mmso/joint_data.py": "ef51b8dae3bf4dd1e16f86378168e28fe9fe01ea1922831d971a8f07097bffb9",
+      "mmso/joint_model.py": "eb0322d4acd185281ed3bcc87ec4abc72c2431006d13846d241c92afd0846e49",
+      "mmso/joint_training.py": "a033a70cc86cc8dedb8fb9bdf178f4db78238b77bec2f6de8e6a4ced61e4e73a",
+      "mmso/joint_world.py": "9437ecb37f7cab13c6aa62b9e8c62cd60e2a9e46f6aea42df5839a4df94e06f9",
+      "mmso/metrics.py": "a887154d56e307fc6a2a54b9cef476964aa7e4a0e8660d50c8f63801f929767b",
+      "mmso/scale_study.py": "f9c035d539dfbcda4291f7199bfcfae1a8cc2e30cf22d0a332aa94757c1614f1",
+      "mmso/scoring.py": "28a864c140911eaf9568f60193de0fe430e24dadbbc5d0e19bc533981d6728bf",
+      "mmso/screen.py": "17c49e2bdb1d321aca118dbd0f23063f184fd640adc9daecce0f4da03750cc31",
+      "uv.lock": "2871c4d6a6e038b673df248b2c30932a9553c1d0be5115876235ad9d9447cf97"
+    },
+    "manifest_sha256": "c8c5e976aa2ab76a8ee39a4bf122e1f7a1f058ca8b6b96eb6938bb63109083eb",
+    "python": "3.12.12",
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "additional_source_hashes": {
+      "scripts/screen_ocr.swift": "90a1b4cbf90a26f2ea103f39780e00ae07b34b97e2068a383ebd63579f75cae0",
+      "scripts/screen_grounding_v2.py": "108ff12d2c3bcaf09c802990b858af610c87ac12b4042b28ce38d2e0d8bc5a9f",
+      "scripts/screen_prepare.py": "2af31afcb888a69da96c78691d98acf572a5a54defdeb5d52b1979e7d126d8e0",
+      "evals/screen-protocol-v3.json": "86c33907aa230e6fb8ee63d57cc7541f11ad51650f87b2dace103d80126d9483"
+    }
+  },
+  "policy": "Every started run retained; failed OCR cases abstain and remain in the denominator"
+}
