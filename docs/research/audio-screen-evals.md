@@ -2,7 +2,7 @@
 
 This is the current application target. **Audio is a core modality.** The earlier image/text shapes experiment remains a mechanics and algorithm control; success there does not establish real-world speech or computer-use capability.
 
-Status: the [first baseline pilot](../../reports/pilot-v1/README.md) has executed on 2,816 real keyword records, 400 sound clips, and 24 screen examples. Generic categorical, multi-label, grounding, and joint scorers are implemented. Sentence-intent data, overlapping-event streams, paired human-audio/screens, and executed workflows are still unpopulated. The default first application is spoken commands grounded in screenshots, with sound events evaluated independently. Initial language coverage is English.
+Status: the [first baseline pilot](../../reports/pilot-v1/README.md) has executed on 2,816 real keyword records, 400 sound clips, and 24 screen examples. Generic categorical, multi-label, grounding, and joint scorers are implemented. A [single native joint model](../../reports/joint-v2/README.md) has also been evaluated on real keywords paired with generated panels; it has not been evaluated on naturally paired application screenshots. Sentence-intent data, overlapping-event streams, paired human-audio/screens, and executed workflows are still unpopulated. The default first application is spoken commands grounded in screenshots, with sound events evaluated independently. Initial language coverage is English.
 
 ## Four capabilities to evaluate separately
 

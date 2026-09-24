@@ -83,6 +83,7 @@ for s,label in zip(slices,display):
     a=evaluations[RUNS[0]]['calibrated']['by_slice'][s];b=evaluations[RUNS[1]]['calibrated']['by_slice'][s];c=evaluations[RUNS[2]]['calibrated']['by_slice'][s]
     lines.append(f"| {label.replace(chr(10),' ')} | {a['joint_macro_accuracy']:.2%} | {b['joint_macro_accuracy']:.2%} | {c['joint_macro_accuracy']:.2%} | {a['joint_examples']} |")
 lines+=['','The score averages six question families: color/position of the spoken command or its opposite, and presence/absence. Audio-word and tile-word auxiliary tasks are excluded. Evaluation speakers were never used in any earlier baseline partition.','',
+        '**The held-composition test fails:** accuracy falls to 45.66%, below the unimodal controls. The model uses both inputs on familiar combinations but does not yet separate command identity from color robustly. Further work must treat this exposed slice as development evidence and use a fresh confirmation set.','',
         '![Transfer slices](transfer.svg)','',
         '## What the comparison establishes','']
 for name,gap in gaps.items():

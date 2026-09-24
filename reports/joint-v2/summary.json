@@ -1,0 +1,32 @@
+{
+  "runs": {
+    "joint-full-v2": "6b3c7ee839498d6b3e35d81d77ac71c62dc366b7c469091df2c0b84a2ca62346",
+    "joint-audio-only-v2": "6bd443aa2e1a100bd96e43bd3eb0df602d2c93506ad8dcde70c1c71416d5b43b",
+    "joint-image-only-v2": "ef62a84c5918158b580b6a35d67496ef6cfc9ae75f775ad7d711e083990bd763"
+  },
+  "paired_gaps": {
+    "joint-audio-only-v2": {
+      "mean_percentage_points": 22.916666666666664,
+      "interval_percentage_points": [
+        18.003310098349605,
+        27.71890096618357
+      ],
+      "speaker_clusters": 134,
+      "method": "Paired speaker-cluster percentile bootstrap; fixed checkpoints, not training-seed variance"
+    },
+    "joint-image-only-v2": {
+      "mean_percentage_points": 23.09027777777778,
+      "interval_percentage_points": [
+        18.197788697788695,
+        27.862819370172303
+      ],
+      "speaker_clusters": 134,
+      "method": "Paired speaker-cluster percentile bootstrap; fixed checkpoints, not training-seed variance"
+    }
+  },
+  "joint_model_parameters": 668097,
+  "test_speakers": 198,
+  "source_manifest_sha256": "dc90840c7052b16e7752b21271c8bfef7dec57f5d54040688d953361faff42e5",
+  "native_joint_model_trained": true,
+  "real_browser_generalization_established": false
+}

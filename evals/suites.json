@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "baseline_pilot_executed",
+  "status": "native_joint_prototype_evaluated",
   "execution_enabled": true,
   "data_populated": true,
   "results": [
@@ -136,7 +136,7 @@
         "min": 200,
         "max": 500
       },
-      "implementation_status": "generic joint scorer implemented; paired data and model unpopulated"
+      "implementation_status": "Generated-panel/real-keyword joint prototype evaluated; naturally paired application screenshots and sentences remain unpopulated"
     },
     {
       "id": "workflow_execution",
@@ -187,7 +187,7 @@
         "composition",
         "template"
       ],
-      "implementation_status": "not implemented"
+      "implementation_status": "Generated panel oracle, interventions, pairing audit, and neural structural checks implemented for the joint study"
     }
   ],
   "required_common_metrics": [
@@ -202,5 +202,16 @@
     "chunk_latency",
     "real_time_factor"
   ],
-  "notes": "Only the three named baseline controls have populated data/results. Core application readiness and native joint modeling remain unestablished."
+  "notes": "Earlier controls and a limited unified model have run. Its command-color composition test fails; broader application readiness remains unestablished.",
+  "joint_training_results": [
+    "reports/joint-full-v1/training.json",
+    "reports/joint-full-v2/training.json",
+    "reports/joint-audio-only-v2/training.json",
+    "reports/joint-image-only-v2/training.json"
+  ],
+  "joint_evaluation_results": [
+    "reports/joint-full-v2/evaluation.json",
+    "reports/joint-audio-only-v2/evaluation.json",
+    "reports/joint-image-only-v2/evaluation.json"
+  ]
 }

@@ -2,6 +2,8 @@
 
 The first unified implementation is `NativeDecisionModel` in [joint_model.py](../../mmso/joint_model.py). It accepts audio, an image, a textual question, and candidate descriptions. One set of weights produces a scalar for each candidate; a masked softmax returns the supplied answer probabilities. The output layer does not have a fixed unit for each answer class.
 
+The [held-out report](../../reports/joint-v2/README.md) now records 72.92% joint accuracy versus about 50% for matched unimodal controls. The held command–color combinations fail at 45.66%. This establishes a useful controlled prototype, not robust compositional or real-browser generalization.
+
 ## What is neural, and what is outside the model?
 
 | Component | Implementation |
@@ -20,7 +22,7 @@ The scene generator and its symbolic oracle create training labels and measure c
 
 ## Why the first task is controlled
 
-The data pairs real human keyword recordings with generated 2×2 panels containing directional/control symbols. Questions request a color, position, or presence judgment about the spoken command or its opposite. Changing only the question can therefore change the correct answer while the audio, image, and candidate set stay fixed.
+The data pairs real human keyword recordings with generated 2×2 panels containing directional/control symbols. Questions request a color, position, or presence judgment about the spoken command or its opposite. The task defines opposite pairs as left/right, up/down, yes/no, and go/stop. Changing only the question can therefore change the correct answer while the audio, image, and candidate set stay fixed.
 
 The six joint question families are:
 
@@ -65,7 +67,9 @@ result = predict_joint(
         "candidates": [
             {"id": "choice-a", "text": "red"},
             {"id": "choice-b", "text": "blue"},
-            {"id": "choice-c", "text": "not present"},
+            {"id": "choice-c", "text": "green"},
+            {"id": "choice-d", "text": "yellow"},
+            {"id": "choice-e", "text": "not present"},
         ],
     }],
 )

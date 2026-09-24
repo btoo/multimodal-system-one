@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "as_of": "2026-09-23",
-  "phase": "implemented_evals_and_baseline_pilot",
+  "as_of": "2026-09-24",
+  "phase": "native_joint_prototype_with_limits",
   "method": "Primary-source claim verification, evidence retention, and targeted follow-up",
-  "model_runs_completed": 3,
+  "model_runs_completed": 7,
   "claims": [
     {
       "id": "C01",
@@ -129,6 +129,28 @@
       "status": "measured_baseline_and_geometric_audit",
       "evidence": "reports/screens-clip-v1/report.json",
       "limit": "Small disclosed external probe; supplied-crop type classification is separate."
+    },
+    {
+      "id": "C18",
+      "claim": "A single jointly trained neural checkpoint consumes audio, pixels, question text, and candidate descriptions with a shared scalar answer scorer.",
+      "status": "implemented_and_measured",
+      "evidence": "docs/research/native-joint-model.md",
+      "limit": "Eight recorded keywords, generated 2x2 panels, limited learned vocabulary; supervised learning, not a Jev-internals reproduction."
+    },
+    {
+      "id": "C19",
+      "claim": "Both modalities contribute on the in-distribution paired task: 72.92% versus 50.00% audio-only and 49.83% image-only.",
+      "status": "measured_controlled_evidence",
+      "evidence": "reports/joint-v2/summary.json",
+      "limit": "One seed; matched steps; speaker-cluster intervals condition on trained checkpoints."
+    },
+    {
+      "id": "C20",
+      "claim": "The selected model generalizes to the held command-color pairs.",
+      "status": "failed_for_current_checkpoint",
+      "evidence": "reports/joint-full-v2/evaluation.json",
+      "observed_accuracy": 0.45659722222222227,
+      "limit": "This exposed test must become development evidence for a later redesigned study."
     }
   ],
   "completed_research_actions": [
@@ -141,10 +163,17 @@
     "Implemented executable data and evaluation harness",
     "Acquired pinned real speech, sound, and screen controls",
     "Passed real CPU/MPS and checkpoint checks",
-    "Recorded three baseline runs with complete predictions and source fingerprints"
+    "Recorded three baseline runs with complete predictions and source fingerprints",
+    "Implemented and trained the unified candidate-conditioned model",
+    "Diagnosed and corrected fixed audio-panel pairing shortcuts using development evidence",
+    "Evaluated a nominated checkpoint and matched unimodal controls on untouched slices",
+    "Preserved the failed compositional transfer result and complete predictions"
   ],
-  "next_owned_action": "Extend spoken intent and paired human-audio/screen coverage; replace coarse-grid proposals and evaluate on a fresh untouched screen sample before joint fusion training.",
+  "next_owned_action": "Investigate failed command-color compositional transfer using the exposed slice as development and reserve fresh confirmation; extend to semantically paired real speech/screens and stronger visual grounding.",
   "application_target": "Speech meaning, acoustic-event classification, screen understanding, and joint audio-screen decisions for computer/browser use",
   "models_trained_from_scratch": 2,
-  "native_joint_model_trained": false
+  "native_joint_model_trained": true,
+  "baseline_runs_completed": 3,
+  "joint_model_runs_completed": 4,
+  "joint_evaluation_runs_completed": 3
 }

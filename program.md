@@ -1,12 +1,12 @@
 # Research protocol
 
-Version 2 — executable evals and baseline stage. This is a project-specific protocol drawing on the [frontier review](docs/research/frontier-methods.md). It governs the executable baseline harness; the evolutionary runner remains pending. It does not claim to reproduce the cited research systems.
+Version 3 — native joint prototype and evaluation stage. This is a project-specific protocol drawing on the [frontier review](docs/research/frontier-methods.md). It governs the executable baseline harness; the evolutionary runner remains pending. It does not claim to reproduce the cited research systems.
 
 ## Objective
 
 Find a small native audio–image–text decision model whose probabilities, modality use, generalization, and resource costs are measured on real speech, sound, screen, and paired tasks, with controlled synthetic tests for mechanics. Improve the research procedure only through a separately evaluated method-level study.
 
-The repository includes audited data adapters, bounded audio training, screen controls, saved checkpoints, independent metrics, and measured reports. Preserve those results. Build semantically paired data and a stronger screen-grounding path before claiming native multimodal competence or integrating an evolution runner.
+The repository includes audited data adapters, bounded audio training, screen controls, saved checkpoints, independent metrics, and measured reports. Preserve those results. A native joint model has now been trained on recorded keywords and generated panels, with matched unimodal controls. Its command–color composition test fails. Real paired speech/screens and a stronger grounding path are still required for application claims. Preserve every completed run and do not retune on the exposed test while treating it as fresh confirmation.
 
 ## Literature and theory phase
 

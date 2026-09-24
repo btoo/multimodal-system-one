@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     problems = []
     markdown_files = [ROOT / "README.md", ROOT / "program.md", ROOT / "evals/README.md",
-                      *sorted((ROOT / "docs/research").glob("*.md")), *sorted((ROOT / "reports").glob("*/README.md"))]
+                      *sorted((ROOT / "docs/research").glob("*.md")), *sorted((ROOT / "reports").glob("*/README.md")),
+                      *sorted((ROOT / "artifacts").glob("*/README.md"))]
     for path in markdown_files:
         text = path.read_text()
         if text.count("```") % 2:
@@ -44,7 +45,13 @@ def main():
     state = json.loads((ROOT / "docs/research/research-state.json").read_text())
     suites = json.loads((ROOT / "evals/suites.json").read_text())
     assert suites["execution_enabled"] is True and suites["data_populated"] is True
-    assert state["model_runs_completed"] == len(suites["results"]) == 3
+    assert state["baseline_runs_completed"] == len(suites["results"]) == 3
+    assert state["joint_model_runs_completed"] == len(suites["joint_training_results"]) == 4
+    assert state["model_runs_completed"] == 7 and state["native_joint_model_trained"] is True
+    for report in suites["joint_training_results"]:
+        assert json.loads((ROOT/report).read_text())["status"] == "development_complete"
+    for report in suites["joint_evaluation_results"]:
+        assert json.loads((ROOT/report).read_text())["status"] == "held_out_evaluated"
     for report in suites["results"]:
         assert json.loads((ROOT / report).read_text())["status"] == "completed"
     assert {"speech_intent", "acoustic_events", "screen_understanding", "paired_audio_screen"} <= {x["id"] for x in suites["suites"]}
@@ -52,7 +59,7 @@ def main():
     assert catalog["datasets_downloaded"] == sum(row["downloaded"] for row in catalog["records"]) == 3
     if problems:
         raise SystemExit("\n".join(problems))
-    print(f"Checked {len(markdown_files)} Markdown files, {len(manifest['figures'])} explanatory figures, campaign budget, and three baseline evidence links.")
+    print(f"Checked {len(markdown_files)} Markdown files, {len(manifest['figures'])} explanatory figures, campaign budget, baseline reports, and joint-model evidence.")
 
 
 if __name__ == "__main__":

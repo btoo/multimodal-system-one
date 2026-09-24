@@ -1,0 +1,42 @@
+{
+  "scene_id": "joint-v1:test:in_distribution:00000",
+  "spoken_word": "down",
+  "oracle_used_only_after_prediction": true,
+  "results": [
+    {
+      "question": "what color marks the spoken command",
+      "expected": "not present",
+      "predicted": "not present",
+      "correct": true,
+      "confidence": 0.5319085121154785
+    },
+    {
+      "question": "what color marks the opposite of the spoken command",
+      "expected": "red",
+      "predicted": "red",
+      "correct": true,
+      "confidence": 0.8872864246368408
+    },
+    {
+      "question": "where is the spoken command on the screen",
+      "expected": "not present",
+      "predicted": "not present",
+      "correct": true,
+      "confidence": 0.5285991430282593
+    },
+    {
+      "question": "is the spoken command on the screen",
+      "expected": "no",
+      "predicted": "no",
+      "correct": true,
+      "confidence": 0.6297881603240967
+    },
+    {
+      "question": "is the spoken command missing from the screen",
+      "expected": "yes",
+      "predicted": "yes",
+      "correct": true,
+      "confidence": 0.5490926504135132
+    }
+  ]
+}

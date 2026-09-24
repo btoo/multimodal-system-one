@@ -1,0 +1,81 @@
+{
+  "answers": [
+    {
+      "type": "choice",
+      "probabilities": {
+        "color-red": 0.021820256486535072,
+        "color-green": 0.4048422873020172,
+        "color-blue": 0.029098626226186752,
+        "color-yellow": 0.012330331839621067,
+        "color-not present": 0.5319085121154785
+      },
+      "prediction": "color-not present",
+      "decision": "color-not present",
+      "ties": [],
+      "confidence": 0.5319085121154785
+    },
+    {
+      "type": "choice",
+      "probabilities": {
+        "color-red": 0.8872864246368408,
+        "color-green": 0.035405393689870834,
+        "color-blue": 0.0017152416985481977,
+        "color-yellow": 0.01264987327158451,
+        "color-not present": 0.06294319778680801
+      },
+      "prediction": "color-red",
+      "decision": "color-red",
+      "ties": [],
+      "confidence": 0.8872864246368408
+    },
+    {
+      "type": "choice",
+      "probabilities": {
+        "position-0": 0.006090742070227861,
+        "position-1": 0.04719172418117523,
+        "position-2": 0.34774050116539,
+        "position-3": 0.070377878844738,
+        "position-4": 0.5285991430282593
+      },
+      "prediction": "position-4",
+      "decision": "position-4",
+      "ties": [],
+      "confidence": 0.5285991430282593
+    },
+    {
+      "type": "choice",
+      "probabilities": {
+        "true": 0.3702118992805481,
+        "false": 0.6297881603240967
+      },
+      "prediction": "false",
+      "decision": "false",
+      "ties": [],
+      "confidence": 0.6297881603240967
+    },
+    {
+      "type": "choice",
+      "probabilities": {
+        "true": 0.5490926504135132,
+        "false": 0.45090731978416443
+      },
+      "prediction": "true",
+      "decision": "true",
+      "ties": [],
+      "confidence": 0.5490926504135132
+    }
+  ],
+  "scope": "Real one-word speech and generated 2x2 icon panels; limited learned vocabulary; no real-browser capability claim",
+  "model": "native-decision-v1",
+  "input_contract": {
+    "offline_audio_window_seconds": 1,
+    "audio_sample_rate": 16000,
+    "image_resized_to": [
+      128,
+      128
+    ],
+    "layout": "generated 2x2 symbol panels",
+    "text_vocabulary_tokens": 43
+  },
+  "note": "Raw audio and pixels enter the network; no transcript or scene oracle is used."
+}

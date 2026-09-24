@@ -13,3 +13,9 @@ The full run began overfitting: training loss fell while development accuracy st
 Keep the architecture, optimizer, input data pool, and output semantics fixed. During each training batch, select a recorded keyword independently of the panel and choose a training recording for that word. Recompute the target using the independent training oracle. Both one-to-one associations are broken. Development and calibration remain fixed; final metrics remain closed until nomination.
 
 This is one targeted training-data change. Any improvement will be evaluated on development first and then against separately trained unimodal controls under the same augmented sampling stream. The first attempt is retained as a development result and is not silently replaced.
+
+## Outcome
+
+Re-pairing improved the selected development checkpoint to 72.83% six-family accuracy. Its untouched in-distribution test scored 72.92%, compared with 50.00% and 49.83% for audio-only and image-only controls trained for the same 8,822 optimizer steps. The held command/color composition test scored 45.66% and remains a recorded failure. New question wording and moved controls scored about 73%.
+
+See [the final report](../../reports/joint-v2/README.md). The study used one training seed; it does not demonstrate universal architecture superiority. The separate held-out failure must inform a new study with fresh confirmation data rather than be tuned away and re-reported as untouched.

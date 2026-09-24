@@ -4,7 +4,7 @@
 
 ![Project overview: visual observations and language enter a jointly trained model that predicts answer probabilities.](docs/assets/overview.svg)
 
-> **Stage: runnable evals and measured baseline controls.** The repository now contains audited real-data manifests, two trained audio CNN checkpoints, local CLIP screen controls, independent scoring, and a measured report. A native audio–screen fusion model, sentence-level speech understanding, and workflow execution are still pending. The architecture/theory figures remain proposals and illustrations.
+> **Stage: first unified neural prototype, with measured limits.** One 668,097-parameter model now reads recorded audio, pixels, question text, and candidate descriptions. It outperforms matched unimodal controls on the generated-panel task, but fails the held-out command–color composition test. General speech, real-browser grounding, and Jev-equivalent capabilities remain unestablished.
 
 The first goal is a small model whose weights, data, losses, and failure modes we can understand. It should answer bounded questions about observations, return a probability distribution over the declared answers, and support abstention in the surrounding software. The initial target machine is an Apple M4 Pro with 48 GB of unified memory. Training throughput and achievable latency are still unmeasured.
 
@@ -12,7 +12,39 @@ The first goal is a small model whose weights, data, losses, and failure modes w
 
 This recommendation is an engineering judgment from the sources below. The best architecture for our data and compute budget remains an empirical question.
 
-## Run it and inspect the evidence
+## The unified model is now implemented
+
+![Implemented neural architecture](docs/assets/implemented-joint.svg)
+
+The new model has one acoustic encoder, one shared visual encoder, a text encoder used for questions and candidate meanings, two fusion blocks, and **one scalar scoring head reused for every supplied candidate**. Its output matrix has no fixed row for each answer class. No transcript, task ID, scene graph, oracle answer, or candidate ID enters the neural forward pass.
+
+All components are jointly trained. The acoustic representation starts from our earlier small speech model; its fixed eight-class head is removed. The first task combines real recorded keywords with generated 2×2 symbol panels. This is a controlled algorithm proof, not a real-screen replacement for the failed grounding baseline below.
+
+![Measured joint model and controls](reports/joint-v2/results.svg)
+
+| Held-out test | Joint model | Audio only | Image only |
+|---|---:|---:|---:|
+| New speakers and panels | **72.92%** | 50.00% | 49.83% |
+| New question phrasing | **72.57%** | 50.00% | 49.83% |
+| Moved controls | **73.96%** | 51.04% | 51.04% |
+| Held command–color combinations | **45.66% — fails** | 48.44% | 48.87% |
+
+Scores average six question families; the first row is 1,152 related questions over 192 scenes from 134 unseen speakers. Controls use the same architecture, initialization, training sampling stream, and 8,822 optimizer steps. The joint model gains about 23 percentage points on the first slice. Candidate permutation produced zero logit difference; question-batch isolation differed by less than `2e-6`.
+
+**Compositional generalization is still weak.** The held-combination result and deteriorated confidence prevent a broad capability claim. Scope is eight spoken words, generated panels, known question families, and a 43-token learned text vocabulary. This is our independently designed supervised model; it does not reproduce Jev's undisclosed RLCD.
+
+Loaded-model p95 processing was **9.84 ms**, including preprocessing and all neural stages, after the full audio clip was available. Listening duration and checkpoint loading are excluded. See [all results and limitations](reports/joint-v2/README.md), the [architecture/API guide](docs/research/native-joint-model.md), and the [preserved development record](docs/research/joint-development.md).
+
+```bash
+uv sync --locked --group docs
+uv run mmso prepare speech_keywords
+uv run mmso joint-prepare
+uv run python scripts/run_joint_demo.py
+```
+
+The demo answers five questions about the same audio/panel through the public API. Its input was fixed before test evaluation. [Inputs](examples/joint-demo-input.json), [model output](examples/joint-demo-output.json), and [independent answer audit](examples/joint-demo-audit.json) are saved separately. The oracle is used for the audit, not prediction.
+
+## Earlier real-data baseline controls
 
 ![Measured first baseline results](reports/pilot-v1/results.svg)
 
@@ -363,13 +395,14 @@ The figure generator writes SVGs and PNG previews. Sources are original code, wi
 | Original explanatory figures | Reproducible documentation artifacts |
 | Real-data controls and independent metrics | Implemented; three acquired manifests, categorical/multi-label/grounding/joint scorers |
 | Trained checkpoints and measured baselines | Two small audio CNNs plus fixed CLIP screen controls; see report |
-| Paired data, native fusion, sentence intent, and workflow success | Pending; baseline controls do not establish these |
+| Paired generated-panel data and native fusion | Implemented and evaluated; one selected model, two matched controls, one retained failed development attempt |
+| Sentence intent, real paired screens, and workflow success | Pending; the controlled prototype does not establish these |
 
 The next implementation gates are:
 
 1. **Extend application coverage.** Retain the implemented data audits and metrics; populate sentence-intent and paired audio–screen evals. Keep future confirmation samples untouched.
 2. **Improve the weak baseline.** The coarse grid is inadequate for small UI targets. Evaluate element proposals or spatial grounding with a fresh confirmation sample, alongside an ASR-plus-vision comparison.
-3. **Evaluate native fusion.** Collect the paired pilot and compare joint predictions with unimodal and cascade baselines. Run bounded architecture studies with realistic input costs, preserving failures.
+3. **Improve transfer without hiding the failure.** Diagnose command–color shortcuts using the now-exposed composition slice as development, reserve fresh confirmation data, and extend to real paired speech/screens and an ASR cascade comparison.
 4. **Publish the actual evidence.** Report all planned slices, calibrated and raw metrics, timings, resource use, counterexamples, and an interactive local demo using a real checkpoint.
 
 The research pass covers the major choices needed for this first proof. It cannot establish an exhaustive optimum across all architectures or guarantee that published large-model gains survive downscaling. The consequential application questions are whether native audio improves decisions over a transcription cascade, whether compact visual processing preserves small UI evidence, and whether probabilities remain useful for unfamiliar speakers and apps. The synthetic study separately compares FiLM, joint tokens, and bottlenecks.
@@ -385,6 +418,10 @@ docs/research/reading-map.md       Annotated primary sources and reading depth
 docs/research/decisions.md         Proposed choices and falsification criteria
 docs/research/experiment-plan.md   Synthetic control, budgets, and mechanics checks
 docs/research/audio-screen-evals.md  Application data and evaluation contract
+docs/research/native-joint-model.md  Implemented joint architecture and API
+evals/joint-protocol-v*.json       Frozen paired-model experiments
+reports/joint-v2/                  Measured joint-model results
+examples/                         Fixed five-question model demo
 evals/suites.json                  Planned modality and joint evaluation suites
 evals/dataset-catalog.json         Metadata-only public data shortlist
 docs/research/autoresearch-source.json  Historical source inspection

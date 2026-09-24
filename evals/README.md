@@ -55,7 +55,7 @@ Implemented metric kinds:
 
 Every manifest record has `id`, `dataset`, `kind`, `split`, `group_id`, and a `media` list containing repository-relative paths and SHA-256 values. Audio and image acquisition manifests provide executable examples of this format. Future paired media records should also preserve time, modality presence, and declared history. Grounding coordinates are pixels, not normalized coordinates.
 
-Joint exact match requires both action and target. Abstention only counts as correct if it is an explicitly acceptable target response. Its coverage excludes abstentions. The generic scorer supports this contract, but no real paired dataset or joint model has been evaluated yet.
+Joint exact match requires both action and target. Abstention only counts as correct if it is an explicitly acceptable target response. Its coverage excludes abstentions. This generic action/target contract remains unpopulated with natural application data. A separate candidate-choice joint model has now been evaluated on real keywords and generated panels, as described below.
 
 ## Use a trained audio checkpoint
 
@@ -70,3 +70,23 @@ Use a PCM16 WAV file. The model resamples to 16 kHz and pads/truncates to the ch
 Raw and temperature-adjusted metrics, class priors, confusion matrices, reliability-bin counts, risk/coverage, cluster uncertainty intervals, CPU/MPS comparison, checkpoint hashes, exact source-file fingerprints, and timings are retained in each report. The published audio uncertainty intervals apply to one fixed trained checkpoint; they do not estimate variation across training seeds.
 
 The screen experiment's oracle-crop diagnostic is explicitly separated from grounding. Neither implies that a browser workflow succeeded. This prototype has ordinary process/function boundaries and content checks; it is not an adversarial sandbox for untrusted evolving code.
+
+## Unified question-conditioned model
+
+The [joint model](../docs/research/native-joint-model.md) is now implemented, with [measured results](../reports/joint-v2/README.md). Its paired-scene manifest is a separate compact format: `joint_data.audit_joint` validates scene families, media, and speakers, and `expand_scenes` deterministically creates the questions. `joint-prepare` runs that audit. Do not pass the compact scene manifest to the older single-record scorer.
+
+```bash
+uv run mmso joint-prepare
+uv run python scripts/run_joint_demo.py
+uv run python scripts/check_joint_results.py
+```
+
+To reproduce development training, use a new ID:
+
+```bash
+uv run mmso joint-train --run-id my-joint-development --resample-pairs
+```
+
+`joint-train` never evaluates final test metrics. After freezing the selected recipe and controls, `joint-evaluate --run-id ...` fits calibration and records the final evaluation once. A training record's `test_evaluated: false` describes that phase; its separate `evaluation.json` records later final evaluation. Do not repeatedly adapt against the already exposed test and call it an untouched result.
+
+The prototype consumes at most one second of audio and resizes input images to 128×128 using a fixed quadrant layout. It rejects unknown text tokens. It is not a general speech or real-browser model. The generic Choice-style scorer supports supplied candidate meanings; Boolean questions use yes/no candidates. Other Jev-compatible primitives are not implemented by this checkpoint.
