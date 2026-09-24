@@ -65,7 +65,7 @@ Q 40.68 411.48 40.68 420.12
 L 40.68 479.88
 Q 40.68 488.52 49.32 488.52
 z
-" clip-path="url(#p1691f1588b)" style="fill: #fff0d9; stroke-dasharray: 4.625,2; stroke-dashoffset: 0; stroke: #b26614; stroke-width: 1.25; stroke-linejoin: miter"/>
+" clip-path="url(#p1691f1588b)" style="fill: #fff0d9; stroke: #b26614; stroke-width: 1.25; stroke-linejoin: miter"/>
    </g>
    <g id="patch_5">
     <path d="M 369.72 384.12
@@ -129,12 +129,12 @@ z
    <g id="patch_10">
     <path d="M 280.809668 446.540735
 Q 320.399607 408.600377 358.698013 371.897737
-" clip-path="url(#p1691f1588b)" style="fill: none; stroke-dasharray: 5.92,2.56; stroke-dashoffset: 0; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
     <path d="M 352.290368 373.883205
 L 358.698013 371.897737
 L 356.4418 378.215134
 z
-" clip-path="url(#p1691f1588b)" style="fill: #506477; stroke-dasharray: 5.92,2.56; stroke-dashoffset: 0; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+" clip-path="url(#p1691f1588b)" style="fill: #506477; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
    </g>
    <g id="patch_11">
     <path d="M 642.180762 240.784937
@@ -173,7 +173,7 @@ z
     <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="39.6" y="77.236406" transform="rotate(-0 39.6 77.236406)">Perception → probabilities → decisions</text>
    </g>
    <g id="text_3">
-    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="106.278281" transform="rotate(-0 39.6 106.278281)">Proposed model · jointly trained on a small, controlled world</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="106.278281" transform="rotate(-0 39.6 106.278281)">Application target: real speech, acoustic events, and screen understanding</text>
    </g>
    <g id="text_4">
     <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="56.16" y="217.277812" transform="rotate(-0 56.16 217.277812)">Visual observation</text>
@@ -188,24 +188,25 @@ z
     <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="56.16" y="354.450312" transform="rotate(-0 56.16 354.450312)">Language → semantic tokens</text>
    </g>
    <g id="text_8">
-    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="56.16" y="440.477813" transform="rotate(-0 56.16 440.477813)">Audio · later</text>
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="56.16" y="440.477813" transform="rotate(-0 56.16 440.477813)">Speech + sounds</text>
    </g>
    <g id="text_9">
-    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="56.16" y="469.650313" transform="rotate(-0 56.16 469.650313)">Spectrograms + timestamps</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="56.16" y="469.650313" transform="rotate(-0 56.16 469.650313)">Acoustic features + timestamps</text>
    </g>
    <g id="text_10">
     <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="376.56" y="217.277812" transform="rotate(-0 376.56 217.277812)">Shared decision network</text>
    </g>
    <g id="text_11">
-    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(376.56 247.515938)">Cross-modal interaction</text>
-    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(376.56 262.400313)">Candidate-conditioned scoring</text>
-    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(376.56 278.350313)">All small-model weights trained</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(376.56 246.450313)">Native input representations</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(376.56 263.465938)">Trainable fusion and heads</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(376.56 278.350313)">Separate from-scratch controls</text>
    </g>
    <g id="text_12">
     <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="736.56" y="217.277812" transform="rotate(-0 736.56 217.277812)">Answer probabilities</text>
    </g>
    <g id="text_13">
-    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="736.56" y="247.515937" transform="rotate(-0 736.56 247.515937)">Boolean · choice · ordered levels</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(736.56 247.515937)">Choice · boolean</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(736.56 263.465937)">Ordered levels · event labels</text>
    </g>
    <g id="text_14">
     <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="736.56" y="343.277813" transform="rotate(-0 736.56 343.277813)">Application policy</text>

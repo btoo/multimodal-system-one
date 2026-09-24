@@ -1,6 +1,6 @@
 # Multimodal System One
 
-**A research project for learning fast, typed decisions directly from images and language on a MacBook.**
+**A research project for learning fast, typed decisions directly from speech, sounds, screenshots, and language on a MacBook.**
 
 ![Project overview: visual observations and language enter a jointly trained model that predicts answer probabilities.](docs/assets/overview.svg)
 
@@ -8,13 +8,14 @@
 
 The first goal is a small model whose weights, data, losses, and failure modes we can understand. It should answer bounded questions about observations, return a probability distribution over the declared answers, and support abstention in the surrounding software. The initial target machine is an Apple M4 Pro with 48 GB of unified memory. Training throughput and achievable latency are still unmeasured.
 
-**Recommended starting point:** a compact, jointly trained image–text transformer with a shared candidate scorer and supervised probability losses. Compare it against late fusion and a FiLM-style model; challenge it with a latent bottleneck. Use controlled scenes to establish whether it actually combines modalities before moving to natural images and audio.
+**Current target:** speech/audio classification and screen understanding for computer/browser use. Define real-data evals for each modality and for paired audio–screen decisions before model search. Use compact pretrained input encoders with trainable fusion/decision heads for the practical track, while retaining small from-scratch controls to learn the fundamentals. The image/text shapes study below is an algorithm control, not the application acceptance test.
 
 This recommendation is an engineering judgment from the sources below. The best architecture for our data and compute budget remains an empirical question.
 
 ## Read the project
 
 - [The decision we want to learn](#the-decision-we-want-to-learn)
+- [Audio, screens, and real-world evals](#audio-screens-and-real-world-evals)
 - [Architecture and alternatives](#architecture-and-alternatives)
 - [The probability objective](#the-probability-objective)
 - [Data that requires multiple modalities](#data-that-requires-multiple-modalities)
@@ -37,7 +38,7 @@ TypeSafe's Jev motivates the interface: structured questions and probabilistic a
 
 ### What “native multimodal” means here
 
-Images enter as pixel-derived tokens, language as text embeddings, and later audio as spectrogram patches. Their representations interact in the trainable prediction network. The decision loss can update both modality pathways. Separate modality-specific input stems are compatible with this definition.
+Images enter as pixel-derived tokens, language as text embeddings, and audio as waveform-derived or spectrogram features. Their representations interact in a trainable prediction network. The from-scratch track updates all input pathways; the practical track may initially freeze pretrained encoders and train fusion/heads. Separate modality-specific input stems are compatible with native input, but frozen representations must not be described as jointly learned here.
 
 There are two distinct development tracks:
 
@@ -46,7 +47,7 @@ There are two distinct development tracks:
 | **A · Fundamentals** | All small-model weights, from random initialization | Multimodal learning on a controlled task distribution |
 | **B · Practical transfer** | A decision head, fusion layers, or adapters over pretrained encoders | Useful decisions on richer inputs, with inherited pretraining knowledge |
 
-We begin with A. Its limited vocabulary and generated scenes do not establish open-domain instruction following. Results from B must be reported separately, including pretrained parameter counts and data provenance.
+A supplies small learnability controls; B is the practical path for real speech and screens. Define evals for both at the start. A's limited vocabulary and generated scenes do not establish open-domain instruction following. Report the tracks separately, including pretrained parameter counts and data provenance.
 
 ### Output contract
 
@@ -55,6 +56,7 @@ We begin with A. Its limited vocabulary and generated scenes do not establish op
 | Boolean | Bernoulli probability | `p_true` in `[0, 1]` |
 | Choice | Categorical distribution over supplied candidates | Candidate ID plus all probabilities |
 | Ordered score | Distribution over ordered rubric levels | Level probabilities and their weighted mean |
+| Multi-label events | Independent probabilities for co-occurring labels | One probability per event; no sum-to-one requirement |
 
 Initially, an ordered score can use a categorical head; an ordinal loss is a later comparison. A valid schema is a property of the serializer. Correctness and calibration require separate measurement.
 
@@ -73,11 +75,34 @@ The following is an **illustrative future response**, not a model result:
 
 Abstention is separate from the candidate labels. A softmax always allocates its mass somewhere, even when every supplied option is unsuitable. The v1 data contract supplies an exhaustive answer set, with an explicit `none` answer where the task requires it. Open-set rejection is an additional research problem.
 
+## Audio, screens, and real-world evals
+
+**Evals are part of the design.** The application now has four core suites: spoken intent, acoustic events, screen understanding, and joint audio–screen decisions. Synthetic data is useful for controlled interventions and debugging. Real recordings and screenshots are necessary to assess the intended behavior.
+
+![Four evaluation suites connect speech meaning, acoustic events, screens, and paired decisions, with later execution-based workflow verification.](docs/assets/eval-suites.svg)
+
+| Capability | First evidence source | What we measure |
+|---|---|---|
+| Spoken meaning | [Speech Commands](https://www.tensorflow.org/datasets/catalog/speech_commands) for mechanics; [SLURP](https://github.com/pswietojanski/slurp) or [Fluent Speech Commands](https://lorenlugosch.github.io/publication/2019-04-01-pretrain-speech-model) for intent | Intent/argument accuracy, macro F1, unfamiliar speakers and noise |
+| Acoustic events | [ESC-50](https://github.com/karolpiczak/ESC-50) diagnostics; selected multi-label sound data later | Per-event quality, overlap, silence, false activations |
+| Screen understanding | [ScreenSpot-Pro](https://github.com/likaixin2000/ScreenSpot-Pro-GUI-Grounding) and [Multimodal-Mind2Web](https://huggingface.co/datasets/osunlp/Multimodal-Mind2Web) | State labels, target grounding, unfamiliar apps/sites |
+| Joint decisions | A purpose-built human-audio + screenshot pilot | Correct action and target, contradictory cues, ambiguity, abstention |
+
+The [detailed eval/data plan](docs/research/audio-screen-evals.md) specifies datasets, access terms, splits, baselines, and collection. The [suite manifest](evals/suites.json) and [dataset catalog](evals/dataset-catalog.json) are planned metadata; no data or evaluator has been run.
+
+**We need some new paired data.** Start with existing public datasets for the individual capabilities, then collect a few hundred episodes in a controlled test workspace. Examples should make both modalities necessary: “close the other tab,” a spoken correction, or an alert sound whose meaning depends on the visible application. Hold out speakers, recording sessions, and app/site families. TTS and UI simulation can supplement training; retain real human recordings for evaluation.
+
+![Practical target architecture with native speech/audio, resolution-preserving screenshot inputs, trainable fusion, and typed decision heads.](docs/assets/audio-screen-architecture.svg)
+
+The practical architecture preserves screenshot resolution through global views and tiles/crops; **64×64 is only the toy experiment**. Native audio remains available to the network. ASR-transcript-plus-vision is a comparison baseline, with its whole cost measured. Choosing among supplied UI targets also needs a proposal-recall metric; oracle target boxes do not establish end-to-end grounding.
+
+Keep one scorecard per task family. Multi-label event probabilities need sigmoid/BCE-style treatment; they cannot share an exclusive-choice softmax metric unchanged. For audio latency, report listening duration, endpointing, and processing separately. Full computer-use success is a later execution-based test in a resettable environment, such as [WebArena](https://github.com/web-arena-x/webarena) or a pinned [OSWorld](https://github.com/xlang-ai/OSWorld-V2) release.
+
 ## Architecture and alternatives
 
 ![Four architecture families: late fusion, FiLM conditioning, early token fusion, and latent bottlenecks.](docs/assets/fusion-families.svg)
 
-The initial study compares four small models with the same observations, candidate semantics, task mix, and evaluation protocol:
+The synthetic control study compares four small models with the same observations, candidate semantics, task mix, and evaluation protocol:
 
 | ID | Design | Why include it | Main concern |
 |---|---|---|---|
@@ -88,7 +113,7 @@ The initial study compares four small models with the same observations, candida
 
 FiLM provides a useful conditional-computation precedent; its own compositional tests also show that strong in-distribution results can coexist with a large generalization gap. ViLT supports the simplicity of patch/text interaction, but its published model uses pretrained initialization: it is not proof that our tiny random-initialized model will learn as efficiently. Perceiver IO motivates A3's input/latent/output separation. [FiLM §2 and §4.5](https://arxiv.org/html/1709.07871), [ViLT §3 and §4.5](https://arxiv.org/html/2102.03334), [Perceiver IO §3](https://arxiv.org/html/2107.14795).
 
-### Proposed A2 baseline
+### Proposed A2 synthetic-control baseline
 
 ![Detailed proposed model: image patches and question tokens interact, then an independent shared scorer evaluates candidate descriptions.](docs/assets/architecture.svg)
 
@@ -145,7 +170,7 @@ The plot counts attention interactions for a simplified six-layer comparison, wi
 | Approach | What it contributes | Position in this project |
 |---|---|---|
 | Contrastive alignment: CLIP / SigLIP | Reusable image/text representations | Transfer baseline or optional pretraining objective |
-| ImageBind | Alignment across more than two modalities | Reference for later audio and missing-pair data |
+| ImageBind | Alignment across more than two modalities | Reference for native audio inputs and missing-pair data |
 | BLIP-2 | Small learned bridges over frozen encoders | Reference for Track B |
 | GLiClass | Direct predictions conditioned on label text | Reference for dynamic answer spaces |
 | VL-JEPA | Predict semantic answer embeddings; score without always decoding text | Important alternative objective after the supervised baseline |
@@ -199,7 +224,7 @@ For the first proof, use a simple threshold policy and measure the actual error 
 
 ## Data that requires multiple modalities
 
-The first dataset will be a deterministic 2D scene generator: colored shapes, positions, and simple occlusions, paired with a small compositional question grammar. All labels come from an independent scene oracle. The model sees rendered pixels and text; scene graphs, seeds, template IDs, and oracle programs stay outside its inputs.
+The synthetic control dataset will be a deterministic 2D scene generator: colored shapes, positions, and simple occlusions, paired with a small compositional question grammar. All labels come from an independent scene oracle. The model sees rendered pixels and text; scene graphs, seeds, template IDs, and oracle programs stay outside its inputs.
 
 ![Counterfactual tests: change the scene or change the question while holding the other fixed.](docs/assets/counterfactuals.svg)
 
@@ -216,17 +241,17 @@ Key construction rules:
 
 CLEVR's diagnostic design and CoGenT splits motivate the controlled stage. Winoground and ARO motivate relation/order counterexamples. Their published results do not transfer automatically to our generated data. [CLEVR](https://cs.stanford.edu/people/jcjohns/clevr/), [Winoground](https://arxiv.org/abs/2204.03162), [ARO §3–4](https://arxiv.org/html/2210.01936).
 
-### Data progression
+### Data workstreams
 
-| Stage | Inputs | Purpose |
+| Workstream | Inputs | Purpose |
 |---|---|---|
-| D0 | Pixels + grammar-based language | Verify learnability and eliminate simple shortcuts |
-| D1 | New combinations, paraphrases, corruptions | Diagnose generalization and confidence failures |
-| D2 | Natural images and richer language | Track B, starting with a carefully scoped real-data task |
-| D3 | Images + text + short audio | Test cases where audio supplies information unavailable in the image |
-| D4 | Short synchronized video/audio histories | Temporal decisions, after explicit timing and alignment support |
+| Controlled mechanics | Shapes/text, simple real-speech keywords | Verify learnability and expose implementation bugs |
+| Speech and sounds | Real recordings with task labels | Separate semantic intent from acoustic-event recognition |
+| Screen understanding | Real screenshots and target/state annotations | Preserve small-text evidence and test new app/site layouts |
+| Paired decisions | Human utterances/sounds synchronized with screens | Establish cross-modal dependence and useful confidence |
+| Workflow integration | Time-aligned observations and executed actions | Measure actual task success in a resettable environment |
 
-NLVR2 is a candidate natural-image benchmark, subject to its image-access terms. Audio spectrogram patches offer a tractable input route; an audio stream needs timing and missingness semantics as well as an encoder. [NLVR2](https://lil.nlp.cornell.edu/nlvr/), [AST](https://arxiv.org/abs/2104.01778).
+These workstreams are defined before model search; audio is not contingent on succeeding at the shapes benchmark. The [audio/screen plan](docs/research/audio-screen-evals.md) is the application contract. [NLVR2](https://lil.nlp.cornell.edu/nlvr/) remains an optional natural-image diagnostic, and [AST](https://arxiv.org/abs/2104.01778) is a reference for spectrogram tokenization.
 
 ## Research that improves its own search
 
@@ -269,7 +294,7 @@ Our planned loop makes the following choices explicit:
 
 Random uniform predictions have normalized NLL 1 for a fixed exhaustive categorical answer set. Report raw NLL and accuracy alongside the scalar; normalization is for cross-task aggregation, not a claim that every task has equal difficulty. Finalists must also survive slice-level checks so the mean cannot hide a failed modality or task.
 
-The proposed first campaign is 12 architecture-screening runs, eight refinement runs, and ten confirmation runs: **6 h 40 min of allocated training time**, excluding setup and evaluation. This is a planned budget, not a runtime estimate or authorization for an unattended run in this research stage. A short profiling pilot must confirm that five-minute screens are informative before freezing this campaign. The optional meta-research campaign has a separate budget and is disabled.
+The proposed synthetic-control campaign is 12 architecture-screening runs, eight refinement runs, and ten confirmation runs: **6 h 40 min of allocated training time**, excluding setup and evaluation. This is a planned budget, not a runtime estimate or authorization for an unattended run in this research stage. A short profiling pilot must confirm that five-minute screens are informative before freezing this campaign. The optional meta-research campaign has a separate budget and is disabled.
 
 ### Keep the final test out of the search
 
@@ -279,7 +304,7 @@ Use separate train, development, calibration, and final-test scene families. The
 
 Freeze the candidate and its policy before the final evaluation. If final results trigger design changes, retire that test as development evidence and prepare another untouched test for a later confirmatory claim. This is procedural separation, not an access-control guarantee against an agent that can read the filesystem.
 
-The [experiment specification](docs/research/experiment-plan.md) defines leakage checks, candidate permutations, multi-question isolation, missing modalities, scene-level uncertainty estimates, and the complete metric ledger. The [campaign manifest](experiments/campaign.json) is marked `planned`, with execution disabled.
+The [synthetic experiment specification](docs/research/experiment-plan.md) defines leakage checks, candidate permutations, multi-question isolation, missing modalities, scene-level uncertainty estimates, and the complete metric ledger. The [campaign manifest](experiments/campaign.json) is marked `planned`, with execution disabled.
 
 ## MacBook implementation plan
 
@@ -320,12 +345,12 @@ The figure generator writes SVGs and PNG previews. Sources are original code, wi
 
 Implementation should proceed through four gates:
 
-1. **Make the experiment trustworthy.** Implement the scene oracle, split manifests, metrics, and leakage controls. Verify that probability metrics behave correctly on known distributions.
-2. **Make a tiny model learn.** Overfit a small controlled batch; confirm gradients reach both input pathways; run CPU/MPS numerical checks. This proves implementation mechanics only.
-3. **Run the bounded architecture study.** Compare A0–A3, preserve failures, and confirm promising changes at a longer budget across fresh seeds.
+1. **Make the evals trustworthy.** Implement audio, screen, and paired-example manifests and task-specific metrics; freeze real-data evaluation groups. Retain the scene oracle as a mechanics control.
+2. **Establish modality baselines.** Build small learnability controls, pretrained audio/screen baselines, and an ASR-plus-vision comparison. Verify gradients, checkpoints, and CPU/MPS behavior.
+3. **Evaluate native fusion.** Collect the paired pilot and compare joint predictions with unimodal and cascade baselines. Run bounded architecture studies with realistic input costs, preserving failures.
 4. **Publish the actual evidence.** Report all planned slices, calibrated and raw metrics, timings, resource use, counterexamples, and an interactive local demo using a real checkpoint.
 
-The research pass covers the major choices needed for this first proof. It cannot establish an exhaustive optimum across all architectures or guarantee that published large-model gains survive downscaling. The most consequential open questions are whether task-conditioned fusion beats FiLM at this scale, whether a bottleneck preserves spatial evidence, and whether confidence remains useful on unfamiliar combinations.
+The research pass covers the major choices needed for this first proof. It cannot establish an exhaustive optimum across all architectures or guarantee that published large-model gains survive downscaling. The consequential application questions are whether native audio improves decisions over a transcription cascade, whether compact visual processing preserves small UI evidence, and whether probabilities remain useful for unfamiliar speakers and apps. The synthetic study separately compares FiLM, joint tokens, and bottlenecks.
 
 ### Repository contents
 
@@ -336,7 +361,10 @@ docs/research/frontier-methods.md  Current RSI methods and adoption decisions
 docs/research/research-state.json  Verified claims and unresolved constraints
 docs/research/reading-map.md       Annotated primary sources and reading depth
 docs/research/decisions.md         Proposed choices and falsification criteria
-docs/research/experiment-plan.md   Data, metrics, budgets, and acceptance gates
+docs/research/experiment-plan.md   Synthetic control, budgets, and mechanics checks
+docs/research/audio-screen-evals.md  Application data and evaluation contract
+evals/suites.json                  Planned modality and joint evaluation suites
+evals/dataset-catalog.json         Metadata-only public data shortlist
 docs/research/autoresearch-source.json  Historical source inspection
 docs/research/shinka-source.json   Inspected runner candidate and hashes
 docs/assets/                      Original SVG figures and PNG previews

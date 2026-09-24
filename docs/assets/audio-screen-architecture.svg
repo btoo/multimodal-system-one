@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1008pt" height="576pt" viewBox="0 0 1008 576" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 576
+L 1008 576
+L 1008 0
+L 0 0
+z
+" style="fill: #f8fafc"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 45.72 240.12
+L 278.28 240.12
+Q 286.92 240.12 286.92 231.48
+L 286.92 157.32
+Q 286.92 148.68 278.28 148.68
+L 45.72 148.68
+Q 37.08 148.68 37.08 157.32
+L 37.08 231.48
+Q 37.08 240.12 45.72 240.12
+z
+" clip-path="url(#p1691f1588b)" style="fill: #e6eefc; stroke: #2e62bc; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 45.72 366.12
+L 278.28 366.12
+Q 286.92 366.12 286.92 357.48
+L 286.92 283.32
+Q 286.92 274.68 278.28 274.68
+L 45.72 274.68
+Q 37.08 274.68 37.08 283.32
+L 37.08 357.48
+Q 37.08 366.12 45.72 366.12
+z
+" clip-path="url(#p1691f1588b)" style="fill: #fff0d9; stroke: #b26614; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 45.72 492.12
+L 278.28 492.12
+Q 286.92 492.12 286.92 483.48
+L 286.92 409.32
+Q 286.92 400.68 278.28 400.68
+L 45.72 400.68
+Q 37.08 400.68 37.08 409.32
+L 37.08 483.48
+Q 37.08 492.12 45.72 492.12
+z
+" clip-path="url(#p1691f1588b)" style="fill: #f0e9f7; stroke: #7850a8; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 351.72 240.12
+L 566.28 240.12
+Q 574.92 240.12 574.92 231.48
+L 574.92 157.32
+Q 574.92 148.68 566.28 148.68
+L 351.72 148.68
+Q 343.08 148.68 343.08 157.32
+L 343.08 231.48
+Q 343.08 240.12 351.72 240.12
+z
+" clip-path="url(#p1691f1588b)" style="fill: #e6eefc; stroke: #2e62bc; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 351.72 366.12
+L 566.28 366.12
+Q 574.92 366.12 574.92 357.48
+L 574.92 283.32
+Q 574.92 274.68 566.28 274.68
+L 351.72 274.68
+Q 343.08 274.68 343.08 283.32
+L 343.08 357.48
+Q 343.08 366.12 351.72 366.12
+z
+" clip-path="url(#p1691f1588b)" style="fill: #fff0d9; stroke: #b26614; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 654.12 366.12
+L 951.48 366.12
+Q 960.12 366.12 960.12 357.48
+L 960.12 157.32
+Q 960.12 148.68 951.48 148.68
+L 654.12 148.68
+Q 645.48 148.68 645.48 157.32
+L 645.48 357.48
+Q 645.48 366.12 654.12 366.12
+z
+" clip-path="url(#p1691f1588b)" style="fill: #dff2ed; stroke: #007e78; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 289.401636 194.4
+Q 315.002008 194.4 338.813525 194.4
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 332.813525 191.4
+L 338.813525 194.4
+L 332.813525 197.4
+z
+" clip-path="url(#p1691f1588b)" style="fill: #506477; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 289.401636 320.4
+Q 315.002008 320.4 338.813525 320.4
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 332.813525 317.4
+L 338.813525 320.4
+L 332.813525 323.4
+z
+" clip-path="url(#p1691f1588b)" style="fill: #506477; stroke: #506477; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 577.203442 195.772412
+Q 610.197041 205.199155 641.470613 214.134461
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #2e62bc; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 636.525632 209.601562
+L 641.470613 214.134461
+L 634.877306 215.370706
+z
+" clip-path="url(#p1691f1588b)" style="fill: #2e62bc; stroke: #2e62bc; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 577.351099 319.6927
+Q 610.202579 314.999632 641.283184 310.559545
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #b26614; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 634.919223 308.438225
+L 641.283184 310.559545
+L 635.767751 314.377922
+z
+" clip-path="url(#p1691f1588b)" style="fill: #b26614; stroke: #b26614; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 289.240714 445.153876
+Q 466.199378 399.60016 641.425667 354.492403
+" clip-path="url(#p1691f1588b)" style="fill: none; stroke: #7850a8; stroke-width: 1.6; stroke-linecap: round"/>
+    <path d="M 634.867212 353.08291
+L 641.425667 354.492403
+L 636.363 358.893471
+z
+" clip-path="url(#p1691f1588b)" style="fill: #7850a8; stroke: #7850a8; stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #007e78" x="39.6" y="36.397656" transform="rotate(-0 39.6 36.397656)">13 / PRACTICAL NATIVE-INPUT MODEL</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="39.6" y="77.236406" transform="rotate(-0 39.6 77.236406)">Listen to the command. Read the screen. Decide.</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="106.278281" transform="rotate(-0 39.6 106.278281)">Compact pretrained input encoders are a starting hypothesis; fusion and decision heads are trained</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="52.56" y="177.677812" transform="rotate(-0 52.56 177.677812)">Screenshot</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="52.56" y="206.850312" transform="rotate(-0 52.56 206.850312)">Global view + legible tiles</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="52.56" y="303.677812" transform="rotate(-0 52.56 303.677812)">Speech / audio</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="52.56" y="333.915937" transform="rotate(-0 52.56 333.915937)">Waveform-derived features</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="52.56" y="429.677813" transform="rotate(-0 52.56 429.677813)">Question / history</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="52.56" y="459.915937" transform="rotate(-0 52.56 459.915937)">Context + candidate semantics</text>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="358.56" y="177.677812" transform="rotate(-0 358.56 177.677812)">Visual encoder</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="358.56" y="206.850312" transform="rotate(-0 358.56 206.850312)">Preserve spatial positions</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="358.56" y="303.677812" transform="rotate(-0 358.56 303.677812)">Acoustic encoder</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="358.56" y="332.850312" transform="rotate(-0 358.56 332.850312)">Preserve time + presence</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 14px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="660.96" y="177.677812" transform="rotate(-0 660.96 177.677812)">Trainable fusion + heads</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(660.96 206.850312)">Speech intent</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(660.96 222.800312)">Independent sound-event labels</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(660.96 238.653203)">Screen state / target scores</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #506477" transform="translate(660.96 254.700312)">Action + target or abstention</text>
+   </g>
+   <g id="text_16">
+    <text style="font-weight: 700; font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #14283e" x="655.2" y="446.4" transform="rotate(-0 655.2 446.4)">Compare with ASR + vision</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="655.2" y="480.24" transform="rotate(-0 655.2 480.24)">Include encoder and proposal costs</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #506477" x="39.6" y="559.158047" transform="rotate(-0 39.6 559.158047)">Proposed architecture. Frozen encoders are not jointly learned here; any target proposal stage needs its own recall test.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p1691f1588b">
+   <rect x="0" y="0" width="1008" height="576"/>
+  </clipPath>
+ </defs>
+</svg>

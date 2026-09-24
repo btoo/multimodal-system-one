@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-09-23",
+  "acquisition_status": "metadata_only",
+  "datasets_downloaded": 0,
+  "records": [
+    {
+      "id": "speech_commands",
+      "source": "https://www.tensorflow.org/datasets/catalog/speech_commands",
+      "role": "speech mechanics and keyword baseline",
+      "release": null,
+      "license_source": "https://huggingface.co/datasets/google/speech_commands/blob/main/README.md",
+      "observed_terms": "CC BY 4.0",
+      "split_policy": "Preserve official splits and audit speaker grouping",
+      "downloaded": false
+    },
+    {
+      "id": "fluent_speech_commands",
+      "source": "https://lorenlugosch.github.io/publication/2019-04-01-pretrain-speech-model",
+      "role": "compact spoken intent baseline",
+      "release": null,
+      "observed_terms": "Dataset-specific terms must be retrieved from the chosen author-linked distribution",
+      "split_policy": "Preserve published splits; audit speakers and utterance variants",
+      "downloaded": false
+    },
+    {
+      "id": "slurp",
+      "source": "https://github.com/pswietojanski/slurp",
+      "role": "spoken intent and entity evaluation",
+      "release": null,
+      "license_source": "https://github.com/pswietojanski/slurp/blob/master/LICENSE.txt",
+      "observed_terms": "Text CC BY 4.0; audio CC BY-NC 4.0",
+      "split_policy": "Preserve official split; keep related recordings and microphone channels grouped in custom splits",
+      "downloaded": false
+    },
+    {
+      "id": "esc50",
+      "source": "https://github.com/karolpiczak/ESC-50",
+      "role": "environmental sound diagnostic",
+      "release": null,
+      "observed_terms": "ESC-50 CC BY-NC 3.0; source README distinguishes ESC-10 subset terms",
+      "split_policy": "Use original source-recording folds for official comparison; adapted holdouts get a separate name",
+      "downloaded": false
+    },
+    {
+      "id": "audioset",
+      "source": "https://research.google.com/audioset/download.html",
+      "role": "later multi-label event reference",
+      "release": null,
+      "observed_terms": "Released dataset metadata/features CC BY 4.0; source media handling is separate",
+      "split_policy": "Preserve release splits and source video IDs; do not treat weak labels as exhaustive negatives",
+      "downloaded": false
+    },
+    {
+      "id": "screenspot_pro",
+      "source": "https://huggingface.co/datasets/likaixin/ScreenSpot-Pro",
+      "code_source": "https://github.com/likaixin2000/ScreenSpot-Pro-GUI-Grounding",
+      "role": "high-resolution GUI grounding evaluation",
+      "release": null,
+      "observed_terms": "Author dataset card lists MIT; pin and retain the exact release notice before use",
+      "split_policy": "Evaluation-only official benchmark; adapted spoken variants are separately named and grouped",
+      "downloaded": false
+    },
+    {
+      "id": "multimodal_mind2web",
+      "source": "https://huggingface.co/datasets/osunlp/Multimodal-Mind2Web",
+      "code_source": "https://github.com/OSU-NLP-Group/Mind2Web",
+      "role": "screenshot/action train and generalization splits",
+      "release": null,
+      "observed_terms": "Multimodal card says OpenRAIL; original repository says CC BY 4.0. Exact selected release terms unresolved.",
+      "split_policy": "Preserve test_task, test_website, and test_domain roles; do not expose target annotations as candidate evidence",
+      "downloaded": false
+    },
+    {
+      "id": "webarena",
+      "source": "https://github.com/web-arena-x/webarena",
+      "role": "later browser workflow execution",
+      "release": null,
+      "observed_terms": "Review code, environment, and asset terms for the selected release",
+      "split_policy": "Pin resettable environment and task versions; use execution-based scoring",
+      "downloaded": false
+    },
+    {
+      "id": "osworld",
+      "source": "https://github.com/xlang-ai/OSWorld-V2",
+      "role": "later desktop workflow execution",
+      "release": null,
+      "observed_terms": "Official task/assets access is gated for current releases; exact release/access not provisioned",
+      "split_policy": "Pin benchmark, task, asset, and environment image versions before any reported run",
+      "downloaded": false
+    }
+  ]
+}

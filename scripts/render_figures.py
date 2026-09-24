@@ -71,16 +71,16 @@ def save(fig, name, kind, description):
 
 def overview():
     f, a = canvas("01 / research target", "Perception → probabilities → decisions",
-                  "Proposed model · jointly trained on a small, controlled world")
+                  "Application target: real speech, acoustic events, and screen understanding")
     box(a, .6, 4.2, 3.25, 1.15, "Visual observation", "Pixels → spatial patch tokens", BLUE)
     box(a, .6, 2.7, 3.25, 1.15, "Question + candidates", "Language → semantic tokens", PURPLE)
-    box(a, .6, 1.25, 3.25, 1.0, "Audio · later", "Spectrograms + timestamps", GOLD, True)
+    box(a, .6, 1.25, 3.25, 1.0, "Speech + sounds", "Acoustic features + timestamps", GOLD)
     box(a, 5.05, 2.7, 3.8, 2.65, "Shared decision network",
-        "Cross-modal interaction\nCandidate-conditioned scoring\nAll small-model weights trained", TEAL)
-    box(a, 10.05, 4.15, 3.3, 1.2, "Answer probabilities", "Boolean · choice · ordered levels", BLUE)
+        "Native input representations\nTrainable fusion and heads\nSeparate from-scratch controls", TEAL)
+    box(a, 10.05, 4.15, 3.3, 1.2, "Answer probabilities", "Choice · boolean\nOrdered levels · event labels", BLUE)
     box(a, 10.05, 2.4, 3.3, 1.2, "Application policy", "Choose an action or abstain", GOLD)
     arrow(a, (3.85, 4.8), (5.05, 4.4)); arrow(a, (3.85, 3.3), (5.05, 3.6))
-    arrow(a, (3.85, 1.75), (5.05, 2.9), dashed=True)
+    arrow(a, (3.85, 1.75), (5.05, 2.9))
     arrow(a, (8.85, 4.65), (10.05, 4.75)); arrow(a, (11.7, 4.15), (11.7, 3.6))
     a.text(5.12, 1.5, "Training signal", fontsize=12, weight="bold", color=TEAL)
     a.text(5.12, 1.05, "Known outcomes → proper probability loss", fontsize=12)
@@ -91,7 +91,7 @@ def overview():
 
 def fusion():
     f, a = canvas("02 / architecture search", "Four credible ways to combine modalities",
-                  "One evaluation contract · four different inductive biases")
+                  "Image/text synthetic control · four inductive biases to study before extending the comparison")
     cols = [(.55, "A0 · Late fusion", BLUE), (3.92, "A1 · FiLM", GOLD),
             (7.29, "A2 · Joint tokens", TEAL), (10.66, "A3 · Latent array", PURPLE)]
     bodies = ["Pool each modality,\nthen combine vectors.", "Text scales and shifts\nvisual feature maps.",
@@ -126,8 +126,8 @@ def fusion():
 
 
 def architecture():
-    f, a = canvas("03 / proposed A2 model", "A direct, question-conditioned candidate scorer",
-                  "Bidirectional observation/question fusion · independent candidate scoring · no answer-token decoding")
+    f, a = canvas("03 / proposed A2 synthetic control", "A direct, question-conditioned candidate scorer",
+                  "64×64 is a toy workload · real screens and speech have a separate evaluation contract")
     box(a, .65, 4.9, 3.6, 1.13, "64 × 64 RGB", "8 × 8 patches → 64 visual tokens", BLUE)
     box(a, 5.2, 4.9, 3.6, 1.13, "Question text", "Token + position embeddings", PURPLE)
     box(a, 4.0, 2.7, 5.0, 1.4, "Joint transformer → H",
@@ -324,9 +324,44 @@ def two_level():
     save(f,"two-level-research","design","Proposed separation of model optimization and later research-policy optimization.")
 
 
+def eval_suites():
+    f,a=canvas("12 / application evaluation", "Four capabilities. Separate evidence for each.",
+               "All suites planned · real data and paired cases must be evaluated before claiming application readiness")
+    box(a,.6,4.2,3.7,1.6,"Speech meaning","Intent · arguments · corrections\nNew speakers and noise",GOLD)
+    box(a,5.1,4.2,3.7,1.6,"Acoustic events","Alerts · speech · music · overlap\nSilence and false activations",PURPLE)
+    box(a,9.6,4.2,3.7,1.6,"Screen understanding","State · targets · small UI text\nNew apps and layouts",BLUE)
+    box(a,3.4,1.7,7.1,1.5,"Joint audio + screen decisions",
+        "Correct action + target · context dependence · ambiguity · abstention",TEAL)
+    arrow(a,(2.45,4.2),(4.5,3.2),GOLD)
+    arrow(a,(6.95,4.2),(6.95,3.2),PURPLE)
+    arrow(a,(11.45,4.2),(9.4,3.2),BLUE)
+    a.text(7,.83,"Later: execute the workflow and verify the outcome",ha="center",fontsize=14,weight="bold")
+    note(a,"Speech recognition, sound classification, visual grounding, and completed computer tasks are distinct measurements.")
+    save(f,"eval-suites","design","Planned real-data capability suites; no measured evaluation results.")
+
+
+def audio_screen_architecture():
+    f,a=canvas("13 / practical native-input model", "Listen to the command. Read the screen. Decide.",
+               "Compact pretrained input encoders are a starting hypothesis; fusion and decision heads are trained")
+    box(a,.55,4.7,3.4,1.2,"Screenshot","Global view + legible tiles",BLUE)
+    box(a,.55,2.95,3.4,1.2,"Speech / audio","Waveform-derived features",GOLD)
+    box(a,.55,1.2,3.4,1.2,"Question / history","Context + candidate semantics",PURPLE)
+    box(a,4.8,4.7,3.15,1.2,"Visual encoder","Preserve spatial positions",BLUE)
+    box(a,4.8,2.95,3.15,1.2,"Acoustic encoder","Preserve time + presence",GOLD)
+    box(a,9.0,2.95,4.3,2.95,"Trainable fusion + heads",
+        "Speech intent\nIndependent sound-event labels\nScreen state / target scores\nAction + target or abstention",TEAL)
+    arrow(a,(3.95,5.3),(4.8,5.3));arrow(a,(3.95,3.55),(4.8,3.55))
+    arrow(a,(7.95,5.3),(9.0,5.0),BLUE);arrow(a,(7.95,3.55),(9.0,3.7),GOLD)
+    arrow(a,(3.95,1.8),(9.0,3.1),PURPLE)
+    a.text(9.1,1.8,"Compare with ASR + vision",fontsize=13,weight="bold")
+    a.text(9.1,1.33,"Include encoder and proposal costs",fontsize=11,color=MUTED)
+    note(a,"Proposed architecture. Frozen encoders are not jointly learned here; any target proposal stage needs its own recall test.")
+    save(f,"audio-screen-architecture","design","Proposed native speech/audio and screenshot fusion, distinct from the synthetic control.")
+
+
 if __name__ == "__main__":
     for make in [overview,fusion,architecture,candidate_equivariance,scaling,proper_scoring,
-                 calibration,counterfactuals,research_loop,firewall,two_level]:
+                 calibration,counterfactuals,research_loop,firewall,two_level,eval_suites,audio_screen_architecture]:
         make()
     for name,item in MANIFEST.items():
         item['svg_sha256']=hashlib.sha256((OUT/f'{name}.svg').read_bytes()).hexdigest()

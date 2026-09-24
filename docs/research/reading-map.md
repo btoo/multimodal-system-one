@@ -4,6 +4,8 @@ Primary sources consulted on 2026-09-23. This is a scoped design review, not a c
 
 The current automated-research sources are assessed separately in [frontier-methods.md](frontier-methods.md). The table below records the model-side evidence and the decision each source informs.
 
+The application-specific speech, sound, and screen datasets are reviewed in [audio-screen-evals.md](audio-screen-evals.md), with source URLs, access notes, and acquisition status in [the dataset catalog](../../evals/dataset-catalog.json).
+
 ## Multimodal structure and learning
 
 | Source | Reading depth | Relevant contribution | Limit / project decision |

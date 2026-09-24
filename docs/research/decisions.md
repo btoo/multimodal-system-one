@@ -4,8 +4,8 @@ Status: proposed for implementation. No model comparison has run. References are
 
 | Decision | Rationale | What could change it |
 |---|---|---|
-| Start with images and text | Sufficient to study actual cross-modal dependence with a cheap oracle | A first task whose answer genuinely needs audio |
-| Train the small baseline from scratch | Makes the learned mechanism and data budget inspectable | Move to a separately labeled pretrained track for natural scenes |
+| Make speech/audio and screen evals first-class | Matches the intended computer/browser-use application | Refine task priority from application evidence |
+| Keep from-scratch controls and a practical pretrained track | Preserves fundamentals while giving real speech/screens a useful starting point | Compare learning curves, cost, and transfer honestly |
 | Start with A2, compare A0/A1/A3 | Simple tokens are easy to inspect; FiLM and bottlenecks are credible alternatives | Equal-budget trials show better quality/resource tradeoffs |
 | Use direct candidate probabilities | Matches the bounded decision task | Requirements expand to free-form explanations or generated media |
 | Use a shared independent candidate scorer | Permutation equivariance and variable answer sets | Set-relative reasoning needs cross-candidate interaction |
@@ -27,8 +27,10 @@ Status: proposed for implementation. No model comparison has run. References are
 - Archive search might cost more than the gains it produces in a small search space.
 - A research method that improves one benchmark might not improve future research efficiency.
 
-## Scope of the first proof
+## Scope of the synthetic control
 
 The model must show a learnable link from pixel evidence and question semantics to correct bounded answers. Both modalities must matter on deliberately balanced tasks. The report must include failures, resource measurements, and unadjusted probability quality. It need not demonstrate open-world knowledge, arbitrary natural language, real-time robotics, a world model, or self-accelerating AI research.
 
 This is a scope decision for the first experiment, not a limit on the longer-term project.
+
+The application proof is governed by [audio-screen-evals.md](audio-screen-evals.md). It requires real-speech, acoustic-event, visual, and joint evaluations; the synthetic control cannot satisfy it.

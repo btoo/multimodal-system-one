@@ -5,18 +5,119 @@
   "method": "Primary-source claim verification, evidence retention, and targeted follow-up",
   "model_runs_completed": 0,
   "claims": [
-    {"id": "C01", "claim": "The public Jev interface accepts text and emits typed probabilistic decisions.", "status": "source_supported", "source": "https://docs.typesafe.ai/concepts/system-one", "limit": "Does not disclose a reproducible internal model or complete training recipe."},
-    {"id": "C02", "claim": "Joint patch/text interaction is a credible architecture pattern.", "status": "source_supported", "source": "https://arxiv.org/html/2102.03334", "limit": "ViLT uses pretrained initialization; it does not validate our from-scratch small model."},
-    {"id": "C03", "claim": "A2 will outperform FiLM and latent fusion within the laptop budget.", "status": "unresolved", "source": null, "test": "Compare A0-A3 at equal time, then confirm finalists with fresh seeds and longer runs."},
-    {"id": "C04", "claim": "Proper log/Brier objectives target probabilities whereas sampled correctness reward targets actions.", "status": "source_supported_and_analytically_derived", "source": "https://sites.stat.washington.edu/people/raftery/Research/PDF/Gneiting2007jasa.pdf", "limit": "Finite learned models may remain miscalibrated; see the explicit binary derivation in README."},
-    {"id": "C05", "claim": "The proposed independent shared scorer is candidate-permutation equivariant.", "status": "analytical_design_property", "source": null, "conditions": ["No candidate slot embeddings", "No order-dependent truncation or cross-candidate attention", "Deterministic inference", "Correct ID remapping"], "test": "Permutation and opaque-ID checks against the implemented model; tie-aware decision policy."},
-    {"id": "C06", "claim": "The model will use both modalities and generalize to unseen combinations.", "status": "unresolved", "source": null, "test": "Balanced tasks, independently trained unimodal controls, counterfactual pairs, and held-out tuple/grammar slices."},
-    {"id": "C07", "claim": "AIDE2 reports transferable research-harness gains but its ignition test is inconclusive.", "status": "source_supported", "source": "https://arxiv.org/html/2609.26457", "limit": "Very recent preprint; no local reproduction or independently verified replication."},
-    {"id": "C08", "claim": "Archive-based search will find better models per unit total cost than greedy search here.", "status": "unresolved", "source": "https://arxiv.org/abs/2509.19349", "test": "Separate matched-cost policy comparison on new task families; count proposer and evaluator costs."},
-    {"id": "C09", "claim": "ShinkaEvolve is compatible with the future local evaluator.", "status": "unresolved", "source": "https://github.com/SakanaAI/ShinkaEvolve/tree/9912af12d423504b8d580f4179fd15f5f88b8c50", "test": "Pin dependency revision and run a deterministic provider-free integration smoke test."},
-    {"id": "C10", "claim": "The proposed baseline meets a 100 ms warm p95 latency target.", "status": "unresolved", "source": null, "test": "Pilot batch-one input-to-probability measurement including preprocessing and device synchronization."},
-    {"id": "C11", "claim": "Calibration remains useful under distribution shift.", "status": "unresolved", "source": "https://arxiv.org/abs/1906.02530", "test": "Measure raw and adjusted NLL, Brier, reliability, and accepted risk on each shifted slice."}
+    {
+      "id": "C01",
+      "claim": "The public Jev interface accepts text and emits typed probabilistic decisions.",
+      "status": "source_supported",
+      "source": "https://docs.typesafe.ai/concepts/system-one",
+      "limit": "Does not disclose a reproducible internal model or complete training recipe."
+    },
+    {
+      "id": "C02",
+      "claim": "Joint patch/text interaction is a credible architecture pattern.",
+      "status": "source_supported",
+      "source": "https://arxiv.org/html/2102.03334",
+      "limit": "ViLT uses pretrained initialization; it does not validate our from-scratch small model."
+    },
+    {
+      "id": "C03",
+      "claim": "A2 will outperform FiLM and latent fusion within the laptop budget.",
+      "status": "unresolved",
+      "source": null,
+      "test": "Compare A0-A3 at equal time, then confirm finalists with fresh seeds and longer runs."
+    },
+    {
+      "id": "C04",
+      "claim": "Proper log/Brier objectives target probabilities whereas sampled correctness reward targets actions.",
+      "status": "source_supported_and_analytically_derived",
+      "source": "https://sites.stat.washington.edu/people/raftery/Research/PDF/Gneiting2007jasa.pdf",
+      "limit": "Finite learned models may remain miscalibrated; see the explicit binary derivation in README."
+    },
+    {
+      "id": "C05",
+      "claim": "The proposed independent shared scorer is candidate-permutation equivariant.",
+      "status": "analytical_design_property",
+      "source": null,
+      "conditions": [
+        "No candidate slot embeddings",
+        "No order-dependent truncation or cross-candidate attention",
+        "Deterministic inference",
+        "Correct ID remapping"
+      ],
+      "test": "Permutation and opaque-ID checks against the implemented model; tie-aware decision policy."
+    },
+    {
+      "id": "C06",
+      "claim": "The model will use both modalities and generalize to unseen combinations.",
+      "status": "unresolved",
+      "source": null,
+      "test": "Balanced tasks, independently trained unimodal controls, counterfactual pairs, and held-out tuple/grammar slices."
+    },
+    {
+      "id": "C07",
+      "claim": "AIDE2 reports transferable research-harness gains but its ignition test is inconclusive.",
+      "status": "source_supported",
+      "source": "https://arxiv.org/html/2609.26457",
+      "limit": "Very recent preprint; no local reproduction or independently verified replication."
+    },
+    {
+      "id": "C08",
+      "claim": "Archive-based search will find better models per unit total cost than greedy search here.",
+      "status": "unresolved",
+      "source": "https://arxiv.org/abs/2509.19349",
+      "test": "Separate matched-cost policy comparison on new task families; count proposer and evaluator costs."
+    },
+    {
+      "id": "C09",
+      "claim": "ShinkaEvolve is compatible with the future local evaluator.",
+      "status": "unresolved",
+      "source": "https://github.com/SakanaAI/ShinkaEvolve/tree/9912af12d423504b8d580f4179fd15f5f88b8c50",
+      "test": "Pin dependency revision and run a deterministic provider-free integration smoke test."
+    },
+    {
+      "id": "C10",
+      "claim": "The proposed baseline meets a 100 ms warm p95 latency target.",
+      "status": "unresolved",
+      "source": null,
+      "test": "Pilot batch-one input-to-probability measurement including preprocessing and device synchronization."
+    },
+    {
+      "id": "C11",
+      "claim": "Calibration remains useful under distribution shift.",
+      "status": "unresolved",
+      "source": "https://arxiv.org/abs/1906.02530",
+      "test": "Measure raw and adjusted NLL, Brier, reliability, and accepted risk on each shifted slice."
+    },
+    {
+      "id": "C12",
+      "claim": "Synthetic shape/text success establishes computer/browser-use ability.",
+      "status": "unsupported_scope_extrapolation",
+      "source": null,
+      "test": "Require independent real speech, sound, screen, and paired decision evidence."
+    },
+    {
+      "id": "C13",
+      "claim": "Native audio plus screenshot fusion improves useful decisions over ASR plus vision.",
+      "status": "unresolved",
+      "source": null,
+      "test": "Matched paired-task comparison including acoustic cues, unseen speakers/sites, complete input cost, and abstention."
+    },
+    {
+      "id": "C14",
+      "claim": "Public unimodal datasets alone cover the intended joint audio-screen task.",
+      "status": "not_established",
+      "source": null,
+      "test": "Collect semantically paired episodes requiring both modalities and audit coverage."
+    }
   ],
-  "completed_research_actions": ["Inspected and fingerprinted autoresearch source", "Reviewed full methods for principal architecture choices", "Reviewed September 2026 RSI methods and contrary evidence", "Inspected ShinkaEvolve source and maintenance revision", "Derived probability-versus-action example", "Specified falsification tests and two-level evaluation boundaries"],
-  "next_owned_action": "Implement the original scene oracle, split discipline, metrics, and one trainable baseline after the research review."
+  "completed_research_actions": [
+    "Inspected and fingerprinted autoresearch source",
+    "Reviewed full methods for principal architecture choices",
+    "Reviewed September 2026 RSI methods and contrary evidence",
+    "Inspected ShinkaEvolve source and maintenance revision",
+    "Derived probability-versus-action example",
+    "Specified falsification tests and two-level evaluation boundaries"
+  ],
+  "next_owned_action": "Implement task-specific eval/data adapters, pin small public datasets, freeze grouped eval splits, and establish audio/screen baselines before training joint fusion.",
+  "application_target": "Speech meaning, acoustic-event classification, screen understanding, and joint audio-screen decisions for computer/browser use"
 }

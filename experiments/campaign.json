@@ -6,22 +6,48 @@
   "model_implemented": false,
   "method": "evidence-driven archive search",
   "runner_candidate": "ShinkaEvolve; source inspected, local compatibility untested",
-  "hardware_target": {"chip": "Apple M4 Pro", "unified_memory_gb": 48},
+  "hardware_target": {
+    "chip": "Apple M4 Pro",
+    "unified_memory_gb": 48
+  },
   "backend_proposal": "pytorch-mps",
   "task_contract": "docs/research/experiment-plan.md",
   "primary_metric": "macro_task_mean_nll_divided_by_log_candidate_count",
   "direction": "minimize",
-  "architecture_screen": {"families": ["A0", "A1", "A2", "A3"], "seeds_per_family": 3, "training_seconds_per_run": 300},
-  "refinement": {"max_runs": 8, "training_seconds_per_run": 300, "active_archive_cap": 12},
-  "confirmation": {"configurations": 2, "fresh_seeds_per_configuration": 5, "training_seconds_per_run": 1800},
+  "architecture_screen": {
+    "families": [
+      "A0",
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "seeds_per_family": 3,
+    "training_seconds_per_run": 300
+  },
+  "refinement": {
+    "max_runs": 8,
+    "training_seconds_per_run": 300,
+    "active_archive_cap": 12
+  },
+  "confirmation": {
+    "configurations": 2,
+    "fresh_seeds_per_configuration": 5,
+    "training_seconds_per_run": 1800
+  },
   "total_allocated_training_seconds": 24000,
   "pilot_required_before_freeze": true,
-  "proposed_gates": {"warm_p95_ms": 100, "process_rss_gib": 12, "mps_driver_allocation_gib": 12},
+  "proposed_gates": {
+    "warm_p95_ms": 100,
+    "process_rss_gib": 12,
+    "mps_driver_allocation_gib": 12
+  },
   "max_concurrent_training_jobs": 1,
   "proposer_api_budget_usd": null,
   "proposer_call_cap": null,
   "research_policy_version": "fixed-v1",
   "meta_research_enabled": false,
   "meta_research_budget": null,
-  "notes": "Training allocation excludes setup/evaluation. Proposer budgets and pilot gates must be fixed before any live campaign. No model or runner currently exists."
+  "notes": "Training allocation excludes setup/evaluation. Proposer budgets and pilot gates must be fixed before any live campaign. No model or runner currently exists.",
+  "acceptance_scope": "Synthetic image/text control only; not the audio/screen application benchmark",
+  "application_eval_plan": "docs/research/audio-screen-evals.md"
 }

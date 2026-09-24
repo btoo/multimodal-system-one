@@ -4,17 +4,17 @@
     "overview": {
       "kind": "design",
       "description": "Proposed multimodal prediction and policy separation.",
-      "svg_sha256": "d5bdf51bb68c1e25b5949e3df4a567c8ab74959ff42c57bc16b2c9976cb87ef6"
+      "svg_sha256": "ab0139d03eaa45b36b2d179707a3c780ca80de7e0259991a0bcf88ae80f270e8"
     },
     "fusion-families": {
       "kind": "design",
       "description": "Four architecture families to compare under the same contract.",
-      "svg_sha256": "92a3808d42fa3828be4a0f83f52e6b90f86a2512220d8650fa55202ffe73bd74"
+      "svg_sha256": "aa64e57cccd294c7707824538ce768b1c30d01be8ba5e51f2625b226fd24ef73"
     },
     "architecture": {
       "kind": "design",
       "description": "Proposed joint transformer and independent semantic candidate scoring.",
-      "svg_sha256": "e1c187db7ef21ac422c21cded9e25e10f36c6c5d594db79f852c7994c9849a6a"
+      "svg_sha256": "3d19e9ef56e80ee173809cdbdcff4f69b605f2c0a4b7ed084d7f5c70f2b815aa"
     },
     "candidate-equivariance": {
       "kind": "analytic",
@@ -83,6 +83,16 @@
       "kind": "design",
       "description": "Proposed separation of model optimization and later research-policy optimization.",
       "svg_sha256": "2630511baafac4ae96bcf5fa7c2aeab6e10ca9be680fc8b5669cb83e0f2cf983"
+    },
+    "eval-suites": {
+      "kind": "design",
+      "description": "Planned real-data capability suites; no measured evaluation results.",
+      "svg_sha256": "c1dff086259bbb7ceab5a1d4fd357e923dea66e226195dd87755d76c1976cba3"
+    },
+    "audio-screen-architecture": {
+      "kind": "design",
+      "description": "Proposed native speech/audio and screenshot fusion, distinct from the synthetic control.",
+      "svg_sha256": "cce2a1bf2b8a925f1011cfb22e6a5c1ed16bf6fce06703fe4dd902294801ad41"
     }
   }
 }

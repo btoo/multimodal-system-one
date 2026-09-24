@@ -42,6 +42,13 @@ def main():
     assert rows == [], "Research-only foundation must not contain fabricated model runs."
     state = json.loads((ROOT / "docs/research/research-state.json").read_text())
     assert state["model_runs_completed"] == 0
+    suites = json.loads((ROOT / "evals/suites.json").read_text())
+    assert suites["execution_enabled"] is False and suites["data_populated"] is False
+    assert suites["results"] == []
+    assert {"speech_intent", "acoustic_events", "screen_understanding", "paired_audio_screen"} <= {x["id"] for x in suites["suites"]}
+    catalog = json.loads((ROOT / "evals/dataset-catalog.json").read_text())
+    assert catalog["datasets_downloaded"] == 0
+    assert all(row["downloaded"] is False for row in catalog["records"])
     if problems:
         raise SystemExit("\n".join(problems))
     print(f"Checked {len(markdown_files)} Markdown files, {len(manifest['figures'])} figures, campaign budget, and empty results ledger.")

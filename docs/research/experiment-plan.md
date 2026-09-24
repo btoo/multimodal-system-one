@@ -1,6 +1,8 @@
-# Proposed experiment contract
+# Synthetic-control experiment contract
 
 Status: design only. The implementation, evaluator, and research runner do not yet exist. Numbers below are proposed settings, not measured outcomes. The profiling pilot may revise them once, before the comparative campaign is frozen.
+
+The application target is now speech/audio plus screenshots for computer/browser use. This document covers the small shapes/text control and reusable measurement rules. Its data sizes, accuracy thresholds, and 100 ms latency gate do not apply to real screens or audio. Use [audio-screen-evals.md](audio-screen-evals.md) for the application contract.
 
 ## Research questions
 

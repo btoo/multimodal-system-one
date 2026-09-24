@@ -4,7 +4,7 @@ Version 1 — research/design stage. This is a project-specific protocol drawing
 
 ## Objective
 
-Find a small native image–text decision model whose probabilities, modality use, generalization, and resource costs are measured on a controlled task. Improve the research procedure only through a separately evaluated method-level study.
+Find a small native audio–image–text decision model whose probabilities, modality use, generalization, and resource costs are measured on real speech, sound, screen, and paired tasks, with controlled synthetic tests for mechanics. Improve the research procedure only through a separately evaluated method-level study.
 
 The present repository contains documentation and figure tools. Do not manufacture benchmark rows, trained weights, or a winner. When implementation begins, build the evaluator and a baseline before integrating an evolution runner.
 
@@ -16,6 +16,8 @@ The present repository contains documentation and figure tools. Do not manufactu
 4. Check contradictory evidence. Preserve uncertainty when a paper's scale, dataset, or evaluation does not match this project.
 5. Update the research-state record with a concrete follow-up experiment. A new source is useful if it changes a design decision or its falsification test.
 6. Finish this phase with a reviewable design and unresolved questions. Literature alone cannot select an empirically best architecture.
+
+Read [the application eval contract](docs/research/audio-screen-evals.md) before implementing. The shapes/text campaign is a control; it does not measure computer-use readiness.
 
 ## Implementation phase prerequisites
 
