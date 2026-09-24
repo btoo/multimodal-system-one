@@ -20,69 +20,69 @@
  </defs>
  <g id="figure_1">
   <g id="patch_1">
-   <path d="M 0 576 
-L 1008 576 
-L 1008 0 
-L 0 0 
+   <path d="M 0 576
+L 1008 576
+L 1008 0
+L 0 0
 z
 " style="fill: #f8fafc"/>
   </g>
   <g id="axes_1">
    <g id="patch_2">
-    <path d="M 144 244.8 
-L 335.589395 244.8 
-L 335.589395 207.36 
-L 144 207.36 
+    <path d="M 144 244.8
+L 335.589395 244.8
+L 335.589395 207.36
+L 144 207.36
 z
 " clip-path="url(#p1691f1588b)" style="fill: #ba4563; stroke: #ba4563; stroke-linejoin: miter"/>
    </g>
    <g id="patch_3">
-    <path d="M 144 324 
-L 214.4818 324 
-L 214.4818 286.56 
-L 144 286.56 
+    <path d="M 144 324
+L 214.4818 324
+L 214.4818 286.56
+L 144 286.56
 z
 " clip-path="url(#p1691f1588b)" style="fill: #2e62bc; stroke: #2e62bc; stroke-linejoin: miter"/>
    </g>
    <g id="patch_4">
-    <path d="M 144 403.2 
-L 169.928805 403.2 
-L 169.928805 365.76 
-L 144 365.76 
+    <path d="M 144 403.2
+L 169.928805 403.2
+L 169.928805 365.76
+L 144 365.76
 z
 " clip-path="url(#p1691f1588b)" style="fill: #007e78; stroke: #007e78; stroke-linejoin: miter"/>
    </g>
    <g id="patch_5">
-    <path d="M 648 244.8 
-L 673.928805 244.8 
-L 673.928805 207.36 
-L 648 207.36 
+    <path d="M 648 244.8
+L 673.928805 244.8
+L 673.928805 207.36
+L 648 207.36
 z
 " clip-path="url(#p1691f1588b)" style="fill: #007e78; stroke: #007e78; stroke-linejoin: miter"/>
    </g>
    <g id="patch_6">
-    <path d="M 648 324 
-L 839.589395 324 
-L 839.589395 286.56 
-L 648 286.56 
+    <path d="M 648 324
+L 839.589395 324
+L 839.589395 286.56
+L 648 286.56
 z
 " clip-path="url(#p1691f1588b)" style="fill: #ba4563; stroke: #ba4563; stroke-linejoin: miter"/>
    </g>
    <g id="patch_7">
-    <path d="M 648 403.2 
-L 718.4818 403.2 
-L 718.4818 365.76 
-L 648 365.76 
+    <path d="M 648 403.2
+L 718.4818 403.2
+L 718.4818 365.76
+L 648 365.76
 z
 " clip-path="url(#p1691f1588b)" style="fill: #2e62bc; stroke: #2e62bc; stroke-linejoin: miter"/>
    </g>
    <g id="patch_8">
-    <path d="M 437.001526 298.8 
-Q 477.001494 298.8 515.212609 298.8 
+    <path d="M 437.001526 298.8
+Q 477.001494 298.8 515.212609 298.8
 " clip-path="url(#p1691f1588b)" style="fill: none; stroke: #007e78; stroke-width: 1.6; stroke-linecap: round"/>
-    <path d="M 509.212609 295.8 
-L 515.212609 298.8 
-L 509.212609 301.8 
+    <path d="M 509.212609 295.8
+L 515.212609 298.8
+L 509.212609 301.8
 z
 " clip-path="url(#p1691f1588b)" style="fill: #007e78; stroke: #007e78; stroke-width: 1.6; stroke-linecap: round"/>
    </g>

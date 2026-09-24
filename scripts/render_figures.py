@@ -63,6 +63,8 @@ def save(fig, name, kind, description):
     for ext in ("svg", "png"):
         fig.savefig(OUT / f"{name}.{ext}", dpi=160, facecolor=BG,
                     metadata={"Date": None} if ext == "svg" else None)
+    svg_path = OUT / f"{name}.svg"
+    svg_path.write_text("\n".join(line.rstrip() for line in svg_path.read_text().splitlines()) + "\n")
     plt.close(fig)
     MANIFEST[name] = {"kind": kind, "description": description}
 

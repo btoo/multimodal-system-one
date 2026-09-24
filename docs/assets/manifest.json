@@ -4,32 +4,32 @@
     "overview": {
       "kind": "design",
       "description": "Proposed multimodal prediction and policy separation.",
-      "svg_sha256": "74243b8dacdb4f7fc3e3c430015ea1139d0e70ba12e70a33c8b122e06fdd93d1"
+      "svg_sha256": "d5bdf51bb68c1e25b5949e3df4a567c8ab74959ff42c57bc16b2c9976cb87ef6"
     },
     "fusion-families": {
       "kind": "design",
       "description": "Four architecture families to compare under the same contract.",
-      "svg_sha256": "48e8c2b937a0ebefcd161e6d8ab8ef46d03888594d0211e991577164d58fd726"
+      "svg_sha256": "92a3808d42fa3828be4a0f83f52e6b90f86a2512220d8650fa55202ffe73bd74"
     },
     "architecture": {
       "kind": "design",
       "description": "Proposed joint transformer and independent semantic candidate scoring.",
-      "svg_sha256": "774d05d0d176a819190ea4e9694176e82e3c1001892ca0b2b326a93849419f4d"
+      "svg_sha256": "e1c187db7ef21ac422c21cded9e25e10f36c6c5d594db79f852c7994c9849a6a"
     },
     "candidate-equivariance": {
       "kind": "analytic",
       "description": "Softmax values of fixed illustrative logits; not model predictions.",
-      "svg_sha256": "7b4fe4e6e59df99cff29a00b9eba1a1f13bf91b7c7d45724914256442745ba6c"
+      "svg_sha256": "ef9a50042c949752cd99ba92bbea50a73d9888489f29e2f5726cd44480881ef1"
     },
     "attention-scaling": {
       "kind": "analytic",
       "description": "Pair counts: 6*N^2 versus N*32+6*32^2+8*32. Not a hardware benchmark.",
-      "svg_sha256": "33468e316939ded5df839aff5a975a5530c8242c77d07462647f1ae4812c3695"
+      "svg_sha256": "f5b24def49d3c80014c1668e30ac9982fa183e7accc9a235fa7e8bc44544cbf0"
     },
     "proper-scoring": {
       "kind": "analytic",
       "description": "True q=.7; log/Brier regret is minimized at p=q; sampled correctness reward is maximized at p=1.",
-      "svg_sha256": "9e6f1fb0120ef9e36dbbc5ab4a9f372a97c631371dea526451281c17e3933fa5"
+      "svg_sha256": "6f927342396d904d99185dca3ff5ddb7d01e1f33b50f1007fd4828da830eb664"
     },
     "calibration": {
       "kind": "simulation",
@@ -62,27 +62,27 @@
       },
       "samples": 40000,
       "seed": 20260923,
-      "svg_sha256": "18728a654a176504c6e22be7da4d7f81e9b466dd1d9d0faffd045f0a4e8516e1"
+      "svg_sha256": "d5926726a43ec35126c57d21c34bd67d5781e7209e45746b3b50e065b32520ff"
     },
     "counterfactuals": {
       "kind": "design",
       "description": "Hand-built task illustrations with deterministic scene-oracle labels.",
-      "svg_sha256": "48d86e4b0b85bfec588f1ed4314e2c97e07b2bccd3d62b5bb86c6a8adb61b0f8"
+      "svg_sha256": "b6f1a2b8933be5c4ed6e026bc9c8583a1d438d887e5cae46cf7cd1e663e5eba3"
     },
     "research-loop": {
       "kind": "design",
       "description": "Proposed evidence-driven population search; no loop has executed.",
-      "svg_sha256": "f77b0dd5133bbf7e55ec128e3f92636416118368ed9960a290b0c72e4d123a55"
+      "svg_sha256": "12ab1ebd927aa7ed9528785b4022ef7999a13269c6654ae916c7423f2fbac0e4"
     },
     "evaluation-firewall": {
       "kind": "design",
       "description": "Four distinct split roles with a one-way model-selection flow.",
-      "svg_sha256": "b27e0578ae278e3d0a19718bb142f07af55f051b9c505fc1d11bf32914bb9593"
+      "svg_sha256": "222fc04a8e47f4ea446203a2ab0d7deb5987b589aed4bc974c0e36072be52832"
     },
     "two-level-research": {
       "kind": "design",
       "description": "Proposed separation of model optimization and later research-policy optimization.",
-      "svg_sha256": "be3375a87ef27e22cde297a8440c87574ebf8542cfbaf09cca955a44502511fe"
+      "svg_sha256": "2630511baafac4ae96bcf5fa7c2aeab6e10ca9be680fc8b5669cb83e0f2cf983"
     }
   }
 }
