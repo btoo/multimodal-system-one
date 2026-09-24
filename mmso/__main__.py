@@ -30,6 +30,25 @@ def main():
     p.add_argument("--split",default="test")
     p.add_argument("--field",default="probabilities")
     p.add_argument("--metadata-only",action="store_true",help="Skip local media existence/hash checks; never claims media verification")
+    commands.add_parser("joint-prepare",help="Prepare real-speech/generated-panel paired data")
+    p=commands.add_parser("joint-smoke",help="Training-only small-batch learnability check; weights discarded")
+    p.add_argument("--device",choices=["auto","cpu","mps"],default="auto")
+    p.add_argument("--steps",type=int,default=250)
+    p=commands.add_parser("joint-train",help="Train a question-conditioned shared candidate scorer; development only")
+    p.add_argument("--run-id",required=True)
+    p.add_argument("--mode",choices=["full","audio_only","image_only"],default="full")
+    p.add_argument("--device",choices=["auto","cpu","mps"],default="auto")
+    p.add_argument("--epochs",type=int,default=48)
+    p.add_argument("--max-train-seconds",type=float,default=360)
+    p.add_argument("--seed",type=int,default=20260924)
+    p.add_argument("--max-steps",type=int)
+    p=commands.add_parser("joint-evaluate",help="Calibrate and evaluate a frozen joint checkpoint once")
+    p.add_argument("--run-id",required=True)
+    p.add_argument("--device",choices=["auto","cpu","mps"],default="auto")
+    p=commands.add_parser("joint-predict",help="Answer supplied candidate questions using audio and image inputs")
+    p.add_argument("checkpoint");p.add_argument("image");p.add_argument("audio");p.add_argument("requests")
+    p.add_argument("--device",choices=["auto","cpu","mps"],default="auto")
+    p.add_argument("--threshold",type=float,default=0.)
     args=parser.parse_args()
     if hasattr(args,"run_id") and (not args.run_id or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_" for c in args.run_id)):
         parser.error("run-id must contain only letters, digits, hyphens, or underscores")
@@ -51,6 +70,22 @@ def main():
     elif args.command=="score":
         from .scoring import score_files
         print(json.dumps(score_files(ROOT/args.manifest,ROOT/args.predictions,args.split,args.field,not args.metadata_only),indent=2))
+    elif args.command=="joint-prepare":
+        from .joint_data import prepare_joint
+        prepare_joint()
+    elif args.command=="joint-smoke":
+        from .joint_training import smoke_joint
+        smoke_joint(args.device,args.steps)
+    elif args.command=="joint-train":
+        from .joint_training import train_joint
+        train_joint(args.run_id,args.mode,args.device,args.epochs,args.max_train_seconds,args.seed,max_steps=args.max_steps)
+    elif args.command=="joint-evaluate":
+        from .joint_training import evaluate_joint
+        evaluate_joint(args.run_id,args.device)
+    elif args.command=="joint-predict":
+        from .joint_model import predict_joint
+        requests=json.loads((ROOT/args.requests).read_text())
+        print(json.dumps(predict_joint(ROOT/args.checkpoint,ROOT/args.image,ROOT/args.audio,requests,args.device,args.threshold),indent=2))
 
 
 if __name__=="__main__":

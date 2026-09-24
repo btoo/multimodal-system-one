@@ -1,0 +1,55 @@
+{
+  "id": "native-question-conditioned-panels-v1",
+  "frozen_on": "2026-09-24",
+  "purpose": "First unified neural proof of concept; not a reproduction of Jev's undisclosed internals",
+  "data": {
+    "manifest": "evals/manifests/joint_panels_v1.jsonl",
+    "input_modalities": ["recorded human keyword audio", "generated RGB control panel", "question text", "candidate descriptions"],
+    "training_scenes": 2048,
+    "development_scenes": 192,
+    "calibration_scenes": 128,
+    "test_in_distribution_scenes": 192,
+    "test_compositional_scenes": 192,
+    "test_position_interventions": 96,
+    "extra_paraphrase_questions": "Six joint questions per in-distribution test scene",
+    "evaluation_speakers": "Never present in any earlier baseline partition",
+    "held_compositions": "One command/color pair per command excluded from train, dev, and calibration",
+    "scope_limit": "Eight spoken words; four colors; four positions; generated 2x2 panels"
+  },
+  "architecture": {
+    "width": 128,
+    "fusion_layers": 2,
+    "image_tokens": 4,
+    "audio_tokens": 1,
+    "question_tokens_after_text_encoder": 1,
+    "candidate_head": "One shared scalar scorer per supplied candidate; no fixed class output matrix",
+    "candidate_ids": "Opaque mapping keys; never neural inputs",
+    "audio_initialization": "Own earlier acoustic encoder; fixed eight-class head removed",
+    "trainable_components": ["audio encoder", "image encoder", "text encoder", "fusion", "candidate scorer"],
+    "training_objective": "Supervised categorical negative log likelihood"
+  },
+  "training": {
+    "seed": 20260924,
+    "max_epochs": 48,
+    "max_train_seconds_per_run": 360,
+    "batch_size": 64,
+    "audio_learning_rate": 0.0001,
+    "other_learning_rate": 0.0003,
+    "maximum_full_model_development_attempts": 2,
+    "selection": "Lowest development macro normalized NLL over six joint question families",
+    "controls": ["same architecture with audio only", "same architecture with image only"],
+    "control_matching": "Same initialization, training examples, and optimizer-step cap as nominated full run",
+    "final_test_rule": "Nominate full model and controls before opening held-out metrics"
+  },
+  "verification": {
+    "small_batch_overfit": "Training-only 64-example check; weights discarded",
+    "candidate_permutation_tolerance": 0.00001,
+    "question_batch_isolation_tolerance": 0.00001,
+    "require_both_modalities": "Compare six-task joint accuracy against separately trained unimodal controls",
+    "question_semantics": "Same inputs/candidates with spoken-vs-opposite and present-vs-absent questions",
+    "candidate_subsets": "2, 3, and 4 supplied candidates without retraining; easier-choice diagnostic only",
+    "calibration": "One temperature on calibration split only"
+  },
+  "remote_model_api_calls": 0,
+  "live_computer_actions": false
+}

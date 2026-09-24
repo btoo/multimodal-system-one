@@ -1,0 +1,33 @@
+{
+  "training_only_examples": 64,
+  "steps": 250,
+  "accuracy": 1.0,
+  "history": [
+    {
+      "step": 0,
+      "loss": 1.5026791095733643,
+      "accuracy": 0.234375
+    },
+    {
+      "step": 50,
+      "loss": 0.011904772371053696,
+      "accuracy": 1.0
+    },
+    {
+      "step": 100,
+      "loss": 1.1225767593714409e-05,
+      "accuracy": 1.0
+    },
+    {
+      "step": 150,
+      "loss": 4.250508936820552e-06,
+      "accuracy": 1.0
+    },
+    {
+      "step": 200,
+      "loss": 2.996974671987118e-06,
+      "accuracy": 1.0
+    }
+  ],
+  "checkpoint_retained": false
+}
