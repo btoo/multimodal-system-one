@@ -48,6 +48,7 @@ for run in runs:
     predictions[run] = read_manifest(report_dir / "predictions.jsonl")
     rows[run] = {"parameters": training["parameters"], "temperature": evaluation["temperature"],
                  "selected_epoch": training["configuration"]["selected_epoch"],
+                 "selected_steps": next(h["steps"] for h in training["history"] if h["epoch"] == training["configuration"]["selected_epoch"]),
                  "actual_steps": training["configuration"]["actual_steps"],
                  "train_seconds": training.get("train_seconds"),
                  "selection_normalized_nll": training.get("selection_normalized_nll"),

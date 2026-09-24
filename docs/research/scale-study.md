@@ -2,7 +2,7 @@
 
 The previous joint model's 45.66% result on held command/color combinations is now exposed evidence. This study asks two separate questions: does a larger shared transformer help, and does a more suitable visual representation help at the original parameter count? It does not re-label the previous test as untouched.
 
-The frozen [protocol](../../evals/scale-protocol-v1.json) compares three conditions: the existing 668,097-parameter architecture; a 1,616,001-parameter model with width 192 and three fusion layers; and a 666,769-parameter model with a factorized visual encoder. The latter two isolate size and a visual prior respectively. Training uses the same 2,048 scenes and audio re-pairing stream, one seed, 8,192 optimizer updates and at most 600 seconds of synchronized training per condition. Updates and examples are matched; FLOPs and elapsed time are not. This bounded size study is not a scaling law.
+The frozen [protocol](../../evals/scale-protocol-v1.json) compares three conditions: the existing 668,097-parameter architecture; a 1,616,001-parameter model with width 192 and three fusion layers; and a 666,769-parameter model with a factorized visual encoder. The latter two isolate size and a visual prior respectively. Training uses the same 2,048 scenes and audio re-pairing stream, one seed, 8,192 optimizer updates and at most 600 seconds of synchronized training per condition. Attempt budgets and sampled examples are matched; development-selected checkpoints can represent different update counts. FLOPs and elapsed time are not matched. This bounded size study is not a scaling law.
 
 ## Why this intervention
 

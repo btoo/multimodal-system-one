@@ -51,15 +51,15 @@ plt.close(fig)
 lines = ["# Scale and visual-prior study", "",
          "Three predeclared training conditions compare model size with a targeted visual prior. The existing served checkpoint is a frozen reference on the same new confirmation examples.", "",
          "![Measured scale-study results](results.svg)", "",
-         "| Condition | Parameters | Updates | Train seconds | Selected epoch | ID accuracy | Composition accuracy |",
+         "| Condition | Parameters | Budget updates (selected checkpoint) | Train seconds | Selected epoch | ID accuracy | Composition accuracy |",
          "|---|---:|---:|---:|---:|---:|---:|"]
 for name, label in zip(names, ["Small RGB", "Larger RGB", "Factorized shape/color", "Existing served checkpoint"]):
     r = rows[name]
     seconds = f"{r['train_seconds']:.1f}" if r["train_seconds"] is not None else "Earlier study"
     a, b = [r["by_slice"][s]["joint_macro_accuracy"] for s in ["in_distribution", "compositional"]]
-    lines.append(f"| {label} | {r['parameters']:,} | {r['actual_steps']:,} | {seconds} | {r['selected_epoch']} | {a:.2%} | {b:.2%} |")
+    lines.append(f"| {label} | {r['parameters']:,} | {r['actual_steps']:,} ({r['selected_steps']:,}) | {seconds} | {r['selected_epoch']} | {a:.2%} | {b:.2%} |")
 lines += ["", f"Development nominated **{summary['selected_run']}** by mean normalized NLL across the ID and compositional development slices before confirmation was opened. Every condition is retained, including inferior or incomplete outcomes. The default served model remains `joint-full-v2`.", "",
-          "The new training conditions match 8,192 optimizer updates and their sampled data stream. They do not match FLOPs or time. The older served checkpoint used a different seed, an ID-only selection objective, and more updates; it is an operational reference, not the matched size control.", "",
+          "The new training attempts each consume the same 8,192-update budget and sampled data stream. Development selects among epoch checkpoints, so selected weights may represent different numbers of updates, shown in parentheses. FLOPs and time are not matched. The older served checkpoint used a different seed, an ID-only selection objective, and more updates; it is an operational reference, not the matched size control.", "",
           "## Paired fixed-checkpoint differences", "",
           "| Candidate | Reference | Slice | Difference (percentage points) | Speaker-cluster 95% interval |",
           "|---|---|---|---:|---:|"]
