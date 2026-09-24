@@ -7,7 +7,7 @@ from mmso.optimization_study import prepare_optimization, train_optimization, no
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("stage", choices=["prepare", "train", "nominate", "evaluate"])
 parser.add_argument("--run-id")
-parser.add_argument("--device", choices=["cpu", "mps"], default="mps")
+parser.add_argument("--device", choices=["cpu", "mps", "cuda"], default="mps")
 args = parser.parse_args()
 if args.stage in {"train", "evaluate"} and not args.run_id:
     parser.error("--run-id is required")

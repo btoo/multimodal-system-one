@@ -78,15 +78,19 @@ class AudioCNN(nn.Module):
 def synchronize(device):
     if device.type == "mps":
         torch.mps.synchronize()
+    elif device.type == "cuda":
+        torch.cuda.synchronize(device)
 
 
 def choose_device(requested="auto"):
     if requested == "auto":
-        requested = "mps" if torch.backends.mps.is_available() else "cpu"
-    if requested not in {"cpu", "mps"}:
-        raise ValueError("This local pilot supports cpu or mps")
+        requested = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+    if requested not in {"cpu", "mps", "cuda"}:
+        raise ValueError("Supported devices are cpu, mps, or cuda")
     if requested == "mps" and not torch.backends.mps.is_available():
         raise ValueError("MPS requested but unavailable")
+    if requested == "cuda" and not torch.cuda.is_available():
+        raise ValueError("CUDA requested but unavailable")
     return torch.device(requested)
 
 

@@ -55,6 +55,10 @@ The original repeated-fixture v2 API measurement was **4.81 ms median / 5.60 ms 
 
 **The model's current scope still applies:** one short spoken keyword, one generated 2×2 panel, and a limited learned text vocabulary. Score is an expectation over declared candidate values; Ranking sorts the same candidate distribution. These output views do not establish arbitrary rubric understanding or general screenshot/speech capability.
 
+## Cloud GPU experiments
+
+The [Modal pilot](docs/modal.md) runs our existing native model on a single L4, checks CPU/CUDA predictions, and verifies that training resumes in a fresh container with matching optimizer and random state. The first run is bounded to 32 training updates and a target below $1. It is a portability test; it does not change the accuracy claims above.
+
 ## Earlier model iteration: size and visual structure
 
 ![Fresh-speaker model comparison and complete development learning curves](reports/scale-v1/results.svg)
