@@ -35,6 +35,16 @@ class FrontierEvalTests(unittest.TestCase):
         self.assertTrue(point_inside([.02,.02], [2,2,8,8], [300,300]))
         self.assertFalse(point_inside([float('nan'),0], [2,2,8,8], [300,300]))
 
+    def test_valid_answer_can_have_invalid_probability_contract(self):
+        rows=[dict(id='x',benchmark='public',stratum='one',group_id='x',choices=['a','b'],target=1)]
+        predictions=[dict(id='x',status='ok',choice=1,probabilities=None,probability_contract_valid=False,timings={'request_ms':1})]
+        result=summarize(rows,predictions)['public']
+        self.assertEqual(result['accuracy'],1)
+        self.assertEqual(result['coverage'],1)
+        self.assertEqual(result['probability_coverage'],0)
+        self.assertEqual(result['invalid_probability_distributions'],1)
+        self.assertIsNone(result['nll_successes_only'])
+
     def test_overlay_is_geometry_only_and_preserves_input(self):
         original=Image.new('RGB',(300,300),'white')
         output=grid_overlay(original,REGIONS)

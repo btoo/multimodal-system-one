@@ -1,0 +1,37 @@
+{
+  "source_revision": "210e78d3844251110bff86c95835ebd37a6930fa",
+  "sources_sha256": {
+    "data/screens_v2/annotations/android_studio_macos.json": "659a925e7373ae8980037d1b0c5eb45b365a3a6281a3fd23098efe125bc3b453",
+    "data/screens_v2/annotations/blender_windows.json": "4cfa940040f129dd1c4b1209972fb0ac6f0b5af0ee5d5ea167a34465834673c8",
+    "data/screens_v2/annotations/excel_macos.json": "b14145a4efe356c13129d708218d1722a1f03578775ea2dacd22f48c9287d382",
+    "data/screens_v2/annotations/macos_common_macos.json": "1cc16a816a9d791cf7bbd2f8a1de5964d0ccbc3f9aefc800983e74a829b74666",
+    "data/screens_v2/annotations/powerpoint_windows.json": "0ab08a5a474050feb102b1b334d924f7e688c47d4fe3374a8aba5b99362aa32b",
+    "data/screens_v2/annotations/pycharm_macos.json": "6f9d19cf3993ce5d3e834a7787c80d01ae0299a3f8323c911a0fba268a70c363",
+    "data/screens_v2/annotations/vscode_macos.json": "55f9b91d3986d8fb027c76b0518b2eb8aa94139601014c4125f81bf839a4667a",
+    "data/screens_v2/annotations/word_macos.json": "a5547fe13b7eab2f1945fd7e7afa5bd2c97d157e442f79a71e1ac9fae3e23208"
+  },
+  "cases": 117,
+  "manifest_sha256": "a4299d9448c23ca7bc0c5c6fad0b9ae65d3825a3d89db039b83251068d93ceb1",
+  "availability": {
+    "android_studio_macos:text": 8,
+    "android_studio_macos:icon": 8,
+    "blender_windows:text": 8,
+    "blender_windows:icon": 5,
+    "excel_macos:text": 8,
+    "excel_macos:icon": 4,
+    "macos_common_macos:text": 8,
+    "macos_common_macos:icon": 8,
+    "powerpoint_windows:text": 8,
+    "powerpoint_windows:icon": 8,
+    "pycharm_macos:text": 8,
+    "pycharm_macos:icon": 8,
+    "vscode_macos:text": 8,
+    "vscode_macos:icon": 8,
+    "word_macos:text": 8,
+    "word_macos:icon": 4
+  },
+  "selection": "Up to 8 per application/type; ascending fixed hash; unseen screenshot names and hashes across all previous MiSO screen manifests",
+  "application_disjoint": false,
+  "prior_miso_image_overlap": 0,
+  "pretraining_overlap": "unknown"
+}

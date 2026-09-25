@@ -1,0 +1,31 @@
+{
+  "id": "miso-frontier-scorecard-v1",
+  "as_of": "2026-09-25",
+  "purpose": "Make the evidence required to rival frontier systems explicit. Missing tracks stay missing; a good result on one track does not qualify another.",
+  "implemented": [
+    {"track": "visual understanding", "benchmark": "MMStar", "coverage": "1500/1500 original validation questions", "source": "https://github.com/MMStar-Benchmark/MMStar", "metric": "Original-choice accuracy by all six skills; zero-shot direct decisions", "comparison_caveat": "No leaderboard submission or official multimodal-gain/leakage audit; pretrained contamination unknown"},
+    {"track": "speech, sound, music reasoning", "benchmark": "MMAU test-mini", "coverage": "1000/1000 pinned publisher cases", "source": "https://github.com/Sakshi113/MMAU", "metric": "Choice accuracy by audio task", "comparison_caveat": "Mono 16kHz input; exact dataset revision recorded; no hidden 9000-case evaluation submission"},
+    {"track": "hard text decisions", "benchmark": "MMLU-Pro", "coverage": "448-case stratified subset, 32 per subject", "source": "https://github.com/TIGER-AI-Lab/MMLU-Pro", "metric": "Zero-shot direct-answer accuracy; Jev and OpenAI use identical source questions/options", "comparison_caveat": "Not the full 12032-question few-shot CoT score"},
+    {"track": "GUI perception", "benchmark": "ScreenSpot-Pro derived diagnostic", "coverage": "117 previously unused screenshot identities", "source": "https://github.com/likaixin2000/ScreenSpot-Pro-GUI-Grounding", "metric": "Nine-region accuracy plus actual point-inside-box success of the selected cell center", "comparison_caveat": "Coarse decision control; no claim of official ScreenSpot-Pro performance"},
+    {"track": "throughput and latency", "benchmark": "same-state multi-question diagnostic", "coverage": "Five observations; 1, 4 and 16 questions; five timed repetitions", "metric": "Full file-to-probability latency, encoder call counts, numerical and order agreement", "comparison_caveat": "Warm single H100; no network, queue or deployment SLA"}
+  ],
+  "required_but_not_yet_measured": [
+    {"track": "expert multimodal reasoning", "benchmark": "MMMU-Pro", "source": "https://github.com/MMMU-Benchmark/MMMU", "requirement": "Pin original multi-image/vision-only variants, original choices, full test scope and scoring; retain unsupported modes"},
+    {"track": "long and multiple audio inputs", "benchmark": "MMAU-Pro", "source": "https://sonalkum.github.io/mmau-pro/", "requirement": "Preserve duration, multi-audio and spatial cues; no silent 30s clipping, ASR substitution or stereo collapse"},
+    {"track": "documents and charts", "benchmarks": ["DocVQA", "ChartQA"], "sources": ["https://www.docvqa.org/datasets/docvqa", "https://github.com/vis-nlp/ChartQA"], "requirement": "Original free-answer ANLS and relaxed numeric accuracy; never construct multiple-choice distractors using the hidden answer; add scanned and multipage PDF tests"},
+    {"track": "spreadsheet and file ingestion", "requirement": "Actual XLSX/PDF upload-to-result tests with tables, formulas, page boundaries, corruption and unsupported file types; transport acceptance is not model understanding"},
+    {"track": "TypeSafe workflows", "source": "https://evals.typesafe.ai/", "requirement": "Obtain complete versioned cases, executable workflow, reference distributions and official scorer; selected webpage examples are not a representative export", "label_caveat": "Published accuracy measures agreement with model consensus, not independently adjudicated correctness", "status": "Complete official artifacts not located in inspected public links"},
+    {"track": "end-to-end browser and desktop work", "benchmarks": ["VisualWebArena", "OSWorld-Verified", "OSWorld 2.0"], "sources": ["https://github.com/web-arena-x/visualwebarena", "https://github.com/xlang-ai/OSWorld", "https://github.com/xlang-ai/OSWorld-V2"], "requirement": "Same agent harness, tool budget and task reset; original executable final-state success; pinned VM/site release; evaluate in isolated benchmark environments"},
+    {"track": "real mixed-modality decisions", "requirement": "Human speech referring to real screen/document content; counterfactual media swaps, contradictions, missing modalities and distractors; private fresh holdout"},
+    {"track": "structured workflows and ranking", "requirement": "Full-workflow success, ranking NDCG/pair accuracy, schema validity, calibration and confidence-based escalation, long context and changing candidate counts"},
+    {"track": "deployment efficiency", "requirement": "Paired client-visible p50/p95/p99, cold starts, concurrency, throughput, all retries and media ingestion, actual allocated-resource cost per correct completed task"}
+  ],
+  "claim_policy": [
+    "Frontier parity is scoped to an explicitly named task distribution, model version, inference budget and confidence interval.",
+    "Compare both maximum-quality frontier configurations and latency-oriented configurations; disabling competitor reasoning alone does not establish frontier capability parity.",
+    "For direct-answer latency comparisons, publish output limits and truncation failures; do not suppress failed or expensive cases.",
+    "Keep API end-to-end latency separate from local GPU pipeline time. Same-hardware comparison is possible only among accessible open weights.",
+    "After evaluation results guide a design change, use a newly frozen confirmation set for the next claimed gain.",
+    "Teacher and competitor outputs are evaluation references only in this study, not automatically authorized training data."
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "variant": "baseline-1536",
+  "selection_result_sha256": "2845f8dc494a90d33bc7a42df2ad9e210ccd75bcf4caef5f73cf6edd373b1086",
+  "confirmation_manifest_sha256": "a4299d9448c23ca7bc0c5c6fad0b9ae65d3825a3d89db039b83251068d93ceb1",
+  "confirmation_opened": false,
+  "reason": "No input variant beat the frozen baseline; retain baseline by preregistered accuracy then latency rule."
+}

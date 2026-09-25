@@ -14,7 +14,7 @@ import torch
 from .backbone_study import Backbone, decode_media, digest, move, prompt_for
 from .backbone_adapters import load_and_merge_adapter
 from .backbone_diagnostics import trim_head
-from .frontier_evals import model_input, summarize
+from .frontier_evals import model_input, summarize, point_inside
 
 
 def load_model(root, adapted=True):
@@ -144,3 +144,31 @@ def run_screens(root, output):
         'nominee': min(metrics, key=lambda k: (-metrics[k]['accuracy'], metrics[k]['median_request_ms']))}
     (output / 'summary.json').write_text(json.dumps(result, indent=2) + '\n')
     return result
+
+
+def run_screen_confirmation(root, output):
+    torch.set_num_threads(4); torch.manual_seed(20260925)
+    protocol = json.loads((root / 'evals/v4-iteration-protocol-v2.json').read_text())
+    nomination = json.loads((root / 'evals/v4-screen-nomination-v2.json').read_text())
+    manifest = root / 'evals/manifests/v4_fresh_screens_v2.jsonl'
+    if digest(manifest) != nomination['confirmation_manifest_sha256']: raise ValueError('Confirmation changed')
+    rows = [json.loads(s) for s in manifest.read_text().splitlines()]
+    model = load_model(root)
+    variant = next(v for v in protocol['screen_ablation']['variants'] if v['name'] == nomination['variant'])
+    records = []
+    for row in rows:
+        result = screen_predict(model, root, model_input(row), variant, protocol['input_policy'])
+        choice = int(np.argmax(result['probabilities']))
+        grid_index = REGIONS.index(row['choices'][choice])
+        point = [(grid_index % 3 + .5) / 3, (grid_index // 3 + .5) / 3]
+        result.update(id=row['id'], point=point, region_correct=choice == row['target'],
+            click_correct=point_inside(point, row['target_bbox_xyxy'], row['image_size']))
+        records.append(result)
+        with (output / 'predictions.jsonl').open('a') as stream: stream.write(json.dumps(result) + '\n')
+    summary = {'status': 'completed', 'phase': 'screen-confirmation', 'variant': variant,
+        'metrics': summarize(rows, records), 'region_accuracy': sum(r['region_correct'] for r in records)/len(rows),
+        'point_inside_box_accuracy': sum(r['click_correct'] for r in records)/len(rows), 'cases': len(rows),
+        'point_predictor': 'Center of the selected equal 3x3 grid cell. A weak localization control, not a dedicated point head.',
+        'nomination_sha256': digest(root / 'evals/v4-screen-nomination-v2.json')}
+    (output / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n')
+    return summary

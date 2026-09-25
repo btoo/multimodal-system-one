@@ -32,6 +32,9 @@ def evaluate(phase, attempt):
         elif phase == 'screens':
             from mmso.v4_iteration import run_screens
             summary = run_screens(root, output)
+        elif phase == 'screen-confirmation':
+            from mmso.v4_iteration import run_screen_confirmation
+            summary = run_screen_confirmation(root, output)
         else:
             from mmso.v4_iteration import run_frontier
             summary = run_frontier(root, phase, output)
@@ -45,7 +48,7 @@ def evaluate(phase, attempt):
 
 @app.local_entrypoint()
 def main(phase: str, attempt: str):
-    if phase not in {'frontier-base', 'frontier-adapted', 'screens', 'shared-observation'}: raise ValueError('Invalid phase')
+    if phase not in {'frontier-base', 'frontier-adapted', 'screens', 'screen-confirmation', 'shared-observation'}: raise ValueError('Invalid phase')
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,79}', attempt): raise ValueError('Invalid attempt name')
     protocol = json.loads((ROOT / 'evals/v4-iteration-protocol-v2.json').read_text())
     budget = protocol['budget']

@@ -134,7 +134,7 @@ class JevAdapter:
         self.spent = 0.
         self.calls = 0
 
-    def predict(self, request):
+    def predict(self, request, *, validate=True):
         # Reserve a whole context window, even though smoke cases are short.
         # No retries: an uncertain/failed charge stops the run instead of
         # assuming zero and silently spending the remainder.
@@ -160,7 +160,7 @@ class JevAdapter:
             raise ValueError('Missing/invalid billable input-token count; stop with unknown cost')
         cost = tokens * PRICE_PER_MILLION_INPUT / 1e6
         self.spent += cost
-        return {'raw':raw, 'answers':canonical_answers(request['questions'], raw), 'latency_seconds':elapsed,
+        return {'raw':raw, 'answers':canonical_answers(request['questions'], raw) if validate else None, 'latency_seconds':elapsed,
                 'cost_usd':cost, 'cost_basis':'published per-input-token API price', 'usage':usage}
 
 

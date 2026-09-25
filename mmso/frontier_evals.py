@@ -61,21 +61,30 @@ def summarize(rows, predictions):
     for benchmark, cases in sorted(groups.items()):
         correct, latencies, nll, brier, confidences, correctness = [], [], [], [], [], []
         strata, clusters, failures = defaultdict(list), defaultdict(list), defaultdict(int)
+        answer_count, invalid_distributions = 0, 0
         for row in cases:
             prediction = by_id[row['id']]
             ok = prediction.get('status') == 'ok'
+            no_distribution = prediction.get('probabilities') is None and 'choice' in prediction
             p = np.asarray(prediction.get('probabilities', []), dtype=float)
-            if ok and (p.shape != (len(row['choices']),) or not np.isfinite(p).all() or
+            if ok and not no_distribution and (p.shape != (len(row['choices']),) or not np.isfinite(p).all() or
                        (p < 0).any() or (p > 1).any() or abs(p.sum() - 1) > 1e-5):
                 raise ValueError('Invalid probability vector')
-            hit = int(ok and int(p.argmax()) == row['target'])
+            chosen = prediction.get('choice', int(p.argmax()) if ok and not no_distribution else None)
+            if ok and (not isinstance(chosen, int) or not 0 <= chosen < len(row['choices'])):
+                raise ValueError('Invalid selected option')
+            hit = int(ok and chosen == row['target'])
             correct.append(hit); strata[row['stratum']].append(hit); clusters[row['group_id']].append(hit)
             if ok:
+                answer_count += 1
+                latencies.append(prediction['timings']['request_ms'])
+                if no_distribution:
+                    invalid_distributions += int(prediction.get('probability_contract_valid') is False)
+                    continue
                 nll.append(-math.log(max(p[row['target']], 1e-12)))
                 one_hot = np.eye(len(p))[row['target']]
                 brier.append(float(np.square(p - one_hot).sum()))
                 confidences.append(float(p.max())); correctness.append(hit)
-                latencies.append(prediction['timings']['request_ms'])
             else:
                 failures[prediction.get('status', 'missing')] += 1
         c, y = np.asarray(confidences), np.asarray(correctness)
@@ -94,7 +103,8 @@ def summarize(rows, predictions):
             selective[str(threshold)] = {'coverage': int(keep.sum()) / len(cases),
                 'accuracy': float(y[keep].mean()) if keep.any() else None, 'accepted': int(keep.sum())}
         results[benchmark] = {'cases': len(cases), 'correct': sum(correct), 'accuracy': float(np.mean(correct)),
-            'accuracy_group_bootstrap_95': ci, 'groups': len(clusters), 'coverage': len(c) / len(cases),
+            'accuracy_group_bootstrap_95': ci, 'groups': len(clusters), 'coverage': answer_count / len(cases),
+            'probability_coverage': len(c) / len(cases), 'invalid_probability_distributions': invalid_distributions,
             'failures': dict(failures), 'nll_successes_only': float(np.mean(nll)) if nll else None,
             'brier_successes_only': float(np.mean(brier)) if brier else None,
             'ece_successes_only': float(ece) if len(c) else None, 'selective': selective,
