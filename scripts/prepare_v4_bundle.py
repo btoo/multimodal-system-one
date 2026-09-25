@@ -19,7 +19,7 @@ def main():
              "evals/v4-selection-protocol-v1.json", "evals/v4-candidates-v1.json", "evals/manifests/v4_selection_v1.jsonl"]
     allowlisted = set(paths)
     rows = [json.loads(x) for x in (ROOT / paths[-1]).read_text().splitlines()]
-    for name in ["mmso/backbone_adapters.py", "evals/v4-adapter-protocol-v1.json", "evals/v4-adapter-nomination-v1.json", "evals/v4-nomination-v1.json"]:
+    for name in ["mmso/backbone_adapters.py", "mmso/backbone_diagnostics.py", "evals/v4-adapter-protocol-v1.json", "evals/v4-adapter-nomination-v1.json", "evals/v4-nomination-v1.json", "evals/v4-diagnostics-protocol-v1.json"]:
         if (ROOT / name).exists(): paths.append(name); allowlisted.add(name)
     for path in (ROOT / "artifacts/v4-adapters").glob("*/adapter/*"):
         if path.is_file() and path.name in {"config.json", "adapter.safetensors"}:

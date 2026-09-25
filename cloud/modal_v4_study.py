@@ -83,7 +83,11 @@ def run_remote(key, phase, attempt):
         raise ValueError("Attempt ID already exists; never overwrite a run")
     output.mkdir(parents=True)
     try:
-        result = run_candidate(Path("/workspace"), key, phase, output)
+        if phase == "diagnostics":
+            from mmso.backbone_diagnostics import run_diagnostics
+            result = run_diagnostics(Path("/workspace"), key, output)
+        else:
+            result = run_candidate(Path("/workspace"), key, phase, output)
     except Exception as error:
         import traceback
         result = {"status": "failed", "key": key, "phase": phase,
@@ -112,7 +116,7 @@ def evaluate_legacy(key, phase, attempt):
 
 @app.local_entrypoint()
 def main(key: str = "gemma4-e2b", phase: str = "smoke", attempt: str = "gemma4-e2b-smoke-v1"):
-    if phase not in {"download", "download-all", "smoke", "development", "confirmation", "adapter-development", "adapter-confirmation"}:
+    if phase not in {"download", "download-all", "smoke", "development", "confirmation", "adapter-development", "adapter-confirmation", "diagnostics"}:
         raise ValueError("Invalid phase")
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,79}", attempt):
         raise ValueError("Invalid attempt ID")

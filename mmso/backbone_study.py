@@ -128,6 +128,7 @@ class Backbone:
         self.readout = None
         self.temperature = 1.0
         self.readout_config = None
+        self.candidate_only = False
 
     def load_readout(self, folder):
         from safetensors.torch import load_file
@@ -223,8 +224,8 @@ class Backbone:
             torch.cuda.synchronize()
             forwarded = time.perf_counter()
             logits = output.logits[0, -1].float()
-            selected = logits[self.token_ids[:len(row["choices"])]]
-            mass = (torch.logsumexp(selected, dim=-1) - torch.logsumexp(logits, dim=-1)).exp()
+            selected = logits[:len(row["choices"])] if self.candidate_only else logits[self.token_ids[:len(row["choices"])]]
+            mass = None if self.candidate_only else (torch.logsumexp(selected, dim=-1) - torch.logsumexp(logits, dim=-1)).exp()
             if self.readout is not None:
                 head = self.readout
                 normalized = (self.feature[0].float() - head["mean"]) / head["std"]
@@ -233,7 +234,7 @@ class Backbone:
             top_token = int(logits.argmax())
             values = selected.cpu().numpy()
             probs = probabilities.cpu().numpy()
-            allowed_mass = float(mass.cpu())
+            allowed_mass = float(mass.cpu()) if mass is not None else None
             # Feature transfer belongs to research extraction, not the serving
             # path. Keep it out of request timing while recording it separately.
             torch.cuda.synchronize()
@@ -250,8 +251,10 @@ class Backbone:
                    "research_feature_copy_ms": (time.perf_counter() - scored) * 1000,
                    "encoder_gpu_ms": encoder_ms}
         return {"status": "ok", "logits": values.tolist(), "probabilities": probs.tolist(),
-                "allowed_vocabulary_mass": allowed_mass, "unconstrained_top_token": self.tokenizer.decode([top_token]),
-                "unconstrained_is_candidate": top_token in self.token_ids[:len(row["choices"])],
+                "allowed_vocabulary_mass": allowed_mass,
+                "output_space": "candidate_codes" if self.candidate_only else "language_vocabulary",
+                "unconstrained_top_token": LETTERS[top_token] if self.candidate_only else self.tokenizer.decode([top_token]),
+                "unconstrained_is_candidate": top_token < len(row["choices"]) if self.candidate_only else top_token in self.token_ids[:len(row["choices"])],
                 "tokens": {"plain_question_and_choices": len(text_tokens), "processed_input": int(seq_length)},
                 "timings": timings}, feature
 

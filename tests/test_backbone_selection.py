@@ -6,9 +6,18 @@ import torch
 from mmso.backbone_selection import choose_winner, quality_reasons, softmax, summarize
 from mmso.backbone_study import move, prompt_for
 from mmso.backbone_adapters import DecisionLoRA
+from mmso.backbone_diagnostics import candidate_projection
 
 
 class BackboneSelectionTests(unittest.TestCase):
+    def test_candidate_projection_preserves_selected_vocabulary_logits(self):
+        torch.manual_seed(9)
+        head = torch.nn.Linear(6, 31, bias=True)
+        x = torch.randn(2, 3, 6)
+        ids = [3, 7, 13, 25]
+        short = candidate_projection(head, ids)
+        torch.testing.assert_close(short(x), head(x)[..., ids])
+
     def test_adapter_starts_identical_and_merge_preserves_trained_function(self):
         torch.manual_seed(1)
         original = torch.nn.Linear(6, 4)

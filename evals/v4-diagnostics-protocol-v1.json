@@ -1,0 +1,14 @@
+{
+  "id": "miso-v4-diagnostics-v1",
+  "created": "2026-09-25",
+  "purpose": "Post-selection engineering diagnostics only; never change the frozen nomination or train on confirmation cases",
+  "cases": "Two development cases per track, chosen by the smallest SHA256 of diag:<case-id>, independent of correctness",
+  "generation_controls": "On the identical unadapted publisher checkpoint, compare direct label-logit scoring, greedy one-token labels, and generated JSON with a probability array. Validate returned contracts and report failures; no speedup claim from invalid or truncated JSON.",
+  "max_json_tokens": 128,
+  "repeats": 5,
+  "head_optimization": "After loading the frozen adapter/readout, replace the unused full language output projection with the ten candidate-code rows. Check probability and argmax parity before timing. Do not claim a new confirmation result for this diagnostic transformation.",
+  "batch_sizes": [1, 4, 16],
+  "batch_scope": "Repeated fixed public example, identical information per item; prepared-input forward-plus-scoring throughput only. Excludes media decoding, processor, queueing, network and startup. Not a production throughput claim.",
+  "hardware_probe": "Run the same frozen MiniCPM candidate on L4 after H100 confirmation; compare outputs on the same development diagnostic cases. A separate probe, not a replacement for matched-H100 selection.",
+  "no_new_training": true
+}
