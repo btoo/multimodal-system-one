@@ -1,0 +1,23 @@
+{
+  "candidates": [
+    "qwen3-30ba3b",
+    "minicpmo45"
+  ],
+  "rule": "Top two product-license-eligible development macro accuracies; no primary candidate passed all gates",
+  "development_scores": {
+    "qwen3-30ba3b": 0.7837500000000001,
+    "gemma4-12b": 0.48125,
+    "gemma4-e2b": 0.39875,
+    "qwen25-3b": 0.685625,
+    "qwen25-7b": 0.735625,
+    "minicpmo45": 0.755625,
+    "gemma4-e4b": 0.44437499999999996,
+    "phi4mm": 0.645
+  },
+  "source_reports": {
+    "qwen3-30ba3b": "3ecb2319ac9c5fd68a58ee8595a54ef1098d9349fb055182605aaa3b1e5b94b9",
+    "minicpmo45": "9649f0fec05cd3216c237dd0b60fecb87b2c62d74a43db4c58d060d3340113b5"
+  },
+  "confirmation_opened": false,
+  "adapter_protocol_sha256": "2ebf22d8dfff06801d9572876833e47ba2257c11c25be0ced4478cc92390b5a9"
+}

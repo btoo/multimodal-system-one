@@ -76,9 +76,13 @@ def train_adapter(backbone, root, rows, protocol, output):
     parameters = [p for layer in wrappers.values() for p in (layer.a, layer.b)]
     optimizer = torch.optim.AdamW(parameters, lr=settings["learning_rate"], weight_decay=settings["weight_decay"])
     model.train()
-    model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+    checkpoint_model = getattr(model, "llm", model)
+    checkpoint_model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
     # Frozen media branches keep evaluation behavior throughout training.
     for name in backbone.encoder_names: model.get_submodule(name).eval()
+    for name, module in model.named_modules():
+        if any(term in name.lower() for term in ("vision", "audio", "vpm", "apm", "lora_dropout")):
+            module.eval()
     tracks = sorted(source["tracks"])
     pools = {t: [r for r in rows if r["split"] == "train" and r["track"] == t] for t in tracks}
     randomizers = {t: random.Random(f"{settings['seed']}:{t}") for t in tracks}
@@ -132,7 +136,7 @@ def train_adapter(backbone, root, rows, protocol, output):
     for name, wrapper in wrappers.items(): replace(model, name, wrapper.merge())
     optimizer.zero_grad(set_to_none=True)
     del optimizer, wrappers, parameters
-    model.gradient_checkpointing_disable()
+    checkpoint_model.gradient_checkpointing_disable()
     model.eval()
     for p in model.parameters(): p.requires_grad_(False)
     torch.cuda.empty_cache()

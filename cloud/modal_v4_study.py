@@ -163,4 +163,5 @@ def main(key: str = "gemma4-e2b", phase: str = "smoke", attempt: str = "gemma4-e
     (report / "rpc.json").write_text(json.dumps({"wall_seconds": time.time() - started,
           "maximum_compute_proxy_usd": reserved}, indent=2) + "\n")
     summary = result["summary"]
-    print(json.dumps({k: summary.get(k) for k in ("status", "key", "phase", "completed", "error_type", "error")}), flush=True)
+    print(json.dumps({k: summary.get(k) for k in ("status", "key", "phase", "completed", "errors", "error_type", "error")}), flush=True)
+    if summary.get("status") != "completed": raise SystemExit(1)
