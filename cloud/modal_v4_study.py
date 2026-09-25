@@ -142,6 +142,20 @@ def main(key: str = "gemma4-e2b", phase: str = "smoke", attempt: str = "gemma4-e
         raise ValueError("Study allocation ceiling exhausted")
     if phase in {"confirmation", "adapter-confirmation"} and not (ROOT / "evals/v4-nomination-v1.json").exists():
         raise ValueError("Freeze a nomination before confirmation")
+    if phase in {"confirmation", "adapter-confirmation"}:
+        import hashlib
+        nomination = json.loads((ROOT / "evals/v4-nomination-v1.json").read_text())
+        display_key = key + ("-adapted" if phase == "adapter-confirmation" else "")
+        nominee = nomination["candidates"].get(display_key)
+        if nominee is None or nominee["base_key"] != key or nominee["phase"] != phase:
+            raise ValueError("This model/variant was not nominated for confirmation")
+        path = ROOT / "artifacts/v4-selection" / display_key / "config.json"
+        if hashlib.sha256(path.read_bytes()).hexdigest() != nominee["readout_config_sha256"]:
+            raise ValueError("Nominated readout configuration changed")
+        if nominee["adapter_config_sha256"]:
+            path = ROOT / "artifacts/v4-adapters" / key / "adapter/config.json"
+            if hashlib.sha256(path.read_bytes()).hexdigest() != nominee["adapter_config_sha256"]:
+                raise ValueError("Nominated adapter changed")
     (report / "reservation.json").write_text(json.dumps({"key": key, "phase": phase, "started_unix": started,
          "maximum_compute_proxy_usd": reserved, "note": "Conservative runtime reservation, not actual billed spend"}, indent=2) + "\n")
     runner = evaluate_legacy if key in {"minicpmo45", "phi4mm"} else evaluate

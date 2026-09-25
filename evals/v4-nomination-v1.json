@@ -1,0 +1,36 @@
+{
+  "status": "no_qualified_winner",
+  "winner": null,
+  "created_at": "2026-09-25T04:20:39.212946+00:00",
+  "research_lead": "minicpmo45-adapted",
+  "quality_reference": "qwen3-30ba3b-adapted",
+  "research_lead_rule": "Lowest measured mean track p95 within 3 percentage points of best macro accuracy, used only as a research lead because no candidate passed every quality floor. This does not waive the failed gates.",
+  "confirmation_opened": false,
+  "protocol_sha256": "834d7bae32f7410ccc7895b6d0df875e8f956fc2e8d565229b4dd344804327b7",
+  "manifest_sha256": "938fea9008352616d7d22299172b42ef5ed2481a26d6a245ade0a8107b38558c",
+  "bootstrap_groups": {
+    "text_rules": "policy_family",
+    "screen_region": "application",
+    "speech_intent": "group_id",
+    "sound_events": "group_id",
+    "joint_control": "group_id"
+  },
+  "candidates": {
+    "minicpmo45-adapted": {
+      "base_key": "minicpmo45",
+      "phase": "adapter-confirmation",
+      "development_attempt": "minicpmo45-adapter-v1",
+      "selection_sha256": "9b5f6da6227d94a7996a530abc0cd87a6d6dd4106983c9c2df8e13bb20263f81",
+      "readout_config_sha256": "7ea4560905dd46b553d12bcab406ae4b2ce38ccaffa5b6e779d62b4678ca0fbe",
+      "adapter_config_sha256": "1a26cb43d371be489be99896a4606831cdcbde9c5aa1109546e34989f846b14e"
+    },
+    "qwen3-30ba3b-adapted": {
+      "base_key": "qwen3-30ba3b",
+      "phase": "adapter-confirmation",
+      "development_attempt": "qwen3-30ba3b-adapter-v1",
+      "selection_sha256": "4f14b76a82c8f10899681a9529dc9b1c6fb4f3d843744cc5990df22cecf35230",
+      "readout_config_sha256": "ff2e643a96c8bb7837acae17f78340b1ea123913e414a8760a2bc5a6373e3bfd",
+      "adapter_config_sha256": "d0946e3ec1c025a61e1040cc7935558cab9200aecd159ea1fe557a5bca219b9e"
+    }
+  }
+}
