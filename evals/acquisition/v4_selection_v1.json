@@ -1,0 +1,64 @@
+{
+  "protocol_sha256": "834d7bae32f7410ccc7895b6d0df875e8f956fc2e8d565229b4dd344804327b7",
+  "manifest_sha256": "938fea9008352616d7d22299172b42ef5ed2481a26d6a245ade0a8107b38558c",
+  "audit": {
+    "examples": 1232,
+    "groups": 1139,
+    "unique_media": 1232,
+    "counts": {
+      "train": {
+        "text_rules": 128,
+        "speech_intent": 128,
+        "sound_events": 80,
+        "screen_region": 32,
+        "joint_control": 128
+      },
+      "calibration": {
+        "text_rules": 32,
+        "speech_intent": 32,
+        "sound_events": 40,
+        "screen_region": 16,
+        "joint_control": 32
+      },
+      "development": {
+        "text_rules": 64,
+        "speech_intent": 64,
+        "sound_events": 40,
+        "screen_region": 32,
+        "joint_control": 64
+      },
+      "confirmation": {
+        "text_rules": 64,
+        "speech_intent": 64,
+        "sound_events": 80,
+        "screen_region": 48,
+        "joint_control": 64
+      }
+    },
+    "group_and_exact_media_disjoint": true
+  },
+  "slurp": {
+    "repo": "qmeeus/slurp",
+    "revision": "91b0abfee2e735282967ee00d631d6d5f0fb7ff9",
+    "source_shards": {
+      "train": {
+        "path": "data/v4/slurp/data/train-00000-of-00006-6b7ed9dd4c07ecfa.parquet",
+        "sha256": "1499a123518964303474b8646675e8d63b81eabe630f8f3cf1e2bcdf402a1b0e"
+      },
+      "devel": {
+        "path": "data/v4/slurp/data/devel-00000-of-00001-acfd964400397e39.parquet",
+        "sha256": "5f194efcf61396135aadf8ec0777a3273a27703ef3abd935c30dc588189580f0"
+      },
+      "test": {
+        "path": "data/v4/slurp/data/test-00000-of-00002-252f381b70e1d25d.parquet",
+        "sha256": "ef8f212b86cd14d1d2fcb0df7335771fdffc02bb036f046c794996d44bf9abe0"
+      }
+    },
+    "original": "https://github.com/pswietojanski/slurp",
+    "policy": "Use real-recording shards only; one recording per utterance ID; exclude IDs seen in another partition; never pass transcripts to the model"
+  },
+  "screenspot_revision": "210e78d3844251110bff86c95835ebd37a6930fa",
+  "official_benchmark_result": false,
+  "upstream_pretraining_contamination": "unknown",
+  "labels_in_model_inputs": false
+}

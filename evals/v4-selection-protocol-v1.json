@@ -1,0 +1,38 @@
+{
+  "id": "miso-v4-backbone-selection-v1",
+  "created": "2026-09-24",
+  "purpose": "Select an open-weight native text/image/audio backbone for MiSO v4 using measured decision quality and latency. This is a development study, not a claim of Jev or OpenAI parity.",
+  "seed": 20260924,
+  "hardware": {"gpu": "H100!", "count": 1, "precision": "bfloat16", "batch_size": 1, "cpu_cores": 4, "ram_mib": 65536},
+  "budget": {"ceiling_usd": 250, "max_gpu_jobs": 24, "gpu_job_timeout_seconds": 3600, "startup_timeout_seconds": 600, "application_retries": 0, "concurrent_gpu_containers": 1, "persistent_endpoint": false},
+  "input_policy": {"image_max_side": 1536, "audio_sample_rate": 16000, "audio_max_seconds": 30, "max_input_tokens": 8192, "output": "One distribution over caller-supplied candidate labels", "transcripts_to_audio_models": false, "image_annotation_to_models": false},
+  "tracks": {
+    "text_rules": {"description": "Original executable business-rule fixtures; synthetic and not a substitute for broad language benchmarks", "train": 128, "calibration": 32, "development": 64, "confirmation": 64, "accuracy_floor": 0.85},
+    "speech_intent": {"description": "Eight SLURP sentence intents with raw human recordings and disjoint utterance identities", "train_per_class": 16, "calibration_per_class": 4, "development_per_class": 8, "confirmation_per_class": 8, "accuracy_floor": 0.8},
+    "sound_events": {"description": "Real ESC-10 environmental sounds preserving original source folds", "train_per_class": 8, "calibration_per_class": 4, "development_per_class": 4, "confirmation_per_class": 8, "accuracy_floor": 0.7},
+    "screen_region": {"description": "Public ScreenSpot-Pro screenshots: select one of nine fixed screen regions containing the target center. Coarse localization, not official point grounding or browser execution", "applications": ["macos_common_macos", "vscode_macos", "excel_macos", "word_macos", "powerpoint_windows", "pycharm_macos", "android_studio_macos", "blender_windows"], "per_application_per_type": {"train": 2, "calibration": 1, "development": 2, "confirmation": 3}, "accuracy_floor": 0.5},
+    "joint_control": {"description": "Controlled keyword-plus-color panels requiring image and audio together; synthetic images, natural speech, and speaker-group splits", "train": 128, "calibration": 32, "development": 64, "confirmation": 64, "accuracy_floor": 0.65}
+  },
+  "methods": {
+    "label_logits": "One forward pass; normalize logits for single-token candidate letters. Retain allowed-vocabulary mass and use a separate calibration temperature. No generated probability strings.",
+    "trained_readout": "Frozen backbone, train-only residual linear decision readout on its final hidden state; no base-weight tuning. This is a readout adaptation screen, not a completed general MiSO architecture.",
+    "readout_l2": [0.01, 0.1, 1.0],
+    "readout_epochs": 120,
+    "readout_learning_rate": 0.001,
+    "calibration_temperatures": [0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 5.0, 8.0],
+    "generated_output_control": "Measure minimal-label and generated JSON controls on fixed development cases. Do not equate one label with the full probability contract."
+  },
+  "selection": {
+    "commercially_usable_license_required": true,
+    "all_five_tracks_required": true,
+    "macro_accuracy_floor": 0.75,
+    "proper_score_gate": "On every development track, calibrated NLL and Brier score must improve on uniform guessing; failures remain in the accuracy denominator and disqualify incomplete candidates.",
+    "maximum_accuracy_gap_to_best_eligible": 0.03,
+    "objective": "Lowest equal-track mean of request p95 latency among development candidates passing every quality floor and within 3 percentage points of the best eligible macro accuracy",
+    "uncertainty": "Paired group-bootstrap 95 percent intervals; report ties and uncertainty. No statistical noninferiority claim merely from a point-estimate margin.",
+    "confirmation": "Freeze nomination and readout before opening confirmation results. Confirm the selected candidate and quality reference once; any revision needs a new version. If no candidate passes, report no qualified winner and nominate a research lead separately.",
+    "scope": "Winner within the measured candidate/runtime set; not fastest among every open model. Different supported attention runtimes must be disclosed."
+  },
+  "timing": {"include": ["file decode and resampling", "processor and tokenization", "host-to-device transfer", "media encoders", "backbone forward", "decision scoring", "device-to-host probability transfer"], "separate": ["model download and load", "warmup", "remote RPC", "generated output decoding", "training", "serialization and report writing"], "cost": "Record allocated container wall time and resource rates; do not present forward-time multiplication as actual serving cost."},
+  "limitations": ["Public benchmark pretraining contamination is unknown", "SLURP subset is English and limited to eight intents", "Screen task is nine-region localization, not precise clicking", "Readout training does not establish benefits of full adapter training or state reuse", "Jev and OpenAI are proprietary API references and cannot be included in a literal same-hardware comparison", "Quality thresholds are preregistered engineering selection criteria, not user-validated production acceptance"]
+}
