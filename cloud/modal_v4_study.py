@@ -25,15 +25,17 @@ cpu_image = (modal.Image.debian_slim(python_version="3.12")
              .add_local_file(Path(__file__), "/workspace/cloud/modal_v4_study.py"))
 
 
-def gpu_image(transformers_version="5.17.0", torch_version="2.14.0", torchvision_version="0.29.0"):
+def gpu_image(legacy=False):
+    transformers_version, torch_version, torchvision_version = ("4.51.0", "2.8.0", "0.23.0") if legacy else ("5.17.0", "2.14.0", "0.29.0")
+    hub_version, accelerate_version, peft_version = ("0.36.0", "1.6.0", "0.15.2") if legacy else ("1.32.0", "1.15.0", "0.21.0")
     return (modal.Image.debian_slim(python_version="3.12")
             .apt_install("libgl1", "libglib2.0-0", "libsndfile1", "ffmpeg")
             .uv_pip_install(f"torch=={torch_version}", f"torchvision=={torchvision_version}",
-                            f"transformers=={transformers_version}", "accelerate==1.15.0",
+                            f"transformers=={transformers_version}", f"accelerate=={accelerate_version}",
                             "numpy==2.5.3", "Pillow==12.3.0", "scipy==1.18.1",
                             "soundfile==0.14.0", "librosa==0.11.0", "sentencepiece==0.2.2",
-                            "einops==0.8.2", "safetensors==0.8.0", "peft==0.21.0",
-                            "timm==1.0.30", "huggingface-hub==1.32.0", "backoff==2.2.1")
+                            "einops==0.8.2", "safetensors==0.8.0", f"peft=={peft_version}",
+                            "timm==1.0.30", f"huggingface-hub=={hub_version}", "backoff==2.2.1")
             # Only the package marker is needed by HF's recursive import check;
             # video and TTS utilities are never invoked in this decision study.
             # Preserve the common pinned Pillow/librosa/Torch runtime.
@@ -100,6 +102,14 @@ def evaluate(key, phase, attempt):
     return run_remote(key, phase, attempt)
 
 
+@app.function(image=gpu_image(legacy=True), gpu="H100!", cpu=4, memory=65536,
+              volumes={"/cache": volume}, timeout=3600, startup_timeout=600,
+              retries=0, max_containers=1, min_containers=0,
+              scaledown_window=2, single_use_containers=True, include_source=False)
+def evaluate_legacy(key, phase, attempt):
+    return run_remote(key, phase, attempt)
+
+
 @app.local_entrypoint()
 def main(key: str = "gemma4-e2b", phase: str = "smoke", attempt: str = "gemma4-e2b-smoke-v1"):
     if phase not in {"download", "download-all", "smoke", "development", "confirmation"}:
@@ -134,7 +144,8 @@ def main(key: str = "gemma4-e2b", phase: str = "smoke", attempt: str = "gemma4-e
         raise ValueError("Freeze a nomination before confirmation")
     (report / "reservation.json").write_text(json.dumps({"key": key, "phase": phase, "started_unix": started,
          "maximum_compute_proxy_usd": reserved, "note": "Conservative runtime reservation, not actual billed spend"}, indent=2) + "\n")
-    call = evaluate.spawn(key, phase, attempt)
+    runner = evaluate_legacy if key in {"minicpmo45", "phi4mm"} else evaluate
+    call = runner.spawn(key, phase, attempt)
     try:
         result = call.get(timeout=4300)
     except BaseException:
