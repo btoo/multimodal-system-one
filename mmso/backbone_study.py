@@ -71,9 +71,11 @@ def decode_media(root, items, policy):
 class Backbone:
     def __init__(self, spec):
         import transformers as tr
-        from huggingface_hub import snapshot_download
         self.spec, self.key = spec, spec["key"]
-        self.snapshot = snapshot_download(spec["id"], revision=spec["revision"], local_files_only=True)
+        download = json.loads((Path("/cache/study/downloads") / (self.key + ".json")).read_text())
+        if download["revision"] != spec["revision"] or download["model"] != spec["id"]:
+            raise ValueError("Cached checkpoint identity differs from frozen candidate")
+        self.snapshot = download["snapshot"]
         path = self.snapshot
         self.family = "gemma" if self.key.startswith("gemma") else "qwen" if self.key.startswith("qwen") else self.key
         self.processor = tr.AutoProcessor.from_pretrained(path, trust_remote_code=self.family in {"minicpmo45", "phi4mm"}, local_files_only=True)
