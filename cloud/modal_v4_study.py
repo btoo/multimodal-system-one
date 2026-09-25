@@ -83,7 +83,10 @@ def run_remote(key, phase, attempt):
         raise ValueError("Attempt ID already exists; never overwrite a run")
     output.mkdir(parents=True)
     try:
-        if phase == "hardware-probe":
+        if phase == "parallel-probe":
+            from mmso.parallel_decisions import run_parallel_probe
+            result = run_parallel_probe(Path("/workspace"), key, output)
+        elif phase == "hardware-probe":
             from mmso.backbone_diagnostics import run_hardware_probe
             result = run_hardware_probe(Path("/workspace"), key, output)
         elif phase == "diagnostics":
@@ -127,7 +130,7 @@ def probe_l4(key, phase, attempt):
 
 @app.local_entrypoint()
 def main(key: str = "gemma4-e2b", phase: str = "smoke", attempt: str = "gemma4-e2b-smoke-v1"):
-    if phase not in {"download", "download-all", "smoke", "development", "confirmation", "adapter-development", "adapter-confirmation", "diagnostics", "hardware-probe"}:
+    if phase not in {"download", "download-all", "smoke", "development", "confirmation", "adapter-development", "adapter-confirmation", "diagnostics", "hardware-probe", "parallel-probe"}:
         raise ValueError("Invalid phase")
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,79}", attempt):
         raise ValueError("Invalid attempt ID")

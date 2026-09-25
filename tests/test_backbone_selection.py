@@ -7,9 +7,26 @@ from mmso.backbone_selection import choose_winner, quality_reasons, softmax, sum
 from mmso.backbone_study import move, prompt_for
 from mmso.backbone_adapters import DecisionLoRA
 from mmso.backbone_diagnostics import candidate_projection, clean_generated_text
+from mmso.parallel_decisions import branch_plan
 
 
 class BackboneSelectionTests(unittest.TestCase):
+    def test_packed_attention_matches_independent_questions(self):
+        torch.manual_seed(11)
+        words = torch.nn.Embedding(30, 8)
+        positions = torch.nn.Embedding(30, 8)
+        layer = torch.nn.TransformerEncoderLayer(8, 2, 16, dropout=0, batch_first=True).eval()
+        sequences = [torch.tensor([1, 2, 3, 4]), torch.tensor([1, 2, 5, 6, 7])]
+        plan = branch_plan(sequences, 2)
+        embeddings = words(plan["input_ids"]) + positions(plan["position_ids"])
+        packed = layer(embeddings, src_mask=plan["attention_mask"][0, 0])
+        for i, sequence in enumerate(sequences):
+            mask = torch.triu(torch.full((len(sequence), len(sequence)), float('-inf')), diagonal=1)
+            independent = layer(words(sequence[None]) + positions(torch.arange(len(sequence))[None]), src_mask=mask)
+            torch.testing.assert_close(packed[0, plan["end_positions"][i]], independent[0, -1], rtol=1e-5, atol=1e-6)
+        self.assertLess(plan["attention_mask"][0, 0, 6, 3], -1e20)
+        self.assertEqual(plan["attention_mask"][0, 0, 6, 1], 0)
+
     def test_generation_cleanup_only_strips_wrappers(self):
         raw = '```json\n{"probabilities": [0.1, 0.2], "choice": "B"}\n```<|tts_eos|>'
         clean = clean_generated_text(raw)
