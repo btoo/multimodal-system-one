@@ -1,0 +1,46 @@
+{
+  "sources": {
+    "mmstar": {
+      "repo": "Lin-Chen/MMStar",
+      "revision": "bc98d668301da7b14f648724866e57302778ab27",
+      "file": "mmstar.parquet",
+      "selection": "all 1500 validation cases",
+      "metric": "Original-choice accuracy, separately by six skill categories",
+      "license": "No explicit license in publisher card; retain raw data locally, do not redistribute media or prompt text",
+      "sha256": "29afd74b0134cfab083a8909b5358577ab18fd41c1e612031577cfb3635531c2",
+      "bytes": 41798712
+    },
+    "mmau": {
+      "repo": "gamma-lab-umd/MMAU-test-mini",
+      "revision": "ccd9696c0111ea7060827598f310558df0b71b0a",
+      "file": "test_mini.parquet",
+      "selection": "all 1000 test-mini cases, preserve original choices",
+      "metric": "Original-choice accuracy for speech, sound and music separately",
+      "license": "CC-BY-NC-4.0; evaluation only, never training",
+      "sha256": "54b76f440db843546f9ad49a1518cc22371f63a266f034ba6bd4343b7b6fde86",
+      "bytes": 1213407227
+    },
+    "mmlu_pro": {
+      "repo": "TIGER-Lab/MMLU-Pro",
+      "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+      "file": "data/test-00000-of-00001.parquet",
+      "selection": "32 per category in ascending SHA256('miso-v4-frontier-v1:' + question_id), 14 categories, 448 total",
+      "metric": "Direct-answer zero-shot subset accuracy; not the full few-shot chain-of-thought leaderboard score",
+      "license": "MIT dataset card",
+      "sha256": "0e24a191921c2f453518a537a8b2117bd137e7714d4ef1565e9ba06c1ecb9ad8",
+      "bytes": 4144185
+    }
+  },
+  "cases": {
+    "mmstar": 1500,
+    "mmau": 1000,
+    "mmlu_pro": 448
+  },
+  "total": 2948,
+  "manifest_sha256": "a41c99db486795f8f7db7ea1cd4ac4d420a3a9f53cacf9686d178ec00915e3d4",
+  "index_sha256": "94042406451c6b824d43b9e987645343a3c4a2da4126d10b60a825ccee78eba8",
+  "exact_media_overlap_with_miso_training": [],
+  "publisher_pretraining_overlap": "unknown",
+  "labels_used_for_training": false,
+  "audio_over_120s": []
+}

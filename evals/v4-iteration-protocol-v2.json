@@ -1,0 +1,28 @@
+{
+  "id": "miso-v4-iteration-v2",
+  "created": "2026-09-25",
+  "purpose": "Measure broader generalization before more training, improve complete-request speed, and diagnose GUI perception without changing v1 results or gates.",
+  "baseline_commit": "4c1699e3e9163324b50129e73f01251b22c8b59c",
+  "budget": {"max_gpu_jobs": 8, "max_additional_compute_reservation_usd": 45, "timeout_seconds": 3600, "startup_timeout_seconds": 600, "max_concurrent_gpu_containers": 1, "retries": 0, "persistent_endpoint": false, "jev_api_ceiling_usd": 0.1},
+  "candidates": ["minicpmo45-base", "minicpmo45-adapted"],
+  "input_policy": {"image_max_side": 1536, "audio_sample_rate": 16000, "audio_max_seconds": 120, "max_input_tokens": 8192},
+  "frontier_audit": {
+    "role": "Public evaluation only. No examples or labels enter training or calibration. Once inspected, results are an exposed regression suite, not an untouched final test.",
+    "mmstar": {"repo": "Lin-Chen/MMStar", "revision": "bc98d668301da7b14f648724866e57302778ab27", "file": "mmstar.parquet", "selection": "all 1500 validation cases", "metric": "Original-choice accuracy, separately by six skill categories", "license": "No explicit license in publisher card; retain raw data locally, do not redistribute media or prompt text"},
+    "mmau": {"repo": "gamma-lab-umd/MMAU-test-mini", "revision": "ccd9696c0111ea7060827598f310558df0b71b0a", "file": "test_mini.parquet", "selection": "all 1000 test-mini cases, preserve original choices", "metric": "Original-choice accuracy for speech, sound and music separately", "license": "CC-BY-NC-4.0; evaluation only, never training"},
+    "mmlu_pro": {"repo": "TIGER-Lab/MMLU-Pro", "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be", "file": "data/test-00000-of-00001.parquet", "selection": "32 per category in ascending SHA256('miso-v4-frontier-v1:' + question_id), 14 categories, 448 total", "metric": "Direct-answer zero-shot subset accuracy; not the full few-shot chain-of-thought leaderboard score", "license": "MIT dataset card"},
+    "metrics": ["accuracy including errors and unsupported cases in denominator", "coverage", "NLL", "Brier", "ECE with ten fixed bins", "accuracy at fixed confidence thresholds with coverage", "95% image/audio/question-group bootstrap intervals", "median and p95 complete pipeline latency", "measured study resource cost"],
+    "comparators": {"Jev": "Same 448 text-only questions and original choices; do not provide an image caption or transcript as a substitute for native multimodal support", "OpenAI": "Same requests when authorized credentials are available; pin model version and reasoning settings; no parity claim without paired results"},
+    "reporting": "Do not pool unrelated benchmarks into a frontier-parity number or copy publisher leaderboard points into our measured Pareto curve. Report omitted and unsupported tracks prominently."
+  },
+  "screen_ablation": {
+    "selection_split": "v1 development screens only, 32 cases",
+    "variants": [{"name": "baseline-1536", "image_max_side": 1536, "grid_overlay": false}, {"name": "native-detail-2304", "image_max_side": 2304, "grid_overlay": false}, {"name": "grid-1536", "image_max_side": 1536, "grid_overlay": true}, {"name": "grid-2304", "image_max_side": 2304, "grid_overlay": true}],
+    "overlay": "Draw only the fixed nine equal cells and their original choice letters. Never use annotation boxes, target centers or answer labels to construct images.",
+    "nomination": "Highest development region accuracy; ties use lower median request latency. A nomination must be frozen before opening new-screen confirmation.",
+    "confirmation": "Up to 128 unseen screenshot identities, balanced across application and text/icon where available. Exclude every image/hash in earlier MiSO screen and v4 manifests. Also record official point-inside-target-box accuracy of each predicted grid-cell center; never call region accuracy click accuracy.",
+    "limitations": ["Nine-way region classification is not an exact grounding model", "The grid-center point is an explicitly weak control, not the official publisher prompting protocol", "Any point-generation experiment must be separately named and timed"]
+  },
+  "shared_observation_speed": {"questions": [1, 4, 16], "observations": 5, "repeats": 5, "baseline": "Decode, process, media-encode and language-score each question independently", "optimized": "Decode/process/media-encode one shared observation, construct independent causal question branches, then score in one language forward", "timing": "Local file read through CPU probability outputs, including question compilation, mask creation and media encoders; warm weights, no network or queue", "acceptance": "Report all per-case argmax changes, probability deltas, reordered-question checks and encoder invocation counts. No speed claim based only on prepared tensors."},
+  "release_gate": "Research only until broader task-specific floors and paired frontier comparisons pass. The existing v1 quality failures and data-license restrictions remain in effect. No playground deployment in this iteration."
+}

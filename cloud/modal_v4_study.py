@@ -25,7 +25,7 @@ cpu_image = (modal.Image.debian_slim(python_version="3.12")
              .add_local_file(Path(__file__), "/workspace/cloud/modal_v4_study.py"))
 
 
-def gpu_image(legacy=False):
+def gpu_image(legacy=False, bundle=None):
     transformers_version, torch_version, torchvision_version = ("4.51.0", "2.8.0", "0.23.0") if legacy else ("5.17.0", "2.14.0", "0.29.0")
     hub_version, accelerate_version, peft_version = ("0.36.0", "1.6.0", "0.15.2") if legacy else ("1.32.0", "1.15.0", "0.21.0")
     return (modal.Image.debian_slim(python_version="3.12")
@@ -42,7 +42,7 @@ def gpu_image(legacy=False):
             .uv_pip_install("minicpmo-utils==1.0.6", extra_options="--no-deps")
             .env({"HF_HOME": "/cache/hf", "PYTHONPATH": "/workspace:/workspace/cloud",
                   "TOKENIZERS_PARALLELISM": "false", "HF_HUB_OFFLINE": "1"})
-            .add_local_dir(BUNDLE, "/workspace"))
+            .add_local_dir(BUNDLE if bundle is None else bundle, "/workspace"))
 
 
 @app.function(image=cpu_image, volumes={"/cache": volume}, cpu=2, memory=4096,
