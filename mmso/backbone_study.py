@@ -93,7 +93,9 @@ class Backbone:
             kwargs.update(trust_remote_code=True, init_vision=True, init_audio=True, init_tts=False)
         elif self.key == "phi4mm":
             cls = tr.AutoModelForCausalLM
-            kwargs.update(trust_remote_code=True)
+            config = tr.AutoConfig.from_pretrained(path, trust_remote_code=True, local_files_only=True)
+            config._attn_implementation = "sdpa"
+            kwargs.update(trust_remote_code=True, config=config, _attn_implementation="sdpa")
         else:
             raise ValueError("Unsupported model adapter")
         self.model, self.loading = cls.from_pretrained(path, **kwargs)
