@@ -1,0 +1,106 @@
+{
+  "key": "qwen3-30ba3b",
+  "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+  "revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+  "snapshot": "/__modal/volumes/vo-WGJLYYADSQz6Lnub99rq4N/hf/hub/models--Qwen--Qwen3-Omni-30B-A3B-Instruct/snapshots/26291f793822fb6be9555850f06dfe95f2d7e695",
+  "download_seconds": 277.620056967,
+  "total_bytes": 70530594055,
+  "files": [
+    {
+      "name": "README.md",
+      "bytes": 90295
+    },
+    {
+      "name": "chat_template.json",
+      "bytes": 6772
+    },
+    {
+      "name": "config.json",
+      "bytes": 13671
+    },
+    {
+      "name": "generation_config.json",
+      "bytes": 146
+    },
+    {
+      "name": "merges.txt",
+      "bytes": 1671839
+    },
+    {
+      "name": "model-00001-of-00015.safetensors",
+      "bytes": 4997899632
+    },
+    {
+      "name": "model-00002-of-00015.safetensors",
+      "bytes": 4997754216
+    },
+    {
+      "name": "model-00003-of-00015.safetensors",
+      "bytes": 4997754216
+    },
+    {
+      "name": "model-00004-of-00015.safetensors",
+      "bytes": 4997755648
+    },
+    {
+      "name": "model-00005-of-00015.safetensors",
+      "bytes": 4997755792
+    },
+    {
+      "name": "model-00006-of-00015.safetensors",
+      "bytes": 4997755792
+    },
+    {
+      "name": "model-00007-of-00015.safetensors",
+      "bytes": 4997755792
+    },
+    {
+      "name": "model-00008-of-00015.safetensors",
+      "bytes": 4997755792
+    },
+    {
+      "name": "model-00009-of-00015.safetensors",
+      "bytes": 4997755792
+    },
+    {
+      "name": "model-00010-of-00015.safetensors",
+      "bytes": 4997755792
+    },
+    {
+      "name": "model-00011-of-00015.safetensors",
+      "bytes": 4997755792
+    },
+    {
+      "name": "model-00012-of-00015.safetensors",
+      "bytes": 4997755792
+    },
+    {
+      "name": "model-00013-of-00015.safetensors",
+      "bytes": 4999771808
+    },
+    {
+      "name": "model-00014-of-00015.safetensors",
+      "bytes": 4996618552
+    },
+    {
+      "name": "model-00015-of-00015.safetensors",
+      "bytes": 553698794
+    },
+    {
+      "name": "model.safetensors.index.json",
+      "bytes": 2727350
+    },
+    {
+      "name": "preprocessor_config.json",
+      "bytes": 603
+    },
+    {
+      "name": "tokenizer_config.json",
+      "bytes": 7344
+    },
+    {
+      "name": "vocab.json",
+      "bytes": 2776833
+    }
+  ]
+}

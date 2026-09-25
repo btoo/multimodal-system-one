@@ -1,0 +1,9 @@
+{
+  "key": "gemma4-e2b",
+  "model": "google/gemma-4-E2B-it",
+  "revision": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+  "selected_method": "readout-l2-0.1",
+  "temperature": 5.0,
+  "feature_sha256": "8b1ac52e426dfe96f3d8a58366457b4594fc4be5495811da974859c9490088fe",
+  "readout_sha256": "85b2264c6c5bc5dc1beb338c3d169f568e55e3751636277836a5060c71b70a73"
+}

@@ -1,0 +1,488 @@
+{
+  "captured_at_utc": "2026-09-25T05:31:22.746080+00:00",
+  "app_ids": [
+    "ap-12Q0kFziTuSBLAACN80os9",
+    "ap-1iHkKuihTg6LW2nGfO17og",
+    "ap-CXqf7lQxQcVTMaFljoUHfQ",
+    "ap-ESRhbxA22XPDIJsmoz8OlF",
+    "ap-GUbyjPdcv9ksxPybPa8k7c",
+    "ap-Gkb2LovlyVws7WGJN7QmcP",
+    "ap-JAYaKchO68W2J90Kb6etHT",
+    "ap-NLeuVxhzGAJfNxbxmSALWb",
+    "ap-P6ECThR6UqaOQA6pDskdaa",
+    "ap-PkUJ19Ts6l8BHE70XRXk9O",
+    "ap-SOrVlgPK7alluLgXayskhr",
+    "ap-V6NYTHqTMoUsnJERxAwz5C",
+    "ap-WCgu8EU9KKdl9M4Sk2pl4f",
+    "ap-XXh0MabSqUSr1g2g0xKRfy",
+    "ap-YWT2m79lP1aC4WXdRzwrfq",
+    "ap-Z9IuNLGeTKZnA4anTeio3Q",
+    "ap-ZEoNhabcbEEBXsjmhPMUvU",
+    "ap-c8x18qe3xG1sVZMDV05kCS",
+    "ap-cYOVLhkWlpXPVy8FTLv3r5",
+    "ap-eM0ATEEeJVtvVwAGMIYuBV",
+    "ap-m40QLCfpT4SPHLiuKHJPOi",
+    "ap-nYaxjnc2FTF0m210Q3Mgu6",
+    "ap-vhoNSGZAWpJv4PbTR4TRnj",
+    "ap-yXGrjUa2wgISmSb0c11S3z"
+  ],
+  "metered_study_usd": "3.36082240",
+  "billing_rows": [
+    {
+      "object_id": "ap-12Q0kFziTuSBLAACN80os9",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.19577758",
+      "cost_by_resource": {
+        "L4": "0.00000000",
+        "CPU": "0.00992335",
+        "Memory": "0.02136523",
+        "H100": "0.16448900"
+      }
+    },
+    {
+      "object_id": "ap-1iHkKuihTg6LW2nGfO17og",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T04:00:00Z",
+      "cost": "0.03838378",
+      "cost_by_resource": {
+        "L4": "0.02466032",
+        "CPU": "0.00583217",
+        "Memory": "0.00789130"
+      }
+    },
+    {
+      "object_id": "ap-CXqf7lQxQcVTMaFljoUHfQ",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.02067286",
+      "cost_by_resource": {
+        "CPU": "0.00084092",
+        "Memory": "0.00227565",
+        "H100": "0.01755628"
+      }
+    },
+    {
+      "object_id": "ap-ESRhbxA22XPDIJsmoz8OlF",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T04:00:00Z",
+      "cost": "0.14018270",
+      "cost_by_resource": {
+        "CPU": "0.00570231",
+        "Memory": "0.01543119",
+        "H100": "0.11904920"
+      }
+    },
+    {
+      "object_id": "ap-GUbyjPdcv9ksxPybPa8k7c",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.04287851",
+      "cost_by_resource": {
+        "CPU": "0.00174420",
+        "Memory": "0.00472003",
+        "H100": "0.03641429"
+      }
+    },
+    {
+      "object_id": "ap-Gkb2LovlyVws7WGJN7QmcP",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T04:00:00Z",
+      "cost": "0.07235112",
+      "cost_by_resource": {
+        "CPU": "0.00294308",
+        "Memory": "0.00796435",
+        "H100": "0.06144370"
+      }
+    },
+    {
+      "object_id": "ap-JAYaKchO68W2J90Kb6etHT",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.31487195",
+      "cost_by_resource": {
+        "CPU": "0.01280826",
+        "Memory": "0.03466083",
+        "H100": "0.26740286"
+      }
+    },
+    {
+      "object_id": "ap-NLeuVxhzGAJfNxbxmSALWb",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T04:00:00Z",
+      "cost": "0.09101167",
+      "cost_by_resource": {
+        "CPU": "0.00370214",
+        "Memory": "0.01001848",
+        "H100": "0.07729104"
+      }
+    },
+    {
+      "object_id": "ap-P6ECThR6UqaOQA6pDskdaa",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T04:00:00Z",
+      "cost": "0.44189351",
+      "cost_by_resource": {
+        "CPU": "0.01797520",
+        "Memory": "0.04864325",
+        "H100": "0.37527506"
+      }
+    },
+    {
+      "object_id": "ap-PkUJ19Ts6l8BHE70XRXk9O",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.18088028",
+      "cost_by_resource": {
+        "CPU": "0.00735779",
+        "Memory": "0.01991114",
+        "H100": "0.15361135"
+      }
+    },
+    {
+      "object_id": "ap-SOrVlgPK7alluLgXayskhr",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.14211956",
+      "cost_by_resource": {
+        "CPU": "0.00578109",
+        "Memory": "0.01564440",
+        "H100": "0.12069407"
+      }
+    },
+    {
+      "object_id": "ap-V6NYTHqTMoUsnJERxAwz5C",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.17829645",
+      "cost_by_resource": {
+        "CPU": "0.00725268",
+        "Memory": "0.01962672",
+        "H100": "0.15141705"
+      }
+    },
+    {
+      "object_id": "ap-WCgu8EU9KKdl9M4Sk2pl4f",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.01291962",
+      "cost_by_resource": {
+        "CPU": "0.00052554",
+        "Memory": "0.00142218",
+        "H100": "0.01097190"
+      }
+    },
+    {
+      "object_id": "ap-XXh0MabSqUSr1g2g0xKRfy",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.04909678",
+      "cost_by_resource": {
+        "CPU": "0.00199714",
+        "Memory": "0.00540453",
+        "H100": "0.04169511"
+      }
+    },
+    {
+      "object_id": "ap-YWT2m79lP1aC4WXdRzwrfq",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.16390248",
+      "cost_by_resource": {
+        "CPU": "0.00666717",
+        "Memory": "0.01804224",
+        "H100": "0.13919307"
+      }
+    },
+    {
+      "object_id": "ap-Z9IuNLGeTKZnA4anTeio3Q",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.02067232",
+      "cost_by_resource": {
+        "CPU": "0.00084090",
+        "Memory": "0.00227559",
+        "H100": "0.01755583"
+      }
+    },
+    {
+      "object_id": "ap-ZEoNhabcbEEBXsjmhPMUvU",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.20432327",
+      "cost_by_resource": {
+        "CPU": "0.01092303",
+        "Memory": "0.02223388",
+        "H100": "0.17116635"
+      }
+    },
+    {
+      "object_id": "ap-c8x18qe3xG1sVZMDV05kCS",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.18604795",
+      "cost_by_resource": {
+        "CPU": "0.00756800",
+        "Memory": "0.02047999",
+        "H100": "0.15799996"
+      }
+    },
+    {
+      "object_id": "ap-cYOVLhkWlpXPVy8FTLv3r5",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.02842486",
+      "cost_by_resource": {
+        "CPU": "0.00115626",
+        "Memory": "0.00312898",
+        "H100": "0.02413962"
+      }
+    },
+    {
+      "object_id": "ap-eM0ATEEeJVtvVwAGMIYuBV",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.02153514",
+      "cost_by_resource": {
+        "CPU": "0.00087600",
+        "Memory": "0.00237057",
+        "H100": "0.01828857"
+      }
+    },
+    {
+      "object_id": "ap-m40QLCfpT4SPHLiuKHJPOi",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T02:00:00Z",
+      "cost": "0.00763719",
+      "cost_by_resource": {
+        "A10G": "0.00000000",
+        "CPU": "0.00713317",
+        "Memory": "0.00050401"
+      }
+    },
+    {
+      "object_id": "ap-m40QLCfpT4SPHLiuKHJPOi",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.06919811",
+      "cost_by_resource": {
+        "CPU": "0.05859991",
+        "Memory": "0.01059820"
+      }
+    },
+    {
+      "object_id": "ap-nYaxjnc2FTF0m210Q3Mgu6",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T04:00:00Z",
+      "cost": "0.09043931",
+      "cost_by_resource": {
+        "CPU": "0.00367886",
+        "Memory": "0.00995548",
+        "H100": "0.07680497"
+      }
+    },
+    {
+      "object_id": "ap-vhoNSGZAWpJv4PbTR4TRnj",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T03:00:00Z",
+      "cost": "0.36373695",
+      "cost_by_resource": {
+        "CPU": "0.01479597",
+        "Memory": "0.04003984",
+        "H100": "0.30890113"
+      }
+    },
+    {
+      "object_id": "ap-vhoNSGZAWpJv4PbTR4TRnj",
+      "description": "miso-v4-selection",
+      "environment_name": "main",
+      "interval": "2026-09-25T04:00:00Z",
+      "cost": "0.28356845",
+      "cost_by_resource": {
+        "CPU": "0.01153491",
+        "Memory": "0.03121497",
+        "H100": "0.24081858"
+      }
+    }
+  ],
+  "billing_may_lag": true,
+  "final_invoice_cash_charge": null,
+  "scope": "Provider-metered resource use for these study apps; includes failed attempts. Credits and final invoice allocation are not inferred.",
+  "gpu_jobs_reserved": 23,
+  "maximum_reserved_compute_proxy_usd": 124.75696800000001,
+  "study_ceiling_usd": 250,
+  "app_states": [
+    {
+      "app_id": "ap-12Q0kFziTuSBLAACN80os9",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790306093.922048,
+      "stopped_at": 1790306280.601082
+    },
+    {
+      "app_id": "ap-1iHkKuihTg6LW2nGfO17og",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790311976.583557,
+      "stopped_at": 1790312100.685651
+    },
+    {
+      "app_id": "ap-CXqf7lQxQcVTMaFljoUHfQ",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790307409.783044,
+      "stopped_at": 1790307439.295322
+    },
+    {
+      "app_id": "ap-ESRhbxA22XPDIJsmoz8OlF",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790310446.531953,
+      "stopped_at": 1790310571.188173
+    },
+    {
+      "app_id": "ap-GUbyjPdcv9ksxPybPa8k7c",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790306849.644265,
+      "stopped_at": 1790306890.546767
+    },
+    {
+      "app_id": "ap-Gkb2LovlyVws7WGJN7QmcP",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790311447.113939,
+      "stopped_at": 1790311514.315688
+    },
+    {
+      "app_id": "ap-JAYaKchO68W2J90Kb6etHT",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790306589.344957,
+      "stopped_at": 1790306848.577691
+    },
+    {
+      "app_id": "ap-NLeuVxhzGAJfNxbxmSALWb",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790310956.66667,
+      "stopped_at": 1790311035.310956
+    },
+    {
+      "app_id": "ap-P6ECThR6UqaOQA6pDskdaa",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790309226.299123,
+      "stopped_at": 1790309580.626589
+    },
+    {
+      "app_id": "ap-PkUJ19Ts6l8BHE70XRXk9O",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790306282.659886,
+      "stopped_at": 1790306433.309502
+    },
+    {
+      "app_id": "ap-SOrVlgPK7alluLgXayskhr",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790305635.952553,
+      "stopped_at": 1790305759.059278
+    },
+    {
+      "app_id": "ap-V6NYTHqTMoUsnJERxAwz5C",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790308233.911314,
+      "stopped_at": 1790308382.462302
+    },
+    {
+      "app_id": "ap-WCgu8EU9KKdl9M4Sk2pl4f",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790305383.262413,
+      "stopped_at": 1790305405.705474
+    },
+    {
+      "app_id": "ap-XXh0MabSqUSr1g2g0xKRfy",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790305528.502596,
+      "stopped_at": 1790305580.837512
+    },
+    {
+      "app_id": "ap-YWT2m79lP1aC4WXdRzwrfq",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790305798.265476,
+      "stopped_at": 1790305936.526236
+    },
+    {
+      "app_id": "ap-Z9IuNLGeTKZnA4anTeio3Q",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790306891.091329,
+      "stopped_at": 1790306919.658651
+    },
+    {
+      "app_id": "ap-ZEoNhabcbEEBXsjmhPMUvU",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790307182.226702,
+      "stopped_at": 1790307374.38698
+    },
+    {
+      "app_id": "ap-c8x18qe3xG1sVZMDV05kCS",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790306434.453624,
+      "stopped_at": 1790306588.021446
+    },
+    {
+      "app_id": "ap-cYOVLhkWlpXPVy8FTLv3r5",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790305441.606116,
+      "stopped_at": 1790305477.590725
+    },
+    {
+      "app_id": "ap-eM0ATEEeJVtvVwAGMIYuBV",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790307609.74439,
+      "stopped_at": 1790307635.450913
+    },
+    {
+      "app_id": "ap-m40QLCfpT4SPHLiuKHJPOi",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790305100.437739,
+      "stopped_at": 1790306441.220786
+    },
+    {
+      "app_id": "ap-nYaxjnc2FTF0m210Q3Mgu6",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790310041.47418,
+      "stopped_at": 1790310123.430837
+    },
+    {
+      "app_id": "ap-vhoNSGZAWpJv4PbTR4TRnj",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790308511.24634,
+      "stopped_at": 1790309022.920787
+    },
+    {
+      "app_id": "ap-yXGrjUa2wgISmSb0c11S3z",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790313266.13141,
+      "stopped_at": 1790313302.594307
+    }
+  ],
+  "missing_app_states": [],
+  "active_study_containers": [],
+  "all_study_apps_stopped": true,
+  "persistent_storage": "Publisher checkpoints and research artifacts remain in miso-v4-selection-v1 Volume; no persistent GPU endpoint was created."
+}

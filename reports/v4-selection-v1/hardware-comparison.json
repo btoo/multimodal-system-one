@@ -1,0 +1,92 @@
+{
+  "scope": "Ten fixed development cases, five warm repeats; no quality re-selection",
+  "hardware": {
+    "full_projection": {
+      "l4_peak_allocated_gib": 18.51170301437378,
+      "l4_peak_reserved_gib": 20.021484375,
+      "argmax_agreement_with_h100": 10,
+      "maximum_probability_difference_with_h100": 0.04740077257156372,
+      "tracks": {
+        "text_rules": {
+          "h100_pipeline_median_ms": 24.25558399999872,
+          "l4_pipeline_median_ms": 87.12624450000561,
+          "l4_over_h100_latency": 3.592007700165463,
+          "l4_busy_resource_cost_proxy_per_1000_decisions": 0.03009688990008194,
+          "h100_busy_resource_cost_proxy_per_1000_decisions": 0.03132560162431835
+        },
+        "speech_intent": {
+          "h100_pipeline_median_ms": 40.811092499996704,
+          "l4_pipeline_median_ms": 121.07860900000134,
+          "l4_over_h100_latency": 2.9668063652060064,
+          "l4_busy_resource_cost_proxy_per_1000_decisions": 0.04182539469296046,
+          "h100_busy_resource_cost_proxy_per_1000_decisions": 0.052706709741895744
+        },
+        "sound_events": {
+          "h100_pipeline_median_ms": 43.46601800000016,
+          "l4_pipeline_median_ms": 130.40045999999705,
+          "l4_over_h100_latency": 3.000055353586716,
+          "l4_busy_resource_cost_proxy_per_1000_decisions": 0.04504553490239899,
+          "h100_busy_resource_cost_proxy_per_1000_decisions": 0.05613549292664021
+        },
+        "joint_control": {
+          "h100_pipeline_median_ms": 106.5866879999966,
+          "l4_pipeline_median_ms": 541.480132000018,
+          "l4_over_h100_latency": 5.080185360483621,
+          "l4_busy_resource_cost_proxy_per_1000_decisions": 0.18704889679808623,
+          "h100_busy_resource_cost_proxy_per_1000_decisions": 0.13765457581823562
+        },
+        "screen_region": {
+          "h100_pipeline_median_ms": 423.5347635000011,
+          "l4_pipeline_median_ms": 1575.3545614999957,
+          "l4_over_h100_latency": 3.719540158832775,
+          "l4_busy_resource_cost_proxy_per_1000_decisions": 0.5441904797245586,
+          "h100_busy_resource_cost_proxy_per_1000_decisions": 0.5469866763649814
+        }
+      }
+    },
+    "candidate_projection": {
+      "l4_peak_allocated_gib": 17.35445261001587,
+      "l4_peak_reserved_gib": 19.2265625,
+      "argmax_agreement_with_h100": 10,
+      "maximum_probability_difference_with_h100": 0.04740077257156372,
+      "tracks": {
+        "text_rules": {
+          "h100_pipeline_median_ms": 22.132498499999542,
+          "l4_pipeline_median_ms": 82.66099049999553,
+          "l4_over_h100_latency": 3.7348241772160176,
+          "l4_busy_resource_cost_proxy_per_1000_decisions": 0.02855441255831846,
+          "h100_busy_resource_cost_proxy_per_1000_decisions": 0.02858367916277941
+        },
+        "speech_intent": {
+          "h100_pipeline_median_ms": 38.37059300000334,
+          "l4_pipeline_median_ms": 118.33987700000392,
+          "l4_over_h100_latency": 3.0841294790516693,
+          "l4_busy_resource_cost_proxy_per_1000_decisions": 0.04087932711088136,
+          "h100_busy_resource_cost_proxy_per_1000_decisions": 0.04955485344764431
+        },
+        "sound_events": {
+          "h100_pipeline_median_ms": 43.305558499994845,
+          "l4_pipeline_median_ms": 126.70375150000979,
+          "l4_over_h100_latency": 2.9258080460970124,
+          "l4_busy_resource_cost_proxy_per_1000_decisions": 0.043768543918163386,
+          "h100_busy_resource_cost_proxy_per_1000_decisions": 0.05592826269157335
+        },
+        "joint_control": {
+          "h100_pipeline_median_ms": 109.84985650000567,
+          "l4_pipeline_median_ms": 539.9479909999911,
+          "l4_over_h100_latency": 4.915327231219125,
+          "l4_busy_resource_cost_proxy_per_1000_decisions": 0.18651963401103694,
+          "h100_busy_resource_cost_proxy_per_1000_decisions": 0.14186889267262734
+        },
+        "screen_region": {
+          "h100_pipeline_median_ms": 420.26089999999886,
+          "l4_pipeline_median_ms": 1601.8350690000034,
+          "l4_over_h100_latency": 3.811525338188748,
+          "l4_busy_resource_cost_proxy_per_1000_decisions": 0.5533379062353612,
+          "h100_busy_resource_cost_proxy_per_1000_decisions": 0.5427585471319986
+        }
+      }
+    }
+  },
+  "cost_proxy_note": "Continuous sequential work only, using warm medians and requested CPU/RAM; excludes idle allocation, queueing, cold starts, network and billing reconciliation. Rates checked at study time."
+}

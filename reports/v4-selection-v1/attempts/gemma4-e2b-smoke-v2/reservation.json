@@ -1,0 +1,7 @@
+{
+  "key": "gemma4-e2b",
+  "phase": "smoke",
+  "started_unix": 1790305449.55762,
+  "maximum_compute_proxy_usd": 5.424216,
+  "note": "Conservative runtime reservation, not actual billed spend"
+}

@@ -1,0 +1,162 @@
+{
+  "key": "phi4mm",
+  "model": "microsoft/Phi-4-multimodal-instruct",
+  "revision": "93f923e1a7727d1c4f446756212d9d3e8fcc5d81",
+  "snapshot": "/__modal/volumes/vo-WGJLYYADSQz6Lnub99rq4N/hf/hub/models--microsoft--Phi-4-multimodal-instruct/snapshots/93f923e1a7727d1c4f446756212d9d3e8fcc5d81",
+  "download_seconds": 61.102499298,
+  "total_bytes": 12871684413,
+  "files": [
+    {
+      "name": "LICENSE",
+      "bytes": 1141
+    },
+    {
+      "name": "README.md",
+      "bytes": 65395
+    },
+    {
+      "name": "added_tokens.json",
+      "bytes": 249
+    },
+    {
+      "name": "config.json",
+      "bytes": 4631
+    },
+    {
+      "name": "configuration_phi4mm.py",
+      "bytes": 11014
+    },
+    {
+      "name": "generation_config.json",
+      "bytes": 190
+    },
+    {
+      "name": "merges.txt",
+      "bytes": 2418348
+    },
+    {
+      "name": "model-00001-of-00003.safetensors",
+      "bytes": 4997504848
+    },
+    {
+      "name": "model-00002-of-00003.safetensors",
+      "bytes": 4952333128
+    },
+    {
+      "name": "model-00003-of-00003.safetensors",
+      "bytes": 1199389232
+    },
+    {
+      "name": "model.safetensors.index.json",
+      "bytes": 239890
+    },
+    {
+      "name": "modeling_phi4mm.py",
+      "bytes": 116057
+    },
+    {
+      "name": "preprocessor_config.json",
+      "bytes": 482
+    },
+    {
+      "name": "processing_phi4mm.py",
+      "bytes": 32775
+    },
+    {
+      "name": "processor_config.json",
+      "bytes": 121
+    },
+    {
+      "name": "sample_finetune_speech.py",
+      "bytes": 16669
+    },
+    {
+      "name": "sample_finetune_vision.py",
+      "bytes": 19617
+    },
+    {
+      "name": "sample_inference_phi4mm.py",
+      "bytes": 10498
+    },
+    {
+      "name": "special_tokens_map.json",
+      "bytes": 473
+    },
+    {
+      "name": "speech-lora/adapter_config.json",
+      "bytes": 465
+    },
+    {
+      "name": "speech-lora/adapter_model.safetensors",
+      "bytes": 922782296
+    },
+    {
+      "name": "speech-lora/added_tokens.json",
+      "bytes": 249
+    },
+    {
+      "name": "speech-lora/special_tokens_map.json",
+      "bytes": 473
+    },
+    {
+      "name": "speech-lora/tokenizer.json",
+      "bytes": 15524095
+    },
+    {
+      "name": "speech-lora/tokenizer_config.json",
+      "bytes": 3248
+    },
+    {
+      "name": "speech-lora/vocab.json",
+      "bytes": 3910310
+    },
+    {
+      "name": "speech_conformer_encoder.py",
+      "bytes": 110521
+    },
+    {
+      "name": "tokenizer.json",
+      "bytes": 15524479
+    },
+    {
+      "name": "tokenizer_config.json",
+      "bytes": 3248
+    },
+    {
+      "name": "vision-lora/adapter_config.json",
+      "bytes": 464
+    },
+    {
+      "name": "vision-lora/adapter_model.safetensors",
+      "bytes": 738232904
+    },
+    {
+      "name": "vision-lora/added_tokens.json",
+      "bytes": 249
+    },
+    {
+      "name": "vision-lora/special_tokens_map.json",
+      "bytes": 473
+    },
+    {
+      "name": "vision-lora/tokenizer.json",
+      "bytes": 15524095
+    },
+    {
+      "name": "vision-lora/tokenizer_config.json",
+      "bytes": 3248
+    },
+    {
+      "name": "vision-lora/vocab.json",
+      "bytes": 3910310
+    },
+    {
+      "name": "vision_siglip_navit.py",
+      "bytes": 78218
+    },
+    {
+      "name": "vocab.json",
+      "bytes": 3910310
+    }
+  ]
+}

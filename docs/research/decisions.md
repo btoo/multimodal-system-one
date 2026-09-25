@@ -1,6 +1,8 @@
 # Decision register
 
-Status: architecture recommendations remain proposed. Three baseline controls have run; this is not an architecture-comparison campaign. See [results](../../reports/pilot-v1/README.md). References are collected in the [reading map](reading-map.md) and [frontier review](frontier-methods.md).
+Latest decision: **MiniCPM-o 4.5 is the provisional v4 research backbone**, with Qwen3-Omni as the accuracy reference. The [matched eight-checkpoint investigation](../../reports/v4-selection-v1/README.md) found no release-qualified winner: screen understanding remains below the declared gate. Preserve the direct probability interface and investigate shared-state question branches; a controlled H100 probe preserved 16/16 top decisions with a 6.53× reduction in the prepared language/scoring phase. No v4 model was promoted to the playground.
+
+The table below records the earlier small-model control decisions. The [original baseline results](../../reports/pilot-v1/README.md), [reading map](reading-map.md) and [frontier review](frontier-methods.md) remain historical evidence.
 
 | Decision | Rationale | What could change it |
 |---|---|---|

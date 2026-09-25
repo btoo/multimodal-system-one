@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "key": "phi4mm",
+  "phase": "development",
+  "error_type": "TypeError",
+  "error": "Phi4MMForCausalLM.__init__() got an unexpected keyword argument '_attn_implementation'",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/cloud/modal_v4_study.py\", line 86, in run_remote\n    result = run_candidate(Path(\"/workspace\"), key, phase, output)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/mmso/backbone_study.py\", line 273, in run_candidate\n    model = Backbone(spec)\n            ^^^^^^^^^^^^^^\n  File \"/workspace/mmso/backbone_study.py\", line 101, in __init__\n    self.model, self.loading = cls.from_pretrained(path, **kwargs)\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py\", line 564, in from_pretrained\n    return model_class.from_pretrained(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/site-packages/transformers/modeling_utils.py\", line 279, in _wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/site-packages/transformers/modeling_utils.py\", line 4343, in from_pretrained\n    model = cls(config, *model_args, **model_kwargs)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: Phi4MMForCausalLM.__init__() got an unexpected keyword argument '_attn_implementation'\n"
+}

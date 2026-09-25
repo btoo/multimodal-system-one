@@ -1,0 +1,9 @@
+{
+  "key": "qwen25-3b",
+  "model": "Qwen/Qwen2.5-Omni-3B",
+  "revision": "f75b40e3da2003cdd6e1829b1f420ca70797c34e",
+  "selected_method": "readout-l2-1.0",
+  "temperature": 1.0,
+  "feature_sha256": "0f22f4d1a7b4387f5e3553db9f5f6368c8a15a9547c57506f47d2a842d37d923",
+  "readout_sha256": "c79b9137ea7ee7d4337282af0db38bb4faa3b6cb5001989fbc1362f01253f734"
+}

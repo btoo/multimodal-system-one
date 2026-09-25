@@ -1,0 +1,9 @@
+{
+  "key": "gemma4-e4b",
+  "model": "google/gemma-4-E4B-it",
+  "revision": "ee0ef6023621cff504d758262d4e04895a5af4a2",
+  "selected_method": "label_logits",
+  "temperature": 5.0,
+  "feature_sha256": "1ccdcf353c11707c0395967ee1ab18d1efb65fecfb2e90d2108e3f4926718a8f",
+  "readout_sha256": null
+}

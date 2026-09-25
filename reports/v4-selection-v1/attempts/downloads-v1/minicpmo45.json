@@ -1,0 +1,98 @@
+{
+  "key": "minicpmo45",
+  "model": "openbmb/MiniCPM-o-4_5",
+  "revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+  "snapshot": "/__modal/volumes/vo-WGJLYYADSQz6Lnub99rq4N/hf/hub/models--openbmb--MiniCPM-o-4_5/snapshots/503e754207c94da6bb26850b4469f367c9ea3582",
+  "download_seconds": 72.45693873999994,
+  "total_bytes": 18760114156,
+  "files": [
+    {
+      "name": "README.md",
+      "bytes": 85837
+    },
+    {
+      "name": "added_tokens.json",
+      "bytes": 2706
+    },
+    {
+      "name": "assets/audio_cases/readme.txt",
+      "bytes": 57
+    },
+    {
+      "name": "config.json",
+      "bytes": 6439
+    },
+    {
+      "name": "configuration_minicpmo.py",
+      "bytes": 10135
+    },
+    {
+      "name": "generation_config.json",
+      "bytes": 178
+    },
+    {
+      "name": "merges.txt",
+      "bytes": 1402109
+    },
+    {
+      "name": "model-00001-of-00004.safetensors",
+      "bytes": 5273477136
+    },
+    {
+      "name": "model-00002-of-00004.safetensors",
+      "bytes": 5301855080
+    },
+    {
+      "name": "model-00003-of-00004.safetensors",
+      "bytes": 5301855048
+    },
+    {
+      "name": "model-00004-of-00004.safetensors",
+      "bytes": 2866549964
+    },
+    {
+      "name": "model.safetensors.index.json",
+      "bytes": 117202
+    },
+    {
+      "name": "modeling_minicpmo.py",
+      "bytes": 214356
+    },
+    {
+      "name": "modeling_navit_siglip.py",
+      "bytes": 42559
+    },
+    {
+      "name": "preprocessor_config.json",
+      "bytes": 842
+    },
+    {
+      "name": "processing_minicpmo.py",
+      "bytes": 67284
+    },
+    {
+      "name": "special_tokens_map.json",
+      "bytes": 12002
+    },
+    {
+      "name": "tokenization_minicpmo_fast.py",
+      "bytes": 3249
+    },
+    {
+      "name": "tokenizer.json",
+      "bytes": 11437712
+    },
+    {
+      "name": "tokenizer_config.json",
+      "bytes": 101726
+    },
+    {
+      "name": "utils.py",
+      "bytes": 95702
+    },
+    {
+      "name": "vocab.json",
+      "bytes": 2776833
+    }
+  ]
+}

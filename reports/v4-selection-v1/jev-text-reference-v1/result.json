@@ -1,0 +1,35 @@
+{
+  "model": "jev-1.13.0",
+  "manifest_sha256": "938fea9008352616d7d22299172b42ef5ed2481a26d6a245ade0a8107b38558c",
+  "cases": 64,
+  "metrics": {
+    "tracks": {
+      "text_rules": {
+        "examples": 64,
+        "errors": 0,
+        "correct": 62,
+        "accuracy": 0.96875,
+        "nll": 0.0635980808754418,
+        "brier": 0.034375,
+        "uniform_nll": 1.2424533248940002,
+        "uniform_brier": 0.7083333333333335,
+        "ece_10_bins": 0.030781250000000045,
+        "p50_ms": 326.5708540002379,
+        "p95_ms": 407.0152250000319
+      }
+    },
+    "macro_accuracy": 0.96875,
+    "macro_nll": 0.0635980808754418,
+    "macro_brier": 0.034375,
+    "macro_track_p95_ms": 407.0152250000319,
+    "errors": 0,
+    "proper_scores_conditioned_on_success": true
+  },
+  "inference_cost_usd": 0.0010402560000000007,
+  "scope": "Original synthetic text-rule development controls only; not official TypeSafe workflows",
+  "latency_boundary": "Client-visible API latency from this Mac, unlike in-container H100 pipeline timing",
+  "eligible_for_same_hardware_frontier": false,
+  "calibration_fitted_here": false,
+  "reference_used_for_training": false,
+  "openai_reference_executed": false
+}

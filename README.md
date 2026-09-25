@@ -1,12 +1,28 @@
 # MiSO — Multimodal System One
 
-**A research project for learning fast, typed decisions directly from speech, sounds, screenshots, and language on a MacBook.**
+**A research project for fast, typed decisions from speech, sounds, images, and language, with MacBook controls and measured GPU experiments.**
 
 [**Open the MiSO playground →**](https://miso-playground-nine.vercel.app) · Audio, image, and native text inputs, editable typed questions, probability views, and saved Workflow runs. Live calls require an owner session. [Deployment evidence](reports/playground-miso-only-v1/README.md).
 
+## MiSO v4 investigation: measured selection
+
+**Provisional research backbone: MiniCPM-o 4.5. No candidate cleared the complete release gate.** The matched study tested eight native multimodal checkpoints, trained attention adapters for MiniCPM and Qwen3-Omni, and confirmed their frozen versions on 320 separate cases each. MiniCPM reached **82.35% equal-track accuracy**, versus Qwen3's **84.54%**, while using roughly **19 GiB versus 60 GiB** of allocated GPU memory. Both reached only **39.58%** on coarse screen localization, so reliable browser use remains unestablished.
+
+![Fresh v4 confirmation across text, speech, sounds, paired inputs and screens](docs/assets/v4-confirmation.svg)
+
+The implementation also tests a concrete System One optimization: sixteen independent questions share one multimodal state prefix. On one controlled H100 example, the language-backbone/scoring phase fell from **341.9 ms to 52.3 ms (6.53×)**, with all sixteen top decisions preserved. This excludes media encoding, preprocessing, startup and networking; it is not an API latency claim.
+
+![Shared causal prefix and independent question branches](docs/assets/v4-shared-prefix.svg)
+
+[**Full investigation, candidate comparison, costs and limitations →**](reports/v4-selection-v1/README.md) · [Frozen protocol](evals/v4-selection-protocol-v1.json) · [Architecture and data design](docs/research/v4-backbone-selection.md) · [Packed-question implementation](mmso/parallel_decisions.py)
+
+The live playground continues to serve the small v3 checkpoint. V4 artifacts are research candidates; they have not been registered as a production model or silently substituted into the playground.
+
+## Served v3 control and earlier results
+
 ![Project overview: visual observations and language enter a jointly trained model that predicts answer probabilities.](docs/assets/overview.svg)
 
-> **Stage: confirmed native-model accuracy gains and broader real-screen evaluation.** The new `mmso-joint-v3` model scores **81.32% on familiar combinations and 66.99% on the known composition gap**, versus v2's 65.30% and 47.14% on identical fresh voices/panels. The inference model remains 668,097 parameters. A separate OCR control reaches 9/64 real-screen targets. General speech, reliable browser execution, and Jev-equivalent capabilities remain unestablished.
+> **Served control: `mmso-joint-v3`.** It scores **81.32% on familiar combinations and 66.99% on the known composition gap**, versus v2's 65.30% and 47.14% on identical fresh voices/panels. The inference model remains 668,097 parameters. A separate OCR control reaches 9/64 real-screen targets. These tasks and timing boundaries differ from the v4 study above.
 
 The first goal is a small model whose weights, data, losses, and failure modes we can understand. It should answer bounded questions about observations, return a probability distribution over the declared answers, and support abstention in the surrounding software. The initial target machine is an Apple M4 Pro with 48 GB of unified memory. The reports below record training budgets and loaded inference latency for the implemented prototypes.
 

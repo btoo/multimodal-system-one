@@ -1,0 +1,25 @@
+{
+  "summary_sha256": "8e45b64d322d700818a62dba1e9695d6219e319d34f72c883f58e6993ece693a",
+  "figures": {
+    "v4-quality": {
+      "kind": "measured_result",
+      "svg_sha256": "848fe2315de25382f34c7eeab0404b1eddeb82f11a71d47065bba66e7db8d01e",
+      "png_sha256": "b8cd5c741fd852f0d4e1bae2c7c264cc74f832596dbd1eaeec6a9cd07907b9b7"
+    },
+    "v4-quality-latency": {
+      "kind": "measured_result",
+      "svg_sha256": "ceb7c894dc286b11d26da373e289662a48b72a010f2fdfe90e41f6e0285a257b",
+      "png_sha256": "e29aa264dd4a14089e28300fe3e6c3cfd10d71d1d25eb358de66636f1a1a5a99"
+    },
+    "v4-confirmation": {
+      "kind": "measured_result",
+      "svg_sha256": "c8c4855c93143fa16ecfdb5bac240c35b846c1be301b5c66eacd30a0fccad4a4",
+      "png_sha256": "4865ea091fccc98e44f79ee37a2345297fc2a2823270de90b8d16b0e8798cd17"
+    },
+    "v4-shared-prefix": {
+      "kind": "design",
+      "svg_sha256": "1f25eac7ddead7cc9d83e38a647d5b06ec655656f327a77f30a9b40945abfb9f",
+      "png_sha256": "2a7e6e5a7035c2c0d610227c552e499dd7b32a4032ed6153058c9455c057ef3b"
+    }
+  }
+}

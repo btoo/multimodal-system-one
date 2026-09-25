@@ -1,0 +1,74 @@
+{
+  "key": "qwen25-3b",
+  "model": "Qwen/Qwen2.5-Omni-3B",
+  "revision": "f75b40e3da2003cdd6e1829b1f420ca70797c34e",
+  "snapshot": "/__modal/volumes/vo-WGJLYYADSQz6Lnub99rq4N/hf/hub/models--Qwen--Qwen2.5-Omni-3B/snapshots/f75b40e3da2003cdd6e1829b1f420ca70797c34e",
+  "download_seconds": 58.53638178399996,
+  "total_bytes": 11988842873,
+  "files": [
+    {
+      "name": "LICENSE",
+      "bytes": 7387
+    },
+    {
+      "name": "README.md",
+      "bytes": 36788
+    },
+    {
+      "name": "added_tokens.json",
+      "bytes": 579
+    },
+    {
+      "name": "chat_template.json",
+      "bytes": 1313
+    },
+    {
+      "name": "config.json",
+      "bytes": 13183
+    },
+    {
+      "name": "generation_config.json",
+      "bytes": 74
+    },
+    {
+      "name": "merges.txt",
+      "bytes": 1671853
+    },
+    {
+      "name": "model-00001-of-00003.safetensors",
+      "bytes": 4994850880
+    },
+    {
+      "name": "model-00002-of-00003.safetensors",
+      "bytes": 4999787448
+    },
+    {
+      "name": "model-00003-of-00003.safetensors",
+      "bytes": 1978024880
+    },
+    {
+      "name": "model.safetensors.index.json",
+      "bytes": 241817
+    },
+    {
+      "name": "preprocessor_config.json",
+      "bytes": 667
+    },
+    {
+      "name": "special_tokens_map.json",
+      "bytes": 832
+    },
+    {
+      "name": "tokenizer.json",
+      "bytes": 11421870
+    },
+    {
+      "name": "tokenizer_config.json",
+      "bytes": 6469
+    },
+    {
+      "name": "vocab.json",
+      "bytes": 2776833
+    }
+  ]
+}

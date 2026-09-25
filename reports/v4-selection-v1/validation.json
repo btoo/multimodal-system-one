@@ -1,0 +1,21 @@
+{
+  "tests": {
+    "command": "uv run --locked --group dev --group research --group docs --group cloud python -m unittest discover -s tests -q",
+    "passed": 102
+  },
+  "evidence_audit": "scripts/check_v4_study.py passed",
+  "documentation_audit": "scripts/check_docs.py passed",
+  "fresh_media_restore_test": {
+    "kinds": [
+      "SLURP recording",
+      "ScreenSpot screenshot",
+      "generated panel"
+    ],
+    "result": "All restored bytes match frozen SHA-256 hashes"
+  },
+  "private_credential_scan": {
+    "files_checked": 182,
+    "leaks_found": 0
+  },
+  "public_playground_model_changed": false
+}

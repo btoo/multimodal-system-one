@@ -1,0 +1,9 @@
+{
+  "key": "gemma4-12b",
+  "model": "google/gemma-4-12B-it",
+  "revision": "707f0a3b8a3c7ad586ed01e27eafbad8a27dd0f7",
+  "selected_method": "readout-l2-0.1",
+  "temperature": 3.0,
+  "feature_sha256": "eb47c2d1b6b4e3ca3a9f5baa5367f7028504a4fe5f1dd1760724e5dc72580336",
+  "readout_sha256": "5cbee8f19f2eba13461fe97b26769954e67837a6083c8acf60b01f9e408f6ad6"
+}

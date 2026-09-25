@@ -1,0 +1,9 @@
+{
+  "key": "minicpmo45",
+  "model": "openbmb/MiniCPM-o-4_5",
+  "revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+  "selected_method": "readout-l2-0.1",
+  "temperature": 1.5,
+  "feature_sha256": "7b4b1ec03d92d90d5d53af8fb701cd8f0b88d911a1df988e4039411832f31b36",
+  "readout_sha256": "e45021b9cb85c05210d9f44d24b2340c76384d3cb437021e433d04550d225ab6"
+}

@@ -1,0 +1,9 @@
+{
+  "key": "qwen25-7b",
+  "model": "Qwen/Qwen2.5-Omni-7B",
+  "revision": "ae9e1690543ffd5c0221dc27f79834d0294cba00",
+  "selected_method": "label_logits",
+  "temperature": 1.0,
+  "feature_sha256": "8587e1210e537ae019bc49204c6a13d9b8affd391cc294f4e74a51d406a314fe",
+  "readout_sha256": null
+}

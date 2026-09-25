@@ -1,0 +1,7 @@
+{
+  "key": "gemma4-e2b",
+  "phase": "development",
+  "started_unix": 1790305644.6086988,
+  "maximum_compute_proxy_usd": 5.424216,
+  "note": "Conservative runtime reservation, not actual billed spend"
+}

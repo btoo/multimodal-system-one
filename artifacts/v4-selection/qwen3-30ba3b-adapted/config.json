@@ -1,0 +1,9 @@
+{
+  "key": "qwen3-30ba3b-adapted",
+  "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+  "revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+  "selected_method": "readout-l2-1.0",
+  "temperature": 3.0,
+  "feature_sha256": "3d0db2f26d7c20d3ae1bed79c6d2455e6b99b2ea88837ff1b175d22748893431",
+  "readout_sha256": "29566128bc2b962d5940b9624a3953f7bf5ea61a63514f92f67738208946a764"
+}

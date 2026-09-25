@@ -1,0 +1,28 @@
+{
+  "name": "MiSO v4 research candidate",
+  "id": "miso-v4-candidate",
+  "status": "research_lead_not_release_qualified",
+  "base_model": "openbmb/MiniCPM-o-4_5",
+  "base_revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+  "hidden_width": 4096,
+  "language_layers": 36,
+  "adapter_config": "artifacts/v4-adapters/minicpmo45/adapter/config.json",
+  "adapter_config_sha256": "1a26cb43d371be489be99896a4606831cdcbde9c5aa1109546e34989f846b14e",
+  "decision_readout_config": "artifacts/v4-selection/minicpmo45-adapted/config.json",
+  "decision_readout_config_sha256": "7ea4560905dd46b553d12bcab406ae4b2ce38ccaffa5b6e779d62b4678ca0fbe",
+  "input_modalities": [
+    "text",
+    "image",
+    "audio"
+  ],
+  "output_contract": "Computed candidate distributions; software projects these into Choice, Noul, Score and Ranking",
+  "tested_candidate_count_range": [
+    2,
+    10
+  ],
+  "inference_requires_external_model_api": false,
+  "public_api_registered": false,
+  "quality_blocker": "Coarse screen localization is 19/48 on confirmation; no reliable browser-use claim",
+  "report": "reports/v4-selection-v1/README.md",
+  "research_only_data": true
+}

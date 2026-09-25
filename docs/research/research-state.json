@@ -250,5 +250,15 @@
     "mmso-joint-v2",
     "mmso-joint-v3"
   ],
-  "run_count_definition": "model_runs_completed retains the original three baseline controls plus native model-training attempts; additional screen pipeline evaluations and representation diagnostics are counted separately."
+  "run_count_definition": "model_runs_completed retains the original three baseline controls plus native model-training attempts; additional screen pipeline evaluations and representation diagnostics are counted separately.",
+  "v4_selection": {
+    "status": "no_release_qualified_winner",
+    "research_lead": "minicpmo45-adapted",
+    "quality_reference": "qwen3-30ba3b-adapted",
+    "report": "reports/v4-selection-v1/README.md",
+    "primary_checkpoints_measured": 8,
+    "attention_adapter_trials": 2,
+    "confirmation_cases_per_finalist": 320,
+    "public_api_promoted": false
+  }
 }

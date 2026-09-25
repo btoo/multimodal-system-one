@@ -1,0 +1,9 @@
+{
+  "key": "phi4mm",
+  "model": "microsoft/Phi-4-multimodal-instruct",
+  "revision": "93f923e1a7727d1c4f446756212d9d3e8fcc5d81",
+  "selected_method": "readout-l2-1.0",
+  "temperature": 1.5,
+  "feature_sha256": "743eab5444b45a74d681af2b24d7dd72e559b2458c3a4b51c0a96b0441839bf2",
+  "readout_sha256": "712424fef5efa2c6aa8937daff2d74d4b0ddd0c8e43b40839a9fae4f120dc8b4"
+}

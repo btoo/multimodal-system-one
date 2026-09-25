@@ -1,0 +1,89 @@
+{
+  "boundary": "Median per component; component medians need not sum to median total. Plain-text tokenizer probe excludes media placeholders; actual tokenization is also included in processor time.",
+  "confirmation": {
+    "minicpmo45": {
+      "text_rules": {
+        "text_tokenizer_probe_ms": 0.38108449999896266,
+        "decode_ms": 0.006065499999152735,
+        "processor_ms": 0.8722150000011197,
+        "forward_ms": 26.250244000001643,
+        "score_and_d2h_ms": 0.42142600000261154,
+        "request_ms": 27.688007999998376
+      },
+      "speech_intent": {
+        "text_tokenizer_probe_ms": 0.35500800000320965,
+        "decode_ms": 1.366199500001386,
+        "processor_ms": 5.860594999997915,
+        "forward_ms": 49.31366600000331,
+        "score_and_d2h_ms": 0.45669050000185507,
+        "request_ms": 57.49797549999869
+      },
+      "sound_events": {
+        "text_tokenizer_probe_ms": 0.32278300000143645,
+        "decode_ms": 5.891472999998371,
+        "processor_ms": 5.745966500001032,
+        "forward_ms": 36.861887500000634,
+        "score_and_d2h_ms": 0.45107700000102113,
+        "request_ms": 49.235194999997844
+      },
+      "joint_control": {
+        "text_tokenizer_probe_ms": 0.29363850000052594,
+        "decode_ms": 3.271402000001089,
+        "processor_ms": 28.613675500000824,
+        "forward_ms": 80.53629900000203,
+        "score_and_d2h_ms": 0.47469550000123206,
+        "request_ms": 113.7525819999965
+      },
+      "screen_region": {
+        "text_tokenizer_probe_ms": 0.6056074999989391,
+        "decode_ms": 167.5611124999996,
+        "processor_ms": 79.70637949999926,
+        "forward_ms": 132.0356335000028,
+        "score_and_d2h_ms": 0.5311805000012271,
+        "request_ms": 381.765197
+      }
+    },
+    "qwen3-30ba3b": {
+      "text_rules": {
+        "text_tokenizer_probe_ms": 0.3194734999993898,
+        "decode_ms": 0.004909499999428135,
+        "processor_ms": 0.7770400000026711,
+        "forward_ms": 49.92197699999679,
+        "score_and_d2h_ms": 0.4493544999917276,
+        "request_ms": 51.22317249999497
+      },
+      "speech_intent": {
+        "text_tokenizer_probe_ms": 0.2962419999974486,
+        "decode_ms": 1.372216500001855,
+        "processor_ms": 2.415215000006299,
+        "forward_ms": 126.21739549999944,
+        "score_and_d2h_ms": 0.4740640000022722,
+        "request_ms": 130.34722950000344
+      },
+      "sound_events": {
+        "text_tokenizer_probe_ms": 0.2895450000011124,
+        "decode_ms": 5.39039499999916,
+        "processor_ms": 2.8412959999997156,
+        "forward_ms": 61.2561499999984,
+        "score_and_d2h_ms": 0.45727650000060294,
+        "request_ms": 70.04183499999073
+      },
+      "joint_control": {
+        "text_tokenizer_probe_ms": 0.259769999992443,
+        "decode_ms": 2.8541759999995975,
+        "processor_ms": 4.7294220000040355,
+        "forward_ms": 76.39762649999682,
+        "score_and_d2h_ms": 0.45399050000582974,
+        "request_ms": 85.59137399999628
+      },
+      "screen_region": {
+        "text_tokenizer_probe_ms": 0.3925400000071022,
+        "decode_ms": 152.03622149999774,
+        "processor_ms": 12.502099499997144,
+        "forward_ms": 144.4383109999947,
+        "score_and_d2h_ms": 0.5089680000054386,
+        "request_ms": 341.15057899999357
+      }
+    }
+  }
+}

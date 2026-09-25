@@ -1,0 +1,70 @@
+[
+  {
+    "track": "text_rules",
+    "batch_size": 1,
+    "forward_score_d2h_ms": [
+      20.247802000000092,
+      19.900915000000907,
+      19.74372400000135,
+      19.501511999997945,
+      19.269379999997227
+    ],
+    "decisions_per_second": 50.64900623610478,
+    "identical_repeated_example": true,
+    "all_repeated_decisions_agree": true
+  },
+  {
+    "track": "text_rules",
+    "batch_size": 4,
+    "forward_score_d2h_ms": [
+      24.73105600000025,
+      24.343626000003837,
+      24.313093000003505,
+      24.183946000000844,
+      24.162258000004044
+    ],
+    "decisions_per_second": 164.52040881838536,
+    "identical_repeated_example": true,
+    "all_repeated_decisions_agree": true
+  },
+  {
+    "track": "text_rules",
+    "batch_size": 16,
+    "forward_score_d2h_ms": [
+      64.41545599999898,
+      64.74078299999775,
+      65.03171299999622,
+      64.94404200000048,
+      64.86003999999923
+    ],
+    "decisions_per_second": 246.68501592043714,
+    "identical_repeated_example": true,
+    "all_repeated_decisions_agree": true
+  },
+  {
+    "track": "joint_control",
+    "batch_size": 1,
+    "forward_score_d2h_ms": [
+      71.77496999999988,
+      71.72163499999584,
+      71.54118999999781,
+      71.17705499999971,
+      71.44364399999859
+    ],
+    "decisions_per_second": 13.97796150721047,
+    "identical_repeated_example": true,
+    "all_repeated_decisions_agree": true
+  },
+  {
+    "track": "joint_control",
+    "batch_size": 4,
+    "status": "unsupported_in_current_streaming_mode",
+    "reason": "Published MiniCPM audio stream_input implementation asserts batch size one; failure retained in diagnostics-v1. No silent mode change."
+  },
+  {
+    "track": "joint_control",
+    "batch_size": 16,
+    "status": "unsupported_in_current_streaming_mode",
+    "reason": "Published MiniCPM audio stream_input implementation asserts batch size one; failure retained in diagnostics-v1. No silent mode change."
+  }
+]

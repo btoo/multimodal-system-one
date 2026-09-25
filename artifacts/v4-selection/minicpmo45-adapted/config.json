@@ -1,0 +1,9 @@
+{
+  "key": "minicpmo45-adapted",
+  "model": "openbmb/MiniCPM-o-4_5",
+  "revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+  "selected_method": "label_logits",
+  "temperature": 3.0,
+  "feature_sha256": "9a8360ba7ed951d6823c7449d0c23b75d1dc6b8bc49f9b241b4822dbec925dc9",
+  "readout_sha256": null
+}

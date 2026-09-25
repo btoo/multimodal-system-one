@@ -1,0 +1,22 @@
+[
+  {
+    "track": "text_rules",
+    "status": "ok"
+  },
+  {
+    "track": "speech_intent",
+    "status": "ok"
+  },
+  {
+    "track": "sound_events",
+    "status": "ok"
+  },
+  {
+    "track": "screen_region",
+    "status": "ok"
+  },
+  {
+    "track": "joint_control",
+    "status": "ok"
+  }
+]

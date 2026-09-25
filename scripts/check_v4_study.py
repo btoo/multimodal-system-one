@@ -65,6 +65,28 @@ def main():
         if config["readout_sha256"]:
             assert sha(config_path.parent / "readout.safetensors") == config["readout_sha256"]
         counts["fitted_candidates"] += 1
+    figures_path = ROOT / "reports/v4-selection-v1/figures.json"
+    if figures_path.exists():
+        figures = json.loads(figures_path.read_text())
+        assert sha(ROOT / "reports/v4-selection-v1/summary.json") == figures["summary_sha256"]
+        for name, entry in figures["figures"].items():
+            assert sha(ROOT / "docs/assets" / (name + ".svg")) == entry["svg_sha256"]
+            assert sha(ROOT / "docs/assets" / (name + ".png")) == entry["png_sha256"]
+    costs_path = ROOT / "reports/v4-selection-v1/cost-and-shutdown.json"
+    if costs_path.exists():
+        costs = json.loads(costs_path.read_text())
+        assert costs["gpu_jobs_reserved"] <= 24
+        assert costs["maximum_reserved_compute_proxy_usd"] <= costs["study_ceiling_usd"]
+        assert costs["all_study_apps_stopped"] and not costs["active_study_containers"]
+    parallel_path = ROOT / "reports/v4-selection-v1/attempts/minicpmo45-parallel-v1/parallel-summary.json"
+    if parallel_path.exists():
+        parallel = json.loads(parallel_path.read_text())
+        for measurement in parallel["measurements"]:
+            assert measurement["argmax_agreement"] == measurement["questions"]
+            assert measurement["maximum_probability_difference"] < .01
+            a = np.median(measurement["sequential_shared_media_ms"])
+            b = np.median(measurement["packed_ms"])
+            assert abs(a / b - measurement["median_speedup"]) < 1e-9
     print(json.dumps({"audit": "passed", **counts}, indent=2))
 
 

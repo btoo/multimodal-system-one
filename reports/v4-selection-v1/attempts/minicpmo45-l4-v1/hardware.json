@@ -1,0 +1,12 @@
+{
+  "status": "completed",
+  "key": "minicpmo45",
+  "phase": "hardware-probe",
+  "gpu": "NVIDIA L4",
+  "gpu_memory_bytes": 23659151360,
+  "cases": 10,
+  "records": 20,
+  "load_seconds": 33.960908425,
+  "wall_seconds": 96.817437587,
+  "scope": "Ten fixed development cases; not new confirmation or a production latency SLA"
+}

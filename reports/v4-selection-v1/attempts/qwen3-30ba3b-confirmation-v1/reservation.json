@@ -1,0 +1,7 @@
+{
+  "key": "qwen3-30ba3b",
+  "phase": "adapter-confirmation",
+  "started_unix": 1790310457.79513,
+  "maximum_compute_proxy_usd": 5.424216,
+  "note": "Conservative runtime reservation, not actual billed spend"
+}

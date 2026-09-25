@@ -1,0 +1,7 @@
+{
+  "key": "qwen25-7b",
+  "phase": "development",
+  "started_unix": 1790306439.705203,
+  "maximum_compute_proxy_usd": 5.424216,
+  "note": "Conservative runtime reservation, not actual billed spend"
+}

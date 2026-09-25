@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "key": "minicpmo45",
+  "phase": "diagnostics",
+  "error_type": "AssertionError",
+  "error": "audio stream_input mode only support batch size 1",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/cloud/modal_v4_study.py\", line 88, in run_remote\n    result = run_diagnostics(Path(\"/workspace\"), key, output)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/mmso/backbone_diagnostics.py\", line 156, in run_diagnostics\n    backbone.forward(inputs); torch.cuda.synchronize()\n    ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/mmso/backbone_study.py\", line 193, in forward\n    return self.model(data=inputs, use_cache=False, return_dict=True, logits_to_keep=1)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1773, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1784, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/cache/hf/modules/transformers_modules/503e754207c94da6bb26850b4469f367c9ea3582/modeling_minicpmo.py\", line 807, in forward\n    vllm_embedding = self.get_omni_embedding(\n                     ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/cache/hf/modules/transformers_modules/503e754207c94da6bb26850b4469f367c9ea3582/modeling_minicpmo.py\", line 749, in get_omni_embedding\n    assert bs == 1, \"audio stream_input mode only support batch size 1\"\n           ^^^^^^^\nAssertionError: audio stream_input mode only support batch size 1\n"
+}

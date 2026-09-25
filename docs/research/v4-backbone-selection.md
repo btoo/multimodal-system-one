@@ -1,5 +1,7 @@
 # MiSO v4: selecting a backbone with measured evidence
 
+**Completed September 25, 2026:** [results and figures](../../reports/v4-selection-v1/README.md). MiniCPM-o 4.5 is the provisional research lead; Qwen3-Omni is the quality reference. Neither cleared every quality gate, and both scored 39.58% on confirmation screen localization. The public playground was not changed.
+
 The selection target is the fastest native text/image/audio decision model that passes explicit quality gates on the same hardware. Gemma is a candidate, not a default winner. This study investigates a successor to the 668,097-parameter v3 control; it does not promote a new playground model or establish Jev/OpenAI parity.
 
 The [frozen protocol](../../evals/v4-selection-protocol-v1.json), [pinned candidate inventory](../../evals/v4-candidates-v1.json), and [dataset acquisition audit](../../evals/acquisition/v4_selection_v1.json) are the executable record. The protocol was committed before candidate inference. Results and failed attempts are retained under `reports/v4-selection-v1`.
@@ -25,6 +27,8 @@ Eight ungated checkpoints span Gemma 4 E2B/E4B/12B, Qwen2.5-Omni 3B/7B, Qwen3-Om
 The families make different tradeoffs. Gemma 4's smaller variants use modality encoders and per-layer embeddings, while its 12B Unified model directly projects media into the shared backbone. MiniCPM-o combines pretrained visual, audio and language components; Qwen3-Omni uses a mixture-of-experts language backbone. Active parameters and hidden width cannot substitute for actual memory or latency measurements. [Gemma architecture](https://ai.google.dev/gemma/docs/core/model_card_4), [MiniCPM-o report](https://arxiv.org/abs/2604.27393), [Qwen3-Omni report](https://arxiv.org/abs/2509.17765).
 
 All candidates receive the same source information and BF16 H100 hardware. Raw audio is never replaced with its reference transcript. Screen annotations determine labels only; models see the screenshot and instruction. Model-specific native processors can produce different numbers of tokens, which are recorded as part of the comparison. This evaluates complete supported inference pipelines, not an isolated tokenizer speed contest. Runtime or attention-backend differences must be disclosed.
+
+The completed study required the publisher-compatible Transformers 4.51/PyTorch 2.8 runtime for MiniCPM and Phi, while the other candidates used Transformers 5.17/PyTorch 2.14. Failed compatibility attempts were retained. The [bounded adapter follow-up](../../evals/v4-adapter-protocol-v1.json) and its [candidate nomination](../../evals/v4-adapter-nomination-v1.json) were committed before training. Final adapters, readouts and temperatures were then frozen in the [confirmation nomination](../../evals/v4-nomination-v1.json).
 
 ## Quality coverage and its limits
 
@@ -54,6 +58,7 @@ The study uses one H100 at a time, no public endpoint, no automatic application 
 
 ```bash
 uv sync --locked --group cloud --group research --group dev --group docs
+uv run --locked --group research python scripts/fetch_v4_data.py
 uv run --locked --group research python scripts/prepare_v4_study.py
 uv run --locked python scripts/prepare_v4_bundle.py
 uv run --locked --group cloud modal run --profile btoo cloud/modal_v4_study.py \
@@ -62,4 +67,4 @@ uv run --locked --group cloud modal run --profile btoo cloud/modal_v4_study.py \
   --key gemma4-e2b --phase smoke --attempt gemma4-e2b-smoke-v1
 ```
 
-Use fresh attempt IDs. The input preparation script expects the pinned SLURP source shards recorded in the acquisition audit. Raw media, model caches and extracted features remain outside Git. Confirmed model changes require their own versioned artifacts and API verification.
+Use fresh attempt IDs. The restore script acquires the pinned natural-data sources and verifies the exact frozen media; procedural panel PNGs are checked in to avoid platform font drift. Other raw media, model caches and extracted features remain outside Git. Confirmed model changes require their own versioned artifacts and API verification.

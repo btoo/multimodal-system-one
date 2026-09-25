@@ -1,0 +1,42 @@
+{
+  "key": "qwen3-30ba3b",
+  "phase": "adapter-confirmation",
+  "expected": 320,
+  "model": {
+    "id": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+    "revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+    "gated": false,
+    "weight_bytes": 70523299202,
+    "total_parameters": 35259818545,
+    "license": "apache-2.0",
+    "license_name": "apache-2.0",
+    "license_link": null,
+    "key": "qwen3-30ba3b",
+    "eligible_for_product": true,
+    "status": "candidate",
+    "source_url": "https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct/tree/26291f793822fb6be9555850f06dfe95f2d7e695",
+    "source_hashes": {
+      "config.json": "eab5093d47807aaf894119506b238b2b1cee70d08456e894fee9a012d88f2e0d",
+      "README.md": "0e44065c4c4a27071f7239afd5b5a33af5bc2e437dd7ea9950e51aafabfde3df"
+    }
+  },
+  "source_hashes": {
+    "evals/v4-selection-protocol-v1.json": "834d7bae32f7410ccc7895b6d0df875e8f956fc2e8d565229b4dd344804327b7",
+    "evals/v4-candidates-v1.json": "84bbb8b00c47f0ab6c96620aec891945f45a41e2e1fbd02a65e390785e0bb78a",
+    "evals/manifests/v4_selection_v1.jsonl": "938fea9008352616d7d22299172b42ef5ed2481a26d6a245ade0a8107b38558c",
+    "mmso/backbone_study.py": "11f9f9fc78dc0a7d80bc57248c4be659259994d500b9184b1502d25badf22e31"
+  },
+  "hardware": {
+    "name": "NVIDIA H100 80GB HBM3",
+    "memory_bytes": 85017624576,
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0"
+  },
+  "versions": {
+    "transformers": "5.17.0",
+    "accelerate": "1.15.0",
+    "numpy": "2.5.3",
+    "librosa": "0.11.0",
+    "soundfile": "0.14.0"
+  }
+}
