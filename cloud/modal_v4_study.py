@@ -112,7 +112,7 @@ def evaluate_legacy(key, phase, attempt):
 
 @app.local_entrypoint()
 def main(key: str = "gemma4-e2b", phase: str = "smoke", attempt: str = "gemma4-e2b-smoke-v1"):
-    if phase not in {"download", "download-all", "smoke", "development", "confirmation"}:
+    if phase not in {"download", "download-all", "smoke", "development", "confirmation", "adapter-development", "adapter-confirmation"}:
         raise ValueError("Invalid phase")
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,79}", attempt):
         raise ValueError("Invalid attempt ID")
@@ -140,7 +140,7 @@ def main(key: str = "gemma4-e2b", phase: str = "smoke", attempt: str = "gemma4-e
     spent_reservations = sum(json.loads(p.read_text())["maximum_compute_proxy_usd"] for p in attempts)
     if spent_reservations + reserved > 250:
         raise ValueError("Study allocation ceiling exhausted")
-    if phase == "confirmation" and not (ROOT / "evals/v4-nomination-v1.json").exists():
+    if phase in {"confirmation", "adapter-confirmation"} and not (ROOT / "evals/v4-nomination-v1.json").exists():
         raise ValueError("Freeze a nomination before confirmation")
     (report / "reservation.json").write_text(json.dumps({"key": key, "phase": phase, "started_unix": started,
          "maximum_compute_proxy_usd": reserved, "note": "Conservative runtime reservation, not actual billed spend"}, indent=2) + "\n")
@@ -152,7 +152,12 @@ def main(key: str = "gemma4-e2b", phase: str = "smoke", attempt: str = "gemma4-e
         call.cancel(terminate_containers=True)
         raise
     for name, payload in result["files"].items():
-        path = (ROOT / ".research/v4/features" / (attempt + ".npz")) if name == "features.npz" else report / name
+        if name == "features.npz":
+            path = ROOT / ".research/v4/features" / (attempt + ".npz")
+        elif name.startswith("adapter/"):
+            path = ROOT / "artifacts/v4-adapters" / key / name
+        else:
+            path = report / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(payload)
     (report / "rpc.json").write_text(json.dumps({"wall_seconds": time.time() - started,

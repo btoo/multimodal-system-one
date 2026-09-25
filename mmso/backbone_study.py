@@ -95,7 +95,7 @@ class Backbone:
             cls = tr.AutoModelForCausalLM
             config = tr.AutoConfig.from_pretrained(path, trust_remote_code=True, local_files_only=True)
             config._attn_implementation = "sdpa"
-            kwargs.update(trust_remote_code=True, config=config, _attn_implementation="sdpa")
+            kwargs.update(trust_remote_code=True, config=config)
         else:
             raise ValueError("Unsupported model adapter")
         self.model, self.loading = cls.from_pretrained(path, **kwargs)
@@ -258,10 +258,11 @@ def run_candidate(root, key, phase, output):
         for item in row["media"]:
             if digest(root / item["path"]) != item["sha256"]:
                 raise ValueError("Media hash mismatch before inference")
-    selected = [r for r in rows if (r["split"] == "confirmation") == (phase == "confirmation")]
+    confirmation_phase = phase in {"confirmation", "adapter-confirmation"}
+    selected = [r for r in rows if (r["split"] == "confirmation") == confirmation_phase]
     if phase == "smoke":
         selected = [next(r for r in rows if r["split"] == "train" and r["track"] == track) for track in protocol["tracks"]]
-    elif phase not in {"development", "confirmation"}:
+    elif phase not in {"development", "confirmation", "adapter-development", "adapter-confirmation"}:
         raise ValueError("Unknown phase")
     selected.sort(key=lambda r: hashlib.sha256(("order:" + r["id"]).encode()).hexdigest())
     source_hashes = {name: digest(root / name) for name in ["evals/v4-selection-protocol-v1.json", "evals/v4-candidates-v1.json", "evals/manifests/v4_selection_v1.jsonl", "mmso/backbone_study.py"]}
@@ -272,6 +273,16 @@ def run_candidate(root, key, phase, output):
     (output / "started.json").write_text(json.dumps(begun, indent=2) + "\n")
     model = Backbone(spec)
     load_seconds = time.perf_counter() - started
+    adapter_metadata = None
+    if phase == "adapter-development":
+        from .backbone_adapters import train_adapter
+        adapter_protocol = json.loads((root / "evals/v4-adapter-protocol-v1.json").read_text())
+        nomination = json.loads((root / "evals/v4-adapter-nomination-v1.json").read_text())
+        if key not in nomination["candidates"]: raise ValueError("Candidate not nominated for adapter training")
+        adapter_metadata = train_adapter(model, root, rows, adapter_protocol, output)
+    elif phase == "adapter-confirmation":
+        from .backbone_adapters import load_and_merge_adapter
+        adapter_metadata = load_and_merge_adapter(model.model, root / "artifacts/v4-adapters" / key / "adapter", spec)
     parameters = sum(p.numel() for p in model.model.parameters())
     warmup_start = time.perf_counter()
     warmups = []
@@ -311,6 +322,7 @@ def run_candidate(root, key, phase, output):
                "function_seconds": time.perf_counter() - started, "loaded_parameters": parameters,
                "peak_allocated_bytes": torch.cuda.max_memory_allocated(), "encoder_modules": model.encoder_names,
                "loading_info": {k: v for k, v in model.loading.items() if k != "error_msgs"},
+               "adapter": adapter_metadata,
                "features_sha256": digest(output / "features.npz") if features else None,
                "predictions_sha256": digest(output / "predictions.jsonl"), "accuracy_computed_remotely": False}
     (output / "result.json").write_text(json.dumps(summary, indent=2, default=str) + "\n")

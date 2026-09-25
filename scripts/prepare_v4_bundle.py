@@ -17,7 +17,13 @@ def sha(path):
 def main():
     paths = ["mmso/__init__.py", "mmso/backbone_study.py", "cloud/modal_v4_study.py",
              "evals/v4-selection-protocol-v1.json", "evals/v4-candidates-v1.json", "evals/manifests/v4_selection_v1.jsonl"]
+    allowlisted = set(paths)
     rows = [json.loads(x) for x in (ROOT / paths[-1]).read_text().splitlines()]
+    for name in ["mmso/backbone_adapters.py", "evals/v4-adapter-protocol-v1.json", "evals/v4-adapter-nomination-v1.json", "evals/v4-nomination-v1.json"]:
+        if (ROOT / name).exists(): paths.append(name); allowlisted.add(name)
+    for path in (ROOT / "artifacts/v4-adapters").glob("*/adapter/*"):
+        if path.is_file() and path.name in {"config.json", "adapter.safetensors"}:
+            name = str(path.relative_to(ROOT)); paths.append(name); allowlisted.add(name)
     for row in rows:
         for item in row["media"]:
             if sha(ROOT / item["path"]) != item["sha256"]:
@@ -25,7 +31,7 @@ def main():
             paths.append(item["path"])
     hashes = {}
     for name in sorted(set(paths)):
-        if not (name.startswith("data/") or name in paths[:6]):
+        if not (name.startswith("data/") or name in allowlisted):
             raise ValueError("Outside upload allowlist")
         target = DEST / name
         target.parent.mkdir(parents=True, exist_ok=True)

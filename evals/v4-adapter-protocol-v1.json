@@ -1,0 +1,28 @@
+{
+  "id": "miso-v4-adapter-followup-v1",
+  "created": "2026-09-24",
+  "trigger": "The frozen-backbone selection study has not produced a candidate passing every quality gate. Test whether a bounded decision-training intervention closes that gap before making a v4 recommendation.",
+  "selection_partition": "development",
+  "candidate_rule": "Two highest development macro-accuracy product-license-eligible candidates after primary compatibility fixes; freeze their IDs in a nomination before adapter training",
+  "confirmation_opened": false,
+  "training": {
+    "rank": 8,
+    "alpha": 16,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "steps": 512,
+    "batch_size": 1,
+    "gradient_clip_norm": 1.0,
+    "seed": 20260924,
+    "sampling": "Round-robin equal task exposure; deterministic shuffled cycles of training rows only",
+    "target_modules": "Language-backbone q_proj and v_proj (or fused qkv_proj) Linear layers only. Freeze all existing weights. New adapter parameters use float32; backbone uses BF16.",
+    "loss": "Cross entropy over supplied single-token candidate codes, with all other vocabulary entries excluded",
+    "checkpoint_selection": "Final fixed-step adapter only; no early stopping or development-guided checkpoint selection",
+    "merge": "Merge the low-rank update into the base Linear weights before extracting evaluation features; preserve the original publisher checkpoint in cache"
+  },
+  "readout_and_calibration": "Repeat the same frozen-feature readout grid and independent calibration protocol on the adapted backbone. All final selection uses development only.",
+  "budget": "Inside the existing $250 and 24-GPU-job study ceiling; no persistent endpoint",
+  "data_rights": "Research only. SLURP audio has a CC BY-NC license; these adapters cannot be silently promoted into a commercial product.",
+  "limitations": ["This small task-specific training set does not establish broad intelligence", "Candidate shortlist is chosen on development results, not randomly", "Public benchmark pretraining contamination remains unknown", "Unchanged primary quality gates; do not lower floors after seeing failures"]
+}

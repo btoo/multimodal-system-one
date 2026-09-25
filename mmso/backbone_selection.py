@@ -103,7 +103,7 @@ def fit_candidate(root, attempt):
     folder = root / "reports/v4-selection-v1/attempts" / attempt
     result = json.loads((folder / "result.json").read_text())
     key = result["key"]
-    if result["phase"] != "development" or result["status"] != "completed":
+    if result["phase"] not in {"development", "adapter-development"} or result["status"] != "completed":
         raise ValueError("Readout fitting requires a complete development extraction")
     protocol = json.loads((root / "evals/v4-selection-protocol-v1.json").read_text())
     all_rows = [json.loads(s) for s in (root / "evals/manifests/v4_selection_v1.jsonl").read_text().splitlines()]
@@ -167,18 +167,19 @@ def fit_candidate(root, attempt):
     registry = json.loads((root / "evals/v4-candidates-v1.json").read_text())
     spec = next(m for m in registry["models"] if m["key"] == key)
     reasons = selected["quality_reasons"] + ([] if spec["eligible_for_product"] else ["license_or_access_not_product_eligible"])
-    report = {"key": key, "attempt": attempt, "model": spec["id"], "revision": spec["revision"],
+    adapted = result["phase"] == "adapter-development"
+    report = {"key": key + ("-adapted" if adapted else ""), "base_key": key, "attempt": attempt, "model": spec["id"], "revision": spec["revision"],
               "selected_method": selected["method"], "temperature": selected["temperature"],
               "development": selected["development"], "disqualification_reasons": reasons,
               "variants": summaries, "feature_sha256": result["features_sha256"],
               "readout_training_scope": "Frozen backbone, training split only. This does not establish full adapter-training performance.",
               "latency_scope": "Measured label-logit pipeline; trained-readout incremental scoring overhead must be measured for finalists."}
-    destination = root / "reports/v4-selection-v1/candidates" / key
+    destination = root / "reports/v4-selection-v1/candidates" / report["key"]
     destination.mkdir(parents=True, exist_ok=True)
     (destination / "selection.json").write_text(json.dumps(report, indent=2) + "\n")
     chosen_probs = probabilities_by_variant[selected["method"]]
     (destination / "development-predictions.jsonl").write_text("".join(json.dumps({"id": r["id"], "probabilities": chosen_probs.get(r["id"])}) + "\n" for r in rows if r["split"] == "development"))
-    artifact = root / "artifacts/v4-selection" / key
+    artifact = root / "artifacts/v4-selection" / report["key"]
     artifact.mkdir(parents=True, exist_ok=True)
     state = states[selected["method"]]
     if state is not None:

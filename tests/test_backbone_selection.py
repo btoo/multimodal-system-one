@@ -5,9 +5,30 @@ import torch
 
 from mmso.backbone_selection import choose_winner, quality_reasons, softmax, summarize
 from mmso.backbone_study import move, prompt_for
+from mmso.backbone_adapters import DecisionLoRA
 
 
 class BackboneSelectionTests(unittest.TestCase):
+    def test_adapter_starts_identical_and_merge_preserves_trained_function(self):
+        torch.manual_seed(1)
+        original = torch.nn.Linear(6, 4)
+        weights = original.weight.detach().clone()
+        inputs = torch.randn(3, 6)
+        expected = original(inputs).detach()
+        adapter = DecisionLoRA(original, rank=2, alpha=4)
+        torch.testing.assert_close(adapter(inputs), expected)
+        optimizer = torch.optim.AdamW([adapter.a, adapter.b], lr=.01)
+        for _ in range(3):
+            optimizer.zero_grad()
+            loss = (adapter(inputs) - torch.ones(3, 4)).square().mean()
+            loss.backward(); optimizer.step()
+        self.assertIsNone(original.weight.grad)
+        torch.testing.assert_close(original.weight, weights)
+        trained = adapter(inputs).detach()
+        self.assertFalse(torch.equal(trained, expected))
+        merged = adapter.merge()
+        torch.testing.assert_close(merged(inputs), trained, rtol=1e-5, atol=1e-6)
+
     def test_processor_mapping_tensors_move_to_requested_device(self):
         # HF BatchFeature/BatchEncoding are UserDict mappings, not dicts.
         batch = UserDict({"input_ids": torch.tensor([[1, 2]]),
