@@ -33,7 +33,11 @@ def gpu_image(transformers_version="5.17.0", torch_version="2.14.0", torchvision
                             "numpy==2.5.3", "Pillow==12.3.0", "scipy==1.18.1",
                             "soundfile==0.14.0", "librosa==0.11.0", "sentencepiece==0.2.2",
                             "einops==0.8.2", "safetensors==0.8.0", "peft==0.21.0",
-                            "timm==1.0.30", "huggingface-hub==1.32.0")
+                            "timm==1.0.30", "huggingface-hub==1.32.0", "backoff==2.2.1")
+            # Only the package marker is needed by HF's recursive import check;
+            # video and TTS utilities are never invoked in this decision study.
+            # Preserve the common pinned Pillow/librosa/Torch runtime.
+            .uv_pip_install("minicpmo-utils==1.0.6", extra_options="--no-deps")
             .env({"HF_HOME": "/cache/hf", "PYTHONPATH": "/workspace:/workspace/cloud",
                   "TOKENIZERS_PARALLELISM": "false", "HF_HUB_OFFLINE": "1"})
             .add_local_dir(BUNDLE, "/workspace"))
