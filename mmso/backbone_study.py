@@ -282,6 +282,10 @@ def run_candidate(root, key, phase, output):
             warmups.append({"track": track, "status": "error", "error": str(error)})
             torch.cuda.empty_cache()
     warmup_seconds = time.perf_counter() - warmup_start
+    (output / "warmup.json").write_text(json.dumps(warmups, indent=2) + "\n")
+    if phase != "smoke" and any(w["status"] != "ok" for w in warmups):
+        raise RuntimeError("Compatibility warmup failed; do not treat adapter errors as a model quality result: "
+                           + json.dumps([w for w in warmups if w["status"] != "ok"]))
     torch.cuda.reset_peak_memory_stats()
     records, features, feature_ids = [], [], []
     for row in selected:
