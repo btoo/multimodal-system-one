@@ -83,7 +83,10 @@ def run_remote(key, phase, attempt):
         raise ValueError("Attempt ID already exists; never overwrite a run")
     output.mkdir(parents=True)
     try:
-        if phase == "diagnostics":
+        if phase == "hardware-probe":
+            from mmso.backbone_diagnostics import run_hardware_probe
+            result = run_hardware_probe(Path("/workspace"), key, output)
+        elif phase == "diagnostics":
             from mmso.backbone_diagnostics import run_diagnostics
             result = run_diagnostics(Path("/workspace"), key, output)
         else:
@@ -114,9 +117,17 @@ def evaluate_legacy(key, phase, attempt):
     return run_remote(key, phase, attempt)
 
 
+@app.function(image=gpu_image(legacy=True), gpu="L4", cpu=4, memory=32768,
+              volumes={"/cache": volume}, timeout=3600, startup_timeout=600,
+              retries=0, max_containers=1, min_containers=0,
+              scaledown_window=2, single_use_containers=True, include_source=False)
+def probe_l4(key, phase, attempt):
+    return run_remote(key, phase, attempt)
+
+
 @app.local_entrypoint()
 def main(key: str = "gemma4-e2b", phase: str = "smoke", attempt: str = "gemma4-e2b-smoke-v1"):
-    if phase not in {"download", "download-all", "smoke", "development", "confirmation", "adapter-development", "adapter-confirmation", "diagnostics"}:
+    if phase not in {"download", "download-all", "smoke", "development", "confirmation", "adapter-development", "adapter-confirmation", "diagnostics", "hardware-probe"}:
         raise ValueError("Invalid phase")
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,79}", attempt):
         raise ValueError("Invalid attempt ID")
@@ -162,7 +173,7 @@ def main(key: str = "gemma4-e2b", phase: str = "smoke", attempt: str = "gemma4-e
                 raise ValueError("Nominated adapter changed")
     (report / "reservation.json").write_text(json.dumps({"key": key, "phase": phase, "started_unix": started,
          "maximum_compute_proxy_usd": reserved, "note": "Conservative runtime reservation, not actual billed spend"}, indent=2) + "\n")
-    runner = evaluate_legacy if key in {"minicpmo45", "phi4mm"} else evaluate
+    runner = probe_l4 if phase == "hardware-probe" else evaluate_legacy if key in {"minicpmo45", "phi4mm"} else evaluate
     call = runner.spawn(key, phase, attempt)
     try:
         result = call.get(timeout=4300)

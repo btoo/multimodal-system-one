@@ -4,6 +4,7 @@ from __future__ import annotations
 import gc
 import hashlib
 import json
+import re
 from pathlib import Path
 import time
 
@@ -13,6 +14,14 @@ from torch import nn
 
 from .backbone_adapters import load_and_merge_adapter
 from .backbone_study import Backbone, decode_media, digest, move, prompt_for
+
+
+def clean_generated_text(text):
+    """Remove transport/presentation wrappers; never repair probability values."""
+    cleaned = re.sub(r"<\|(?:tts_bos|tts_eos|spk_bos|spk_eos)\|>", "", text).strip()
+    if cleaned.startswith("```") and cleaned.endswith("```"):
+        cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned)[:-3].strip()
+    return cleaned
 
 
 def candidate_projection(original, token_ids):
@@ -66,9 +75,10 @@ def generated(backbone, root, row, policy, json_mode):
     torch.cuda.synchronize()
     elapsed = time.perf_counter() - start
     valid, parsed = False, None
+    cleaned = clean_generated_text(text)
     if json_mode:
         try:
-            parsed = json.loads(text)
+            parsed = json.loads(cleaned)
             p = np.asarray(parsed["probabilities"], dtype=float)
             choice = parsed["choice"]
             valid = bool(p.shape == (len(row["choices"]),) and np.isfinite(p).all() and (p >= 0).all()
@@ -76,9 +86,10 @@ def generated(backbone, root, row, policy, json_mode):
                          and p[ord(choice) - 65] >= p.max() - 1e-6)
         except (ValueError, TypeError, KeyError): pass
     else:
-        valid = text.strip() in list("ABCDEFGHIJ"[:len(row["choices"])])
+        valid = cleaned in list("ABCDEFGHIJ"[:len(row["choices"])])
     return {"request_ms": elapsed * 1000, "model_generation_ms": (time.perf_counter() - generate_start) * 1000,
-            "tokens": token_count, "text": text, "contract_valid": valid,
+            "tokens": token_count, "text": text, "cleaned_text": cleaned,
+            "wrappers_removed": cleaned != text.strip(), "contract_valid": valid,
             "hit_token_limit": bool(json_mode and token_count >= 128)}
 
 
@@ -110,6 +121,10 @@ def run_diagnostics(root, key, output):
     backbone = Backbone(spec)
     gpu_name = torch.cuda.get_device_name()
     started = time.perf_counter()
+    first = {k: selected[0][k] for k in ("question", "choices", "media")}
+    # Exercise generation's cache setup too, outside timed comparisons.
+    generated(backbone, root, first, policy, False)
+    generated(backbone, root, first, policy, True)
     for row in selected:
         safe = {k: row[k] for k in ("question", "choices", "media")}
         # Warm the exact shape before the generation comparison.
@@ -150,6 +165,11 @@ def run_diagnostics(root, key, output):
         row = next(r for r in selected if r["track"] == track)
         safe = {k: row[k] for k in ("question", "choices", "media")}
         for count in (1, 4, 16):
+            if count > 1 and any(m["modality"] == "audio" for m in row["media"]):
+                batch_records.append({"track": track, "batch_size": count, "status": "unsupported_in_current_streaming_mode",
+                  "reason": "Published MiniCPM audio stream_input implementation asserts batch size one; failure retained in diagnostics-v1. No silent mode change."})
+                (output / "batches.json").write_text(json.dumps(batch_records, indent=2) + "\n")
+                continue
             inputs = batch_inputs(backbone, root, safe, policy, count)
             times = []
             with torch.inference_mode():
@@ -175,3 +195,40 @@ def run_diagnostics(root, key, output):
               "source_sha256": digest(root / "mmso/backbone_diagnostics.py")}
     (output / "diagnostics.json").write_text(json.dumps(report, indent=2) + "\n")
     return report
+
+
+def run_hardware_probe(root, key, output):
+    """Same frozen candidate and ten development cases on a cheaper GPU."""
+    torch.set_num_threads(4)
+    registry = json.loads((root / "evals/v4-candidates-v1.json").read_text())
+    spec = next(m for m in registry["models"] if m["key"] == key)
+    protocol = json.loads((root / "evals/v4-selection-protocol-v1.json").read_text())
+    rows = [json.loads(s) for s in (root / "evals/manifests/v4_selection_v1.jsonl").read_text().splitlines()]
+    selected = []
+    for track in protocol["tracks"]:
+        selected += sorted((r for r in rows if r["track"] == track and r["split"] == "development"),
+                           key=lambda r: hashlib.sha256(("diag:" + r["id"]).encode()).hexdigest())[:2]
+    start = time.perf_counter()
+    backbone = Backbone(spec)
+    load_and_merge_adapter(backbone.model, root / "artifacts/v4-adapters" / key / "adapter", spec)
+    backbone.load_readout(root / "artifacts/v4-selection" / (key + "-adapted"))
+    load_seconds = time.perf_counter() - start
+    records = []
+    for mode in ("full_projection", "candidate_projection"):
+        if mode == "candidate_projection": trim_head(backbone)
+        for row in selected:
+            safe = {k: row[k] for k in ("question", "choices", "media")}
+            backbone.infer(root, safe, protocol["input_policy"])
+            torch.cuda.reset_peak_memory_stats()
+            values = [backbone.infer(root, safe, protocol["input_policy"])[0] for _ in range(5)]
+            records.append({"id": row["id"], "track": row["track"], "mode": mode,
+                 "probabilities": values[-1]["probabilities"], "request_ms": [r["timings"]["request_ms"] for r in values],
+                 "forward_ms": [r["timings"]["forward_ms"] for r in values],
+                 "peak_allocated_bytes": torch.cuda.max_memory_allocated(), "peak_reserved_bytes": torch.cuda.max_memory_reserved()})
+            with (output / "hardware-predictions.jsonl").open("a") as stream: stream.write(json.dumps(records[-1]) + "\n")
+    result = {"status": "completed", "key": key, "phase": "hardware-probe", "gpu": torch.cuda.get_device_name(),
+              "gpu_memory_bytes": torch.cuda.get_device_properties(0).total_memory,
+              "cases": len(selected), "records": len(records), "load_seconds": load_seconds,
+              "wall_seconds": time.perf_counter() - start, "scope": "Ten fixed development cases; not new confirmation or a production latency SLA"}
+    (output / "hardware.json").write_text(json.dumps(result, indent=2) + "\n")
+    return result

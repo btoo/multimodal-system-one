@@ -6,10 +6,16 @@ import torch
 from mmso.backbone_selection import choose_winner, quality_reasons, softmax, summarize
 from mmso.backbone_study import move, prompt_for
 from mmso.backbone_adapters import DecisionLoRA
-from mmso.backbone_diagnostics import candidate_projection
+from mmso.backbone_diagnostics import candidate_projection, clean_generated_text
 
 
 class BackboneSelectionTests(unittest.TestCase):
+    def test_generation_cleanup_only_strips_wrappers(self):
+        raw = '```json\n{"probabilities": [0.1, 0.2], "choice": "B"}\n```<|tts_eos|>'
+        clean = clean_generated_text(raw)
+        self.assertEqual(clean, '{"probabilities": [0.1, 0.2], "choice": "B"}')
+        self.assertIn('0.1, 0.2', clean)  # Invalid total is not silently normalized.
+
     def test_candidate_projection_preserves_selected_vocabulary_logits(self):
         torch.manual_seed(9)
         head = torch.nn.Linear(6, 31, bias=True)
