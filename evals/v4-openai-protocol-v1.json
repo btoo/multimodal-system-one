@@ -1,0 +1,17 @@
+{
+  "id": "miso-v4-openai-reference-v1",
+  "created": "2026-09-25",
+  "budget_usd": 2,
+  "data": "Pinned v4 frontier manifest; original questions and choices; image pixels resized to the same 1536 longest-side limit then encoded losslessly as PNG",
+  "selection": "All 448 MMLU-Pro audit cases and 20 per MMStar category sorted by stable_rank(id), 120 images. Maximum-capability pilot takes the first one per category from these subsets: 14 text and 6 visual questions.",
+  "configurations": {
+    "sol-none": {"model": "gpt-6-sol", "reasoning_effort": "none", "max_output_tokens": 32, "role": "Latency-oriented direct-answer reference", "input_usd_per_million": 2, "output_usd_per_million": 10},
+    "astra-medium": {"model": "gpt-6-astra", "reasoning_effort": "medium", "max_output_tokens": 1024, "role": "Small reasoning-enabled capability pilot; not evidence of broad frontier parity", "input_usd_per_million": 10, "output_usd_per_million": 50}
+  },
+  "output": "Strict JSON schema containing one original-choice letter; no generated confidence passed off as calibrated probabilities",
+  "timing": "Local media decode/resize/PNG encoding plus HTTP request through final response; network and provider work included; individual runs at concurrency one",
+  "cost": "Compute a conservative reservation before every request. Charge all returned usage at uncached standard prices for an upper estimate; record actual usage fields. Count incomplete responses as failures. No automatic retries after uncertain charges.",
+  "error_policy": "A transport, authentication, quota or model-access error stops the paid run; preserve completed records and account for all remaining cases as not run. Do not silently substitute a model.",
+  "sources": ["https://developers.openai.com/api/docs/models/gpt-6-sol", "https://developers.openai.com/api/docs/models/gpt-6-astra", "https://developers.openai.com/api/docs/pricing", "https://developers.openai.com/api/docs/guides/structured-outputs", "https://developers.openai.com/api/docs/guides/images-vision"],
+  "limitations": ["Twenty Astra cases are a pilot, not a statistically powered capability comparison", "A bounded reasoning output can truncate; report the count and never describe it as unlimited reasoning", "These GPT-6 endpoints do not accept native audio; no transcript substitution", "Local MiSO pipeline latency is not directly comparable with hosted API client latency"]
+}

@@ -1,0 +1,9 @@
+{
+  "created": "2026-09-25",
+  "parent": "miso-v4-iteration-v2",
+  "trigger": "The MiniCPM base and adapted variants completed the public audit. On the same MMLU-Pro subset, their direct-answer accuracy was approximately 47%, versus approximately 79% for Jev. The existing task adaptation did not improve broad public-audit accuracy.",
+  "change": "Evaluate the already-cached, pinned Qwen3-Omni-30B-A3B-Instruct Thinker base on the unchanged 2948-case public audit. No benchmark-specific training, prompt search or calibration.",
+  "method": "Same BF16 H100 pipeline, input policy and candidate-code scoring; its publisher-supported modern runtime is pinned in the existing study runner.",
+  "budget": "Uses one of the existing eight follow-up GPU slots and remains inside the $45 additional reservation cap.",
+  "claim_scope": "Exploratory candidate extension after inspecting initial results. These now-exposed benchmarks are regression/audit data, not a fresh model-selection confirmation. No automatic production promotion."
+}

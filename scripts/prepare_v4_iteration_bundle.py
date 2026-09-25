@@ -20,7 +20,7 @@ def main():
         'artifacts/v4-selection/minicpmo45-adapted/config.json']
     rows = [json.loads(s) for s in (ROOT / 'data/v4-frontier/manifest.jsonl').read_text().splitlines()]
     rows += [json.loads(s) for s in (ROOT / 'evals/manifests/v4_selection_v1.jsonl').read_text().splitlines() if json.loads(s)['split'] == 'development']
-    for name in ('evals/manifests/v4_fresh_screens_v2.jsonl', 'evals/v4-screen-nomination-v2.json'):
+    for name in ('evals/manifests/v4_fresh_screens_v2.jsonl', 'evals/v4-screen-nomination-v2.json', 'evals/v4-iteration-amendment-v1.json'):
         if (ROOT / name).exists(): names.append(name)
     if (ROOT / 'evals/manifests/v4_fresh_screens_v2.jsonl').exists():
         rows += [json.loads(s) for s in (ROOT / 'evals/manifests/v4_fresh_screens_v2.jsonl').read_text().splitlines()]

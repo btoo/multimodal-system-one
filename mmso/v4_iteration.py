@@ -17,13 +17,13 @@ from .backbone_diagnostics import trim_head
 from .frontier_evals import model_input, summarize, point_inside
 
 
-def load_model(root, adapted=True):
+def load_model(root, adapted=True, key='minicpmo45'):
     registry = json.loads((root / 'evals/v4-candidates-v1.json').read_text())
-    spec = next(m for m in registry['models'] if m['key'] == 'minicpmo45')
+    spec = next(m for m in registry['models'] if m['key'] == key)
     model = Backbone(spec)
     if adapted:
-        load_and_merge_adapter(model.model, root / 'artifacts/v4-adapters/minicpmo45/adapter', spec)
-        model.load_readout(root / 'artifacts/v4-selection/minicpmo45-adapted')
+        load_and_merge_adapter(model.model, root / 'artifacts/v4-adapters' / key / 'adapter', spec)
+        model.load_readout(root / 'artifacts/v4-selection' / (key + '-adapted'))
     if model.readout is not None: raise ValueError('This iteration requires the selected label-logit readout')
     trim_head(model)
     return model
@@ -40,7 +40,7 @@ def run_frontier(root, phase, output):
     for row in rows:
         for item in row['media']:
             if digest(root / item['path']) != item['sha256']: raise ValueError('Media hash mismatch')
-    model = load_model(root, adapted=phase == 'frontier-adapted')
+    model = load_model(root, adapted=phase == 'frontier-adapted', key='qwen3-30ba3b' if phase == 'frontier-qwen3-base' else 'minicpmo45')
     load_seconds = time.perf_counter() - started
     # Warm each supported modality before timed evaluation. No labels are read.
     for benchmark in ('mmstar', 'mmau', 'mmlu_pro'):

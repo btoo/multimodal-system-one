@@ -14,10 +14,7 @@ BUNDLE = ROOT / '.research/v4-iteration/bundle'
 app = modal.App('miso-v4-iteration')
 
 
-@app.function(image=gpu_image(legacy=True, bundle=BUNDLE), gpu='H100!', cpu=4, memory=65536,
-              volumes={'/cache': volume}, timeout=3600, startup_timeout=600, retries=0,
-              max_containers=1, min_containers=0, scaledown_window=2, single_use_containers=True, include_source=False)
-def evaluate(phase, attempt):
+def run_remote(phase, attempt):
     import traceback
     volume.reload()
     root = Path('/workspace')
@@ -46,9 +43,23 @@ def evaluate(phase, attempt):
     return {'summary': summary, 'files': {p.name: p.read_bytes() for p in output.iterdir() if p.is_file()}}
 
 
+@app.function(image=gpu_image(legacy=True, bundle=BUNDLE), gpu='H100!', cpu=4, memory=65536,
+              volumes={'/cache': volume}, timeout=3600, startup_timeout=600, retries=0,
+              max_containers=1, min_containers=0, scaledown_window=2, single_use_containers=True, include_source=False)
+def evaluate(phase, attempt):
+    return run_remote(phase, attempt)
+
+
+@app.function(image=gpu_image(legacy=False, bundle=BUNDLE), gpu='H100!', cpu=4, memory=65536,
+              volumes={'/cache': volume}, timeout=3600, startup_timeout=600, retries=0,
+              max_containers=1, min_containers=0, scaledown_window=2, single_use_containers=True, include_source=False)
+def evaluate_modern(phase, attempt):
+    return run_remote(phase, attempt)
+
+
 @app.local_entrypoint()
 def main(phase: str, attempt: str):
-    if phase not in {'frontier-base', 'frontier-adapted', 'screens', 'screen-confirmation', 'shared-observation'}: raise ValueError('Invalid phase')
+    if phase not in {'frontier-base', 'frontier-adapted', 'frontier-qwen3-base', 'screens', 'screen-confirmation', 'shared-observation'}: raise ValueError('Invalid phase')
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,79}', attempt): raise ValueError('Invalid attempt name')
     protocol = json.loads((ROOT / 'evals/v4-iteration-protocol-v2.json').read_text())
     budget = protocol['budget']
@@ -63,7 +74,8 @@ def main(phase: str, attempt: str):
     started = time.time()
     (report / 'reservation.json').write_text(json.dumps({'phase': phase, 'started_unix': started,
         'maximum_compute_proxy_usd': reserved, 'note': 'Conservative reservation, not an invoice'}, indent=2) + '\n')
-    call = evaluate.spawn(phase, attempt)
+    runner = evaluate_modern if phase == 'frontier-qwen3-base' else evaluate
+    call = runner.spawn(phase, attempt)
     try: result = call.get(timeout=4300)
     except BaseException:
         call.cancel(terminate_containers=True)
