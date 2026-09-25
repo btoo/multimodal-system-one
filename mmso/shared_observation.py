@@ -56,7 +56,7 @@ def shared_inputs(model, images, audios, queries, policy):
     return prepared, prefix_length
 
 
-def predict_shared(model, root, media, queries, policy, *, packed=True):
+def predict_shared(model, root, media, queries, policy, *, packed=False):
     """Complete warm request from local files to CPU probability vectors."""
     started = time.perf_counter()
     images, audios = decode_media(root, media, policy)
@@ -135,7 +135,7 @@ def run_full_pipeline_probe(root, output):
             paths = {
                 'independent': lambda: independent(model, root, row['media'], queries, policy),
                 'serial_shared_media': lambda: predict_shared(model, root, row['media'], queries, policy, packed=False),
-                'packed_shared_media': lambda: predict_shared(model, root, row['media'], queries, policy),
+                'packed_shared_media': lambda: predict_shared(model, root, row['media'], queries, policy, packed=True),
             }
             timings, values, invocations = {}, {}, {}
             for name, run in paths.items():
@@ -152,7 +152,7 @@ def run_full_pipeline_probe(root, output):
                 comparisons[name] = {'argmax_agreement': sum(int(a.argmax()) == int(b.argmax()) for a,b in zip(reference, actual)),
                     'max_probability_delta': max(float(np.max(np.abs(a-b))) for a,b in zip(reference, actual)),
                     'probabilities': [p.tolist() for p in actual]}
-            reverse = predict_shared(model, root, row['media'], list(reversed(queries)), policy)['probabilities']
+            reverse = predict_shared(model, root, row['media'], list(reversed(queries)), policy, packed=True)['probabilities']
             reorder = max(float(np.max(np.abs(a-b))) for a,b in zip(values['packed_shared_media']['probabilities'], reversed(reverse)))
             record = {'id': row['id'], 'questions': count, 'timings_ms': timings,
                 'encoder_invocations': invocations, 'comparison': comparisons,

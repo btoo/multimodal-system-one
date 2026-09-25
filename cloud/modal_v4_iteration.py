@@ -59,7 +59,7 @@ def evaluate_modern(phase, attempt):
 
 @app.local_entrypoint()
 def main(phase: str, attempt: str):
-    if phase not in {'frontier-base', 'frontier-adapted', 'frontier-qwen3-base', 'screens', 'screen-confirmation', 'shared-observation'}: raise ValueError('Invalid phase')
+    if phase not in {'frontier-base', 'frontier-adapted', 'frontier-qwen3-base', 'frontier-gemma4-12b', 'screens', 'screen-confirmation', 'shared-observation'}: raise ValueError('Invalid phase')
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,79}', attempt): raise ValueError('Invalid attempt name')
     protocol = json.loads((ROOT / 'evals/v4-iteration-protocol-v2.json').read_text())
     budget = protocol['budget']
@@ -74,7 +74,7 @@ def main(phase: str, attempt: str):
     started = time.time()
     (report / 'reservation.json').write_text(json.dumps({'phase': phase, 'started_unix': started,
         'maximum_compute_proxy_usd': reserved, 'note': 'Conservative reservation, not an invoice'}, indent=2) + '\n')
-    runner = evaluate_modern if phase == 'frontier-qwen3-base' else evaluate
+    runner = evaluate_modern if phase in {'frontier-qwen3-base', 'frontier-gemma4-12b'} else evaluate
     call = runner.spawn(phase, attempt)
     try: result = call.get(timeout=4300)
     except BaseException:

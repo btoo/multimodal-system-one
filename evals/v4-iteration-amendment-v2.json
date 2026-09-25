@@ -1,0 +1,8 @@
+{
+  "created": "2026-09-25",
+  "parent": "miso-v4-iteration-v2",
+  "trigger": "Qwen3 improved broad audit quality over MiniCPM but remained far behind Jev on the matched text subset. Compare the cached Gemma 4 12B alternative before drawing a backbone recommendation from only those two families.",
+  "change": "Evaluate pinned google/gemma-4-12B-it on the same 2948 public cases. Use the unchanged model/input adapters and reduced candidate projection. No new training or calibration.",
+  "budget": "One of the existing eight GPU slots; unchanged $45 reservation ceiling and one GPU container at a time.",
+  "claim_scope": "Exploratory, post-result shortlist extension. This is not a preregistered winner or a new untouched confirmation test. The original model-selection gates remain unmet."
+}

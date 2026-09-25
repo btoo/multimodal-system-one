@@ -40,7 +40,8 @@ def run_frontier(root, phase, output):
     for row in rows:
         for item in row['media']:
             if digest(root / item['path']) != item['sha256']: raise ValueError('Media hash mismatch')
-    model = load_model(root, adapted=phase == 'frontier-adapted', key='qwen3-30ba3b' if phase == 'frontier-qwen3-base' else 'minicpmo45')
+    key = {'frontier-qwen3-base': 'qwen3-30ba3b', 'frontier-gemma4-12b': 'gemma4-12b'}.get(phase, 'minicpmo45')
+    model = load_model(root, adapted=phase == 'frontier-adapted', key=key)
     load_seconds = time.perf_counter() - started
     # Warm each supported modality before timed evaluation. No labels are read.
     for benchmark in ('mmstar', 'mmau', 'mmlu_pro'):
