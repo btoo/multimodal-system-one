@@ -1,11 +1,21 @@
 import copy
 import unittest
+from collections import UserDict
+import torch
 
 from mmso.backbone_selection import choose_winner, quality_reasons, softmax, summarize
-from mmso.backbone_study import prompt_for
+from mmso.backbone_study import move, prompt_for
 
 
 class BackboneSelectionTests(unittest.TestCase):
+    def test_processor_mapping_tensors_move_to_requested_device(self):
+        # HF BatchFeature/BatchEncoding are UserDict mappings, not dicts.
+        batch = UserDict({"input_ids": torch.tensor([[1, 2]]),
+                          "pixels": [torch.zeros(1, 3, 8, 8)]})
+        result = move(batch, "meta")
+        self.assertEqual(result["input_ids"].device.type, "meta")
+        self.assertEqual(result["pixels"][0].device.type, "meta")
+
     def test_private_labels_and_annotations_are_not_prompt_inputs(self):
         row = {"question": "Which option?", "choices": ["One", "Two"], "target": 1,
                "transcript": "SECRET TRANSCRIPT", "target_bbox_xyxy": [1, 2, 3, 4]}

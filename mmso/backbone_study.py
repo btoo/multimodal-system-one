@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+from collections.abc import Mapping
 import importlib.metadata
 import inspect
 import json
@@ -34,7 +35,7 @@ def prompt_for(row, *, generated_json=False):
 def move(value, device):
     if isinstance(value, torch.Tensor):
         return value.to(device)
-    if isinstance(value, dict):
+    if isinstance(value, Mapping):
         return {k: move(v, device) for k, v in value.items()}
     if isinstance(value, list):
         return [move(v, device) for v in value]
