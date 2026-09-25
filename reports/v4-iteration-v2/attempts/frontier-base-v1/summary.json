@@ -1,0 +1,276 @@
+{
+  "status": "completed",
+  "phase": "frontier-base",
+  "model": {
+    "id": "openbmb/MiniCPM-o-4_5",
+    "revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+    "gated": false,
+    "weight_bytes": 18743737228,
+    "total_parameters": 9371787666,
+    "license": "apache-2.0",
+    "license_name": null,
+    "license_link": null,
+    "key": "minicpmo45",
+    "eligible_for_product": true,
+    "status": "candidate",
+    "source_url": "https://huggingface.co/openbmb/MiniCPM-o-4_5/tree/503e754207c94da6bb26850b4469f367c9ea3582",
+    "source_hashes": {
+      "tokenization_minicpmo_fast.py": "c9c71d0d7ef0c113829e2d810619c9e0a69cffe04c732c4d80599b40a33bc7bf",
+      "config.json": "b0c03cf9f0cfc1178ade50e4ba62727ca7a77aa6a6a71eda6668d8f289e96c1d",
+      "processing_minicpmo.py": "3a1f017339b92c2fa768d7737db76cc4689d2280b68a71866b06f7dedc8ac1c2",
+      "modeling_navit_siglip.py": "1a40a58cb7dfa93f723685f860d1cf3caf3a0ecf52b7904db0c4007aacd1536f",
+      "README.md": "4afc013f5f1e4471bdbee28515eb5be802ea2c80c8d89d4107c4d4aec439577a",
+      "configuration_minicpmo.py": "b0c56c192d4aa57d3dc358338a4a93413b8b68e7c7a7c5b82a5af35afab1d86a",
+      "utils.py": "0372698343830d4a96524f56a91a8cabf628fd7c57dde8b25db43eed1f6042c1",
+      "modeling_minicpmo.py": "25359f891d1aa81de16b51a24a97b8c8262b83ce3920c36b92be441fde8e4282"
+    }
+  },
+  "cases": 2948,
+  "temperature": 1.0,
+  "metrics": {
+    "mmau": {
+      "cases": 1000,
+      "correct": 766,
+      "accuracy": 0.766,
+      "accuracy_group_bootstrap_95": [
+        0.7398771102284012,
+        0.7919163796402603
+      ],
+      "groups": 904,
+      "coverage": 1.0,
+      "failures": {},
+      "nll_successes_only": 0.6287575737291179,
+      "brier_successes_only": 0.3171527278601888,
+      "ece_successes_only": 0.07007610651850701,
+      "selective": {
+        "0.5": {
+          "coverage": 0.889,
+          "accuracy": 0.8166479190101237,
+          "accepted": 889
+        },
+        "0.7": {
+          "coverage": 0.737,
+          "accuracy": 0.8846675712347354,
+          "accepted": 737
+        },
+        "0.8": {
+          "coverage": 0.668,
+          "accuracy": 0.9176646706586826,
+          "accepted": 668
+        },
+        "0.9": {
+          "coverage": 0.585,
+          "accuracy": 0.9572649572649573,
+          "accepted": 585
+        },
+        "0.95": {
+          "coverage": 0.524,
+          "accuracy": 0.9732824427480916,
+          "accepted": 524
+        }
+      },
+      "strata": {
+        "music": {
+          "cases": 334,
+          "accuracy": 0.7544910179640718
+        },
+        "sound": {
+          "cases": 333,
+          "accuracy": 0.8078078078078078
+        },
+        "speech": {
+          "cases": 333,
+          "accuracy": 0.7357357357357357
+        }
+      },
+      "latency_ms": {
+        "median": 56.424812000003044,
+        "p95": 148.8841027000035
+      }
+    },
+    "mmlu_pro": {
+      "cases": 448,
+      "correct": 212,
+      "accuracy": 0.4732142857142857,
+      "accuracy_group_bootstrap_95": [
+        0.4263392857142857,
+        0.5211581291759465
+      ],
+      "groups": 447,
+      "coverage": 1.0,
+      "failures": {},
+      "nll_successes_only": 2.1923274057203215,
+      "brier_successes_only": 0.7376119226219923,
+      "ece_successes_only": 0.25083888441856417,
+      "selective": {
+        "0.5": {
+          "coverage": 0.75,
+          "accuracy": 0.5684523809523809,
+          "accepted": 336
+        },
+        "0.7": {
+          "coverage": 0.5647321428571429,
+          "accuracy": 0.6363636363636364,
+          "accepted": 253
+        },
+        "0.8": {
+          "coverage": 0.4732142857142857,
+          "accuracy": 0.6886792452830188,
+          "accepted": 212
+        },
+        "0.9": {
+          "coverage": 0.3950892857142857,
+          "accuracy": 0.7457627118644068,
+          "accepted": 177
+        },
+        "0.95": {
+          "coverage": 0.3482142857142857,
+          "accuracy": 0.782051282051282,
+          "accepted": 156
+        }
+      },
+      "strata": {
+        "biology": {
+          "cases": 32,
+          "accuracy": 0.6875
+        },
+        "business": {
+          "cases": 32,
+          "accuracy": 0.375
+        },
+        "chemistry": {
+          "cases": 32,
+          "accuracy": 0.28125
+        },
+        "computer science": {
+          "cases": 32,
+          "accuracy": 0.5625
+        },
+        "economics": {
+          "cases": 32,
+          "accuracy": 0.625
+        },
+        "engineering": {
+          "cases": 32,
+          "accuracy": 0.34375
+        },
+        "health": {
+          "cases": 32,
+          "accuracy": 0.46875
+        },
+        "history": {
+          "cases": 32,
+          "accuracy": 0.625
+        },
+        "law": {
+          "cases": 32,
+          "accuracy": 0.40625
+        },
+        "math": {
+          "cases": 32,
+          "accuracy": 0.21875
+        },
+        "other": {
+          "cases": 32,
+          "accuracy": 0.46875
+        },
+        "philosophy": {
+          "cases": 32,
+          "accuracy": 0.46875
+        },
+        "physics": {
+          "cases": 32,
+          "accuracy": 0.5
+        },
+        "psychology": {
+          "cases": 32,
+          "accuracy": 0.59375
+        }
+      },
+      "latency_ms": {
+        "median": 28.888885500009565,
+        "p95": 35.4461246500005
+      }
+    },
+    "mmstar": {
+      "cases": 1500,
+      "correct": 957,
+      "accuracy": 0.638,
+      "accuracy_group_bootstrap_95": [
+        0.6115553071789167,
+        0.6624668435013262
+      ],
+      "groups": 1430,
+      "coverage": 1.0,
+      "failures": {},
+      "nll_successes_only": 1.4811569521901593,
+      "brier_successes_only": 0.571325912482877,
+      "ece_successes_only": 0.23012217052777612,
+      "selective": {
+        "0.5": {
+          "coverage": 0.9453333333333334,
+          "accuracy": 0.657968970380818,
+          "accepted": 1418
+        },
+        "0.7": {
+          "coverage": 0.8046666666666666,
+          "accuracy": 0.7025683512841756,
+          "accepted": 1207
+        },
+        "0.8": {
+          "coverage": 0.7266666666666667,
+          "accuracy": 0.7256880733944954,
+          "accepted": 1090
+        },
+        "0.9": {
+          "coverage": 0.6186666666666667,
+          "accuracy": 0.7586206896551724,
+          "accepted": 928
+        },
+        "0.95": {
+          "coverage": 0.538,
+          "accuracy": 0.7905824039653035,
+          "accepted": 807
+        }
+      },
+      "strata": {
+        "coarse perception": {
+          "cases": 250,
+          "accuracy": 0.748
+        },
+        "fine-grained perception": {
+          "cases": 250,
+          "accuracy": 0.52
+        },
+        "instance reasoning": {
+          "cases": 250,
+          "accuracy": 0.732
+        },
+        "logical reasoning": {
+          "cases": 250,
+          "accuracy": 0.652
+        },
+        "math": {
+          "cases": 250,
+          "accuracy": 0.628
+        },
+        "science & technology": {
+          "cases": 250,
+          "accuracy": 0.548
+        }
+      },
+      "latency_ms": {
+        "median": 51.93747850000108,
+        "p95": 134.38839715001194
+      }
+    }
+  },
+  "load_seconds": 18.697511333,
+  "function_seconds": 214.910120231,
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "peak_allocated_bytes": 18856060416,
+  "manifest_sha256": "a41c99db486795f8f7db7ea1cd4ac4d420a3a9f53cacf9686d178ec00915e3d4",
+  "predictions_sha256": "52587bccb7d718ce090c7af7cee64241365471be6ca254294d4488a29773bba0",
+  "timing_boundary": "File read, media decode/resample, CPU processor, host-to-device, all model encoders, language forward, candidate scores and CPU probability transfer. Warm weights; excludes network and queue.",
+  "trained_on_this_suite": false
+}

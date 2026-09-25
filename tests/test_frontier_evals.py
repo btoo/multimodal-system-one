@@ -4,9 +4,16 @@ from PIL import Image
 
 from mmso.frontier_evals import mmstar_question, model_input, point_inside, summarize
 from mmso.v4_iteration import grid_overlay, REGIONS
+from mmso.reference_costs import openai_cost
 
 
 class FrontierEvalTests(unittest.TestCase):
+    def test_cache_write_premium_is_included_in_cost(self):
+        cost=openai_cost({'input_tokens':1000,'output_tokens':100,'input_tokens_details':{'cached_tokens':200,'cache_write_tokens':300}},
+                         {'input_usd_per_million':2,'output_usd_per_million':10})
+        self.assertAlmostEqual(cost['standard_rate_estimate_usd'],.00279)
+        self.assertAlmostEqual(cost['conservative_upper_usd'],.00315)
+
     def test_original_options_preserve_commas_and_missing_distractors(self):
         question, choices = mmstar_question('What is visible?\nOptions: A: One, two, or three., B: Nothing., C: nan, D: nan')
         self.assertEqual(question, 'What is visible?')

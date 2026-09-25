@@ -1,7 +1,7 @@
 {
   "name": "MiSO v4 research candidate",
   "id": "miso-v4-candidate",
-  "status": "research_lead_not_release_qualified",
+  "status": "research_reference_backbone_selection_open",
   "base_model": "openbmb/MiniCPM-o-4_5",
   "base_revision": "503e754207c94da6bb26850b4469f367c9ea3582",
   "hidden_width": 4096,
@@ -22,7 +22,9 @@
   ],
   "inference_requires_external_model_api": false,
   "public_api_registered": false,
-  "quality_blocker": "Coarse screen localization is 19/48 on confirmation; no reliable browser-use claim",
+  "quality_blocker": "Coarse GUI grounding remains inadequate; broader public audit also exposes a substantial hard-text decision gap against Jev and OpenAI. No frontier or release qualification.",
   "report": "reports/v4-selection-v1/README.md",
-  "research_only_data": true
+  "research_only_data": true,
+  "latest_report": "reports/v4-iteration-v2/README.md",
+  "shared_observation_default": "Reuse native media processing and encoder outputs; independent language branches. Packed branches are experimental because probabilities can drift."
 }

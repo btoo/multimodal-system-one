@@ -1,0 +1,9 @@
+{
+  "status": "completed",
+  "phase": "shared-observation",
+  "measurements": 15,
+  "observations": 5,
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "timing_boundary": "Local file open through returned CPU probabilities; includes decode, resampling, all preprocessing, question compilation, media encoders, branch mask, language and scoring. Excludes network, queue and cold model load.",
+  "new_quality_result": false
+}

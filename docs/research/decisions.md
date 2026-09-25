@@ -1,6 +1,8 @@
 # Decision register
 
-Latest decision: **MiniCPM-o 4.5 is the provisional v4 research backbone**, with Qwen3-Omni as the accuracy reference. The [matched eight-checkpoint investigation](../../reports/v4-selection-v1/README.md) found no release-qualified winner: screen understanding remains below the declared gate. Preserve the direct probability interface and investigate shared-state question branches; a controlled H100 probe preserved 16/16 top decisions with a 6.53× reduction in the prepared language/scoring phase. No v4 model was promoted to the playground.
+Latest decision: **Use media reuse as the conservative v4 speed path and keep backbone selection open.** The [broader public audit](../../reports/v4-iteration-v2/README.md) exposes a substantial text-reasoning gap against Jev and OpenAI that the original policy controls did not reveal. Qwen3-Omni leads the tested open weights on broad accuracy; MiniCPM remains the smaller, faster engineering reference. Gemma 4 12B did not overtake Qwen on these three benchmarks. These are measured tradeoffs, not a release-qualified winner. No v4 model was promoted to the playground.
+
+The complete local 16-question pipeline improved from 1,948 ms to 567 ms through media reuse, with identical tested probability vectors. Experimental packed branches reached 160 ms but introduced up to 3.64 percentage points of probability drift. Keep packing opt-in until broader calibration and decision-threshold tests establish acceptable behavior. The [earlier eight-checkpoint selection](../../reports/v4-selection-v1/README.md) remains historical evidence under its narrower task scope.
 
 The table below records the earlier small-model control decisions. The [original baseline results](../../reports/pilot-v1/README.md), [reading map](reading-map.md) and [frontier review](frontier-methods.md) remain historical evidence.
 

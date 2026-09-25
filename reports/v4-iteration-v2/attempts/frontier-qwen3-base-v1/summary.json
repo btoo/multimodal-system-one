@@ -1,0 +1,276 @@
+{
+  "status": "completed",
+  "phase": "frontier-qwen3-base",
+  "model": {
+    "id": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+    "revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+    "gated": false,
+    "weight_bytes": 70523299202,
+    "total_parameters": 35259818545,
+    "license": "apache-2.0",
+    "license_name": "apache-2.0",
+    "license_link": null,
+    "key": "qwen3-30ba3b",
+    "eligible_for_product": true,
+    "status": "candidate",
+    "source_url": "https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct/tree/26291f793822fb6be9555850f06dfe95f2d7e695",
+    "source_hashes": {
+      "config.json": "eab5093d47807aaf894119506b238b2b1cee70d08456e894fee9a012d88f2e0d",
+      "README.md": "0e44065c4c4a27071f7239afd5b5a33af5bc2e437dd7ea9950e51aafabfde3df"
+    }
+  },
+  "cases": 2948,
+  "temperature": 1.0,
+  "metrics": {
+    "mmau": {
+      "cases": 1000,
+      "correct": 782,
+      "accuracy": 0.782,
+      "accuracy_group_bootstrap_95": [
+        0.7564863811145105,
+        0.8075013697707661
+      ],
+      "groups": 904,
+      "coverage": 1.0,
+      "probability_coverage": 1.0,
+      "invalid_probability_distributions": 0,
+      "failures": {},
+      "nll_successes_only": 0.730541233582294,
+      "brier_successes_only": 0.33801451036303704,
+      "ece_successes_only": 0.1108705657720565,
+      "selective": {
+        "0.5": {
+          "coverage": 0.939,
+          "accuracy": 0.8072417465388712,
+          "accepted": 939
+        },
+        "0.7": {
+          "coverage": 0.83,
+          "accuracy": 0.8493975903614458,
+          "accepted": 830
+        },
+        "0.8": {
+          "coverage": 0.782,
+          "accuracy": 0.8734015345268542,
+          "accepted": 782
+        },
+        "0.9": {
+          "coverage": 0.726,
+          "accuracy": 0.8953168044077136,
+          "accepted": 726
+        },
+        "0.95": {
+          "coverage": 0.661,
+          "accuracy": 0.9213313161875946,
+          "accepted": 661
+        }
+      },
+      "strata": {
+        "music": {
+          "cases": 334,
+          "accuracy": 0.7754491017964071
+        },
+        "sound": {
+          "cases": 333,
+          "accuracy": 0.8258258258258259
+        },
+        "speech": {
+          "cases": 333,
+          "accuracy": 0.7447447447447447
+        }
+      },
+      "latency_ms": {
+        "median": 105.3683000000234,
+        "p95": 213.99740499999564
+      }
+    },
+    "mmlu_pro": {
+      "cases": 448,
+      "correct": 248,
+      "accuracy": 0.5535714285714286,
+      "accuracy_group_bootstrap_95": [
+        0.5077676334314349,
+        0.5991202174357134
+      ],
+      "groups": 447,
+      "coverage": 1.0,
+      "probability_coverage": 1.0,
+      "invalid_probability_distributions": 0,
+      "failures": {},
+      "nll_successes_only": 2.430594334788715,
+      "brier_successes_only": 0.727454026785444,
+      "ece_successes_only": 0.3243531504246805,
+      "selective": {
+        "0.5": {
+          "coverage": 0.9174107142857143,
+          "accuracy": 0.5790754257907542,
+          "accepted": 411
+        },
+        "0.7": {
+          "coverage": 0.8169642857142857,
+          "accuracy": 0.6256830601092896,
+          "accepted": 366
+        },
+        "0.8": {
+          "coverage": 0.7477678571428571,
+          "accuracy": 0.6537313432835821,
+          "accepted": 335
+        },
+        "0.9": {
+          "coverage": 0.6540178571428571,
+          "accuracy": 0.6962457337883959,
+          "accepted": 293
+        },
+        "0.95": {
+          "coverage": 0.5959821428571429,
+          "accuracy": 0.7078651685393258,
+          "accepted": 267
+        }
+      },
+      "strata": {
+        "biology": {
+          "cases": 32,
+          "accuracy": 0.75
+        },
+        "business": {
+          "cases": 32,
+          "accuracy": 0.46875
+        },
+        "chemistry": {
+          "cases": 32,
+          "accuracy": 0.46875
+        },
+        "computer science": {
+          "cases": 32,
+          "accuracy": 0.625
+        },
+        "economics": {
+          "cases": 32,
+          "accuracy": 0.71875
+        },
+        "engineering": {
+          "cases": 32,
+          "accuracy": 0.46875
+        },
+        "health": {
+          "cases": 32,
+          "accuracy": 0.65625
+        },
+        "history": {
+          "cases": 32,
+          "accuracy": 0.71875
+        },
+        "law": {
+          "cases": 32,
+          "accuracy": 0.3125
+        },
+        "math": {
+          "cases": 32,
+          "accuracy": 0.34375
+        },
+        "other": {
+          "cases": 32,
+          "accuracy": 0.4375
+        },
+        "philosophy": {
+          "cases": 32,
+          "accuracy": 0.625
+        },
+        "physics": {
+          "cases": 32,
+          "accuracy": 0.5
+        },
+        "psychology": {
+          "cases": 32,
+          "accuracy": 0.65625
+        }
+      },
+      "latency_ms": {
+        "median": 73.8632875000178,
+        "p95": 123.3534184000149
+      }
+    },
+    "mmstar": {
+      "cases": 1500,
+      "correct": 1052,
+      "accuracy": 0.7013333333333334,
+      "accuracy_group_bootstrap_95": [
+        0.6778517870869427,
+        0.7245989304812834
+      ],
+      "groups": 1430,
+      "coverage": 1.0,
+      "probability_coverage": 1.0,
+      "invalid_probability_distributions": 0,
+      "failures": {},
+      "nll_successes_only": 1.1047126238572553,
+      "brier_successes_only": 0.4782504127529948,
+      "ece_successes_only": 0.18293756558497748,
+      "selective": {
+        "0.5": {
+          "coverage": 0.9506666666666667,
+          "accuracy": 0.7187938288920056,
+          "accepted": 1426
+        },
+        "0.7": {
+          "coverage": 0.8226666666666667,
+          "accuracy": 0.7617504051863857,
+          "accepted": 1234
+        },
+        "0.8": {
+          "coverage": 0.7613333333333333,
+          "accuracy": 0.7714535901926445,
+          "accepted": 1142
+        },
+        "0.9": {
+          "coverage": 0.6826666666666666,
+          "accuracy": 0.8017578125,
+          "accepted": 1024
+        },
+        "0.95": {
+          "coverage": 0.6046666666666667,
+          "accuracy": 0.8302094818081588,
+          "accepted": 907
+        }
+      },
+      "strata": {
+        "coarse perception": {
+          "cases": 250,
+          "accuracy": 0.756
+        },
+        "fine-grained perception": {
+          "cases": 250,
+          "accuracy": 0.624
+        },
+        "instance reasoning": {
+          "cases": 250,
+          "accuracy": 0.8
+        },
+        "logical reasoning": {
+          "cases": 250,
+          "accuracy": 0.748
+        },
+        "math": {
+          "cases": 250,
+          "accuracy": 0.72
+        },
+        "science & technology": {
+          "cases": 250,
+          "accuracy": 0.56
+        }
+      },
+      "latency_ms": {
+        "median": 100.12030599997956,
+        "p95": 200.42989669999895
+      }
+    }
+  },
+  "load_seconds": 80.94061190000001,
+  "function_seconds": 437.60955058999997,
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "peak_allocated_bytes": 63460632064,
+  "manifest_sha256": "a41c99db486795f8f7db7ea1cd4ac4d420a3a9f53cacf9686d178ec00915e3d4",
+  "predictions_sha256": "0e4ccf4bce14085ed6cbbe4955d6bed39c574587b489a4661a8046e0812e6120",
+  "timing_boundary": "File read, media decode/resample, CPU processor, host-to-device, all model encoders, language forward, candidate scores and CPU probability transfer. Warm weights; excludes network and queue.",
+  "trained_on_this_suite": false
+}

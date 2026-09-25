@@ -1,0 +1,130 @@
+{
+  "status": "completed",
+  "phase": "screen-confirmation",
+  "variant": {
+    "name": "baseline-1536",
+    "image_max_side": 1536,
+    "grid_overlay": false
+  },
+  "metrics": {
+    "screenspot_pro_derived": {
+      "cases": 117,
+      "correct": 60,
+      "accuracy": 0.5128205128205128,
+      "accuracy_group_bootstrap_95": [
+        0.4188034188034188,
+        0.6068376068376068
+      ],
+      "groups": 117,
+      "coverage": 1.0,
+      "probability_coverage": 1.0,
+      "invalid_probability_distributions": 0,
+      "failures": {},
+      "nll_successes_only": 1.6251591677724522,
+      "brier_successes_only": 0.7094525390315645,
+      "ece_successes_only": 0.203181832901433,
+      "selective": {
+        "0.5": {
+          "coverage": 0.7863247863247863,
+          "accuracy": 0.532608695652174,
+          "accepted": 92
+        },
+        "0.7": {
+          "coverage": 0.5213675213675214,
+          "accuracy": 0.6229508196721312,
+          "accepted": 61
+        },
+        "0.8": {
+          "coverage": 0.36752136752136755,
+          "accuracy": 0.7674418604651163,
+          "accepted": 43
+        },
+        "0.9": {
+          "coverage": 0.13675213675213677,
+          "accuracy": 0.8125,
+          "accepted": 16
+        },
+        "0.95": {
+          "coverage": 0.03418803418803419,
+          "accuracy": 0.75,
+          "accepted": 4
+        }
+      },
+      "strata": {
+        "android_studio_macos:icon": {
+          "cases": 8,
+          "accuracy": 0.375
+        },
+        "android_studio_macos:text": {
+          "cases": 8,
+          "accuracy": 0.375
+        },
+        "blender_windows:icon": {
+          "cases": 5,
+          "accuracy": 0.6
+        },
+        "blender_windows:text": {
+          "cases": 8,
+          "accuracy": 0.5
+        },
+        "excel_macos:icon": {
+          "cases": 4,
+          "accuracy": 1.0
+        },
+        "excel_macos:text": {
+          "cases": 8,
+          "accuracy": 0.75
+        },
+        "macos_common_macos:icon": {
+          "cases": 8,
+          "accuracy": 0.25
+        },
+        "macos_common_macos:text": {
+          "cases": 8,
+          "accuracy": 0.5
+        },
+        "powerpoint_windows:icon": {
+          "cases": 8,
+          "accuracy": 0.75
+        },
+        "powerpoint_windows:text": {
+          "cases": 8,
+          "accuracy": 0.625
+        },
+        "pycharm_macos:icon": {
+          "cases": 8,
+          "accuracy": 0.5
+        },
+        "pycharm_macos:text": {
+          "cases": 8,
+          "accuracy": 0.5
+        },
+        "vscode_macos:icon": {
+          "cases": 8,
+          "accuracy": 0.25
+        },
+        "vscode_macos:text": {
+          "cases": 8,
+          "accuracy": 0.625
+        },
+        "word_macos:icon": {
+          "cases": 4,
+          "accuracy": 0.5
+        },
+        "word_macos:text": {
+          "cases": 8,
+          "accuracy": 0.375
+        }
+      },
+      "latency_ms": {
+        "median": 432.2185420000011,
+        "p95": 940.2877245999986
+      }
+    }
+  },
+  "region_accuracy": 0.5128205128205128,
+  "point_inside_box_accuracy": 0.0,
+  "cases": 117,
+  "point_predictor": "Center of the selected equal 3x3 grid cell. A weak localization control, not a dedicated point head.",
+  "nomination_sha256": "97db81c834f3684e6280722ec6cc43678b1c032208f06166be38178379ced6cf"
+}

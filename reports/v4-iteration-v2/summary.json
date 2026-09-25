@@ -1,0 +1,1728 @@
+{
+  "models": {
+    "mini-base": {
+      "run_status": "completed",
+      "cases": 2948,
+      "metrics": {
+        "mmau": {
+          "cases": 1000,
+          "correct": 766,
+          "accuracy": 0.766,
+          "accuracy_group_bootstrap_95": [
+            0.7398771102284012,
+            0.7919163796402603
+          ],
+          "groups": 904,
+          "coverage": 1.0,
+          "probability_coverage": 1.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": 0.6287575737291179,
+          "brier_successes_only": 0.3171527278601888,
+          "ece_successes_only": 0.07007610651850701,
+          "selective": {
+            "0.5": {
+              "coverage": 0.889,
+              "accuracy": 0.8166479190101237,
+              "accepted": 889
+            },
+            "0.7": {
+              "coverage": 0.737,
+              "accuracy": 0.8846675712347354,
+              "accepted": 737
+            },
+            "0.8": {
+              "coverage": 0.668,
+              "accuracy": 0.9176646706586826,
+              "accepted": 668
+            },
+            "0.9": {
+              "coverage": 0.585,
+              "accuracy": 0.9572649572649573,
+              "accepted": 585
+            },
+            "0.95": {
+              "coverage": 0.524,
+              "accuracy": 0.9732824427480916,
+              "accepted": 524
+            }
+          },
+          "strata": {
+            "music": {
+              "cases": 334,
+              "accuracy": 0.7544910179640718
+            },
+            "sound": {
+              "cases": 333,
+              "accuracy": 0.8078078078078078
+            },
+            "speech": {
+              "cases": 333,
+              "accuracy": 0.7357357357357357
+            }
+          },
+          "latency_ms": {
+            "median": 56.424812000003044,
+            "p95": 148.8841027000035
+          }
+        },
+        "mmlu_pro": {
+          "cases": 448,
+          "correct": 212,
+          "accuracy": 0.4732142857142857,
+          "accuracy_group_bootstrap_95": [
+            0.4263392857142857,
+            0.5211581291759465
+          ],
+          "groups": 447,
+          "coverage": 1.0,
+          "probability_coverage": 1.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": 2.1923274057203215,
+          "brier_successes_only": 0.7376119226219923,
+          "ece_successes_only": 0.25083888441856417,
+          "selective": {
+            "0.5": {
+              "coverage": 0.75,
+              "accuracy": 0.5684523809523809,
+              "accepted": 336
+            },
+            "0.7": {
+              "coverage": 0.5647321428571429,
+              "accuracy": 0.6363636363636364,
+              "accepted": 253
+            },
+            "0.8": {
+              "coverage": 0.4732142857142857,
+              "accuracy": 0.6886792452830188,
+              "accepted": 212
+            },
+            "0.9": {
+              "coverage": 0.3950892857142857,
+              "accuracy": 0.7457627118644068,
+              "accepted": 177
+            },
+            "0.95": {
+              "coverage": 0.3482142857142857,
+              "accuracy": 0.782051282051282,
+              "accepted": 156
+            }
+          },
+          "strata": {
+            "biology": {
+              "cases": 32,
+              "accuracy": 0.6875
+            },
+            "business": {
+              "cases": 32,
+              "accuracy": 0.375
+            },
+            "chemistry": {
+              "cases": 32,
+              "accuracy": 0.28125
+            },
+            "computer science": {
+              "cases": 32,
+              "accuracy": 0.5625
+            },
+            "economics": {
+              "cases": 32,
+              "accuracy": 0.625
+            },
+            "engineering": {
+              "cases": 32,
+              "accuracy": 0.34375
+            },
+            "health": {
+              "cases": 32,
+              "accuracy": 0.46875
+            },
+            "history": {
+              "cases": 32,
+              "accuracy": 0.625
+            },
+            "law": {
+              "cases": 32,
+              "accuracy": 0.40625
+            },
+            "math": {
+              "cases": 32,
+              "accuracy": 0.21875
+            },
+            "other": {
+              "cases": 32,
+              "accuracy": 0.46875
+            },
+            "philosophy": {
+              "cases": 32,
+              "accuracy": 0.46875
+            },
+            "physics": {
+              "cases": 32,
+              "accuracy": 0.5
+            },
+            "psychology": {
+              "cases": 32,
+              "accuracy": 0.59375
+            }
+          },
+          "latency_ms": {
+            "median": 28.888885500009565,
+            "p95": 35.4461246500005
+          }
+        },
+        "mmstar": {
+          "cases": 1500,
+          "correct": 957,
+          "accuracy": 0.638,
+          "accuracy_group_bootstrap_95": [
+            0.6115553071789167,
+            0.6624668435013262
+          ],
+          "groups": 1430,
+          "coverage": 1.0,
+          "probability_coverage": 1.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": 1.4811569521901593,
+          "brier_successes_only": 0.571325912482877,
+          "ece_successes_only": 0.23012217052777612,
+          "selective": {
+            "0.5": {
+              "coverage": 0.9453333333333334,
+              "accuracy": 0.657968970380818,
+              "accepted": 1418
+            },
+            "0.7": {
+              "coverage": 0.8046666666666666,
+              "accuracy": 0.7025683512841756,
+              "accepted": 1207
+            },
+            "0.8": {
+              "coverage": 0.7266666666666667,
+              "accuracy": 0.7256880733944954,
+              "accepted": 1090
+            },
+            "0.9": {
+              "coverage": 0.6186666666666667,
+              "accuracy": 0.7586206896551724,
+              "accepted": 928
+            },
+            "0.95": {
+              "coverage": 0.538,
+              "accuracy": 0.7905824039653035,
+              "accepted": 807
+            }
+          },
+          "strata": {
+            "coarse perception": {
+              "cases": 250,
+              "accuracy": 0.748
+            },
+            "fine-grained perception": {
+              "cases": 250,
+              "accuracy": 0.52
+            },
+            "instance reasoning": {
+              "cases": 250,
+              "accuracy": 0.732
+            },
+            "logical reasoning": {
+              "cases": 250,
+              "accuracy": 0.652
+            },
+            "math": {
+              "cases": 250,
+              "accuracy": 0.628
+            },
+            "science & technology": {
+              "cases": 250,
+              "accuracy": 0.548
+            }
+          },
+          "latency_ms": {
+            "median": 51.93747850000108,
+            "p95": 134.38839715001194
+          }
+        }
+      },
+      "source": "reports/v4-iteration-v2/attempts/frontier-base-v1/summary.json",
+      "latency_scope": "Local H100 pipeline, network excluded"
+    },
+    "mini-adapted": {
+      "run_status": "completed",
+      "cases": 2948,
+      "metrics": {
+        "mmau": {
+          "cases": 1000,
+          "correct": 764,
+          "accuracy": 0.764,
+          "accuracy_group_bootstrap_95": [
+            0.737312368909019,
+            0.7912096304917079
+          ],
+          "groups": 904,
+          "coverage": 1.0,
+          "probability_coverage": 1.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": 0.5886255820860169,
+          "brier_successes_only": 0.30650685934719185,
+          "ece_successes_only": 0.04142918169498443,
+          "selective": {
+            "0.5": {
+              "coverage": 0.791,
+              "accuracy": 0.865992414664981,
+              "accepted": 791
+            },
+            "0.7": {
+              "coverage": 0.625,
+              "accuracy": 0.944,
+              "accepted": 625
+            },
+            "0.8": {
+              "coverage": 0.539,
+              "accuracy": 0.9666048237476809,
+              "accepted": 539
+            },
+            "0.9": {
+              "coverage": 0.405,
+              "accuracy": 0.9851851851851852,
+              "accepted": 405
+            },
+            "0.95": {
+              "coverage": 0.287,
+              "accuracy": 0.9930313588850174,
+              "accepted": 287
+            }
+          },
+          "strata": {
+            "music": {
+              "cases": 334,
+              "accuracy": 0.7335329341317365
+            },
+            "sound": {
+              "cases": 333,
+              "accuracy": 0.8048048048048048
+            },
+            "speech": {
+              "cases": 333,
+              "accuracy": 0.7537537537537538
+            }
+          },
+          "latency_ms": {
+            "median": 72.11825450001186,
+            "p95": 162.48956410000622
+          }
+        },
+        "mmlu_pro": {
+          "cases": 448,
+          "correct": 211,
+          "accuracy": 0.47098214285714285,
+          "accuracy_group_bootstrap_95": [
+            0.4228187919463087,
+            0.5177797619047619
+          ],
+          "groups": 447,
+          "coverage": 1.0,
+          "probability_coverage": 1.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": 1.6454072592606521,
+          "brier_successes_only": 0.6779741709449725,
+          "ece_successes_only": 0.11128714507711786,
+          "selective": {
+            "0.5": {
+              "coverage": 0.5446428571428571,
+              "accuracy": 0.6311475409836066,
+              "accepted": 244
+            },
+            "0.7": {
+              "coverage": 0.36160714285714285,
+              "accuracy": 0.7654320987654321,
+              "accepted": 162
+            },
+            "0.8": {
+              "coverage": 0.27232142857142855,
+              "accuracy": 0.8442622950819673,
+              "accepted": 122
+            },
+            "0.9": {
+              "coverage": 0.12276785714285714,
+              "accuracy": 0.8363636363636363,
+              "accepted": 55
+            },
+            "0.95": {
+              "coverage": 0.03571428571428571,
+              "accuracy": 0.875,
+              "accepted": 16
+            }
+          },
+          "strata": {
+            "biology": {
+              "cases": 32,
+              "accuracy": 0.6875
+            },
+            "business": {
+              "cases": 32,
+              "accuracy": 0.34375
+            },
+            "chemistry": {
+              "cases": 32,
+              "accuracy": 0.3125
+            },
+            "computer science": {
+              "cases": 32,
+              "accuracy": 0.5625
+            },
+            "economics": {
+              "cases": 32,
+              "accuracy": 0.65625
+            },
+            "engineering": {
+              "cases": 32,
+              "accuracy": 0.375
+            },
+            "health": {
+              "cases": 32,
+              "accuracy": 0.46875
+            },
+            "history": {
+              "cases": 32,
+              "accuracy": 0.625
+            },
+            "law": {
+              "cases": 32,
+              "accuracy": 0.34375
+            },
+            "math": {
+              "cases": 32,
+              "accuracy": 0.21875
+            },
+            "other": {
+              "cases": 32,
+              "accuracy": 0.5
+            },
+            "philosophy": {
+              "cases": 32,
+              "accuracy": 0.34375
+            },
+            "physics": {
+              "cases": 32,
+              "accuracy": 0.5625
+            },
+            "psychology": {
+              "cases": 32,
+              "accuracy": 0.59375
+            }
+          },
+          "latency_ms": {
+            "median": 39.19031900000647,
+            "p95": 45.83690650000456
+          }
+        },
+        "mmstar": {
+          "cases": 1500,
+          "correct": 951,
+          "accuracy": 0.634,
+          "accuracy_group_bootstrap_95": [
+            0.6084907951721753,
+            0.6590912881314815
+          ],
+          "groups": 1430,
+          "coverage": 1.0,
+          "probability_coverage": 1.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": 1.0130862795247644,
+          "brier_successes_only": 0.5300506488172702,
+          "ece_successes_only": 0.1556255013942718,
+          "selective": {
+            "0.5": {
+              "coverage": 0.8933333333333333,
+              "accuracy": 0.6701492537313433,
+              "accepted": 1340
+            },
+            "0.7": {
+              "coverage": 0.694,
+              "accuracy": 0.7262247838616714,
+              "accepted": 1041
+            },
+            "0.8": {
+              "coverage": 0.578,
+              "accuracy": 0.7635524798154556,
+              "accepted": 867
+            },
+            "0.9": {
+              "coverage": 0.422,
+              "accuracy": 0.8135860979462876,
+              "accepted": 633
+            },
+            "0.95": {
+              "coverage": 0.27466666666666667,
+              "accuracy": 0.883495145631068,
+              "accepted": 412
+            }
+          },
+          "strata": {
+            "coarse perception": {
+              "cases": 250,
+              "accuracy": 0.732
+            },
+            "fine-grained perception": {
+              "cases": 250,
+              "accuracy": 0.516
+            },
+            "instance reasoning": {
+              "cases": 250,
+              "accuracy": 0.736
+            },
+            "logical reasoning": {
+              "cases": 250,
+              "accuracy": 0.656
+            },
+            "math": {
+              "cases": 250,
+              "accuracy": 0.636
+            },
+            "science & technology": {
+              "cases": 250,
+              "accuracy": 0.528
+            }
+          },
+          "latency_ms": {
+            "median": 66.79993749997948,
+            "p95": 146.12009319999615
+          }
+        }
+      },
+      "source": "reports/v4-iteration-v2/attempts/frontier-adapted-v1/summary.json",
+      "latency_scope": "Local H100 pipeline, network excluded"
+    },
+    "qwen3-base": {
+      "run_status": "completed",
+      "cases": 2948,
+      "metrics": {
+        "mmau": {
+          "cases": 1000,
+          "correct": 782,
+          "accuracy": 0.782,
+          "accuracy_group_bootstrap_95": [
+            0.7564863811145105,
+            0.8075013697707661
+          ],
+          "groups": 904,
+          "coverage": 1.0,
+          "probability_coverage": 1.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": 0.730541233582294,
+          "brier_successes_only": 0.33801451036303704,
+          "ece_successes_only": 0.1108705657720565,
+          "selective": {
+            "0.5": {
+              "coverage": 0.939,
+              "accuracy": 0.8072417465388712,
+              "accepted": 939
+            },
+            "0.7": {
+              "coverage": 0.83,
+              "accuracy": 0.8493975903614458,
+              "accepted": 830
+            },
+            "0.8": {
+              "coverage": 0.782,
+              "accuracy": 0.8734015345268542,
+              "accepted": 782
+            },
+            "0.9": {
+              "coverage": 0.726,
+              "accuracy": 0.8953168044077136,
+              "accepted": 726
+            },
+            "0.95": {
+              "coverage": 0.661,
+              "accuracy": 0.9213313161875946,
+              "accepted": 661
+            }
+          },
+          "strata": {
+            "music": {
+              "cases": 334,
+              "accuracy": 0.7754491017964071
+            },
+            "sound": {
+              "cases": 333,
+              "accuracy": 0.8258258258258259
+            },
+            "speech": {
+              "cases": 333,
+              "accuracy": 0.7447447447447447
+            }
+          },
+          "latency_ms": {
+            "median": 105.3683000000234,
+            "p95": 213.99740499999564
+          }
+        },
+        "mmlu_pro": {
+          "cases": 448,
+          "correct": 248,
+          "accuracy": 0.5535714285714286,
+          "accuracy_group_bootstrap_95": [
+            0.5077676334314349,
+            0.5991202174357134
+          ],
+          "groups": 447,
+          "coverage": 1.0,
+          "probability_coverage": 1.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": 2.430594334788715,
+          "brier_successes_only": 0.727454026785444,
+          "ece_successes_only": 0.3243531504246805,
+          "selective": {
+            "0.5": {
+              "coverage": 0.9174107142857143,
+              "accuracy": 0.5790754257907542,
+              "accepted": 411
+            },
+            "0.7": {
+              "coverage": 0.8169642857142857,
+              "accuracy": 0.6256830601092896,
+              "accepted": 366
+            },
+            "0.8": {
+              "coverage": 0.7477678571428571,
+              "accuracy": 0.6537313432835821,
+              "accepted": 335
+            },
+            "0.9": {
+              "coverage": 0.6540178571428571,
+              "accuracy": 0.6962457337883959,
+              "accepted": 293
+            },
+            "0.95": {
+              "coverage": 0.5959821428571429,
+              "accuracy": 0.7078651685393258,
+              "accepted": 267
+            }
+          },
+          "strata": {
+            "biology": {
+              "cases": 32,
+              "accuracy": 0.75
+            },
+            "business": {
+              "cases": 32,
+              "accuracy": 0.46875
+            },
+            "chemistry": {
+              "cases": 32,
+              "accuracy": 0.46875
+            },
+            "computer science": {
+              "cases": 32,
+              "accuracy": 0.625
+            },
+            "economics": {
+              "cases": 32,
+              "accuracy": 0.71875
+            },
+            "engineering": {
+              "cases": 32,
+              "accuracy": 0.46875
+            },
+            "health": {
+              "cases": 32,
+              "accuracy": 0.65625
+            },
+            "history": {
+              "cases": 32,
+              "accuracy": 0.71875
+            },
+            "law": {
+              "cases": 32,
+              "accuracy": 0.3125
+            },
+            "math": {
+              "cases": 32,
+              "accuracy": 0.34375
+            },
+            "other": {
+              "cases": 32,
+              "accuracy": 0.4375
+            },
+            "philosophy": {
+              "cases": 32,
+              "accuracy": 0.625
+            },
+            "physics": {
+              "cases": 32,
+              "accuracy": 0.5
+            },
+            "psychology": {
+              "cases": 32,
+              "accuracy": 0.65625
+            }
+          },
+          "latency_ms": {
+            "median": 73.8632875000178,
+            "p95": 123.3534184000149
+          }
+        },
+        "mmstar": {
+          "cases": 1500,
+          "correct": 1052,
+          "accuracy": 0.7013333333333334,
+          "accuracy_group_bootstrap_95": [
+            0.6778517870869427,
+            0.7245989304812834
+          ],
+          "groups": 1430,
+          "coverage": 1.0,
+          "probability_coverage": 1.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": 1.1047126238572553,
+          "brier_successes_only": 0.4782504127529948,
+          "ece_successes_only": 0.18293756558497748,
+          "selective": {
+            "0.5": {
+              "coverage": 0.9506666666666667,
+              "accuracy": 0.7187938288920056,
+              "accepted": 1426
+            },
+            "0.7": {
+              "coverage": 0.8226666666666667,
+              "accuracy": 0.7617504051863857,
+              "accepted": 1234
+            },
+            "0.8": {
+              "coverage": 0.7613333333333333,
+              "accuracy": 0.7714535901926445,
+              "accepted": 1142
+            },
+            "0.9": {
+              "coverage": 0.6826666666666666,
+              "accuracy": 0.8017578125,
+              "accepted": 1024
+            },
+            "0.95": {
+              "coverage": 0.6046666666666667,
+              "accuracy": 0.8302094818081588,
+              "accepted": 907
+            }
+          },
+          "strata": {
+            "coarse perception": {
+              "cases": 250,
+              "accuracy": 0.756
+            },
+            "fine-grained perception": {
+              "cases": 250,
+              "accuracy": 0.624
+            },
+            "instance reasoning": {
+              "cases": 250,
+              "accuracy": 0.8
+            },
+            "logical reasoning": {
+              "cases": 250,
+              "accuracy": 0.748
+            },
+            "math": {
+              "cases": 250,
+              "accuracy": 0.72
+            },
+            "science & technology": {
+              "cases": 250,
+              "accuracy": 0.56
+            }
+          },
+          "latency_ms": {
+            "median": 100.12030599997956,
+            "p95": 200.42989669999895
+          }
+        }
+      },
+      "source": "reports/v4-iteration-v2/attempts/frontier-qwen3-base-v1/summary.json",
+      "latency_scope": "Local H100 pipeline, network excluded"
+    },
+    "gemma4-12b": {
+      "run_status": "completed",
+      "cases": 2948,
+      "metrics": {
+        "mmau": {
+          "cases": 1000,
+          "correct": 660,
+          "accuracy": 0.66,
+          "accuracy_group_bootstrap_95": [
+            0.6297722306468331,
+            0.6897615811157154
+          ],
+          "groups": 904,
+          "coverage": 1.0,
+          "probability_coverage": 1.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": 1.06144463456884,
+          "brier_successes_only": 0.4983811414808253,
+          "ece_successes_only": 0.1964316082596779,
+          "selective": {
+            "0.5": {
+              "coverage": 0.934,
+              "accuracy": 0.6873661670235546,
+              "accepted": 934
+            },
+            "0.7": {
+              "coverage": 0.773,
+              "accuracy": 0.759379042690815,
+              "accepted": 773
+            },
+            "0.8": {
+              "coverage": 0.695,
+              "accuracy": 0.7985611510791367,
+              "accepted": 695
+            },
+            "0.9": {
+              "coverage": 0.617,
+              "accuracy": 0.826580226904376,
+              "accepted": 617
+            },
+            "0.95": {
+              "coverage": 0.531,
+              "accuracy": 0.8700564971751412,
+              "accepted": 531
+            }
+          },
+          "strata": {
+            "music": {
+              "cases": 334,
+              "accuracy": 0.6676646706586826
+            },
+            "sound": {
+              "cases": 333,
+              "accuracy": 0.6306306306306306
+            },
+            "speech": {
+              "cases": 333,
+              "accuracy": 0.6816816816816816
+            }
+          },
+          "latency_ms": {
+            "median": 57.92280200000732,
+            "p95": 164.0865616500003
+          }
+        },
+        "mmlu_pro": {
+          "cases": 448,
+          "correct": 231,
+          "accuracy": 0.515625,
+          "accuracy_group_bootstrap_95": [
+            0.46872390033407574,
+            0.5615212527964206
+          ],
+          "groups": 447,
+          "coverage": 1.0,
+          "probability_coverage": 1.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": 2.919280716913129,
+          "brier_successes_only": 0.7944115605485814,
+          "ece_successes_only": 0.3484806838844503,
+          "selective": {
+            "0.5": {
+              "coverage": 0.8839285714285714,
+              "accuracy": 0.5580808080808081,
+              "accepted": 396
+            },
+            "0.7": {
+              "coverage": 0.7857142857142857,
+              "accuracy": 0.5994318181818182,
+              "accepted": 352
+            },
+            "0.8": {
+              "coverage": 0.7366071428571429,
+              "accuracy": 0.6272727272727273,
+              "accepted": 330
+            },
+            "0.9": {
+              "coverage": 0.6785714285714286,
+              "accuracy": 0.6447368421052632,
+              "accepted": 304
+            },
+            "0.95": {
+              "coverage": 0.6450892857142857,
+              "accuracy": 0.6747404844290658,
+              "accepted": 289
+            }
+          },
+          "strata": {
+            "biology": {
+              "cases": 32,
+              "accuracy": 0.65625
+            },
+            "business": {
+              "cases": 32,
+              "accuracy": 0.40625
+            },
+            "chemistry": {
+              "cases": 32,
+              "accuracy": 0.25
+            },
+            "computer science": {
+              "cases": 32,
+              "accuracy": 0.5625
+            },
+            "economics": {
+              "cases": 32,
+              "accuracy": 0.65625
+            },
+            "engineering": {
+              "cases": 32,
+              "accuracy": 0.5625
+            },
+            "health": {
+              "cases": 32,
+              "accuracy": 0.5625
+            },
+            "history": {
+              "cases": 32,
+              "accuracy": 0.75
+            },
+            "law": {
+              "cases": 32,
+              "accuracy": 0.375
+            },
+            "math": {
+              "cases": 32,
+              "accuracy": 0.34375
+            },
+            "other": {
+              "cases": 32,
+              "accuracy": 0.53125
+            },
+            "philosophy": {
+              "cases": 32,
+              "accuracy": 0.59375
+            },
+            "physics": {
+              "cases": 32,
+              "accuracy": 0.3125
+            },
+            "psychology": {
+              "cases": 32,
+              "accuracy": 0.65625
+            }
+          },
+          "latency_ms": {
+            "median": 50.32498399998531,
+            "p95": 101.07880209999323
+          }
+        },
+        "mmstar": {
+          "cases": 1500,
+          "correct": 975,
+          "accuracy": 0.65,
+          "accuracy_group_bootstrap_95": [
+            0.6257424269686168,
+            0.6751217267488594
+          ],
+          "groups": 1430,
+          "coverage": 1.0,
+          "probability_coverage": 1.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": 1.9994049545837158,
+          "brier_successes_only": 0.612449742880077,
+          "ece_successes_only": 0.28043028646707535,
+          "selective": {
+            "0.5": {
+              "coverage": 0.974,
+              "accuracy": 0.6591375770020534,
+              "accepted": 1461
+            },
+            "0.7": {
+              "coverage": 0.9053333333333333,
+              "accuracy": 0.6752577319587629,
+              "accepted": 1358
+            },
+            "0.8": {
+              "coverage": 0.866,
+              "accuracy": 0.6882217090069284,
+              "accepted": 1299
+            },
+            "0.9": {
+              "coverage": 0.796,
+              "accuracy": 0.7110552763819096,
+              "accepted": 1194
+            },
+            "0.95": {
+              "coverage": 0.7373333333333333,
+              "accuracy": 0.7332730560578662,
+              "accepted": 1106
+            }
+          },
+          "strata": {
+            "coarse perception": {
+              "cases": 250,
+              "accuracy": 0.74
+            },
+            "fine-grained perception": {
+              "cases": 250,
+              "accuracy": 0.596
+            },
+            "instance reasoning": {
+              "cases": 250,
+              "accuracy": 0.72
+            },
+            "logical reasoning": {
+              "cases": 250,
+              "accuracy": 0.68
+            },
+            "math": {
+              "cases": 250,
+              "accuracy": 0.64
+            },
+            "science & technology": {
+              "cases": 250,
+              "accuracy": 0.524
+            }
+          },
+          "latency_ms": {
+            "median": 58.6401215000123,
+            "p95": 103.89716515000309
+          }
+        }
+      },
+      "source": "reports/v4-iteration-v2/attempts/frontier-gemma4-12b-v1/summary.json",
+      "latency_scope": "Local H100 pipeline, network excluded"
+    },
+    "jev": {
+      "run_status": "completed",
+      "cases": 448,
+      "metrics": {
+        "mmlu_pro": {
+          "cases": 448,
+          "correct": 356,
+          "accuracy": 0.7946428571428571,
+          "accuracy_group_bootstrap_95": [
+            0.7544642857142857,
+            0.8303571428571429
+          ],
+          "groups": 447,
+          "coverage": 1.0,
+          "probability_coverage": 0.96875,
+          "invalid_probability_distributions": 14,
+          "failures": {},
+          "nll_successes_only": 0.9920096480690845,
+          "brier_successes_only": 0.2945433179723502,
+          "ece_successes_only": 0.06903225806451609,
+          "selective": {
+            "0.5": {
+              "coverage": 0.8058035714285714,
+              "accuracy": 0.8698060941828255,
+              "accepted": 361
+            },
+            "0.7": {
+              "coverage": 0.7008928571428571,
+              "accuracy": 0.9203821656050956,
+              "accepted": 314
+            },
+            "0.8": {
+              "coverage": 0.6517857142857143,
+              "accuracy": 0.9212328767123288,
+              "accepted": 292
+            },
+            "0.9": {
+              "coverage": 0.5513392857142857,
+              "accuracy": 0.9311740890688259,
+              "accepted": 247
+            },
+            "0.95": {
+              "coverage": 0.4642857142857143,
+              "accuracy": 0.9471153846153846,
+              "accepted": 208
+            }
+          },
+          "strata": {
+            "biology": {
+              "cases": 32,
+              "accuracy": 0.8125
+            },
+            "business": {
+              "cases": 32,
+              "accuracy": 0.75
+            },
+            "chemistry": {
+              "cases": 32,
+              "accuracy": 0.78125
+            },
+            "computer science": {
+              "cases": 32,
+              "accuracy": 0.84375
+            },
+            "economics": {
+              "cases": 32,
+              "accuracy": 0.90625
+            },
+            "engineering": {
+              "cases": 32,
+              "accuracy": 0.84375
+            },
+            "health": {
+              "cases": 32,
+              "accuracy": 0.78125
+            },
+            "history": {
+              "cases": 32,
+              "accuracy": 0.84375
+            },
+            "law": {
+              "cases": 32,
+              "accuracy": 0.75
+            },
+            "math": {
+              "cases": 32,
+              "accuracy": 0.84375
+            },
+            "other": {
+              "cases": 32,
+              "accuracy": 0.59375
+            },
+            "philosophy": {
+              "cases": 32,
+              "accuracy": 0.84375
+            },
+            "physics": {
+              "cases": 32,
+              "accuracy": 0.71875
+            },
+            "psychology": {
+              "cases": 32,
+              "accuracy": 0.8125
+            }
+          },
+          "latency_ms": {
+            "median": 335.86635399842635,
+            "p95": 420.0919540453469
+          }
+        }
+      },
+      "source": "reports/v4-iteration-v2/attempts/jev-mmlu-pro-v2/summary.json",
+      "latency_scope": "API client including network"
+    },
+    "openai-sol-none": {
+      "run_status": "completed",
+      "cases": 568,
+      "metrics": {
+        "mmlu_pro": {
+          "cases": 448,
+          "correct": 355,
+          "accuracy": 0.7924107142857143,
+          "accuracy_group_bootstrap_95": [
+            0.7544642857142857,
+            0.8299776286353467
+          ],
+          "groups": 447,
+          "coverage": 1.0,
+          "probability_coverage": 0.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": null,
+          "brier_successes_only": null,
+          "ece_successes_only": null,
+          "selective": {
+            "0.5": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.7": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.8": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.9": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.95": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            }
+          },
+          "strata": {
+            "biology": {
+              "cases": 32,
+              "accuracy": 0.84375
+            },
+            "business": {
+              "cases": 32,
+              "accuracy": 0.78125
+            },
+            "chemistry": {
+              "cases": 32,
+              "accuracy": 0.84375
+            },
+            "computer science": {
+              "cases": 32,
+              "accuracy": 0.84375
+            },
+            "economics": {
+              "cases": 32,
+              "accuracy": 0.90625
+            },
+            "engineering": {
+              "cases": 32,
+              "accuracy": 0.6875
+            },
+            "health": {
+              "cases": 32,
+              "accuracy": 0.78125
+            },
+            "history": {
+              "cases": 32,
+              "accuracy": 0.75
+            },
+            "law": {
+              "cases": 32,
+              "accuracy": 0.75
+            },
+            "math": {
+              "cases": 32,
+              "accuracy": 0.71875
+            },
+            "other": {
+              "cases": 32,
+              "accuracy": 0.75
+            },
+            "philosophy": {
+              "cases": 32,
+              "accuracy": 0.8125
+            },
+            "physics": {
+              "cases": 32,
+              "accuracy": 0.875
+            },
+            "psychology": {
+              "cases": 32,
+              "accuracy": 0.75
+            }
+          },
+          "latency_ms": {
+            "median": 1319.3782084999839,
+            "p95": 2053.061918950697
+          }
+        },
+        "mmstar": {
+          "cases": 120,
+          "correct": 94,
+          "accuracy": 0.7833333333333333,
+          "accuracy_group_bootstrap_95": [
+            0.7083333333333334,
+            0.8583333333333333
+          ],
+          "groups": 119,
+          "coverage": 1.0,
+          "probability_coverage": 0.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": null,
+          "brier_successes_only": null,
+          "ece_successes_only": null,
+          "selective": {
+            "0.5": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.7": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.8": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.9": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.95": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            }
+          },
+          "strata": {
+            "coarse perception": {
+              "cases": 20,
+              "accuracy": 0.7
+            },
+            "fine-grained perception": {
+              "cases": 20,
+              "accuracy": 0.8
+            },
+            "instance reasoning": {
+              "cases": 20,
+              "accuracy": 0.7
+            },
+            "logical reasoning": {
+              "cases": 20,
+              "accuracy": 0.85
+            },
+            "math": {
+              "cases": 20,
+              "accuracy": 0.9
+            },
+            "science & technology": {
+              "cases": 20,
+              "accuracy": 0.75
+            }
+          },
+          "latency_ms": {
+            "median": 1551.7722709992086,
+            "p95": 2648.148754146677
+          }
+        }
+      },
+      "source": "reports/v4-iteration-v2/attempts/openai-sol-none-v1/summary.json",
+      "latency_scope": "API client including network"
+    },
+    "openai-astra-medium-pilot": {
+      "run_status": "completed",
+      "cases": 20,
+      "metrics": {
+        "mmlu_pro": {
+          "cases": 14,
+          "correct": 13,
+          "accuracy": 0.9285714285714286,
+          "accuracy_group_bootstrap_95": [
+            0.7857142857142857,
+            1.0
+          ],
+          "groups": 14,
+          "coverage": 1.0,
+          "probability_coverage": 0.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": null,
+          "brier_successes_only": null,
+          "ece_successes_only": null,
+          "selective": {
+            "0.5": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.7": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.8": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.9": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.95": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            }
+          },
+          "strata": {
+            "biology": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "business": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "chemistry": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "computer science": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "economics": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "engineering": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "health": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "history": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "law": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "math": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "other": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "philosophy": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "physics": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "psychology": {
+              "cases": 1,
+              "accuracy": 0.0
+            }
+          },
+          "latency_ms": {
+            "median": 2416.5793954962282,
+            "p95": 8137.93582674625
+          }
+        },
+        "mmstar": {
+          "cases": 6,
+          "correct": 6,
+          "accuracy": 1.0,
+          "accuracy_group_bootstrap_95": [
+            1.0,
+            1.0
+          ],
+          "groups": 6,
+          "coverage": 1.0,
+          "probability_coverage": 0.0,
+          "invalid_probability_distributions": 0,
+          "failures": {},
+          "nll_successes_only": null,
+          "brier_successes_only": null,
+          "ece_successes_only": null,
+          "selective": {
+            "0.5": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.7": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.8": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.9": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            },
+            "0.95": {
+              "coverage": 0.0,
+              "accuracy": null,
+              "accepted": 0
+            }
+          },
+          "strata": {
+            "coarse perception": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "fine-grained perception": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "instance reasoning": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "logical reasoning": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "math": {
+              "cases": 1,
+              "accuracy": 1.0
+            },
+            "science & technology": {
+              "cases": 1,
+              "accuracy": 1.0
+            }
+          },
+          "latency_ms": {
+            "median": 2926.074957998935,
+            "p95": 4219.279833490873
+          }
+        }
+      },
+      "source": "reports/v4-iteration-v2/attempts/openai-astra-medium-v1/summary.json",
+      "latency_scope": "API client including network"
+    }
+  },
+  "paired_differences": {
+    "mmstar": {
+      "mini-base_to_mini-adapted": {
+        "cases": 1500,
+        "right_minus_left_accuracy": -0.004,
+        "paired_group_bootstrap_95": [
+          -0.015457249115994533,
+          0.007323812694185527
+        ]
+      },
+      "mini-base_to_qwen3-base": {
+        "cases": 1500,
+        "right_minus_left_accuracy": 0.06333333333333334,
+        "paired_group_bootstrap_95": [
+          0.03802535023348899,
+          0.08856638440007629
+        ]
+      },
+      "mini-base_to_gemma4-12b": {
+        "cases": 1500,
+        "right_minus_left_accuracy": 0.012,
+        "paired_group_bootstrap_95": [
+          -0.014150197628458495,
+          0.03765048167249065
+        ]
+      },
+      "mini-base_to_openai-sol-none": {
+        "cases": 120,
+        "right_minus_left_accuracy": 0.15833333333333333,
+        "paired_group_bootstrap_95": [
+          0.06611570247933884,
+          0.25210084033613445
+        ]
+      }
+    },
+    "mmau": {
+      "mini-base_to_mini-adapted": {
+        "cases": 1000,
+        "right_minus_left_accuracy": -0.002,
+        "paired_group_bootstrap_95": [
+          -0.01626057613577153,
+          0.012648081914046242
+        ]
+      },
+      "mini-base_to_qwen3-base": {
+        "cases": 1000,
+        "right_minus_left_accuracy": 0.016,
+        "paired_group_bootstrap_95": [
+          -0.009960407621756245,
+          0.04283049111012535
+        ]
+      },
+      "mini-base_to_gemma4-12b": {
+        "cases": 1000,
+        "right_minus_left_accuracy": -0.106,
+        "paired_group_bootstrap_95": [
+          -0.13627369166193082,
+          -0.07429632058243146
+        ]
+      }
+    },
+    "mmlu_pro": {
+      "mini-base_to_mini-adapted": {
+        "cases": 448,
+        "right_minus_left_accuracy": -0.002232142857142857,
+        "paired_group_bootstrap_95": [
+          -0.026845637583892617,
+          0.02237136465324385
+        ]
+      },
+      "mini-base_to_qwen3-base": {
+        "cases": 448,
+        "right_minus_left_accuracy": 0.08035714285714286,
+        "paired_group_bootstrap_95": [
+          0.03571229716831053,
+          0.12472160356347439
+        ]
+      },
+      "mini-base_to_gemma4-12b": {
+        "cases": 448,
+        "right_minus_left_accuracy": 0.04241071428571429,
+        "paired_group_bootstrap_95": [
+          -0.004464285714285714,
+          0.09131403118040089
+        ]
+      },
+      "mini-base_to_jev": {
+        "cases": 448,
+        "right_minus_left_accuracy": 0.32142857142857145,
+        "paired_group_bootstrap_95": [
+          0.2717149220489978,
+          0.3713789778927069
+        ]
+      },
+      "mini-base_to_openai-sol-none": {
+        "cases": 448,
+        "right_minus_left_accuracy": 0.31919642857142855,
+        "paired_group_bootstrap_95": [
+          0.26887807606263986,
+          0.37195839464683395
+        ]
+      }
+    }
+  },
+  "complete_request_speed": {
+    "1": {
+      "observations": 5,
+      "questions_compared": 5,
+      "modes": {
+        "independent": {
+          "median_ms": 122.47031799999775,
+          "p95_ms": 124.37799620000192
+        },
+        "serial_shared_media": {
+          "median_ms": 121.68696100000886,
+          "p95_ms": 125.32694559999698
+        },
+        "packed_shared_media": {
+          "median_ms": 122.79651099999,
+          "p95_ms": 126.29628760000173
+        }
+      },
+      "serial_media_reuse_speedup": 1.0064374768960564,
+      "packed_speedup": 0.9973436297388589,
+      "agreement": {
+        "serial_shared_media": {
+          "argmax": 5,
+          "max_probability_delta": 0.0
+        },
+        "packed_shared_media": {
+          "argmax": 5,
+          "max_probability_delta": 0.003990352153778076
+        }
+      },
+      "reorder_max_probability_delta": 0.0
+    },
+    "4": {
+      "observations": 5,
+      "questions_compared": 20,
+      "modes": {
+        "independent": {
+          "median_ms": 488.8185060000012,
+          "p95_ms": 507.02372379999474
+        },
+        "serial_shared_media": {
+          "median_ms": 213.098727000002,
+          "p95_ms": 219.25646120000266
+        },
+        "packed_shared_media": {
+          "median_ms": 127.24677599999978,
+          "p95_ms": 128.99380339999738
+        }
+      },
+      "serial_media_reuse_speedup": 2.2938593434206513,
+      "packed_speedup": 3.8415001257085053,
+      "agreement": {
+        "serial_shared_media": {
+          "argmax": 20,
+          "max_probability_delta": 0.0
+        },
+        "packed_shared_media": {
+          "argmax": 20,
+          "max_probability_delta": 0.03641822189092636
+        }
+      },
+      "reorder_max_probability_delta": 0.007594943046569824
+    },
+    "16": {
+      "observations": 5,
+      "questions_compared": 80,
+      "modes": {
+        "independent": {
+          "median_ms": 1948.2191660000012,
+          "p95_ms": 2003.5051998000013
+        },
+        "serial_shared_media": {
+          "median_ms": 566.7997469999904,
+          "p95_ms": 575.9464548000011
+        },
+        "packed_shared_media": {
+          "median_ms": 159.95295600001214,
+          "p95_ms": 165.7706850000039
+        }
+      },
+      "serial_media_reuse_speedup": 3.4372265977741066,
+      "packed_speedup": 12.17995099759115,
+      "agreement": {
+        "serial_shared_media": {
+          "argmax": 80,
+          "max_probability_delta": 0.0
+        },
+        "packed_shared_media": {
+          "argmax": 80,
+          "max_probability_delta": 0.03641822189092636
+        }
+      },
+      "reorder_max_probability_delta": 0.01211082935333252
+    }
+  },
+  "source_hashes": {
+    "reports/v4-iteration-v2/attempts/frontier-base-v1/summary.json": "6c8f9466885a930ad58efdd3b805a12b9b9e9a194b7e20ed27c70a27e7bcfb49",
+    "reports/v4-iteration-v2/attempts/frontier-base-v1/predictions.jsonl": "52587bccb7d718ce090c7af7cee64241365471be6ca254294d4488a29773bba0",
+    "reports/v4-iteration-v2/attempts/frontier-adapted-v1/summary.json": "ae95b6e833d03b714064a33ab14528b369ec81371b6f5d874206a7c7c74ec9f6",
+    "reports/v4-iteration-v2/attempts/frontier-adapted-v1/predictions.jsonl": "91a703ffc04e48792a1652832849cbc4f417f37f1497393675316672a9b38d99",
+    "reports/v4-iteration-v2/attempts/frontier-qwen3-base-v1/summary.json": "5fd451fa1b4de957fe6c0ccb3f27f2d01f5ba44af5a932f4fbaa43768fa53be4",
+    "reports/v4-iteration-v2/attempts/frontier-qwen3-base-v1/predictions.jsonl": "0e4ccf4bce14085ed6cbbe4955d6bed39c574587b489a4661a8046e0812e6120",
+    "reports/v4-iteration-v2/attempts/frontier-gemma4-12b-v1/summary.json": "17f53942ed0c4dd3f884451b7f5fe0e6a2e89a21eee4bc800d45a9400a0b99a5",
+    "reports/v4-iteration-v2/attempts/frontier-gemma4-12b-v1/predictions.jsonl": "330efa2b99560ae3b63722c21a85def3048e13a37c569679d8d089a0bd6731a5",
+    "reports/v4-iteration-v2/attempts/jev-mmlu-pro-v2/summary.json": "abffc8832c4f01021f7ec4a070d538267cf904f4ec1c857197d41082335f92f6",
+    "reports/v4-iteration-v2/attempts/jev-mmlu-pro-v2/predictions.jsonl": "c380de2ba9e69c5d98daa78eb51785cfddcd7c7ccd80c02b20c6a8d4430af23e",
+    "reports/v4-iteration-v2/attempts/openai-sol-none-v1/summary.json": "a04563fee0fb6a76cb207790028594eec424074541d073ab0ebe274864e4ba6d",
+    "reports/v4-iteration-v2/attempts/openai-sol-none-v1/predictions.jsonl": "afdb52afca5ccf4d8823dbd666e4f3b2f0dd35adc086dc9ff7faeb5295876d5b",
+    "reports/v4-iteration-v2/attempts/openai-astra-medium-v1/summary.json": "ef5cc6f145f233e3e840c5c64e38e88aea2cbda71f4b29504048c13934581694",
+    "reports/v4-iteration-v2/attempts/openai-astra-medium-v1/predictions.jsonl": "adf1d47488a7fc2bebe06e54000568dee72e973d59bc0cc1894f987cbc8ecbf6"
+  },
+  "no_frontier_parity_established": true,
+  "unchanged_served_model": "mmso-joint-v3",
+  "quality_scope": "Public benchmark audit; not a fresh product acceptance set. Astra pilot has one question per stratum.",
+  "matched_text_api_cost_per_correct": {
+    "jev": {
+      "cases": 448,
+      "correct": 356,
+      "inference_standard_rate_usd": 0.010688580000000001,
+      "usd_per_1000_correct_decisions": 0.03002410112359551,
+      "scope": "All requests in this matched text run, including incorrect decisions; standard API list-rate estimate before credits, excluding earlier setup/failed attempts"
+    },
+    "openai-sol-none": {
+      "cases": 448,
+      "correct": 355,
+      "inference_standard_rate_usd": 0.279028,
+      "usd_per_1000_correct_decisions": 0.7859943661971831,
+      "scope": "All requests in this matched text run, including incorrect decisions; standard API list-rate estimate before credits, excluding earlier setup/failed attempts"
+    }
+  }
+}

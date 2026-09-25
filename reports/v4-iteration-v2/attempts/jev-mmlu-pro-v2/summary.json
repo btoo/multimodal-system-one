@@ -1,0 +1,122 @@
+{
+  "status": "completed",
+  "phase": "jev-reference",
+  "model": "jev-1.13.0",
+  "manifest_sha256": "a41c99db486795f8f7db7ea1cd4ac4d420a3a9f53cacf9686d178ec00915e3d4",
+  "metrics": {
+    "mmlu_pro": {
+      "cases": 448,
+      "correct": 356,
+      "accuracy": 0.7946428571428571,
+      "accuracy_group_bootstrap_95": [
+        0.7544642857142857,
+        0.8303571428571429
+      ],
+      "groups": 447,
+      "coverage": 1.0,
+      "probability_coverage": 0.96875,
+      "invalid_probability_distributions": 14,
+      "failures": {},
+      "nll_successes_only": 0.9920096480690845,
+      "brier_successes_only": 0.2945433179723502,
+      "ece_successes_only": 0.06903225806451609,
+      "selective": {
+        "0.5": {
+          "coverage": 0.8058035714285714,
+          "accuracy": 0.8698060941828255,
+          "accepted": 361
+        },
+        "0.7": {
+          "coverage": 0.7008928571428571,
+          "accuracy": 0.9203821656050956,
+          "accepted": 314
+        },
+        "0.8": {
+          "coverage": 0.6517857142857143,
+          "accuracy": 0.9212328767123288,
+          "accepted": 292
+        },
+        "0.9": {
+          "coverage": 0.5513392857142857,
+          "accuracy": 0.9311740890688259,
+          "accepted": 247
+        },
+        "0.95": {
+          "coverage": 0.4642857142857143,
+          "accuracy": 0.9471153846153846,
+          "accepted": 208
+        }
+      },
+      "strata": {
+        "biology": {
+          "cases": 32,
+          "accuracy": 0.8125
+        },
+        "business": {
+          "cases": 32,
+          "accuracy": 0.75
+        },
+        "chemistry": {
+          "cases": 32,
+          "accuracy": 0.78125
+        },
+        "computer science": {
+          "cases": 32,
+          "accuracy": 0.84375
+        },
+        "economics": {
+          "cases": 32,
+          "accuracy": 0.90625
+        },
+        "engineering": {
+          "cases": 32,
+          "accuracy": 0.84375
+        },
+        "health": {
+          "cases": 32,
+          "accuracy": 0.78125
+        },
+        "history": {
+          "cases": 32,
+          "accuracy": 0.84375
+        },
+        "law": {
+          "cases": 32,
+          "accuracy": 0.75
+        },
+        "math": {
+          "cases": 32,
+          "accuracy": 0.84375
+        },
+        "other": {
+          "cases": 32,
+          "accuracy": 0.59375
+        },
+        "philosophy": {
+          "cases": 32,
+          "accuracy": 0.84375
+        },
+        "physics": {
+          "cases": 32,
+          "accuracy": 0.71875
+        },
+        "psychology": {
+          "cases": 32,
+          "accuracy": 0.8125
+        }
+      },
+      "latency_ms": {
+        "median": 335.86635399842635,
+        "p95": 420.0919540453469
+      }
+    }
+  },
+  "known_cost_usd": 0.010688579999999996,
+  "cost_unknown_after_error": false,
+  "calls": 448,
+  "ceiling_usd": 0.1,
+  "seconds": 160.87052416801453,
+  "timing_boundary": "Client HTTP request through parsed response; includes network and provider service; not same-hardware latency",
+  "supports_native_multimodal_inputs": false,
+  "official_typesafe_workflow_benchmark": false
+}

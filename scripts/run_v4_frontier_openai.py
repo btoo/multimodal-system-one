@@ -13,6 +13,7 @@ from PIL import Image
 
 from mmso.backbone_study import digest
 from mmso.frontier_evals import stable_rank, summarize
+from mmso.reference_costs import openai_cost
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -64,13 +65,13 @@ def main():
                 content.append({'type':'input_image','image_url':'data:image/png;base64,'+base64.b64encode(buf.getvalue()).decode(),'detail':'high'})
                 media_count+=1
             content.append({'type':'input_text','text':prompt})
-            payload={'model':spec['model'],'reasoning':{'effort':spec['reasoning_effort']},'max_output_tokens':spec['max_output_tokens'],
+            payload={'model':spec['model'],'service_tier':'default','reasoning':{'effort':spec['reasoning_effort']},'max_output_tokens':spec['max_output_tokens'],
                 'store':False,'input':[{'role':'user','content':content}],
                 'text':{'format':{'type':'json_schema','name':'decision','strict':True,
                     'schema':{'type':'object','properties':{'choice':{'type':'string','enum':labels}},'required':['choice'],'additionalProperties':False}}}}
             # Text bytes upper-bound BPE token count, with schema/protocol margin.
             image_bound=4096 if args.configuration=='astra-medium' else 16384
-            reservation=((len(prompt.encode())+2048+media_count*image_bound)*spec['input_usd_per_million']+
+            reservation=((len(prompt.encode())+2048+media_count*image_bound)*spec['input_usd_per_million']*1.25+
                          spec['max_output_tokens']*spec['output_usd_per_million'])/1e6
             if spent+reservation>protocol['budget_usd']:
                 stop='budget';result['status']='not_run_budget'
@@ -83,9 +84,9 @@ def main():
                     duration=(time.perf_counter()-start)*1000
                     usage=raw.get('usage')
                     if not usage or not isinstance(usage.get('input_tokens'),int) or not isinstance(usage.get('output_tokens'),int): raise ValueError('Missing usage')
-                    charge=(usage['input_tokens']*spec['input_usd_per_million']+usage['output_tokens']*spec['output_usd_per_million'])/1e6
+                    cost=openai_cost(usage,spec);charge=cost['conservative_upper_usd']
                     if charge>reservation: raise ValueError('Usage exceeded conservative reservation')
-                    result.update(model=raw.get('model'),usage=usage,cost_upper_usd=charge,timings={'request_ms':duration},response_id=raw.get('id'),provider_status=raw.get('status'))
+                    result.update(model=raw.get('model'),usage=usage,cost_upper_usd=charge,standard_rate_cost_estimate_usd=cost['standard_rate_estimate_usd'],service_tier=raw.get('service_tier'),timings={'request_ms':duration},response_id=raw.get('id'),provider_status=raw.get('status'))
                     texts=[p['text'] for o in raw.get('output',[]) if o.get('type')=='message' for p in o.get('content',[]) if p.get('type')=='output_text']
                     if raw.get('status')=='completed' and texts:
                         answer=json.loads(''.join(texts))

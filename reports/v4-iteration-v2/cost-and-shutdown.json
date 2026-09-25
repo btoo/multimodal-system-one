@@ -1,0 +1,155 @@
+{
+  "captured_at_utc": "2026-09-25T21:01:35.709735+00:00",
+  "app_states": [
+    {
+      "app_id": "ap-1m62LPqiU943FdZ2ENoDwG",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790369596.952277,
+      "stopped_at": 1790369702.328041
+    },
+    {
+      "app_id": "ap-8x2wpBw9ObL6MsD3biN9rd",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790368743.703702,
+      "stopped_at": 1790368918.513377
+    },
+    {
+      "app_id": "ap-EMVTuN0aIHHoLJpDGlnnbB",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790369522.466248,
+      "stopped_at": 1790369526.650973
+    },
+    {
+      "app_id": "ap-aR43Vrd2LBdnjXOJ4qf0l9",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790368960.94121,
+      "stopped_at": 1790369431.775341
+    },
+    {
+      "app_id": "ap-bQsSNVD4PcVvEAdaLpp059",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790367871.161283,
+      "stopped_at": 1790368015.331687
+    },
+    {
+      "app_id": "ap-cQmmt2F9QMQcEm0vYPCMIE",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790368322.69713,
+      "stopped_at": 1790368618.116351
+    },
+    {
+      "app_id": "ap-wOUPOFcz21QMZSiH53P4dc",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790368048.267013,
+      "stopped_at": 1790368292.588218
+    },
+    {
+      "app_id": "ap-xzdUqGS5e0crAjcbU9e8r4",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790369727.054359,
+      "stopped_at": 1790369999.800315
+    }
+  ],
+  "active_containers": [],
+  "all_apps_stopped": true,
+  "modal_metered_usd": "1.98523794",
+  "billing_may_lag": true,
+  "final_invoice_cash_charge": null,
+  "billing_rows": [
+    {
+      "object_id": "ap-1m62LPqiU943FdZ2ENoDwG",
+      "description": "miso-v4-iteration",
+      "environment_name": "main",
+      "interval": "2026-09-25T20:00:00Z",
+      "cost": "0.11565241",
+      "cost_by_resource": {
+        "Memory": "0.01273092",
+        "CPU": "0.00470447",
+        "H100": "0.09821703"
+      }
+    },
+    {
+      "object_id": "ap-8x2wpBw9ObL6MsD3biN9rd",
+      "description": "miso-v4-iteration",
+      "environment_name": "main",
+      "interval": "2026-09-25T20:00:00Z",
+      "cost": "0.19898714",
+      "cost_by_resource": {
+        "Memory": "0.02190433",
+        "CPU": "0.00809433",
+        "H100": "0.16898848"
+      }
+    },
+    {
+      "object_id": "ap-aR43Vrd2LBdnjXOJ4qf0l9",
+      "description": "miso-v4-iteration",
+      "environment_name": "main",
+      "interval": "2026-09-25T20:00:00Z",
+      "cost": "0.58270408",
+      "cost_by_resource": {
+        "Memory": "0.06414355",
+        "CPU": "0.02370305",
+        "H100": "0.49485748"
+      }
+    },
+    {
+      "object_id": "ap-bQsSNVD4PcVvEAdaLpp059",
+      "description": "miso-v4-iteration",
+      "environment_name": "main",
+      "interval": "2026-09-25T20:00:00Z",
+      "cost": "0.11627990",
+      "cost_by_resource": {
+        "Memory": "0.01279999",
+        "CPU": "0.00473000",
+        "H100": "0.09874992"
+      }
+    },
+    {
+      "object_id": "ap-cQmmt2F9QMQcEm0vYPCMIE",
+      "description": "miso-v4-iteration",
+      "environment_name": "main",
+      "interval": "2026-09-25T20:00:00Z",
+      "cost": "0.35920502",
+      "cost_by_resource": {
+        "Memory": "0.03954097",
+        "CPU": "0.01461162",
+        "H100": "0.30505242"
+      }
+    },
+    {
+      "object_id": "ap-wOUPOFcz21QMZSiH53P4dc",
+      "description": "miso-v4-iteration",
+      "environment_name": "main",
+      "interval": "2026-09-25T20:00:00Z",
+      "cost": "0.28682508",
+      "cost_by_resource": {
+        "Memory": "0.03157345",
+        "CPU": "0.01166738",
+        "H100": "0.24358425"
+      }
+    },
+    {
+      "object_id": "ap-xzdUqGS5e0crAjcbU9e8r4",
+      "description": "miso-v4-iteration",
+      "environment_name": "main",
+      "interval": "2026-09-25T20:00:00Z",
+      "cost": "0.32558431",
+      "cost_by_resource": {
+        "Memory": "0.03584003",
+        "CPU": "0.01324401",
+        "H100": "0.27650026"
+      }
+    }
+  ],
+  "gpu_jobs": 7,
+  "gpu_reserved_upper_usd": 37.969512,
+  "gpu_reservation_ceiling_usd": 45,
+  "openai_cost_upper_usd": 0.5404725,
+  "openai_ceiling_usd": 2,
+  "openai_usage_unknown_calls": 0,
+  "jev_known_cost_usd": 0.010776401999999996,
+  "jev_unknown_call_count": 0,
+  "jev_unknown_call_cost_upper_usd": 0.0,
+  "scope": "Research compute and public-data inference only. Credits/cash invoice allocation and production serving cost are not inferred.",
+  "persistent_storage": "Pinned weights and experiment records remain on the existing Modal volume; no persistent GPU service created."
+}

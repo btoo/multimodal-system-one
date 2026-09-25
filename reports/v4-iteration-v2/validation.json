@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "new_public_audit_cases": 2948,
+  "new_screen_cases": 117,
+  "scored_public_reference_predictions": 12828,
+  "screen_predictions": 117,
+  "shared_observation_decisions": 105,
+  "probability_equivalent_default_decisions": 105,
+  "all_study_apps_stopped": true,
+  "credentials_in_bundle_allowlist": false
+}

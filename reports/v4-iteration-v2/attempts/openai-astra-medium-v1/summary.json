@@ -1,0 +1,202 @@
+{
+  "status": "completed",
+  "stop_reason": null,
+  "configuration": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "medium",
+    "max_output_tokens": 1024,
+    "role": "Small reasoning-enabled capability pilot; not evidence of broad frontier parity",
+    "input_usd_per_million": 10,
+    "output_usd_per_million": 50
+  },
+  "cases": 20,
+  "metrics": {
+    "mmlu_pro": {
+      "cases": 14,
+      "correct": 13,
+      "accuracy": 0.9285714285714286,
+      "accuracy_group_bootstrap_95": [
+        0.7857142857142857,
+        1.0
+      ],
+      "groups": 14,
+      "coverage": 1.0,
+      "probability_coverage": 0.0,
+      "invalid_probability_distributions": 0,
+      "failures": {},
+      "nll_successes_only": null,
+      "brier_successes_only": null,
+      "ece_successes_only": null,
+      "selective": {
+        "0.5": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.7": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.8": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.9": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.95": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        }
+      },
+      "strata": {
+        "biology": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "business": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "chemistry": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "computer science": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "economics": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "engineering": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "health": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "history": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "law": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "math": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "other": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "philosophy": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "physics": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "psychology": {
+          "cases": 1,
+          "accuracy": 0.0
+        }
+      },
+      "latency_ms": {
+        "median": 2416.5793954962282,
+        "p95": 8137.93582674625
+      }
+    },
+    "mmstar": {
+      "cases": 6,
+      "correct": 6,
+      "accuracy": 1.0,
+      "accuracy_group_bootstrap_95": [
+        1.0,
+        1.0
+      ],
+      "groups": 6,
+      "coverage": 1.0,
+      "probability_coverage": 0.0,
+      "invalid_probability_distributions": 0,
+      "failures": {},
+      "nll_successes_only": null,
+      "brier_successes_only": null,
+      "ece_successes_only": null,
+      "selective": {
+        "0.5": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.7": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.8": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.9": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.95": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        }
+      },
+      "strata": {
+        "coarse perception": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "fine-grained perception": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "instance reasoning": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "logical reasoning": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "math": {
+          "cases": 1,
+          "accuracy": 1.0
+        },
+        "science & technology": {
+          "cases": 1,
+          "accuracy": 1.0
+        }
+      },
+      "latency_ms": {
+        "median": 2926.074957998935,
+        "p95": 4219.279833490873
+      }
+    }
+  },
+  "run_cost_upper_usd": 0.13521,
+  "all_openai_runs_cost_upper_usd": 0.529818,
+  "budget_usd": 2,
+  "seconds": 65.87527203559875,
+  "timing_boundary": "Local media decode/resize/PNG encoding plus HTTP request through final response; network and provider work included; individual runs at concurrency one",
+  "manifest_sha256": "a41c99db486795f8f7db7ea1cd4ac4d420a3a9f53cacf9686d178ec00915e3d4",
+  "protocol_sha256": "c519330a8a017c9bb13f85562f5b0a9002e8e3f4ed38098ab8d8fe3fc98eb537"
+}

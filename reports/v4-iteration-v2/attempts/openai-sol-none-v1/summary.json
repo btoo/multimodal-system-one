@@ -1,0 +1,202 @@
+{
+  "status": "completed",
+  "stop_reason": null,
+  "configuration": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "none",
+    "max_output_tokens": 32,
+    "role": "Latency-oriented direct-answer reference",
+    "input_usd_per_million": 2,
+    "output_usd_per_million": 10
+  },
+  "cases": 568,
+  "metrics": {
+    "mmlu_pro": {
+      "cases": 448,
+      "correct": 355,
+      "accuracy": 0.7924107142857143,
+      "accuracy_group_bootstrap_95": [
+        0.7539149888143176,
+        0.8288888888888889
+      ],
+      "groups": 447,
+      "coverage": 1.0,
+      "probability_coverage": 0.0,
+      "invalid_probability_distributions": 0,
+      "failures": {},
+      "nll_successes_only": null,
+      "brier_successes_only": null,
+      "ece_successes_only": null,
+      "selective": {
+        "0.5": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.7": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.8": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.9": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.95": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        }
+      },
+      "strata": {
+        "biology": {
+          "cases": 32,
+          "accuracy": 0.84375
+        },
+        "business": {
+          "cases": 32,
+          "accuracy": 0.78125
+        },
+        "chemistry": {
+          "cases": 32,
+          "accuracy": 0.84375
+        },
+        "computer science": {
+          "cases": 32,
+          "accuracy": 0.84375
+        },
+        "economics": {
+          "cases": 32,
+          "accuracy": 0.90625
+        },
+        "engineering": {
+          "cases": 32,
+          "accuracy": 0.6875
+        },
+        "health": {
+          "cases": 32,
+          "accuracy": 0.78125
+        },
+        "history": {
+          "cases": 32,
+          "accuracy": 0.75
+        },
+        "law": {
+          "cases": 32,
+          "accuracy": 0.75
+        },
+        "math": {
+          "cases": 32,
+          "accuracy": 0.71875
+        },
+        "other": {
+          "cases": 32,
+          "accuracy": 0.75
+        },
+        "philosophy": {
+          "cases": 32,
+          "accuracy": 0.8125
+        },
+        "physics": {
+          "cases": 32,
+          "accuracy": 0.875
+        },
+        "psychology": {
+          "cases": 32,
+          "accuracy": 0.75
+        }
+      },
+      "latency_ms": {
+        "median": 1319.3782084999839,
+        "p95": 2053.061918950697
+      }
+    },
+    "mmstar": {
+      "cases": 120,
+      "correct": 94,
+      "accuracy": 0.7833333333333333,
+      "accuracy_group_bootstrap_95": [
+        0.7083333333333334,
+        0.8571428571428571
+      ],
+      "groups": 119,
+      "coverage": 1.0,
+      "probability_coverage": 0.0,
+      "invalid_probability_distributions": 0,
+      "failures": {},
+      "nll_successes_only": null,
+      "brier_successes_only": null,
+      "ece_successes_only": null,
+      "selective": {
+        "0.5": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.7": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.8": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.9": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        },
+        "0.95": {
+          "coverage": 0.0,
+          "accuracy": null,
+          "accepted": 0
+        }
+      },
+      "strata": {
+        "coarse perception": {
+          "cases": 20,
+          "accuracy": 0.7
+        },
+        "fine-grained perception": {
+          "cases": 20,
+          "accuracy": 0.8
+        },
+        "instance reasoning": {
+          "cases": 20,
+          "accuracy": 0.7
+        },
+        "logical reasoning": {
+          "cases": 20,
+          "accuracy": 0.85
+        },
+        "math": {
+          "cases": 20,
+          "accuracy": 0.9
+        },
+        "science & technology": {
+          "cases": 20,
+          "accuracy": 0.75
+        }
+      },
+      "latency_ms": {
+        "median": 1551.7722709992086,
+        "p95": 2648.148754146677
+      }
+    }
+  },
+  "run_cost_upper_usd": 0.39460800000000035,
+  "all_openai_runs_cost_upper_usd": 0.39460800000000035,
+  "budget_usd": 2,
+  "seconds": 833.8197419643402,
+  "timing_boundary": "Local media decode/resize/PNG encoding plus HTTP request through final response; network and provider work included; individual runs at concurrency one",
+  "manifest_sha256": "a41c99db486795f8f7db7ea1cd4ac4d420a3a9f53cacf9686d178ec00915e3d4",
+  "protocol_sha256": "c519330a8a017c9bb13f85562f5b0a9002e8e3f4ed38098ab8d8fe3fc98eb537"
+}

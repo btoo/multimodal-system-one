@@ -1,0 +1,17 @@
+{
+  "figures": [
+    {
+      "path": "docs/assets/v4-frontier-audit.svg",
+      "sha256": "ec05fa2a03927311e6c010242885d9aee81801c0daf3e13b9f7676bf5ba4ab1f",
+      "alt": "Public benchmark accuracy by modality, with confidence intervals and explicit missing provider modalities.",
+      "model_results": true
+    },
+    {
+      "path": "docs/assets/v4-complete-request-speed.svg",
+      "sha256": "103061ee04383739acf323884f9ab8f3106ad7398646844b31b51c507039c506",
+      "alt": "Complete local request latency as question count increases; default media reuse preserves tested probabilities.",
+      "model_results": true
+    }
+  ],
+  "source_summary_sha256": "b0ca3f7345e92713d101c04a750fc5bcd87e4e869935fa1045da23abaa90e309"
+}

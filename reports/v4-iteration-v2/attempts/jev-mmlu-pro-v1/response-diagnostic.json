@@ -1,0 +1,29 @@
+{
+  "id": "mmlu_pro:3468",
+  "raw": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "answer": {
+        "type": "choice",
+        "choice": "C",
+        "confidence": 0.92,
+        "probabilities": {
+          "E": 0.0,
+          "I": 0.0,
+          "C": 0.9400000000000001,
+          "D": 0.0,
+          "B": 0.0,
+          "H": 0.03,
+          "A": 0.02,
+          "J": 0.0,
+          "G": 0.0,
+          "F": 0.0
+        }
+      }
+    },
+    "usage": {
+      "input_tokens": 773,
+      "output_tokens": 87
+    }
+  }
+}

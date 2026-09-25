@@ -1,0 +1,8 @@
+{
+  "status": "failed_before_gpu_dispatch",
+  "phase": "screen-confirmation",
+  "app_id": "ap-EMVTuN0aIHHoLJpDGlnnbB",
+  "error": "Local bundle was rebuilt while Modal was uploading it; input file modification invalidated the build.",
+  "resolution": "Finish bundle preparation before launching the next immutable attempt; no bundle writes while a build is active.",
+  "predictions_produced": 0
+}

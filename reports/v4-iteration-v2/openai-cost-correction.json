@@ -1,0 +1,20 @@
+{
+  "reason": "Initial estimates treated all input at the uncached rate and omitted the 25% cache-write premium. Preserve original predictions and supersede their cost fields with these usage-derived amounts.",
+  "rates_source": "https://developers.openai.com/api/docs/pricing",
+  "runs": {
+    "openai-sol-none-v1": {
+      "calls": 568,
+      "original_estimate_usd": 0.394608,
+      "corrected_upper_usd": 0.3999475,
+      "standard_rate_estimate_usd": 0.3999475,
+      "cache_write_tokens": 10679
+    },
+    "openai-astra-medium-v1": {
+      "calls": 20,
+      "original_estimate_usd": 0.13521,
+      "corrected_upper_usd": 0.140525,
+      "standard_rate_estimate_usd": 0.140525,
+      "cache_write_tokens": 2126
+    }
+  }
+}

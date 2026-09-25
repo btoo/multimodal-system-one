@@ -4,7 +4,21 @@
 
 [**Open the MiSO playground →**](https://miso-playground-nine.vercel.app) · Audio, image, and native text inputs, editable typed questions, probability views, and saved Workflow runs. Live calls require an owner session. [Deployment evidence](reports/playground-miso-only-v1/README.md).
 
-## MiSO v4 investigation: measured selection
+## MiSO v4 iteration: broader tests and complete-request speed
+
+**The new audit adds 2,948 public benchmark cases and 117 unused screenshots. MiSO has not established frontier parity.** MMStar measures visual understanding, MMAU covers speech/sounds/music, and a stratified MMLU-Pro subset tests harder text decisions. Jev and OpenAI now run on matched cases; their results expose a large capability gap that the earlier small controls did not measure.
+
+![Broader matched-case benchmark results](docs/assets/v4-frontier-audit.svg)
+
+The new shared-observation path processes and encodes image/audio once for multiple independent questions. For 16 questions, complete local H100 latency fell from **1,948 ms to 567 ms (3.44×)**, with identical probabilities on all 105 tested decisions. Experimental packed branches reached **160 ms (12.18×)** but changed probabilities by up to 3.64 percentage points, so the conservative reuse path is the default. These measurements include media processing and encoders, while excluding network, queueing and cold loading.
+
+![Complete local request latency with shared observation processing](docs/assets/v4-complete-request-speed.svg)
+
+[**Latest results, paired comparisons, costs and limitations →**](reports/v4-iteration-v2/README.md) · [Generated score tables](reports/v4-iteration-v2/RESULTS.md) · [Required frontier coverage](evals/frontier-scorecard-v1.json) · [Shared-observation implementation](mmso/shared_observation.py)
+
+The live playground remains v3. V4 is a research candidate; these experiments have not been deployed as a public API upgrade.
+
+## Earlier v4 investigation: narrow-suite selection
 
 **Provisional research backbone: MiniCPM-o 4.5. No candidate cleared the complete release gate.** The matched study tested eight native multimodal checkpoints, trained attention adapters for MiniCPM and Qwen3-Omni, and confirmed their frozen versions on 320 separate cases each. MiniCPM reached **82.35% equal-track accuracy**, versus Qwen3's **84.54%**, while using roughly **19 GiB versus 60 GiB** of allocated GPU memory. Both reached only **39.58%** on coarse screen localization, so reliable browser use remains unestablished.
 
@@ -38,7 +52,7 @@ Jev's published chart evaluates four text-based business workflows against a ref
 
 The [comparison design](docs/research/jev-comparison.md) documents the publisher's benchmark, the missing reproduction artifacts, independent real-world evaluation tracks, and the proposed language-capable multimodal successor. The [live, version-pinned Jev integration](reports/jev-engineering-smoke-v1/README.md) completed 12/12 original engineering fixtures at 365 ms median client latency and $0.000217686 total input-token cost. The smoke is explicitly excluded from research leaderboards. See the [machine-readable contract](evals/jev-comparison-v1.json).
 
-The shared text comparison is the next target; MiSO v3 does not yet qualify:
+The v4 [public-audit comparison](reports/v4-iteration-v2/README.md) now measures shared text cases against Jev and OpenAI. The original published TypeSafe workflow reproduction still needs its complete case export, harness and reference scorer; MiSO v3 does not qualify for that comparison:
 
 ```mermaid
 flowchart LR

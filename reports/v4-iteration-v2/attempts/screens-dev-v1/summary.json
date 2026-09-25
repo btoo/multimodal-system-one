@@ -1,0 +1,36 @@
+{
+  "status": "completed",
+  "phase": "screens",
+  "metrics": {
+    "baseline-1536": {
+      "cases": 32,
+      "correct": 14,
+      "accuracy": 0.4375,
+      "median_request_ms": 381.6101910000018,
+      "p95_request_ms": 843.8447572000023
+    },
+    "native-detail-2304": {
+      "cases": 32,
+      "correct": 11,
+      "accuracy": 0.34375,
+      "median_request_ms": 433.48500599999795,
+      "p95_request_ms": 838.0881447499945
+    },
+    "grid-1536": {
+      "cases": 32,
+      "correct": 13,
+      "accuracy": 0.40625,
+      "median_request_ms": 389.60409949999786,
+      "p95_request_ms": 837.3637082000073
+    },
+    "grid-2304": {
+      "cases": 32,
+      "correct": 14,
+      "accuracy": 0.4375,
+      "median_request_ms": 435.6072869999998,
+      "p95_request_ms": 873.4176696999973
+    }
+  },
+  "selection_data": "Previously exposed v1 development only; not a fresh confirmation result",
+  "nominee": "baseline-1536"
+}
