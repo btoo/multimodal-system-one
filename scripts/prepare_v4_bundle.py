@@ -24,6 +24,9 @@ def main():
     for path in (ROOT / "artifacts/v4-adapters").glob("*/adapter/*"):
         if path.is_file() and path.name in {"config.json", "adapter.safetensors"}:
             name = str(path.relative_to(ROOT)); paths.append(name); allowlisted.add(name)
+    for path in (ROOT / "artifacts/v4-selection").glob("*/*"):
+        if path.is_file() and path.name in {"config.json", "readout.safetensors"}:
+            name = str(path.relative_to(ROOT)); paths.append(name); allowlisted.add(name)
     for row in rows:
         for item in row["media"]:
             if sha(ROOT / item["path"]) != item["sha256"]:

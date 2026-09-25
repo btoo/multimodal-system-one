@@ -125,6 +125,21 @@ class Backbone:
                 self.encoder_hooks.append(module.register_forward_pre_hook(self.start_encoder(name)))
                 self.encoder_hooks.append(module.register_forward_hook(self.end_encoder(name)))
         self.encoder_names = chosen
+        self.readout = None
+        self.temperature = 1.0
+        self.readout_config = None
+
+    def load_readout(self, folder):
+        from safetensors.torch import load_file
+        config = json.loads((folder / "config.json").read_text())
+        if config["model"] != self.spec["id"] or config["revision"] != self.spec["revision"]:
+            raise ValueError("Readout base model differs from selected checkpoint")
+        if config["readout_sha256"]:
+            path = folder / "readout.safetensors"
+            if digest(path) != config["readout_sha256"]: raise ValueError("Readout hash mismatch")
+            self.readout = load_file(str(path), device="cuda")
+        self.temperature = float(config["temperature"])
+        self.readout_config = config
 
     def capture_feature(self, module, inputs):
         self.feature = inputs[0][:, -1, :].detach()
@@ -209,8 +224,12 @@ class Backbone:
             forwarded = time.perf_counter()
             logits = output.logits[0, -1].float()
             selected = logits[self.token_ids[:len(row["choices"])]]
-            probabilities = selected.softmax(dim=-1)
             mass = (torch.logsumexp(selected, dim=-1) - torch.logsumexp(logits, dim=-1)).exp()
+            if self.readout is not None:
+                head = self.readout
+                normalized = (self.feature[0].float() - head["mean"]) / head["std"]
+                selected = selected + nn_functional_linear(normalized, head["weight"], head["bias"])[:len(row["choices"])]
+            probabilities = (selected / self.temperature).softmax(dim=-1)
             top_token = int(logits.argmax())
             values = selected.cpu().numpy()
             probs = probabilities.cpu().numpy()
@@ -242,6 +261,10 @@ def defaultdict_sum(pairs):
     for name, value in pairs:
         result[name] = result.get(name, 0.0) + float(value)
     return result
+
+
+def nn_functional_linear(value, weight, bias):
+    return torch.nn.functional.linear(value, weight, bias)
 
 
 def run_candidate(root, key, phase, output):
@@ -283,6 +306,9 @@ def run_candidate(root, key, phase, output):
     elif phase == "adapter-confirmation":
         from .backbone_adapters import load_and_merge_adapter
         adapter_metadata = load_and_merge_adapter(model.model, root / "artifacts/v4-adapters" / key / "adapter", spec)
+    if confirmation_phase:
+        readout_key = key + ("-adapted" if phase == "adapter-confirmation" else "")
+        model.load_readout(root / "artifacts/v4-selection" / readout_key)
     parameters = sum(p.numel() for p in model.model.parameters())
     warmup_start = time.perf_counter()
     warmups = []
@@ -323,6 +349,7 @@ def run_candidate(root, key, phase, output):
                "peak_allocated_bytes": torch.cuda.max_memory_allocated(), "encoder_modules": model.encoder_names,
                "loading_info": {k: v for k, v in model.loading.items() if k != "error_msgs"},
                "adapter": adapter_metadata,
+               "selected_readout": model.readout_config,
                "features_sha256": digest(output / "features.npz") if features else None,
                "predictions_sha256": digest(output / "predictions.jsonl"), "accuracy_computed_remotely": False}
     (output / "result.json").write_text(json.dumps(summary, indent=2, default=str) + "\n")

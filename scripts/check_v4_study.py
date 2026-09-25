@@ -30,9 +30,9 @@ def main():
         predictions = [json.loads(s) for s in predictions_path.read_text().splitlines()]
         assert len(predictions) == len({r["id"] for r in predictions}) == result["completed"] == result["expected"]
         phase = result["phase"]
-        if phase == "development":
+        if phase in {"development", "adapter-development"}:
             assert {r["id"] for r in predictions} == {r["id"] for r in rows if r["split"] != "confirmation"}
-        if phase == "confirmation":
+        if phase in {"confirmation", "adapter-confirmation"}:
             assert (ROOT / "evals/v4-nomination-v1.json").exists()
             assert {r["id"] for r in predictions} == {r["id"] for r in rows if r["split"] == "confirmation"}
         for p in predictions:
@@ -57,7 +57,7 @@ def main():
     counts["failed_attempts"] = len(list((ROOT / "reports/v4-selection-v1/attempts").glob("*/failure.json")))
     for path in (ROOT / "reports/v4-selection-v1/candidates").glob("*/selection.json"):
         report = json.loads(path.read_text())
-        assert report["revision"] == models[report["key"]]["revision"]
+        assert report["revision"] == models[report.get("base_key", report["key"])]["revision"]
         config_path = ROOT / "artifacts/v4-selection" / report["key"] / "config.json"
         config = json.loads(config_path.read_text())
         assert config["temperature"] == report["temperature"]
