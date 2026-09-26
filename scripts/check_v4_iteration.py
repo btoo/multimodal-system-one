@@ -57,6 +57,10 @@ def main():
     for name in ('screen_grounding.jsonl','screen_grounding_v2.jsonl','v4_selection_v1.jsonl'):
         used|={m['sha256'] for row in rows(ROOT/'evals/manifests'/name) for m in row['media'] if m['modality']=='image'}
     assert len(fresh)==117 and not used.intersection(r['media'][0]['sha256'] for r in fresh)
+    action_audit=json.loads((report/'grounding-action-space-audit.json').read_text())
+    assert action_audit['manifest_sha256']==digest(ROOT/'evals/manifests/v4_fresh_screens_v2.jsonl')
+    assert action_audit['oracle_accuracy_ceiling']==0 and not action_audit['can_discriminate_model_quality']
+    assert not action_audit['source_image_dimension_mismatches']
     screen=rows(report/'attempts/screen-confirmation-v1/predictions.jsonl');screen_by_id={r['id']:r for r in screen}
     assert set(screen_by_id)=={r['id'] for r in fresh}
     for case in fresh:
@@ -78,6 +82,8 @@ def main():
         'scored_public_reference_predictions':total_predictions,'screen_predictions':len(screen),
         'shared_observation_decisions':sum(r['questions'] for r in speed),
         'probability_equivalent_default_decisions':sum(r['questions'] for r in speed),
+        'grid_center_point_metric_valid_as_model_quality':False,
+        'grid_center_oracle_ceiling':action_audit['oracle_accuracy_ceiling'],
         'all_study_apps_stopped':True,'credentials_in_bundle_allowlist':False}
     (report/'validation.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result))
 

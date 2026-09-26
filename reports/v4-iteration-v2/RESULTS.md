@@ -66,7 +66,8 @@ Each cell pools five repeats on each of five observations, with paths interleave
 
 ## Fresh screen diagnostic
 
-On 117 unused screenshots: **51.28% region accuracy**, **0.00% actual point-inside-box accuracy** using the selected grid-cell center. This is not a dedicated GUI grounding head or an official full ScreenSpot-Pro score.
+On 117 unused screenshots: **51.28% coarse region accuracy**.
+**Correction: the earlier 0/117 click result cannot measure model quality.** None of the nine allowed grid-center points lies in any target box, so even an oracle would score zero. Original predictions are preserved. Precise GUI grounding remains unmeasured; see the [action-space audit](grounding-action-space-audit.json).
 
 ## Paired accuracy changes
 

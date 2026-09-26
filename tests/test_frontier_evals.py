@@ -2,7 +2,7 @@ import unittest
 import numpy as np
 from PIL import Image
 
-from mmso.frontier_evals import mmstar_question, model_input, point_inside, summarize
+from mmso.frontier_evals import mmstar_question, model_input, point_inside, point_action_coverage, summarize
 from mmso.v4_iteration import grid_overlay, REGIONS
 from mmso.reference_costs import openai_cost
 
@@ -41,6 +41,18 @@ class FrontierEvalTests(unittest.TestCase):
         self.assertFalse(point_inside([1/6,1/6], [2,2,8,8], [300,300]))
         self.assertTrue(point_inside([.02,.02], [2,2,8,8], [300,300]))
         self.assertFalse(point_inside([float('nan'),0], [2,2,8,8], [300,300]))
+
+    def test_impossible_click_action_space_is_not_a_model_quality_score(self):
+        points=[((c+.5)/3,(r+.5)/3) for r in range(3) for c in range(3)]
+        cases=[dict(id='tiny-button',target_bbox_xyxy=[2,2,8,8],image_size=[300,300])]
+        audit=point_action_coverage(cases,points)
+        self.assertEqual(audit['oracle_accuracy_ceiling'],0)
+        self.assertFalse(audit['can_discriminate_model_quality'])
+        self.assertFalse(audit['valid_as_unconstrained_grounding_evaluation'])
+        cases.append(dict(id='reachable-button',target_bbox_xyxy=[45,45,55,55],image_size=[300,300]))
+        audit=point_action_coverage(cases,points)
+        self.assertEqual(audit['oracle_accuracy_ceiling'],.5)
+        self.assertEqual(audit['reachable_case_ids'],['reachable-button'])
 
     def test_valid_answer_can_have_invalid_probability_contract(self):
         rows=[dict(id='x',benchmark='public',stratum='one',group_id='x',choices=['a','b'],target=1)]

@@ -83,6 +83,10 @@ def main():
             'usd_per_1000_correct_decisions':total/correct*1000 if correct else None,
             'scope':'All requests in this matched text run, including incorrect decisions; standard API list-rate estimate before credits, excluding earlier setup/failed attempts'}
     result['matched_text_api_cost_per_correct']=api_costs
+    audit_path=REPORT/'grounding-action-space-audit.json'
+    if audit_path.exists():
+        result['grounding_action_space_audit']=json.loads(audit_path.read_text())
+        sources[str(audit_path.relative_to(ROOT))]=digest(audit_path)
     (REPORT/'summary.json').write_text(json.dumps(result,indent=2)+'\n')
     lines=['# Generated v4 follow-up results','', 'Generated from the retained prediction files. Percentages below measure different task distributions; no pooled frontier score is computed.','',
         '## Full public audit','', '| Model | MMAU, 1,000 | MMStar, 1,500 | MMLU-Pro subset, 448 |','|---|---:|---:|---:|']
@@ -128,7 +132,12 @@ def main():
     screen_path=REPORT/'attempts/screen-confirmation-v1/summary.json'
     if screen_path.exists():
         screen=json.loads(screen_path.read_text())
-        lines.append(f"On {screen['cases']} unused screenshots: **{screen['region_accuracy']:.2%} region accuracy**, **{screen['point_inside_box_accuracy']:.2%} actual point-inside-box accuracy** using the selected grid-cell center. This is not a dedicated GUI grounding head or an official full ScreenSpot-Pro score.")
+        lines.append(f"On {screen['cases']} unused screenshots: **{screen['region_accuracy']:.2%} coarse region accuracy**.")
+        audit=result.get('grounding_action_space_audit')
+        if audit and not audit['can_discriminate_model_quality']:
+            lines.append('**Correction: the earlier 0/117 click result cannot measure model quality.** None of the nine allowed grid-center points lies in any target box, so even an oracle would score zero. Original predictions are preserved. Precise GUI grounding remains unmeasured; see the [action-space audit](grounding-action-space-audit.json).')
+        else:
+            lines.append('Do not interpret the grid-center hit fraction as model grounding quality without checking the feasible-action ceiling. It is not an official full ScreenSpot-Pro score.')
     else:lines.append('Pending; nomination and screenshot identities are frozen.')
     lines += ['', '## Paired accuracy changes','', 'Right model minus original MiniCPM base, on identical cases. Bootstrap resamples image/audio/question groups. These are exploratory public-audit comparisons.','',
         '| Benchmark | Right model | Cases | Difference | 95% paired interval |','|---|---|---:|---:|---|']

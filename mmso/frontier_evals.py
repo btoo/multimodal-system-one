@@ -50,6 +50,25 @@ def point_inside(point, box, image_size):
     return box[0] <= x <= box[2] and box[1] <= y <= box[3]
 
 
+def point_action_coverage(rows, points):
+    """Scoring-only oracle ceiling; annotations never enter model inputs.
+
+    A constrained action space can make the benchmark impossible regardless of
+    perception quality. Report its ceiling before interpreting model accuracy.
+    """
+    if not rows or not points: raise ValueError('Cases and candidate points are required')
+    if any(len(p) != 2 or not all(math.isfinite(x) and 0 <= x <= 1 for x in p) for p in points):
+        raise ValueError('Candidate points must be finite normalized coordinates')
+    reachable = [r['id'] for r in rows if any(point_inside(p, r['target_bbox_xyxy'], r['image_size']) for p in points)]
+    return {'cases': len(rows), 'candidate_points': [list(p) for p in points],
+        'reachable_target_count': len(reachable), 'reachable_case_ids': reachable,
+        'oracle_accuracy_ceiling': len(reachable) / len(rows),
+        'valid_as_unconstrained_grounding_evaluation': len(reachable) == len(rows),
+        'can_discriminate_model_quality': len(reachable) > 0,
+        'interpretation': 'Every allowed click misses every target; observed zero cannot measure visual or grounding ability.' if not reachable else
+            'Output constraints limit achievable success; compare with this ceiling and use the original unrestricted coordinate task for grounding.'}
+
+
 def summarize(rows, predictions):
     by_id = {p['id']: p for p in predictions}
     if len(by_id) != len(predictions) or set(by_id) != {r['id'] for r in rows}:

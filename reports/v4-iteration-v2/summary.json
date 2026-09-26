@@ -1704,7 +1704,8 @@
     "reports/v4-iteration-v2/attempts/openai-sol-none-v1/summary.json": "a04563fee0fb6a76cb207790028594eec424074541d073ab0ebe274864e4ba6d",
     "reports/v4-iteration-v2/attempts/openai-sol-none-v1/predictions.jsonl": "afdb52afca5ccf4d8823dbd666e4f3b2f0dd35adc086dc9ff7faeb5295876d5b",
     "reports/v4-iteration-v2/attempts/openai-astra-medium-v1/summary.json": "ef5cc6f145f233e3e840c5c64e38e88aea2cbda71f4b29504048c13934581694",
-    "reports/v4-iteration-v2/attempts/openai-astra-medium-v1/predictions.jsonl": "adf1d47488a7fc2bebe06e54000568dee72e973d59bc0cc1894f987cbc8ecbf6"
+    "reports/v4-iteration-v2/attempts/openai-astra-medium-v1/predictions.jsonl": "adf1d47488a7fc2bebe06e54000568dee72e973d59bc0cc1894f987cbc8ecbf6",
+    "reports/v4-iteration-v2/grounding-action-space-audit.json": "9a3a8d79bc4d6977058ada6eed1f055200c465165a3e05f45decfe55cfd7506e"
   },
   "no_frontier_parity_established": true,
   "unchanged_served_model": "mmso-joint-v3",
@@ -1724,5 +1725,58 @@
       "usd_per_1000_correct_decisions": 0.7859943661971831,
       "scope": "All requests in this matched text run, including incorrect decisions; standard API list-rate estimate before credits, excluding earlier setup/failed attempts"
     }
+  },
+  "grounding_action_space_audit": {
+    "cases": 117,
+    "candidate_points": [
+      [
+        0.16666666666666666,
+        0.16666666666666666
+      ],
+      [
+        0.5,
+        0.16666666666666666
+      ],
+      [
+        0.8333333333333334,
+        0.16666666666666666
+      ],
+      [
+        0.16666666666666666,
+        0.5
+      ],
+      [
+        0.5,
+        0.5
+      ],
+      [
+        0.8333333333333334,
+        0.5
+      ],
+      [
+        0.16666666666666666,
+        0.8333333333333334
+      ],
+      [
+        0.5,
+        0.8333333333333334
+      ],
+      [
+        0.8333333333333334,
+        0.8333333333333334
+      ]
+    ],
+    "reachable_target_count": 0,
+    "reachable_case_ids": [],
+    "oracle_accuracy_ceiling": 0.0,
+    "valid_as_unconstrained_grounding_evaluation": false,
+    "can_discriminate_model_quality": false,
+    "interpretation": "Every allowed click misses every target; observed zero cannot measure visual or grounding ability.",
+    "manifest_sha256": "a4299d9448c23ca7bc0c5c6fad0b9ae65d3825a3d89db039b83251068d93ceb1",
+    "source_image_dimension_mismatches": [],
+    "new_model_inference": false,
+    "correction": "The earlier 0/117 grid-center result was guaranteed by the restricted output space. It is not evidence that the model lacks vision or cannot ground coordinates. Precise grounding remains unmeasured.",
+    "preserved_valid_result": "60/117 coarse region classifications; this remains a different task from exact GUI grounding.",
+    "original_predictions_preserved": true
   }
 }

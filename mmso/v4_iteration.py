@@ -14,7 +14,7 @@ import torch
 from .backbone_study import Backbone, decode_media, digest, move, prompt_for
 from .backbone_adapters import load_and_merge_adapter
 from .backbone_diagnostics import trim_head
-from .frontier_evals import model_input, summarize, point_inside
+from .frontier_evals import model_input, summarize, point_inside, point_action_coverage
 
 
 def load_model(root, adapted=True, key='minicpmo45'):
@@ -154,6 +154,8 @@ def run_screen_confirmation(root, output):
     manifest = root / 'evals/manifests/v4_fresh_screens_v2.jsonl'
     if digest(manifest) != nomination['confirmation_manifest_sha256']: raise ValueError('Confirmation changed')
     rows = [json.loads(s) for s in manifest.read_text().splitlines()]
+    action_audit = point_action_coverage(rows, [((c+.5)/3, (r+.5)/3) for r in range(3) for c in range(3)])
+    (output / 'point-action-audit.json').write_text(json.dumps(action_audit, indent=2) + '\n')
     model = load_model(root)
     variant = next(v for v in protocol['screen_ablation']['variants'] if v['name'] == nomination['variant'])
     records = []
@@ -168,7 +170,9 @@ def run_screen_confirmation(root, output):
         with (output / 'predictions.jsonl').open('a') as stream: stream.write(json.dumps(result) + '\n')
     summary = {'status': 'completed', 'phase': 'screen-confirmation', 'variant': variant,
         'metrics': summarize(rows, records), 'region_accuracy': sum(r['region_correct'] for r in records)/len(rows),
-        'point_inside_box_accuracy': sum(r['click_correct'] for r in records)/len(rows), 'cases': len(rows),
+        'point_inside_box_accuracy': sum(r['click_correct'] for r in records)/len(rows) if action_audit['can_discriminate_model_quality'] else None,
+        'grid_center_hit_fraction_observed': sum(r['click_correct'] for r in records)/len(rows),
+        'point_action_audit': action_audit, 'cases': len(rows),
         'point_predictor': 'Center of the selected equal 3x3 grid cell. A weak localization control, not a dedicated point head.',
         'nomination_sha256': digest(root / 'evals/v4-screen-nomination-v2.json')}
     (output / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n')

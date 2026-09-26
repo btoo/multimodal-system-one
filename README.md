@@ -8,6 +8,8 @@
 
 **The new audit adds 2,948 public benchmark cases and 117 unused screenshots. MiSO has not established frontier parity.** MMStar measures visual understanding, MMAU covers speech/sounds/music, and a stratified MMLU-Pro subset tests harder text decisions. Jev and OpenAI now run on matched cases; their results expose a large capability gap that the earlier small controls did not measure.
 
+**Grounding correction:** the earlier 0/117 click statistic used nine fixed points that cannot hit any of the target boxes. It cannot measure model quality. Precise coordinate grounding remains unmeasured; see the [feasibility audit](reports/v4-iteration-v2/grounding-action-space-audit.json).
+
 ![Broader matched-case benchmark results](docs/assets/v4-frontier-audit.svg)
 
 The new shared-observation path processes and encodes image/audio once for multiple independent questions. For 16 questions, complete local H100 latency fell from **1,948 ms to 567 ms (3.44×)**, with identical probabilities on all 105 tested decisions. Experimental packed branches reached **160 ms (12.18×)** but changed probabilities by up to 3.64 percentage points, so the conservative reuse path is the default. These measurements include media processing and encoders, while excluding network, queueing and cold loading.

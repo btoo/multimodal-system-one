@@ -22,7 +22,7 @@
   ],
   "inference_requires_external_model_api": false,
   "public_api_registered": false,
-  "quality_blocker": "Coarse GUI grounding remains inadequate; broader public audit also exposes a substantial hard-text decision gap against Jev and OpenAI. No frontier or release qualification.",
+  "quality_blocker": "Precise GUI grounding has not been validly evaluated: the previous grid-center control has zero feasible targets. Broad public text decisions also remain substantially below Jev/OpenAI quality; no frontier or release qualification.",
   "report": "reports/v4-selection-v1/README.md",
   "research_only_data": true,
   "latest_report": "reports/v4-iteration-v2/README.md",

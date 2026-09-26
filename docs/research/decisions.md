@@ -4,6 +4,8 @@ Latest decision: **Use media reuse as the conservative v4 speed path and keep ba
 
 The complete local 16-question pipeline improved from 1,948 ms to 567 ms through media reuse, with identical tested probability vectors. Experimental packed branches reached 160 ms but introduced up to 3.64 percentage points of probability drift. Keep packing opt-in until broader calibration and decision-threshold tests establish acceptable behavior. The [earlier eight-checkpoint selection](../../reports/v4-selection-v1/README.md) remains historical evidence under its narrower task scope.
 
+Grounding correction: all 117 target boxes were unreachable from the nine allowed grid-center points. The earlier zero cannot establish a perception or localization failure. Require an action-space feasibility check, then evaluate an actual coordinate/element output path before choosing a new spatial head, GUI training recipe or larger model on grounding evidence.
+
 The table below records the earlier small-model control decisions. The [original baseline results](../../reports/pilot-v1/README.md), [reading map](reading-map.md) and [frontier review](frontier-methods.md) remain historical evidence.
 
 | Decision | Rationale | What could change it |
