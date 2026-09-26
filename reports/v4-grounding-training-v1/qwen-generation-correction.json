@@ -1,0 +1,17 @@
+{
+  "superseded_attempt": "qwen-baseline-v1",
+  "affected_tasks": [
+    "point",
+    "chart"
+  ],
+  "cause": "Publisher generation_config.json contains Talker options only. The Thinker-only generation call did not explicitly pass the tokenizer end-of-answer token; every free-answer response reached its output cap, often repeating turns or EOS tokens.",
+  "fix": "Pass tokenizer.eos_token_id and pad_token_id explicitly to Thinker.generate; retain final token ID and configured stop IDs.",
+  "tokenizer_eos_token": "<|im_end|>",
+  "tokenizer_eos_token_id": 151645,
+  "publisher_revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+  "original_summary_sha256": "fb6e2eed1699297fa5b85c39ba0cbac9b029b78e5e54376c91bdf744506e5d55",
+  "replacement_attempt": "qwen-baseline-v2",
+  "original_results_preserved": true,
+  "single_pass_classification_uses_generation_stopping": false,
+  "choice_note": "Replacement-run choice predictions are retained as measured; minor between-run numerical differences are not overwritten."
+}

@@ -1,0 +1,41 @@
+{
+  "cases": 96,
+  "metrics": {
+    "screenspot_v2": {
+      "cases": 96,
+      "correct": 2,
+      "accuracy": 0.020833333333333332,
+      "group_bootstrap_95": [
+        0.0,
+        0.052083333333333336
+      ],
+      "groups": 96,
+      "errors": 0,
+      "schema_valid": 96,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 507.95914199999714,
+        "p95": 599.6981582500105
+      },
+      "strata": {
+        "desktop:icon": {
+          "cases": 24,
+          "accuracy": 0.0
+        },
+        "desktop:text": {
+          "cases": 24,
+          "accuracy": 0.041666666666666664
+        },
+        "web:icon": {
+          "cases": 24,
+          "accuracy": 0.041666666666666664
+        },
+        "web:text": {
+          "cases": 24,
+          "accuracy": 0.0
+        }
+      }
+    }
+  },
+  "predictions_sha256": "2dc8ee5a8f41471abd003c7e961dde9d750e831de6a711d93ca1d353f4246c2c"
+}

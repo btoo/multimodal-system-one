@@ -1,0 +1,20 @@
+{
+  "name": "MiSO v4 mixed-task grounding candidate",
+  "id": "miso-v4-grounding-candidate",
+  "status": "evaluated_research_candidate_not_deployed",
+  "base_model": "openbmb/MiniCPM-o-4_5",
+  "base_revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+  "adapter_config": "artifacts/v4-grounding-training/minicpmo45/adapter/config.json",
+  "adapter_sha256": "3c4b9c646de6681e3885bb5f01750d522f5b5dd4360bd7d05a4ccd26f55b0e94",
+  "training_updates": 1024,
+  "trainable_adapter_parameters": 3833856,
+  "input_modalities": ["text", "image", "audio"],
+  "output_paths": {"choice": "One-pass supplied-candidate probabilities, temperature 1", "point": "Bounded JSON coordinate generation, normalized 0-1", "chart": "Bounded short-answer generation"},
+  "probability_calibration": "Not separately recalibrated after mixed-task adaptation",
+  "public_api_registered": false,
+  "inference_requires_external_model_api": false,
+  "checkpoint_distribution": "Owner-local ignored tensor file and existing Modal volume; configuration and hash are public",
+  "research_only": true,
+  "report": "reports/v4-grounding-training-v1/README.md",
+  "limitations": ["Coordinate path is still autoregressive", "Hard ScreenSpot-Pro performance remains below the matched OpenAI reference", "Absent-target behavior and complete browser workflows are not qualified", "Chart images do not establish arbitrary PDF/XLSX ingestion"]
+}

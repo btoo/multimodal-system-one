@@ -1,0 +1,339 @@
+{
+  "cases": 829,
+  "metrics": {
+    "boolq": {
+      "cases": 128,
+      "correct": 117,
+      "accuracy": 0.9140625,
+      "group_bootstrap_95": [
+        0.859375,
+        0.9609375
+      ],
+      "groups": 128,
+      "errors": 0,
+      "schema_valid": 128,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 25.06380200001246,
+        "p95": 31.538071300000322
+      },
+      "strata": {
+        "False": {
+          "cases": 46,
+          "accuracy": 0.8913043478260869
+        },
+        "True": {
+          "cases": 82,
+          "accuracy": 0.926829268292683
+        }
+      }
+    },
+    "omniact": {
+      "cases": 96,
+      "correct": 66,
+      "accuracy": 0.6875,
+      "group_bootstrap_95": [
+        0.5318982712765957,
+        0.8
+      ],
+      "groups": 7,
+      "errors": 0,
+      "schema_valid": 96,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 788.6571939999953,
+        "p95": 1000.9489879999993
+      },
+      "strata": {
+        "desktop/audible": {
+          "cases": 13,
+          "accuracy": 0.6923076923076923
+        },
+        "desktop/message": {
+          "cases": 14,
+          "accuracy": 0.7857142857142857
+        },
+        "desktop/photos": {
+          "cases": 14,
+          "accuracy": 0.6428571428571429
+        },
+        "desktop/text_editor": {
+          "cases": 14,
+          "accuracy": 0.2857142857142857
+        },
+        "web/cmu": {
+          "cases": 14,
+          "accuracy": 0.8571428571428571
+        },
+        "web/flight_aware": {
+          "cases": 14,
+          "accuracy": 0.7142857142857143
+        },
+        "web/instacart": {
+          "cases": 13,
+          "accuracy": 0.8461538461538461
+        }
+      }
+    },
+    "mmlu_pro": {
+      "cases": 112,
+      "correct": 55,
+      "accuracy": 0.49107142857142855,
+      "group_bootstrap_95": [
+        0.39285714285714285,
+        0.5803571428571429
+      ],
+      "groups": 112,
+      "errors": 0,
+      "schema_valid": 112,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 26.787627500006295,
+        "p95": 35.0737577499963
+      },
+      "strata": {
+        "biology": {
+          "cases": 8,
+          "accuracy": 0.625
+        },
+        "business": {
+          "cases": 8,
+          "accuracy": 0.25
+        },
+        "chemistry": {
+          "cases": 8,
+          "accuracy": 0.375
+        },
+        "computer science": {
+          "cases": 8,
+          "accuracy": 0.5
+        },
+        "economics": {
+          "cases": 8,
+          "accuracy": 0.625
+        },
+        "engineering": {
+          "cases": 8,
+          "accuracy": 0.5
+        },
+        "health": {
+          "cases": 8,
+          "accuracy": 0.5
+        },
+        "history": {
+          "cases": 8,
+          "accuracy": 0.625
+        },
+        "law": {
+          "cases": 8,
+          "accuracy": 0.25
+        },
+        "math": {
+          "cases": 8,
+          "accuracy": 0.125
+        },
+        "other": {
+          "cases": 8,
+          "accuracy": 0.625
+        },
+        "philosophy": {
+          "cases": 8,
+          "accuracy": 0.625
+        },
+        "physics": {
+          "cases": 8,
+          "accuracy": 0.5
+        },
+        "psychology": {
+          "cases": 8,
+          "accuracy": 0.75
+        }
+      }
+    },
+    "mmau": {
+      "cases": 128,
+      "correct": 94,
+      "accuracy": 0.734375,
+      "group_bootstrap_95": [
+        0.6535433070866141,
+        0.8125
+      ],
+      "groups": 127,
+      "errors": 0,
+      "schema_valid": 128,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 53.30219849997775,
+        "p95": 152.8148763500045
+      },
+      "strata": {
+        "music": {
+          "cases": 43,
+          "accuracy": 0.7441860465116279
+        },
+        "sound": {
+          "cases": 43,
+          "accuracy": 0.7906976744186046
+        },
+        "speech": {
+          "cases": 42,
+          "accuracy": 0.6666666666666666
+        }
+      }
+    },
+    "mmstar": {
+      "cases": 120,
+      "correct": 75,
+      "accuracy": 0.625,
+      "group_bootstrap_95": [
+        0.5416666666666666,
+        0.7083333333333334
+      ],
+      "groups": 120,
+      "errors": 0,
+      "schema_valid": 120,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 49.69157850000272,
+        "p95": 129.66752484999836
+      },
+      "strata": {
+        "coarse perception": {
+          "cases": 20,
+          "accuracy": 0.75
+        },
+        "fine-grained perception": {
+          "cases": 20,
+          "accuracy": 0.65
+        },
+        "instance reasoning": {
+          "cases": 20,
+          "accuracy": 0.7
+        },
+        "logical reasoning": {
+          "cases": 20,
+          "accuracy": 0.6
+        },
+        "math": {
+          "cases": 20,
+          "accuracy": 0.5
+        },
+        "science & technology": {
+          "cases": 20,
+          "accuracy": 0.55
+        }
+      }
+    },
+    "screenspot_pro": {
+      "cases": 117,
+      "correct": 25,
+      "accuracy": 0.21367521367521367,
+      "group_bootstrap_95": [
+        0.1452991452991453,
+        0.2905982905982906
+      ],
+      "groups": 117,
+      "errors": 0,
+      "schema_valid": 117,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 931.7936520000103,
+        "p95": 1331.3059756000077
+      },
+      "strata": {
+        "android_studio_macos:icon": {
+          "cases": 8,
+          "accuracy": 0.0
+        },
+        "android_studio_macos:text": {
+          "cases": 8,
+          "accuracy": 0.25
+        },
+        "blender_windows:icon": {
+          "cases": 5,
+          "accuracy": 0.0
+        },
+        "blender_windows:text": {
+          "cases": 8,
+          "accuracy": 0.125
+        },
+        "excel_macos:icon": {
+          "cases": 4,
+          "accuracy": 0.0
+        },
+        "excel_macos:text": {
+          "cases": 8,
+          "accuracy": 0.25
+        },
+        "macos_common_macos:icon": {
+          "cases": 8,
+          "accuracy": 0.0
+        },
+        "macos_common_macos:text": {
+          "cases": 8,
+          "accuracy": 0.125
+        },
+        "powerpoint_windows:icon": {
+          "cases": 8,
+          "accuracy": 0.125
+        },
+        "powerpoint_windows:text": {
+          "cases": 8,
+          "accuracy": 0.25
+        },
+        "pycharm_macos:icon": {
+          "cases": 8,
+          "accuracy": 0.0
+        },
+        "pycharm_macos:text": {
+          "cases": 8,
+          "accuracy": 0.5
+        },
+        "vscode_macos:icon": {
+          "cases": 8,
+          "accuracy": 0.0
+        },
+        "vscode_macos:text": {
+          "cases": 8,
+          "accuracy": 0.5
+        },
+        "word_macos:icon": {
+          "cases": 4,
+          "accuracy": 0.25
+        },
+        "word_macos:text": {
+          "cases": 8,
+          "accuracy": 0.875
+        }
+      }
+    },
+    "chartqa": {
+      "cases": 128,
+      "correct": 109,
+      "accuracy": 0.8515625,
+      "group_bootstrap_95": [
+        0.7890625,
+        0.9140625
+      ],
+      "groups": 128,
+      "errors": 0,
+      "schema_valid": 128,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 186.48695899999268,
+        "p95": 237.99880374998992
+      },
+      "strata": {
+        "0": {
+          "cases": 59,
+          "accuracy": 0.7457627118644068
+        },
+        "1": {
+          "cases": 69,
+          "accuracy": 0.9420289855072463
+        }
+      }
+    }
+  },
+  "predictions_sha256": "0660f406b72d745710eca62a35a8aaecfb37732a59eab5277f9685d64ccde8fe"
+}

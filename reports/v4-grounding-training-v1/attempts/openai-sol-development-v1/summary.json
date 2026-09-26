@@ -1,0 +1,153 @@
+{
+  "status": "completed",
+  "stop_reason": null,
+  "model": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "none",
+    "input_usd_per_million": 2,
+    "output_usd_per_million": 10
+  },
+  "metrics": {
+    "boolq": {
+      "cases": 128,
+      "correct": 115,
+      "accuracy": 0.8984375,
+      "group_bootstrap_95": [
+        0.84375,
+        0.9453125
+      ],
+      "groups": 128,
+      "errors": 0,
+      "schema_valid": 128,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 1072.3646249971353,
+        "p95": 1851.4496892494208
+      },
+      "strata": {
+        "False": {
+          "cases": 46,
+          "accuracy": 0.8695652173913043
+        },
+        "True": {
+          "cases": 82,
+          "accuracy": 0.9146341463414634
+        }
+      }
+    },
+    "screenspot_pro": {
+      "cases": 117,
+      "correct": 78,
+      "accuracy": 0.6666666666666666,
+      "group_bootstrap_95": [
+        0.5811965811965812,
+        0.7521367521367521
+      ],
+      "groups": 117,
+      "errors": 0,
+      "schema_valid": 117,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 1654.8157910001464,
+        "p95": 2339.4160505995383
+      },
+      "strata": {
+        "android_studio_macos:icon": {
+          "cases": 8,
+          "accuracy": 0.25
+        },
+        "android_studio_macos:text": {
+          "cases": 8,
+          "accuracy": 0.625
+        },
+        "blender_windows:icon": {
+          "cases": 5,
+          "accuracy": 0.6
+        },
+        "blender_windows:text": {
+          "cases": 8,
+          "accuracy": 0.75
+        },
+        "excel_macos:icon": {
+          "cases": 4,
+          "accuracy": 0.25
+        },
+        "excel_macos:text": {
+          "cases": 8,
+          "accuracy": 0.75
+        },
+        "macos_common_macos:icon": {
+          "cases": 8,
+          "accuracy": 0.375
+        },
+        "macos_common_macos:text": {
+          "cases": 8,
+          "accuracy": 0.375
+        },
+        "powerpoint_windows:icon": {
+          "cases": 8,
+          "accuracy": 0.625
+        },
+        "powerpoint_windows:text": {
+          "cases": 8,
+          "accuracy": 0.875
+        },
+        "pycharm_macos:icon": {
+          "cases": 8,
+          "accuracy": 0.5
+        },
+        "pycharm_macos:text": {
+          "cases": 8,
+          "accuracy": 1.0
+        },
+        "vscode_macos:icon": {
+          "cases": 8,
+          "accuracy": 0.75
+        },
+        "vscode_macos:text": {
+          "cases": 8,
+          "accuracy": 0.875
+        },
+        "word_macos:icon": {
+          "cases": 4,
+          "accuracy": 1.0
+        },
+        "word_macos:text": {
+          "cases": 8,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "chartqa": {
+      "cases": 128,
+      "correct": 50,
+      "accuracy": 0.390625,
+      "group_bootstrap_95": [
+        0.3046875,
+        0.4765625
+      ],
+      "groups": 128,
+      "errors": 0,
+      "schema_valid": 128,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 1292.95627099782,
+        "p95": 1992.9029557970343
+      },
+      "strata": {
+        "0": {
+          "cases": 59,
+          "accuracy": 0.4915254237288136
+        },
+        "1": {
+          "cases": 69,
+          "accuracy": 0.30434782608695654
+        }
+      }
+    }
+  },
+  "new_cost_upper_usd": 0.7902320000000008,
+  "cumulative_openai_upper_usd": 1.3307045000000008,
+  "manifest_sha256": "cf835e8859a6abf86ff0c2bf16a5d0115fe04d79c8b4b2020d6de0046b30af32",
+  "timing_boundary": "Full local media preparation and API client request through parsed answer, including network/provider work; warm/cold provider behavior is not controlled."
+}

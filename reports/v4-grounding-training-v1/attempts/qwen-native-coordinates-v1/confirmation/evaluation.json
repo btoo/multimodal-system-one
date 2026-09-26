@@ -1,0 +1,84 @@
+{
+  "cases": 192,
+  "metrics": {
+    "screenspot_v2": {
+      "cases": 96,
+      "correct": 36,
+      "accuracy": 0.375,
+      "group_bootstrap_95": [
+        0.2708333333333333,
+        0.46875
+      ],
+      "groups": 96,
+      "errors": 0,
+      "schema_valid": 37,
+      "output_limit_hits": 26,
+      "latency_ms": {
+        "median": 1709.764084000028,
+        "p95": 5386.3941965000495
+      },
+      "strata": {
+        "desktop:icon": {
+          "cases": 24,
+          "accuracy": 0.5416666666666666
+        },
+        "desktop:text": {
+          "cases": 24,
+          "accuracy": 0.5
+        },
+        "web:icon": {
+          "cases": 24,
+          "accuracy": 0.25
+        },
+        "web:text": {
+          "cases": 24,
+          "accuracy": 0.20833333333333334
+        }
+      }
+    },
+    "omniact": {
+      "cases": 96,
+      "correct": 32,
+      "accuracy": 0.3333333333333333,
+      "group_bootstrap_95": [
+        0.19791666666666666,
+        0.5208333333333334
+      ],
+      "groups": 6,
+      "errors": 0,
+      "schema_valid": 38,
+      "output_limit_hits": 23,
+      "latency_ms": {
+        "median": 1551.888968500009,
+        "p95": 4111.455337999928
+      },
+      "strata": {
+        "desktop/linux_todo": {
+          "cases": 16,
+          "accuracy": 0.75
+        },
+        "web/best_buy": {
+          "cases": 16,
+          "accuracy": 0.125
+        },
+        "web/coursera": {
+          "cases": 16,
+          "accuracy": 0.25
+        },
+        "web/google_careers": {
+          "cases": 16,
+          "accuracy": 0.3125
+        },
+        "web/samsung": {
+          "cases": 16,
+          "accuracy": 0.1875
+        },
+        "web/trip_advisor": {
+          "cases": 16,
+          "accuracy": 0.375
+        }
+      }
+    }
+  },
+  "predictions_sha256": "4dd4bdbaf6a95d2feeb32305770b544c756e8fe7e00385e6d339c746b2aabd8e"
+}

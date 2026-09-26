@@ -1,0 +1,17 @@
+{
+  "model": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "none",
+    "input_usd_per_million": 2,
+    "output_usd_per_million": 10
+  },
+  "manifest_sha256": "cf835e8859a6abf86ff0c2bf16a5d0115fe04d79c8b4b2020d6de0046b30af32",
+  "cases": 373,
+  "selection": "All development ScreenSpot-Pro, ChartQA and BoolQ cases. No training or confirmation requests.",
+  "max_output_tokens": 64,
+  "image_max_side": 1536,
+  "image_detail": "high",
+  "concurrency": 1,
+  "previous_openai_upper_usd": 0.5404725,
+  "cumulative_ceiling_usd": 2
+}

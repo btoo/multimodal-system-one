@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "phase": "baseline",
+  "key": "minicpmo45",
+  "app_id": "ap-I070WDQqJR2gv3E2MYLVnp",
+  "error": "Remote module initialization read a local-only bundle pointer before function startup. No model predictions produced.",
+  "fix": "Read the bundle pointer only in the local Modal client; remote image already contains the immutable payload."
+}

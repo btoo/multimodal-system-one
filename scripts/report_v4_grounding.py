@@ -36,7 +36,16 @@ def main():
     nomination=json.loads(nomination_path.read_text()) if nomination_path.exists() else None
     confirmation_path=REPORT/'attempts/confirmation-v1/summary.json'
     confirmation=json.loads(confirmation_path.read_text()) if confirmation_path.exists() else None
+    native_path=REPORT/'attempts/qwen-native-coordinates-v1/summary.json'
+    native=json.loads(native_path.read_text()) if native_path.exists() else None
+    if native:
+        loaded['qwen-scaled']=native['development']
+        hashes[str(native_path.relative_to(ROOT))]=digest(native_path)
+    ablation_path=REPORT/'attempts/image-ablation-v1/summary.json'
+    ablation=json.loads(ablation_path.read_text()) if ablation_path.exists() else None
+    if ablation:hashes[str(ablation_path.relative_to(ROOT))]=digest(ablation_path)
     result={'development':loaded,'nomination':nomination,'confirmation':confirmation,'source_hashes':hashes,
+            'qwen_coordinate_control':native,'image_ablation':ablation,
             'served_model_unchanged':'mmso-joint-v3','frontier_parity_established':False}
     rows=read(ROOT/'data/v4-training/manifest.jsonl')
     if confirmation:
@@ -47,8 +56,17 @@ def main():
             differences[dataset]=paired(cases,a,b)
         result['confirmation_paired_differences']=differences
         hashes[str(confirmation_path.relative_to(ROOT))]=digest(confirmation_path)
+        efficiency={}
+        for dataset in ('screenspot_v2','omniact'):
+            efficiency[dataset]={}
+            for name,records in [('base',a),('adapted',b)]:
+                values=[r for r in records if r['dataset']==dataset]
+                seconds=sum(r['timings']['request_ms'] for r in values if r['status']=='ok')/1000
+                hits=sum(r['correct'] for r in values)
+                efficiency[dataset][name]={'total_warm_pipeline_seconds':seconds,'correct':hits,'warm_pipeline_seconds_per_correct_case':seconds/hits if hits else None}
+        result['warm_pipeline_efficiency']=efficiency
     (REPORT/'summary.json').write_text(json.dumps(result,indent=2)+'\n')
-    names={'minicpm-base':'MiniCPM base','qwen-base':'Qwen base','adapted':'MiSO mixed adapter','openai-sol-none':'GPT-6 Sol none'}
+    names={'minicpm-base':'MiniCPM base','qwen-base':'Qwen, 0–1 prompt','adapted':'MiSO mixed adapter','openai-sol-none':'GPT-6 Sol none','qwen-scaled':'Qwen, 0–1000 prompt'}
     datasets=['screenspot_pro','omniact','chartqa','boolq','mmau','mmstar','mmlu_pro']
     lines=['# Grounding and broader-training results','',
         'Development and regression cases below are exposed; use the separate confirmation table for the fixed-checkpoint follow-up. Local and hosted latency boundaries differ.','',
@@ -70,7 +88,27 @@ def main():
         for ds,change in result['confirmation_paired_differences'].items():
             a=confirmation['base']['metrics'][ds];b=confirmation['adapted']['metrics'][ds];lo,hi=change['paired_group_bootstrap_95']
             lines.append(f"| {ds} | {a['cases']} | {a['accuracy']:.2%} | {b['accuracy']:.2%} | {change['accuracy_delta']*100:+.2f} pp [{lo*100:+.2f}, {hi*100:+.2f}] |")
+        lines += ['', '### Paired image/audio regression','']
+        a=confirmation['base_joint_regression']['metrics']['joint_control'];b=confirmation['adapted_joint_regression']['metrics']['joint_control']
+        lines.append(f"On the same exposed controlled image/audio cases: base {a['correct']}/{a['cases']} ({a['accuracy']:.2%}), adapter {b['correct']}/{b['cases']} ({b['accuracy']:.2%}). This is regression coverage, not new real-world speech/screen confirmation.")
+        lines += ['', '### Coordinate latency on confirmation','', '| Task | Base median ms | Adapter median ms |','|---|---:|---:|']
+        for ds in ('screenspot_v2','omniact'):
+            a=confirmation['base']['metrics'][ds]['latency_ms'];b=confirmation['adapted']['metrics'][ds]['latency_ms']
+            lines.append(f"| {ds} | {a['median']:.1f} | {b['median']:.1f} |")
+        lines.append('\nThese sequential warm measurements do not establish a kernel speedup. Coordinate generation remains autoregressive; improved success did not make every request faster.')
     else:lines.append('Not yet evaluated. Checkpoint hashes must be frozen before these calls.')
+    if native:
+        lines += ['', '## Explicit 0–1000 coordinate control','', 'Same original target boxes and deterministic output conversion; no guessed units. This exploratory prompt-format control was frozen before confirmation calls.','',
+            '| Partition | Dataset | Correct / cases | Valid output | Accuracy |','|---|---|---:|---:|---:|']
+        for split in ('development','confirmation'):
+            for ds,m in native[split]['metrics'].items():lines.append(f"| {split} | {ds} | {m['correct']}/{m['cases']} | {m['schema_valid']}/{m['cases']} | {m['accuracy']:.2%} |")
+    if ablation and confirmation:
+        lines += ['', '## Image-content dependence diagnostic','', 'The blank-image condition removes the visible targets. Its score is agreement with the original boxes, not grounding accuracy on a valid visible-target task.','',
+            '| Model | Clean-image successes | Blank-image reference agreements |','|---|---:|---:|']
+        for key in ('base','adapted'):
+            a=confirmation[key]['metrics']['screenspot_v2'];b=ablation[key+'_blank']['metrics']['screenspot_v2']
+            lines.append(f"| {key} | {a['correct']}/{a['cases']} | {b['correct']}/{b['cases']} |")
+        lines.append('\nThis tests image reliance, not absent-target detection or calibrated abstention.')
     (REPORT/'RESULTS.md').write_text('\n'.join(lines)+'\n')
     plt.rcParams.update({'font.family':'DejaVu Sans','font.size':11,'figure.facecolor':'#f7f7ef','axes.facecolor':'#f7f7ef','savefig.facecolor':'#f7f7ef'})
     figures=[]
@@ -82,19 +120,20 @@ def main():
     fig,ax=plt.subplots(figsize=(10,4.8));keys=list(loaded);x=np.arange(len(keys));correct=[];valid=[]
     for k in keys:
         m=loaded[k]['metrics']['screenspot_pro'];correct.append(m['accuracy']*100);valid.append(m['schema_valid']/m['cases']*100)
-    ax.bar(x,valid,color='#d6ddd7',label='Valid coordinate JSON');ax.bar(x,correct,color=['#718b7a','#b17b47','#365748','#397396'][:len(keys)],label='Point inside target')
+    ax.bar(x,valid,color='#d6ddd7',label='Valid coordinate JSON');ax.bar(x,correct,color=['#718b7a','#b17b47','#365748','#397396','#976048'][:len(keys)],label='Point inside target')
     for i,v in enumerate(correct):ax.text(i,v+2,f'{v:.1f}%',ha='center')
-    ax.set(ylim=(0,115),xticks=x,xticklabels=[names[k] for k in keys],ylabel='Percent of the same 117 screenshots')
-    ax.set_title('A valid coordinate is only the first step',fontsize=17);ax.spines[['top','right']].set_visible(False);ax.legend(frameon=False,loc='upper left')
+    ax.set(ylim=(0,115),xticks=x,xticklabels=[names[k].replace(', ','\n') for k in keys],ylabel='Percent of the same 117 screenshots')
+    ax.set_title('Precise GUI grounding · 117 matched screenshots',fontsize=17);ax.spines[['top','right']].set_visible(False);ax.legend(frameon=False,loc='upper left')
     fig.text(.1,-.03,'Original target boxes, unrestricted normalized x/y outputs. Formatting failures stay in the denominator.\nPreviously exposed development screenshots; no official full-benchmark or frontier-parity claim.',fontsize=9);fig.tight_layout();save(fig,'v4-valid-grounding')
     if confirmation:
         fig,ax=plt.subplots(figsize=(10,4.7));ds=list(result['confirmation_paired_differences']);x=np.arange(len(ds));width=.34
         for shift,key,color in [(-width/2,'base','#85998b'),(width/2,'adapted','#365748')]:
             values=[confirmation[key]['metrics'][k]['accuracy']*100 for k in ds];ax.bar(x+shift,values,width,label=key,color=color)
             for pos,val in zip(x+shift,values):ax.text(pos,val+2,f'{val:.1f}',ha='center',fontsize=10)
-        ax.set(ylim=(0,110),xticks=x,xticklabels=ds,ylabel='Accuracy (%)');ax.spines[['top','right']].set_visible(False);ax.legend(frameon=False)
+        labels={'screenspot_v2':'ScreenSpot-v2','omniact':'OmniAct','chartqa':'ChartQA','boolq':'BoolQ'}
+        ax.set(ylim=(0,110),xticks=x,xticklabels=[labels[d] for d in ds],ylabel='Accuracy (%)');ax.spines[['top','right']].set_visible(False);ax.legend(frameon=False)
         ax.set_title('Broader training: frozen-checkpoint confirmation',fontsize=17)
-        fig.text(.1,-.015,'Same untouched confirmation cases for base and adapter; point-in-box, chart relaxed accuracy, and binary decisions.\nPaired group intervals and corpus limitations are reported in the results table.',fontsize=9);fig.tight_layout();save(fig,'v4-grounding-confirmation')
+        fig.text(.1,-.085,'Same untouched confirmation cases for base and adapter; point-in-box, chart relaxed accuracy, and binary decisions.\nPaired group intervals and corpus limitations are reported in the results table.',fontsize=9);fig.tight_layout();save(fig,'v4-grounding-confirmation')
     (REPORT/'figures.json').write_text(json.dumps({'figures':figures,'summary_sha256':digest(REPORT/'summary.json')},indent=2)+'\n')
     print(json.dumps({'variants':list(loaded),'confirmation':confirmation is not None}))
 

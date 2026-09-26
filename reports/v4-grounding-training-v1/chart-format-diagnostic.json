@@ -1,0 +1,397 @@
+{
+  "status": "diagnostic_only",
+  "post_hoc": true,
+  "primary_scores_unchanged": true,
+  "method": "Strip a leading currency symbol, grouping commas and a simple trailing unit phrase/percent sign from a single numeric answer; do not rescale the number.",
+  "limitations": "Not the official ChartQA metric. Units and scales can change meaning; this heuristic is only a sensitivity check and cannot establish semantic correctness or a model ranking.",
+  "metric_reference": "https://github.com/google-research/pix2struct/blob/main/pix2struct/metrics.py",
+  "runs": {
+    "minicpm-base": {
+      "cases": 128,
+      "strict_correct": 108,
+      "diagnostic_correct": 109,
+      "changed_cases": [
+        {
+          "id": "chartqa:development:20",
+          "raw_prediction": "68%",
+          "numeric_display": "68",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        }
+      ],
+      "predictions_sha256": "7b1b7c136b686165e66009aa836ea2fa547c4403e71015dc483b833070966df5"
+    },
+    "qwen-base": {
+      "cases": 128,
+      "strict_correct": 97,
+      "diagnostic_correct": 97,
+      "changed_cases": [],
+      "predictions_sha256": "cc8667b274a745cb23da1d3a9b469cc57a4ca9462f9c2196c877d35915fe9bab"
+    },
+    "openai-sol-none": {
+      "cases": 128,
+      "strict_correct": 50,
+      "diagnostic_correct": 99,
+      "changed_cases": [
+        {
+          "id": "chartqa:development:300",
+          "raw_prediction": "16%",
+          "numeric_display": "16",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1662",
+          "raw_prediction": "35.5%",
+          "numeric_display": "35.5",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:903",
+          "raw_prediction": "12.3 percentage points",
+          "numeric_display": "12.3",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1049",
+          "raw_prediction": "$17,626.6 million",
+          "numeric_display": "17626.6",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1685",
+          "raw_prediction": "42 million reals",
+          "numeric_display": "42",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1233",
+          "raw_prediction": "6.49%",
+          "numeric_display": "6.49",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1097",
+          "raw_prediction": "285.7 million",
+          "numeric_display": "285.7",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1292",
+          "raw_prediction": "23,481",
+          "numeric_display": "23481",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1418",
+          "raw_prediction": "187.3 million euros",
+          "numeric_display": "187.3",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1251",
+          "raw_prediction": "$2,127.25 billion",
+          "numeric_display": "2127.25",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1104",
+          "raw_prediction": "35.6 million square feet",
+          "numeric_display": "35.6",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1068",
+          "raw_prediction": "\u20ac1.7 billion",
+          "numeric_display": "1.7",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1051",
+          "raw_prediction": "48.2%",
+          "numeric_display": "48.2",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:83",
+          "raw_prediction": "32 times",
+          "numeric_display": "32",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1753",
+          "raw_prediction": "$14.49 billion",
+          "numeric_display": "14.49",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:737",
+          "raw_prediction": "99.5%",
+          "numeric_display": "99.5",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1031",
+          "raw_prediction": "45.2%",
+          "numeric_display": "45.2",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:691",
+          "raw_prediction": "24.6%",
+          "numeric_display": "24.6",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1150",
+          "raw_prediction": "47,900",
+          "numeric_display": "47900",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1015",
+          "raw_prediction": "24.07 million",
+          "numeric_display": "24.07",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:7",
+          "raw_prediction": "40%",
+          "numeric_display": "40",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:833",
+          "raw_prediction": "17 percentage points",
+          "numeric_display": "17",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1723",
+          "raw_prediction": "5.3%",
+          "numeric_display": "5.3",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:933",
+          "raw_prediction": "41.75%",
+          "numeric_display": "41.75",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1549",
+          "raw_prediction": "3.3%",
+          "numeric_display": "3.3",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:671",
+          "raw_prediction": "36 percentage points",
+          "numeric_display": "36",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1133",
+          "raw_prediction": "41,000",
+          "numeric_display": "41000",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:802",
+          "raw_prediction": "67%",
+          "numeric_display": "67",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1570",
+          "raw_prediction": "74.44%",
+          "numeric_display": "74.44",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1668",
+          "raw_prediction": "4.44%",
+          "numeric_display": "4.44",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1489",
+          "raw_prediction": "89.1 residents per square mile",
+          "numeric_display": "89.1",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:20",
+          "raw_prediction": "68%",
+          "numeric_display": "68",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:661",
+          "raw_prediction": "31%",
+          "numeric_display": "31",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1566",
+          "raw_prediction": "24.3%",
+          "numeric_display": "24.3",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:45",
+          "raw_prediction": "2.77%",
+          "numeric_display": "2.77",
+          "primary_correct": true,
+          "diagnostic_correct": false
+        },
+        {
+          "id": "chartqa:development:1857",
+          "raw_prediction": "25%",
+          "numeric_display": "25",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1374",
+          "raw_prediction": "36.2%",
+          "numeric_display": "36.2",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:683",
+          "raw_prediction": "11%",
+          "numeric_display": "11",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1030",
+          "raw_prediction": "51.1%",
+          "numeric_display": "51.1",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1253",
+          "raw_prediction": "83%",
+          "numeric_display": "83",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:274",
+          "raw_prediction": "37%",
+          "numeric_display": "37",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:780",
+          "raw_prediction": "$990",
+          "numeric_display": "990",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1191",
+          "raw_prediction": "1,871.6 million euros",
+          "numeric_display": "1871.6",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1028",
+          "raw_prediction": "19.8%",
+          "numeric_display": "19.8",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1793",
+          "raw_prediction": "$95 million",
+          "numeric_display": "95",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:363",
+          "raw_prediction": "3.1 times",
+          "numeric_display": "3.1",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1405",
+          "raw_prediction": "$106 million",
+          "numeric_display": "106",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1543",
+          "raw_prediction": "47,449 thousand square feet",
+          "numeric_display": "47449",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1610",
+          "raw_prediction": "\u20ac700 billion",
+          "numeric_display": "700",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:883",
+          "raw_prediction": "28,728",
+          "numeric_display": "28728",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        },
+        {
+          "id": "chartqa:development:1705",
+          "raw_prediction": "9.29 million",
+          "numeric_display": "9.29",
+          "primary_correct": false,
+          "diagnostic_correct": true
+        }
+      ],
+      "predictions_sha256": "2b22a26c1b826f8b930907b3783edd48e5a65ebbca16645935068b87ac3964c8"
+    }
+  }
+}

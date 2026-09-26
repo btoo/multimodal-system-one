@@ -1,0 +1,29 @@
+{
+  "cases": 64,
+  "metrics": {
+    "joint_control": {
+      "cases": 64,
+      "correct": 54,
+      "accuracy": 0.84375,
+      "group_bootstrap_95": [
+        0.7333333333333333,
+        0.9393939393939394
+      ],
+      "groups": 48,
+      "errors": 0,
+      "schema_valid": 64,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 100.618972999996,
+        "p95": 108.64572390000686
+      },
+      "strata": {
+        "joint_control": {
+          "cases": 64,
+          "accuracy": 0.84375
+        }
+      }
+    }
+  },
+  "predictions_sha256": "c44179e0c22969beb36a17b6823ffd64c7ea43fb1e58bf557d42fdc33044e4fc"
+}

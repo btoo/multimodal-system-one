@@ -1,0 +1,369 @@
+{
+  "key": "minicpmo45",
+  "phase": "confirmation",
+  "model": {
+    "id": "openbmb/MiniCPM-o-4_5",
+    "revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+    "gated": false,
+    "weight_bytes": 18743737228,
+    "total_parameters": 9371787666,
+    "license": "apache-2.0",
+    "license_name": null,
+    "license_link": null,
+    "key": "minicpmo45",
+    "eligible_for_product": true,
+    "status": "candidate",
+    "source_url": "https://huggingface.co/openbmb/MiniCPM-o-4_5/tree/503e754207c94da6bb26850b4469f367c9ea3582",
+    "source_hashes": {
+      "tokenization_minicpmo_fast.py": "c9c71d0d7ef0c113829e2d810619c9e0a69cffe04c732c4d80599b40a33bc7bf",
+      "config.json": "b0c03cf9f0cfc1178ade50e4ba62727ca7a77aa6a6a71eda6668d8f289e96c1d",
+      "processing_minicpmo.py": "3a1f017339b92c2fa768d7737db76cc4689d2280b68a71866b06f7dedc8ac1c2",
+      "modeling_navit_siglip.py": "1a40a58cb7dfa93f723685f860d1cf3caf3a0ecf52b7904db0c4007aacd1536f",
+      "README.md": "4afc013f5f1e4471bdbee28515eb5be802ea2c80c8d89d4107c4d4aec439577a",
+      "configuration_minicpmo.py": "b0c56c192d4aa57d3dc358338a4a93413b8b68e7c7a7c5b82a5af35afab1d86a",
+      "utils.py": "0372698343830d4a96524f56a91a8cabf628fd7c57dde8b25db43eed1f6042c1",
+      "modeling_minicpmo.py": "25359f891d1aa81de16b51a24a97b8c8262b83ce3920c36b92be441fde8e4282"
+    }
+  },
+  "load_seconds": 11.948749753,
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "manifest_sha256": "cf835e8859a6abf86ff0c2bf16a5d0115fe04d79c8b4b2020d6de0046b30af32",
+  "protocol_sha256": "30269d3e49a576e0bda322d9b4e86743359333b5d033ce406434aee614d386a7",
+  "base": {
+    "cases": 448,
+    "metrics": {
+      "boolq": {
+        "cases": 128,
+        "correct": 117,
+        "accuracy": 0.9140625,
+        "group_bootstrap_95": [
+          0.8671875,
+          0.9609375
+        ],
+        "groups": 128,
+        "errors": 0,
+        "schema_valid": 128,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 26.022226000002036,
+          "p95": 33.03891190000029
+        },
+        "strata": {
+          "False": {
+            "cases": 48,
+            "accuracy": 0.9166666666666666
+          },
+          "True": {
+            "cases": 80,
+            "accuracy": 0.9125
+          }
+        }
+      },
+      "screenspot_v2": {
+        "cases": 96,
+        "correct": 27,
+        "accuracy": 0.28125,
+        "group_bootstrap_95": [
+          0.1875,
+          0.375
+        ],
+        "groups": 96,
+        "errors": 0,
+        "schema_valid": 63,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 643.2823484999943,
+          "p95": 801.6655692500017
+        },
+        "strata": {
+          "desktop:icon": {
+            "cases": 24,
+            "accuracy": 0.16666666666666666
+          },
+          "desktop:text": {
+            "cases": 24,
+            "accuracy": 0.5
+          },
+          "web:icon": {
+            "cases": 24,
+            "accuracy": 0.25
+          },
+          "web:text": {
+            "cases": 24,
+            "accuracy": 0.20833333333333334
+          }
+        }
+      },
+      "chartqa": {
+        "cases": 128,
+        "correct": 110,
+        "accuracy": 0.859375,
+        "group_bootstrap_95": [
+          0.7890625,
+          0.9140625
+        ],
+        "groups": 128,
+        "errors": 0,
+        "schema_valid": 128,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 176.1786785000048,
+          "p95": 255.99676974999093
+        },
+        "strata": {
+          "0": {
+            "cases": 70,
+            "accuracy": 0.8
+          },
+          "1": {
+            "cases": 58,
+            "accuracy": 0.9310344827586207
+          }
+        }
+      },
+      "omniact": {
+        "cases": 96,
+        "correct": 6,
+        "accuracy": 0.0625,
+        "group_bootstrap_95": [
+          0.020833333333333332,
+          0.10416666666666667
+        ],
+        "groups": 6,
+        "errors": 0,
+        "schema_valid": 63,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 563.1356965000123,
+          "p95": 710.5242047499889
+        },
+        "strata": {
+          "desktop/linux_todo": {
+            "cases": 16,
+            "accuracy": 0.0625
+          },
+          "web/best_buy": {
+            "cases": 16,
+            "accuracy": 0.0
+          },
+          "web/coursera": {
+            "cases": 16,
+            "accuracy": 0.125
+          },
+          "web/google_careers": {
+            "cases": 16,
+            "accuracy": 0.0625
+          },
+          "web/samsung": {
+            "cases": 16,
+            "accuracy": 0.125
+          },
+          "web/trip_advisor": {
+            "cases": 16,
+            "accuracy": 0.0
+          }
+        }
+      }
+    },
+    "predictions_sha256": "a3ace3c5b0806195185425eb459c04554ec563a9bb6df1ae61d57f1a12fe1e42"
+  },
+  "base_joint_regression": {
+    "cases": 64,
+    "metrics": {
+      "joint_control": {
+        "cases": 64,
+        "correct": 54,
+        "accuracy": 0.84375,
+        "group_bootstrap_95": [
+          0.7333333333333333,
+          0.9393939393939394
+        ],
+        "groups": 48,
+        "errors": 0,
+        "schema_valid": 64,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 100.618972999996,
+          "p95": 108.64572390000686
+        },
+        "strata": {
+          "joint_control": {
+            "cases": 64,
+            "accuracy": 0.84375
+          }
+        }
+      }
+    },
+    "predictions_sha256": "c44179e0c22969beb36a17b6823ffd64c7ea43fb1e58bf557d42fdc33044e4fc"
+  },
+  "adapted": {
+    "cases": 448,
+    "metrics": {
+      "boolq": {
+        "cases": 128,
+        "correct": 119,
+        "accuracy": 0.9296875,
+        "group_bootstrap_95": [
+          0.8828125,
+          0.96875
+        ],
+        "groups": 128,
+        "errors": 0,
+        "schema_valid": 128,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 21.87583700001028,
+          "p95": 26.379862600013823
+        },
+        "strata": {
+          "False": {
+            "cases": 48,
+            "accuracy": 0.9166666666666666
+          },
+          "True": {
+            "cases": 80,
+            "accuracy": 0.9375
+          }
+        }
+      },
+      "screenspot_v2": {
+        "cases": 96,
+        "correct": 69,
+        "accuracy": 0.71875,
+        "group_bootstrap_95": [
+          0.625,
+          0.8020833333333334
+        ],
+        "groups": 96,
+        "errors": 0,
+        "schema_valid": 96,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 733.2290070000056,
+          "p95": 800.4418922500136
+        },
+        "strata": {
+          "desktop:icon": {
+            "cases": 24,
+            "accuracy": 0.5
+          },
+          "desktop:text": {
+            "cases": 24,
+            "accuracy": 1.0
+          },
+          "web:icon": {
+            "cases": 24,
+            "accuracy": 0.7083333333333334
+          },
+          "web:text": {
+            "cases": 24,
+            "accuracy": 0.6666666666666666
+          }
+        }
+      },
+      "chartqa": {
+        "cases": 128,
+        "correct": 111,
+        "accuracy": 0.8671875,
+        "group_bootstrap_95": [
+          0.8046875,
+          0.921875
+        ],
+        "groups": 128,
+        "errors": 0,
+        "schema_valid": 128,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 173.4623134999964,
+          "p95": 234.26357624999235
+        },
+        "strata": {
+          "0": {
+            "cases": 70,
+            "accuracy": 0.8
+          },
+          "1": {
+            "cases": 58,
+            "accuracy": 0.9482758620689655
+          }
+        }
+      },
+      "omniact": {
+        "cases": 96,
+        "correct": 64,
+        "accuracy": 0.6666666666666666,
+        "group_bootstrap_95": [
+          0.5104166666666666,
+          0.8125
+        ],
+        "groups": 6,
+        "errors": 0,
+        "schema_valid": 96,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 682.1763334999957,
+          "p95": 749.0535827499798
+        },
+        "strata": {
+          "desktop/linux_todo": {
+            "cases": 16,
+            "accuracy": 0.8125
+          },
+          "web/best_buy": {
+            "cases": 16,
+            "accuracy": 0.625
+          },
+          "web/coursera": {
+            "cases": 16,
+            "accuracy": 0.75
+          },
+          "web/google_careers": {
+            "cases": 16,
+            "accuracy": 0.5
+          },
+          "web/samsung": {
+            "cases": 16,
+            "accuracy": 0.375
+          },
+          "web/trip_advisor": {
+            "cases": 16,
+            "accuracy": 0.9375
+          }
+        }
+      }
+    },
+    "predictions_sha256": "cc74d2965db2bc53d14e1cd6f45a4ebe0cbde85f0871aa29ad14803cda0a1a73"
+  },
+  "adapted_joint_regression": {
+    "cases": 64,
+    "metrics": {
+      "joint_control": {
+        "cases": 64,
+        "correct": 60,
+        "accuracy": 0.9375,
+        "group_bootstrap_95": [
+          0.8823529411764706,
+          0.9841269841269841
+        ],
+        "groups": 48,
+        "errors": 0,
+        "schema_valid": 64,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 99.94031499999778,
+          "p95": 105.06662930000914
+        },
+        "strata": {
+          "joint_control": {
+            "cases": 64,
+            "accuracy": 0.9375
+          }
+        }
+      }
+    },
+    "predictions_sha256": "50b4a948fabed64f41449376dbad8d42fad167539ed114ebde337cd7fb86b1b1"
+  },
+  "status": "completed",
+  "function_seconds": 329.52700474200003,
+  "peak_allocated_bytes": 20090354176
+}

@@ -1,0 +1,374 @@
+{
+  "key": "minicpmo45",
+  "phase": "baseline",
+  "model": {
+    "id": "openbmb/MiniCPM-o-4_5",
+    "revision": "503e754207c94da6bb26850b4469f367c9ea3582",
+    "gated": false,
+    "weight_bytes": 18743737228,
+    "total_parameters": 9371787666,
+    "license": "apache-2.0",
+    "license_name": null,
+    "license_link": null,
+    "key": "minicpmo45",
+    "eligible_for_product": true,
+    "status": "candidate",
+    "source_url": "https://huggingface.co/openbmb/MiniCPM-o-4_5/tree/503e754207c94da6bb26850b4469f367c9ea3582",
+    "source_hashes": {
+      "tokenization_minicpmo_fast.py": "c9c71d0d7ef0c113829e2d810619c9e0a69cffe04c732c4d80599b40a33bc7bf",
+      "config.json": "b0c03cf9f0cfc1178ade50e4ba62727ca7a77aa6a6a71eda6668d8f289e96c1d",
+      "processing_minicpmo.py": "3a1f017339b92c2fa768d7737db76cc4689d2280b68a71866b06f7dedc8ac1c2",
+      "modeling_navit_siglip.py": "1a40a58cb7dfa93f723685f860d1cf3caf3a0ecf52b7904db0c4007aacd1536f",
+      "README.md": "4afc013f5f1e4471bdbee28515eb5be802ea2c80c8d89d4107c4d4aec439577a",
+      "configuration_minicpmo.py": "b0c56c192d4aa57d3dc358338a4a93413b8b68e7c7a7c5b82a5af35afab1d86a",
+      "utils.py": "0372698343830d4a96524f56a91a8cabf628fd7c57dde8b25db43eed1f6042c1",
+      "modeling_minicpmo.py": "25359f891d1aa81de16b51a24a97b8c8262b83ce3920c36b92be441fde8e4282"
+    }
+  },
+  "load_seconds": 21.152209057,
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "manifest_sha256": "cf835e8859a6abf86ff0c2bf16a5d0115fe04d79c8b4b2020d6de0046b30af32",
+  "protocol_sha256": "30269d3e49a576e0bda322d9b4e86743359333b5d033ce406434aee614d386a7",
+  "evaluation": {
+    "cases": 829,
+    "metrics": {
+      "boolq": {
+        "cases": 128,
+        "correct": 117,
+        "accuracy": 0.9140625,
+        "group_bootstrap_95": [
+          0.859375,
+          0.9609375
+        ],
+        "groups": 128,
+        "errors": 0,
+        "schema_valid": 128,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 30.570384000000672,
+          "p95": 37.92795750000621
+        },
+        "strata": {
+          "False": {
+            "cases": 46,
+            "accuracy": 0.8913043478260869
+          },
+          "True": {
+            "cases": 82,
+            "accuracy": 0.926829268292683
+          }
+        }
+      },
+      "omniact": {
+        "cases": 96,
+        "correct": 11,
+        "accuracy": 0.11458333333333333,
+        "group_bootstrap_95": [
+          0.030919945297706714,
+          0.21052631578947367
+        ],
+        "groups": 7,
+        "errors": 0,
+        "schema_valid": 68,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 804.5324649999941,
+          "p95": 1212.0939375000078
+        },
+        "strata": {
+          "desktop/audible": {
+            "cases": 13,
+            "accuracy": 0.3076923076923077
+          },
+          "desktop/message": {
+            "cases": 14,
+            "accuracy": 0.07142857142857142
+          },
+          "desktop/photos": {
+            "cases": 14,
+            "accuracy": 0.0
+          },
+          "desktop/text_editor": {
+            "cases": 14,
+            "accuracy": 0.0
+          },
+          "web/cmu": {
+            "cases": 14,
+            "accuracy": 0.21428571428571427
+          },
+          "web/flight_aware": {
+            "cases": 14,
+            "accuracy": 0.0
+          },
+          "web/instacart": {
+            "cases": 13,
+            "accuracy": 0.23076923076923078
+          }
+        }
+      },
+      "mmlu_pro": {
+        "cases": 112,
+        "correct": 54,
+        "accuracy": 0.48214285714285715,
+        "group_bootstrap_95": [
+          0.39285714285714285,
+          0.5714285714285714
+        ],
+        "groups": 112,
+        "errors": 0,
+        "schema_valid": 112,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 33.304528000002165,
+          "p95": 40.457088949994706
+        },
+        "strata": {
+          "biology": {
+            "cases": 8,
+            "accuracy": 0.625
+          },
+          "business": {
+            "cases": 8,
+            "accuracy": 0.25
+          },
+          "chemistry": {
+            "cases": 8,
+            "accuracy": 0.375
+          },
+          "computer science": {
+            "cases": 8,
+            "accuracy": 0.625
+          },
+          "economics": {
+            "cases": 8,
+            "accuracy": 0.625
+          },
+          "engineering": {
+            "cases": 8,
+            "accuracy": 0.375
+          },
+          "health": {
+            "cases": 8,
+            "accuracy": 0.5
+          },
+          "history": {
+            "cases": 8,
+            "accuracy": 0.625
+          },
+          "law": {
+            "cases": 8,
+            "accuracy": 0.25
+          },
+          "math": {
+            "cases": 8,
+            "accuracy": 0.125
+          },
+          "other": {
+            "cases": 8,
+            "accuracy": 0.5
+          },
+          "philosophy": {
+            "cases": 8,
+            "accuracy": 0.625
+          },
+          "physics": {
+            "cases": 8,
+            "accuracy": 0.5
+          },
+          "psychology": {
+            "cases": 8,
+            "accuracy": 0.75
+          }
+        }
+      },
+      "mmau": {
+        "cases": 128,
+        "correct": 94,
+        "accuracy": 0.734375,
+        "group_bootstrap_95": [
+          0.6535433070866141,
+          0.8110236220472441
+        ],
+        "groups": 127,
+        "errors": 0,
+        "schema_valid": 128,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 62.98596450001526,
+          "p95": 165.94249200001198
+        },
+        "strata": {
+          "music": {
+            "cases": 43,
+            "accuracy": 0.7674418604651163
+          },
+          "sound": {
+            "cases": 43,
+            "accuracy": 0.7674418604651163
+          },
+          "speech": {
+            "cases": 42,
+            "accuracy": 0.6666666666666666
+          }
+        }
+      },
+      "mmstar": {
+        "cases": 120,
+        "correct": 71,
+        "accuracy": 0.5916666666666667,
+        "group_bootstrap_95": [
+          0.5083333333333333,
+          0.6833333333333333
+        ],
+        "groups": 120,
+        "errors": 0,
+        "schema_valid": 120,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 57.52885649999939,
+          "p95": 144.57909044999366
+        },
+        "strata": {
+          "coarse perception": {
+            "cases": 20,
+            "accuracy": 0.75
+          },
+          "fine-grained perception": {
+            "cases": 20,
+            "accuracy": 0.55
+          },
+          "instance reasoning": {
+            "cases": 20,
+            "accuracy": 0.7
+          },
+          "logical reasoning": {
+            "cases": 20,
+            "accuracy": 0.5
+          },
+          "math": {
+            "cases": 20,
+            "accuracy": 0.5
+          },
+          "science & technology": {
+            "cases": 20,
+            "accuracy": 0.55
+          }
+        }
+      },
+      "screenspot_pro": {
+        "cases": 117,
+        "correct": 4,
+        "accuracy": 0.03418803418803419,
+        "group_bootstrap_95": [
+          0.008547008547008548,
+          0.06837606837606838
+        ],
+        "groups": 117,
+        "errors": 0,
+        "schema_valid": 107,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 1012.3340110000072,
+          "p95": 1507.8099327999946
+        },
+        "strata": {
+          "android_studio_macos:icon": {
+            "cases": 8,
+            "accuracy": 0.0
+          },
+          "android_studio_macos:text": {
+            "cases": 8,
+            "accuracy": 0.0
+          },
+          "blender_windows:icon": {
+            "cases": 5,
+            "accuracy": 0.0
+          },
+          "blender_windows:text": {
+            "cases": 8,
+            "accuracy": 0.0
+          },
+          "excel_macos:icon": {
+            "cases": 4,
+            "accuracy": 0.0
+          },
+          "excel_macos:text": {
+            "cases": 8,
+            "accuracy": 0.0
+          },
+          "macos_common_macos:icon": {
+            "cases": 8,
+            "accuracy": 0.0
+          },
+          "macos_common_macos:text": {
+            "cases": 8,
+            "accuracy": 0.0
+          },
+          "powerpoint_windows:icon": {
+            "cases": 8,
+            "accuracy": 0.25
+          },
+          "powerpoint_windows:text": {
+            "cases": 8,
+            "accuracy": 0.0
+          },
+          "pycharm_macos:icon": {
+            "cases": 8,
+            "accuracy": 0.0
+          },
+          "pycharm_macos:text": {
+            "cases": 8,
+            "accuracy": 0.125
+          },
+          "vscode_macos:icon": {
+            "cases": 8,
+            "accuracy": 0.0
+          },
+          "vscode_macos:text": {
+            "cases": 8,
+            "accuracy": 0.0
+          },
+          "word_macos:icon": {
+            "cases": 4,
+            "accuracy": 0.0
+          },
+          "word_macos:text": {
+            "cases": 8,
+            "accuracy": 0.125
+          }
+        }
+      },
+      "chartqa": {
+        "cases": 128,
+        "correct": 108,
+        "accuracy": 0.84375,
+        "group_bootstrap_95": [
+          0.78125,
+          0.90625
+        ],
+        "groups": 128,
+        "errors": 0,
+        "schema_valid": 128,
+        "output_limit_hits": 0,
+        "latency_ms": {
+          "median": 217.5933120000053,
+          "p95": 280.5240037000004
+        },
+        "strata": {
+          "0": {
+            "cases": 59,
+            "accuracy": 0.7288135593220338
+          },
+          "1": {
+            "cases": 69,
+            "accuracy": 0.9420289855072463
+          }
+        }
+      }
+    },
+    "predictions_sha256": "7b1b7c136b686165e66009aa836ea2fa547c4403e71015dc483b833070966df5"
+  },
+  "status": "completed",
+  "function_seconds": 284.850648572,
+  "peak_allocated_bytes": 20061748736
+}

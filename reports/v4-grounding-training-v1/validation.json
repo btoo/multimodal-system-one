@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "training_updates": 1024,
+  "training_cases_seen": 1024,
+  "trainable_adapter_parameters": 3833856,
+  "confirmation_cases": 448,
+  "verified_self_hosted_predictions": 4108,
+  "joint_regression_cases": 64,
+  "verified_openai_reference_predictions": 373,
+  "cumulative_openai_cost_upper_usd": 1.3307045,
+  "all_study_apps_stopped": true,
+  "checkpoint_tensor_in_git": false,
+  "original_scores_preserved": true
+}

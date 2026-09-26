@@ -1,5 +1,7 @@
 # MiSO v4: broader evaluation and complete-request optimization
 
+Follow-up: the [September 26 grounding/training study](../v4-grounding-training-v1/README.md) now measures real coordinate outputs and a broader mixed-task adapter. This report preserves the earlier audit.
+
 September 25, 2026. **This iteration improves reuse speed and exposes substantial capability gaps. It does not establish frontier parity or release a new playground model.** The earlier 82.35% five-track confirmation score measured a much narrower task distribution.
 
 **Correction to the click result:** the earlier 0/117 grid-center statistic cannot measure the model's vision or grounding ability. **None of the nine allowed points lies inside any of the 117 target boxes. Even an oracle would score zero.** The [action-space audit](grounding-action-space-audit.json) records this defect. Coarse region classification remains a valid separate result; precise GUI grounding has not yet been validly evaluated. Original run files are preserved.

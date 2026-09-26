@@ -1,0 +1,170 @@
+{
+  "captured_at_utc": "2026-09-26T04:27:07.334814+00:00",
+  "app_states": [
+    {
+      "app_id": "ap-71wV81jQq5QHDhPId3xjfT",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790389928.037111,
+      "stopped_at": 1790390234.124038
+    },
+    {
+      "app_id": "ap-9l81KR3UGeVcDcbcwNL0JF",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790393345.291365,
+      "stopped_at": 1790393631.405586
+    },
+    {
+      "app_id": "ap-I070WDQqJR2gv3E2MYLVnp",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790389806.864264,
+      "stopped_at": 1790389927.506829
+    },
+    {
+      "app_id": "ap-KQMi6z4dQYX6lFvMbr0ais",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790395027.650746,
+      "stopped_at": 1790395955.700749
+    },
+    {
+      "app_id": "ap-VZF9dPpAuNelh61UBzwkxb",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790393804.330136,
+      "stopped_at": 1790394158.333546
+    },
+    {
+      "app_id": "ap-dnC7JmFkkCuavk1D11GQMH",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790392651.695468,
+      "stopped_at": 1790393110.082774
+    },
+    {
+      "app_id": "ap-lLsJMRtjuKj2CDEdJvHyi2",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790391781.289059,
+      "stopped_at": 1790392318.078888
+    },
+    {
+      "app_id": "ap-y4qsgkB1hcro3H9Q91bRlw",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790396336.012439,
+      "stopped_at": 1790396480.913779
+    },
+    {
+      "app_id": "ap-yQ9KlQpdGaCWRJdWVsPgxu",
+      "app_state": "APP_STATE_STOPPED",
+      "created_at": 1790390290.034564,
+      "stopped_at": 1790391563.267391
+    }
+  ],
+  "active_containers": [],
+  "all_apps_stopped": true,
+  "modal_metered_usd": "4.24725304",
+  "billing_rows": [
+    {
+      "object_id": "ap-71wV81jQq5QHDhPId3xjfT",
+      "description": "miso-v4-grounding-training",
+      "environment_name": "main",
+      "interval": "2026-09-26T02:00:00Z",
+      "cost": "0.37985736",
+      "cost_by_resource": {
+        "H100": "0.32259128",
+        "Memory": "0.04181436",
+        "CPU": "0.01545171"
+      }
+    },
+    {
+      "object_id": "ap-9l81KR3UGeVcDcbcwNL0JF",
+      "description": "miso-v4-grounding-training",
+      "environment_name": "main",
+      "interval": "2026-09-26T03:00:00Z",
+      "cost": "0.35039155",
+      "cost_by_resource": {
+        "H100": "0.29756765",
+        "Memory": "0.03857079",
+        "CPU": "0.01425311"
+      }
+    },
+    {
+      "object_id": "ap-I070WDQqJR2gv3E2MYLVnp",
+      "description": "miso-v4-grounding-training",
+      "environment_name": "main",
+      "interval": "2026-09-26T02:00:00Z",
+      "cost": "0.00258344",
+      "cost_by_resource": {
+        "H100": "0.00219397",
+        "Memory": "0.00028438",
+        "CPU": "0.00010509"
+      }
+    },
+    {
+      "object_id": "ap-KQMi6z4dQYX6lFvMbr0ais",
+      "description": "miso-v4-grounding-training",
+      "environment_name": "main",
+      "interval": "2026-09-26T03:00:00Z",
+      "cost": "0.21188816",
+      "cost_by_resource": {
+        "H100": "0.17994458",
+        "Memory": "0.02332446",
+        "CPU": "0.00861912"
+      }
+    },
+    {
+      "object_id": "ap-VZF9dPpAuNelh61UBzwkxb",
+      "description": "miso-v4-grounding-training",
+      "environment_name": "main",
+      "interval": "2026-09-26T03:00:00Z",
+      "cost": "0.43152863",
+      "cost_by_resource": {
+        "H100": "0.36647276",
+        "Memory": "0.04750229",
+        "CPU": "0.01755358"
+      }
+    },
+    {
+      "object_id": "ap-dnC7JmFkkCuavk1D11GQMH",
+      "description": "miso-v4-grounding-training",
+      "environment_name": "main",
+      "interval": "2026-09-26T03:00:00Z",
+      "cost": "0.57460303",
+      "cost_by_resource": {
+        "H100": "0.48797772",
+        "Memory": "0.06325180",
+        "CPU": "0.02337351"
+      }
+    },
+    {
+      "object_id": "ap-lLsJMRtjuKj2CDEdJvHyi2",
+      "description": "miso-v4-grounding-training",
+      "environment_name": "main",
+      "interval": "2026-09-26T03:00:00Z",
+      "cost": "0.67683823",
+      "cost_by_resource": {
+        "H100": "0.57480027",
+        "Memory": "0.07450576",
+        "CPU": "0.02753221"
+      }
+    },
+    {
+      "object_id": "ap-yQ9KlQpdGaCWRJdWVsPgxu",
+      "description": "miso-v4-grounding-training",
+      "environment_name": "main",
+      "interval": "2026-09-26T02:00:00Z",
+      "cost": "1.61956264",
+      "cost_by_resource": {
+        "H100": "1.37540257",
+        "Memory": "0.17828003",
+        "CPU": "0.06588004"
+      }
+    }
+  ],
+  "billing_may_lag": true,
+  "gpu_jobs_reserved": 9,
+  "gpu_reserved_upper_usd": 44.55606,
+  "gpu_reservation_ceiling_usd": 45,
+  "openai_new_cost_upper_usd": 0.790232,
+  "openai_usage_unknown_calls": 0,
+  "final_invoice_cash_charge": null,
+  "persistent_endpoint": false,
+  "persistent_storage": "Pinned publisher weights and experiment/adapter records remain on the existing Modal volume.",
+  "scope": "Only the app IDs from this study; includes failed startup. Training, evaluation and loading are research compute, not an inference-serving price."
+}

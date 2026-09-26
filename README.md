@@ -4,11 +4,32 @@
 
 [**Open the MiSO playground →**](https://miso-playground-nine.vercel.app) · Audio, image, and native text inputs, editable typed questions, probability views, and saved Workflow runs. Live calls require an owner session. [Deployment evidence](reports/playground-miso-only-v1/README.md).
 
-## MiSO v4 iteration: broader tests and complete-request speed
+## MiSO v4: broader training improves precise pointing
+
+**The backbone stayed about 9B parameters.** A 1,024-update mixed-task adapter improved actual point-in-target accuracy on untouched confirmation data:
+
+| Confirmation task | Unchanged base | Trained adapter |
+|---|---:|---:|
+| ScreenSpot-v2, 96 desktop/web targets | 28.1% | **71.9%** |
+| OmniAct, 96 withheld application/site cases | 6.3% | **66.7%** |
+| ChartQA, 128 questions | 85.9% | 86.7% |
+| BoolQ, 128 passage decisions | 91.4% | 93.0% |
+
+![Mixed-task confirmation results](docs/assets/v4-grounding-confirmation.svg)
+
+Training used 3.83M adapter parameters and 401 seconds on one H100. The paired image/audio regression rose from 54/64 to 60/64. Removing image content reduced the trained model's ScreenSpot-v2 reference agreement from **69/96 to 2/96**, supporting dependence on the screenshots.
+
+**The speed tradeoff remains:** median local coordinate-response latency rose from 643 to 733 ms on ScreenSpot-v2. This coordinate path still generates text. On the harder matched ScreenSpot-Pro diagnostic, the adapter achieves 25/117 versus GPT-6 Sol's 78/117; these results do not establish frontier parity.
+
+[**Training report, controls, costs and limitations →**](reports/v4-grounding-training-v1/README.md) · [Exact result tables](reports/v4-grounding-training-v1/RESULTS.md) · [Candidate metadata](artifacts/miso-v4-grounding-candidate.json)
+
+The playground still serves v3; the new checkpoint is a research candidate.
+
+## Earlier v4 iteration: broader tests and complete-request speed
 
 **The new audit adds 2,948 public benchmark cases and 117 unused screenshots. MiSO has not established frontier parity.** MMStar measures visual understanding, MMAU covers speech/sounds/music, and a stratified MMLU-Pro subset tests harder text decisions. Jev and OpenAI now run on matched cases; their results expose a large capability gap that the earlier small controls did not measure.
 
-**Grounding correction:** the earlier 0/117 click statistic used nine fixed points that cannot hit any of the target boxes. It cannot measure model quality. Precise coordinate grounding remains unmeasured; see the [feasibility audit](reports/v4-iteration-v2/grounding-action-space-audit.json).
+**Grounding correction:** the earlier 0/117 click statistic used nine fixed points that cannot hit any of the target boxes. It cannot measure model quality. The newer study above now measures valid coordinate outputs; see the original [feasibility audit](reports/v4-iteration-v2/grounding-action-space-audit.json).
 
 ![Broader matched-case benchmark results](docs/assets/v4-frontier-audit.svg)
 

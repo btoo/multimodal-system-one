@@ -1,0 +1,138 @@
+{
+  "cases": 448,
+  "metrics": {
+    "boolq": {
+      "cases": 128,
+      "correct": 117,
+      "accuracy": 0.9140625,
+      "group_bootstrap_95": [
+        0.8671875,
+        0.9609375
+      ],
+      "groups": 128,
+      "errors": 0,
+      "schema_valid": 128,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 26.022226000002036,
+        "p95": 33.03891190000029
+      },
+      "strata": {
+        "False": {
+          "cases": 48,
+          "accuracy": 0.9166666666666666
+        },
+        "True": {
+          "cases": 80,
+          "accuracy": 0.9125
+        }
+      }
+    },
+    "screenspot_v2": {
+      "cases": 96,
+      "correct": 27,
+      "accuracy": 0.28125,
+      "group_bootstrap_95": [
+        0.1875,
+        0.375
+      ],
+      "groups": 96,
+      "errors": 0,
+      "schema_valid": 63,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 643.2823484999943,
+        "p95": 801.6655692500017
+      },
+      "strata": {
+        "desktop:icon": {
+          "cases": 24,
+          "accuracy": 0.16666666666666666
+        },
+        "desktop:text": {
+          "cases": 24,
+          "accuracy": 0.5
+        },
+        "web:icon": {
+          "cases": 24,
+          "accuracy": 0.25
+        },
+        "web:text": {
+          "cases": 24,
+          "accuracy": 0.20833333333333334
+        }
+      }
+    },
+    "chartqa": {
+      "cases": 128,
+      "correct": 110,
+      "accuracy": 0.859375,
+      "group_bootstrap_95": [
+        0.7890625,
+        0.9140625
+      ],
+      "groups": 128,
+      "errors": 0,
+      "schema_valid": 128,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 176.1786785000048,
+        "p95": 255.99676974999093
+      },
+      "strata": {
+        "0": {
+          "cases": 70,
+          "accuracy": 0.8
+        },
+        "1": {
+          "cases": 58,
+          "accuracy": 0.9310344827586207
+        }
+      }
+    },
+    "omniact": {
+      "cases": 96,
+      "correct": 6,
+      "accuracy": 0.0625,
+      "group_bootstrap_95": [
+        0.020833333333333332,
+        0.10416666666666667
+      ],
+      "groups": 6,
+      "errors": 0,
+      "schema_valid": 63,
+      "output_limit_hits": 0,
+      "latency_ms": {
+        "median": 563.1356965000123,
+        "p95": 710.5242047499889
+      },
+      "strata": {
+        "desktop/linux_todo": {
+          "cases": 16,
+          "accuracy": 0.0625
+        },
+        "web/best_buy": {
+          "cases": 16,
+          "accuracy": 0.0
+        },
+        "web/coursera": {
+          "cases": 16,
+          "accuracy": 0.125
+        },
+        "web/google_careers": {
+          "cases": 16,
+          "accuracy": 0.0625
+        },
+        "web/samsung": {
+          "cases": 16,
+          "accuracy": 0.125
+        },
+        "web/trip_advisor": {
+          "cases": 16,
+          "accuracy": 0.0
+        }
+      }
+    }
+  },
+  "predictions_sha256": "a3ace3c5b0806195185425eb459c04554ec563a9bb6df1ae61d57f1a12fe1e42"
+}

@@ -1,0 +1,15 @@
+{
+  "figures": [
+    {
+      "path": "docs/assets/v4-valid-grounding.svg",
+      "sha256": "9e106db3b3f7c87d228ebac23680c4d2f314a68c44b66a10ffac0cbe76e311d5",
+      "model_results": true
+    },
+    {
+      "path": "docs/assets/v4-grounding-confirmation.svg",
+      "sha256": "caf87807aba846f5314e9b4ce8744a55f193d6fef40f1854ecaeaa3109e8a59a",
+      "model_results": true
+    }
+  ],
+  "summary_sha256": "733b315d53198c87ab2fa08ea28c8eef8bfa86a401fb8772f020a6865600d25b"
+}

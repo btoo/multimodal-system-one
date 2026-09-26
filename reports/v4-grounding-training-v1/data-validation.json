@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "cases": 3005,
+  "training_cases": 1728,
+  "point_oracle_cases": 1173,
+  "point_oracle_accuracy": 1.0,
+  "chart_identity_control_cases": 640,
+  "group_split_leakage": false,
+  "exact_media_split_leakage": false,
+  "label_blind_prompt_check": true,
+  "counts": {
+    "screenspot_v2:confirmation": 96,
+    "screenspot_pro:development": 117,
+    "omniact:train": 768,
+    "omniact:development": 96,
+    "omniact:confirmation": 96,
+    "chartqa:train": 384,
+    "chartqa:development": 128,
+    "chartqa:confirmation": 128,
+    "boolq:train": 384,
+    "boolq:development": 128,
+    "boolq:confirmation": 128,
+    "native_replay:train": 192,
+    "mmau:regression": 128,
+    "mmstar:regression": 120,
+    "mmlu_pro:regression": 112
+  },
+  "manual_source_label_spotcheck": {
+    "cases": [
+      "omniact:2245",
+      "omniact:4657",
+      "omniact:1381",
+      "omniact:855"
+    ],
+    "notes": "Points align with annotated visual elements. The AMC example has a modal overlay; this corpus measures localization, not whether a live click would execute."
+  }
+}
