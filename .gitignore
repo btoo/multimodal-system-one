@@ -18,3 +18,4 @@ node_modules/
 !playground/app/runs/**
 !playground/app/api/runs/
 !playground/app/api/runs/**
+artifacts/v4-grounding-training/*/adapter/*.safetensors

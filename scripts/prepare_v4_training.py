@@ -25,6 +25,7 @@ def pixel_hash(image):
     rgb=image.convert('RGB')
     return hashlib.sha256(str(rgb.size).encode()+rgb.tobytes()).hexdigest()
 def stored(payload,relative):
+    if Path(relative).is_absolute() or '..' in Path(relative).parts:raise ValueError('Unsafe source media path')
     path=BASE/'media'/relative;path.parent.mkdir(parents=True,exist_ok=True)
     if not path.exists():path.write_bytes(payload)
     elif path.read_bytes()!=payload:raise ValueError('Media payload changed')

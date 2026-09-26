@@ -1,8 +1,20 @@
 import unittest
+from types import SimpleNamespace
+import torch
 from mmso.grounding_tasks import task_prompt, safe_input, parse_point, chart_score, pointer_from_script
+from mmso.grounding_training import teacher_forcing_inputs
 
 
 class GroundingTaskTests(unittest.TestCase):
+    def test_teacher_forcing_supervises_only_answer_prediction_positions(self):
+        tokenizer=SimpleNamespace(encode=lambda answer,add_special_tokens:[3,4],eos_token_id=5)
+        backbone=SimpleNamespace(tokenizer=tokenizer,family='qwen')
+        original={'input_ids':torch.tensor([[1,2]]),'attention_mask':torch.ones(1,2),'position_ids':torch.tensor([[0,1]])}
+        inputs,target=teacher_forcing_inputs(backbone,original,'answer')
+        self.assertEqual(inputs['input_ids'].tolist(),[[1,2,3,4]])
+        self.assertEqual(target.tolist(),[[3,4,5]])
+        self.assertEqual(inputs['position_ids'].tolist(),[[0,1,2,3]])
+        self.assertEqual(original['input_ids'].tolist(),[[1,2]])
     def test_point_contract_accepts_full_precision_without_snapping(self):
         self.assertEqual(parse_point('{"x":0.003427,"y":0.914827}'),[.003427,.914827])
         self.assertEqual(parse_point('```json\n{"x":0.2,"y":0.3}\n```'),[.2,.3])

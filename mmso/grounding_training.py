@@ -20,6 +20,7 @@ from .grounding_tasks import safe_input, task_prompt, parse_point, chart_score
 
 def infer_task(backbone, root, safe, protocol):
     policy=protocol['input_policy'];started=time.perf_counter()
+    backbone.events=[]
     images,audios=decode_media(root,safe['media'],policy)
     inputs,_=backbone.prepare(task_prompt(safe),images,audios)
     length=inputs['input_ids'].shape[-1]
@@ -105,10 +106,11 @@ def teacher_forcing_inputs(backbone,inputs,answer):
     tokens=backbone.tokenizer.encode(answer,add_special_tokens=False)
     eos=backbone.tokenizer.convert_tokens_to_ids(backbone.model.terminators[0]) if backbone.family=='minicpmo45' else backbone.tokenizer.eos_token_id
     tokens.append(eos)
-    target=torch.tensor(tokens,device='cuda',dtype=torch.long)[None]
+    device=inputs['input_ids'].device
+    target=torch.tensor(tokens,device=device,dtype=torch.long)[None]
     inputs=dict(inputs);inputs['input_ids']=torch.cat([inputs['input_ids'],target[:,:-1]],dim=1)
     inputs['attention_mask']=torch.ones_like(inputs['input_ids'])
-    if 'position_ids' in inputs:inputs['position_ids']=torch.arange(inputs['input_ids'].shape[-1],device='cuda')[None]
+    if 'position_ids' in inputs:inputs['position_ids']=torch.arange(inputs['input_ids'].shape[-1],device=device)[None]
     return inputs,target
 
 
