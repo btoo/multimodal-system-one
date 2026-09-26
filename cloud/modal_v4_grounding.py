@@ -40,7 +40,7 @@ def qwen(key,phase,attempt):return remote(key,phase,attempt)
 
 @app.local_entrypoint()
 def main(key:str,phase:str,attempt:str):
-    if key not in {'minicpmo45','qwen3-30ba3b'} or phase not in {'baseline','train','confirmation'}:raise ValueError('Unknown candidate/phase')
+    if key not in {'minicpmo45','qwen3-30ba3b'} or phase not in {'baseline','train','adapted-development','confirmation'}:raise ValueError('Unknown candidate/phase')
     if not re.fullmatch('[a-z0-9][a-z0-9-]{0,79}',attempt):raise ValueError('Invalid attempt name')
     report=ROOT/'reports/v4-grounding-training-v1/attempts'/attempt
     if report.exists():raise ValueError('Local attempt already exists')
@@ -48,8 +48,8 @@ def main(key:str,phase:str,attempt:str):
     previous=[json.loads(p.read_text()) for p in report.parent.glob('*/reservation.json')]
     reserved=4200*(.001097+4*.0000131+64*.00000222)
     if len(previous)>=budget['max_gpu_jobs'] or sum(r['maximum_compute_proxy_usd'] for r in previous)+reserved>budget['additional_reservation_ceiling_usd']:raise ValueError('Study budget exhausted')
-    if phase in {'train','confirmation'}:
-        name='evals/v4-grounding-'+('training' if phase=='train' else 'confirmation')+'-nomination-v1.json'
+    if phase in {'train','adapted-development','confirmation'}:
+        name='evals/v4-grounding-'+('confirmation' if phase=='confirmation' else 'training')+'-nomination-v1.json'
         if json.loads((ROOT/name).read_text())['key']!=key:raise ValueError('Candidate not nominated')
     report.mkdir(parents=True);start=time.time()
     (report/'reservation.json').write_text(json.dumps({'key':key,'phase':phase,'started_unix':start,'maximum_compute_proxy_usd':reserved,'bundle_id':identifier},indent=2)+'\n')

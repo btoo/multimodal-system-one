@@ -42,12 +42,18 @@ def infer_task(backbone, root, safe, protocol):
                 output=backbone.model.llm.generate(inputs_embeds=embeddings,attention_mask=inputs['attention_mask'],pad_token_id=0,eos_token_id=terminators,**kwargs)
                 ids=output.sequences[0]
             else:
-                output=backbone.model.generate(**inputs,**kwargs)
+                # The Omni publisher generation_config configures the Talker;
+                # loading its Thinker alone does not inherit an EOS setting.
+                eos=backbone.tokenizer.eos_token_id
+                if eos is None:raise ValueError('Missing text end-of-answer token')
+                output=backbone.model.generate(**inputs,eos_token_id=eos,pad_token_id=backbone.tokenizer.pad_token_id,**kwargs)
                 ids=output.sequences[0,length:]
             raw=backbone.tokenizer.decode(ids,skip_special_tokens=True).strip()
             point=parse_point(raw) if safe['task']=='point' else None
             result={'text':raw,'point':point,'schema_valid':point is not None if safe['task']=='point' else bool(raw),
-                'output_tokens':len(ids),'hit_output_limit':len(ids)>=maximum}
+                'output_tokens':len(ids),'hit_output_limit':len(ids)>=maximum,
+                'last_token_id':int(ids[-1]) if len(ids) else None,
+                'expected_stop_tokens':terminators if backbone.family=='minicpmo45' else [eos]}
     torch.cuda.synchronize();ended=time.perf_counter()
     return {'status':'ok',**result,'input_tokens':length,'timings':{'request_ms':(ended-started)*1000,'decode_and_processor_ms':(prepared-started)*1000,'model_and_output_ms':(ended-prepared)*1000}}
 
@@ -83,13 +89,14 @@ def summarize(rows,records):
     return report
 
 
-def evaluate(backbone,root,rows,protocol,output,*,prefix=''):
+def evaluate(backbone,root,rows,protocol,output,*,prefix='',deadline=None):
     output.mkdir(parents=True,exist_ok=True);records=[]
     # Pure input-schema warmups before scoring, not model-quality preselection.
     for task in ('point','chart','choice'):
         row=next((r for r in rows if r['task']==task),None)
         if row is not None:infer_task(backbone,root,safe_input(row),protocol)
     for row in sorted(rows,key=lambda r:__import__('hashlib').sha256(r['id'].encode()).hexdigest()):
+        if deadline is not None and time.perf_counter()>deadline:raise TimeoutError('Evaluation deadline reached; partial predictions retained')
         try:result=infer_task(backbone,root,safe_input(row),protocol)
         except Exception as error:
             result={'status':'error','error_type':type(error).__name__,'error':str(error)};torch.cuda.empty_cache()
@@ -188,15 +195,19 @@ def run(root,key,phase,output):
         nomination=json.loads((root/'evals/v4-grounding-training-nomination-v1.json').read_text())
         if nomination['key']!=key:raise ValueError('Training candidate not nominated')
         summary['training']=train(model,root,rows,protocol,output)
+    if phase=='adapted-development':
+        nomination=json.loads((root/'evals/v4-grounding-training-nomination-v1.json').read_text())
+        if nomination['key']!=key:raise ValueError('Training candidate not nominated')
+        summary['adapter']=load_and_merge_adapter(model.model,root/'artifacts/v4-grounding-training'/key/'adapter',spec)
     if phase=='confirmation':
         nomination=json.loads((root/'evals/v4-grounding-confirmation-nomination-v1.json').read_text())
         folder=root/'artifacts/v4-grounding-training'/key/'adapter'
         if nomination['key']!=key or digest(folder/'config.json')!=nomination['adapter_config_sha256']:raise ValueError('Confirmation candidate changed')
         selected=[r for r in rows if r['split']=='confirmation']
-        summary['base']=evaluate(model,root,selected,protocol,output/'base',prefix='confirmation-base')
+        summary['base']=evaluate(model,root,selected,protocol,output/'base',prefix='confirmation-base',deadline=started+3300)
         load_and_merge_adapter(model.model,folder,spec)
-        summary['adapted']=evaluate(model,root,selected,protocol,output/'adapted',prefix='confirmation-adapted')
-    else:
-        summary['evaluation']=evaluate(model,root,selected,protocol,output/'evaluation',prefix=phase)
+        summary['adapted']=evaluate(model,root,selected,protocol,output/'adapted',prefix='confirmation-adapted',deadline=started+3300)
+    elif phase!='train':
+        summary['evaluation']=evaluate(model,root,selected,protocol,output/'evaluation',prefix=phase,deadline=started+3300)
     summary.update(status='completed',function_seconds=time.perf_counter()-started,peak_allocated_bytes=torch.cuda.max_memory_allocated())
     (output/'summary.json').write_text(json.dumps(summary,indent=2)+'\n');return summary
