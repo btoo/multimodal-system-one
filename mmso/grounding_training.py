@@ -205,7 +205,10 @@ def run(root,key,phase,output):
         nomination=json.loads((root/'evals/v4-grounding-training-nomination-v1.json').read_text())
         if nomination['key']!=key:raise ValueError('Training candidate not nominated')
         summary['adapter']=load_and_merge_adapter(model.model,root/'artifacts/v4-grounding-training'/key/'adapter',spec)
-    if phase=='confirmation':
+    if phase=='native-coordinate-reference':
+        for split in ('development','confirmation'):
+            summary[split]=evaluate(model,root,[r for r in selected if r['split']==split],protocol,output/split,prefix='native-coordinate-'+split,deadline=started+3300)
+    elif phase=='confirmation':
         nomination=json.loads((root/'evals/v4-grounding-confirmation-nomination-v1.json').read_text())
         folder=root/'artifacts/v4-grounding-training'/key/'adapter'
         if nomination['key']!=key or digest(folder/'config.json')!=nomination['adapter_config_sha256']:raise ValueError('Confirmation candidate changed')
