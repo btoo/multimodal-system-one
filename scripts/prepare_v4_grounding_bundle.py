@@ -15,7 +15,7 @@ def main():
         'mmso/grounding_tasks.py','mmso/grounding_training.py','cloud/modal_v4_study.py','cloud/modal_v4_grounding.py',
         'evals/v4-candidates-v1.json','evals/v4-grounding-training-protocol-v1.json',
         'evals/acquisition/v4_grounding_training_v1.json','data/v4-training/manifest.jsonl']
-    for name in ['evals/v4-grounding-training-nomination-v1.json','evals/v4-grounding-confirmation-nomination-v1.json','evals/v4-native-coordinate-reference-v1.json']:
+    for name in ['evals/v4-grounding-training-nomination-v1.json','evals/v4-grounding-confirmation-nomination-v1.json','evals/v4-native-coordinate-reference-v1.json','evals/manifests/v4_joint_regression_v1.jsonl','evals/v4-joint-regression-amendment-v1.json']:
         if (ROOT/name).exists():paths.append(name)
     for file in (ROOT/'artifacts/v4-grounding-training').glob('*/adapter/*'):
         if file.name in {'config.json','adapter.safetensors'}:paths.append(str(file.relative_to(ROOT)))
@@ -24,6 +24,13 @@ def main():
             if not item['path'].startswith('data/') or '..' in Path(item['path']).parts:raise ValueError('Invalid upload path')
             if digest(ROOT/item['path'])!=item['sha256']:raise ValueError('Media changed')
             paths.append(item['path'])
+    joint=ROOT/'evals/manifests/v4_joint_regression_v1.jsonl'
+    if joint.exists():
+        for line in joint.read_text().splitlines():
+            for item in json.loads(line)['media']:
+                if not item['path'].startswith('data/') or '..' in Path(item['path']).parts:raise ValueError('Invalid joint media path')
+                if digest(ROOT/item['path'])!=item['sha256']:raise ValueError('Joint media changed')
+                paths.append(item['path'])
     hashes={p:digest(ROOT/p) for p in sorted(set(paths))}
     identifier=hashlib.sha256(json.dumps(hashes,sort_keys=True).encode()).hexdigest()[:20]
     base=ROOT/'.research/v4-grounding';dest=base/'bundles'/identifier

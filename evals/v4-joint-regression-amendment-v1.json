@@ -1,0 +1,7 @@
+{
+  "created": "2026-09-25",
+  "reason": "The initial regression subsets cover speech/sounds, vision and text individually. Explicitly verify paired audio/image behavior after the shared-language adapter update.",
+  "cases": "The 64 previously exposed joint_control development cases from v4 selection, unchanged inputs and labels, all marked regression.",
+  "execution": "In the already-budgeted confirmation job, evaluate the unchanged base and final merged adapter on these same 64 cases. No additional training, selection or GPU job.",
+  "claim_scope": "Controlled synthetic-panel plus natural-speech regression, not fresh confirmation or proof of real spoken browser commands."
+}

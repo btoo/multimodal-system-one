@@ -1,0 +1,11 @@
+{
+  "key": "minicpmo45",
+  "training_attempt": "mixed-training-v1",
+  "adapter_config_sha256": "7e26697f865f4e9d2574215ebe2f8b5ab638648dc1076cc22fde7638fcde9237",
+  "adapter_sha256": "3c4b9c646de6681e3885bb5f01750d522f5b5dd4360bd7d05a4ccd26f55b0e94",
+  "steps": 1024,
+  "manifest_sha256": "cf835e8859a6abf86ff0c2bf16a5d0115fe04d79c8b4b2020d6de0046b30af32",
+  "protocol_sha256": "30269d3e49a576e0bda322d9b4e86743359333b5d033ce406434aee614d386a7",
+  "checkpoint_rule": "Final fixed-step checkpoint, frozen before adapted development inspection or any confirmation calls",
+  "confirmation_evaluated": false
+}

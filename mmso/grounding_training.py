@@ -214,8 +214,11 @@ def run(root,key,phase,output):
         if nomination['key']!=key or digest(folder/'config.json')!=nomination['adapter_config_sha256']:raise ValueError('Confirmation candidate changed')
         selected=[r for r in rows if r['split']=='confirmation']
         summary['base']=evaluate(model,root,selected,protocol,output/'base',prefix='confirmation-base',deadline=started+3300)
+        joint=[json.loads(s) for s in (root/'evals/manifests/v4_joint_regression_v1.jsonl').read_text().splitlines()]
+        summary['base_joint_regression']=evaluate(model,root,joint,protocol,output/'base-joint',prefix='joint-base',deadline=started+3300)
         load_and_merge_adapter(model.model,folder,spec)
         summary['adapted']=evaluate(model,root,selected,protocol,output/'adapted',prefix='confirmation-adapted',deadline=started+3300)
+        summary['adapted_joint_regression']=evaluate(model,root,joint,protocol,output/'adapted-joint',prefix='joint-adapted',deadline=started+3300)
     elif phase!='train':
         summary['evaluation']=evaluate(model,root,selected,protocol,output/'evaluation',prefix=phase,deadline=started+3300)
     summary.update(status='completed',function_seconds=time.perf_counter()-started,peak_allocated_bytes=torch.cuda.max_memory_allocated())
