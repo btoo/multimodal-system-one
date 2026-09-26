@@ -11,10 +11,12 @@ from .backbone_study import prompt_for
 
 def task_prompt(row):
     if row['task'] == 'point':
+        scale=row.get('coordinate_scale',1)
+        if scale not in (1,1000):raise ValueError('Unsupported explicit coordinate convention')
         return ('Locate the UI element requested below in the screenshot. Return only a JSON object '
                 'with keys "x" and "y": the coordinates of a point inside that element, normalized to '
-                'the full screenshot. Both numbers must be between 0 and 1. The top-left corner is '
-                '(0,0) and the bottom-right corner is (1,1). Do not explain.\nRequested element: ' + row['question'])
+                f'the full screenshot. Both numbers must be between 0 and {scale}. The top-left corner is '
+                f'(0,0) and the bottom-right corner is ({scale},{scale}). Do not explain.\nRequested element: ' + row['question'])
     if row['task'] == 'chart':
         return row['question'] + '\nAnswer using only the shortest answer value or phrase. Do not explain.'
     if row['task'] == 'choice': return prompt_for(row)
@@ -22,10 +24,11 @@ def task_prompt(row):
 
 
 def safe_input(row):
-    return {k: row[k] for k in ('task', 'question', 'media', 'choices') if k in row}
+    return {k: row[k] for k in ('task', 'question', 'media', 'choices', 'coordinate_scale') if k in row}
 
 
-def parse_point(text):
+def parse_point(text, *, coordinate_scale=1):
+    if coordinate_scale not in (1,1000):raise ValueError('Unsupported explicit coordinate convention')
     value = text.strip()
     if value.startswith('```') and value.endswith('```'):
         value = re.sub(r'^```(?:json)?\s*', '', value)[:-3].strip()
@@ -33,8 +36,8 @@ def parse_point(text):
     except (ValueError, TypeError): return None
     if not isinstance(point, dict) or set(point) != {'x', 'y'}: return None
     values = [point['x'], point['y']]
-    if any(isinstance(x, bool) or not isinstance(x, (int, float)) or not math.isfinite(x) or not 0 <= x <= 1 for x in values): return None
-    return values
+    if any(isinstance(x, bool) or not isinstance(x, (int, float)) or not math.isfinite(x) or not 0 <= x <= coordinate_scale for x in values): return None
+    return [x/coordinate_scale for x in values]
 
 
 def chart_score(prediction, answers):

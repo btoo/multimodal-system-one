@@ -40,7 +40,7 @@ def qwen(key,phase,attempt):return remote(key,phase,attempt)
 
 @app.local_entrypoint()
 def main(key:str,phase:str,attempt:str):
-    if key not in {'minicpmo45','qwen3-30ba3b'} or phase not in {'baseline','train','adapted-development','confirmation'}:raise ValueError('Unknown candidate/phase')
+    if key not in {'minicpmo45','qwen3-30ba3b'} or phase not in {'baseline','train','adapted-development','confirmation','native-coordinate-reference'}:raise ValueError('Unknown candidate/phase')
     if not re.fullmatch('[a-z0-9][a-z0-9-]{0,79}',attempt):raise ValueError('Invalid attempt name')
     report=ROOT/'reports/v4-grounding-training-v1/attempts'/attempt
     if report.exists():raise ValueError('Local attempt already exists')

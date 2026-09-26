@@ -15,7 +15,7 @@ def main():
         'mmso/grounding_tasks.py','mmso/grounding_training.py','cloud/modal_v4_study.py','cloud/modal_v4_grounding.py',
         'evals/v4-candidates-v1.json','evals/v4-grounding-training-protocol-v1.json',
         'evals/acquisition/v4_grounding_training_v1.json','data/v4-training/manifest.jsonl']
-    for name in ['evals/v4-grounding-training-nomination-v1.json','evals/v4-grounding-confirmation-nomination-v1.json']:
+    for name in ['evals/v4-grounding-training-nomination-v1.json','evals/v4-grounding-confirmation-nomination-v1.json','evals/v4-native-coordinate-reference-v1.json']:
         if (ROOT/name).exists():paths.append(name)
     for file in (ROOT/'artifacts/v4-grounding-training').glob('*/adapter/*'):
         if file.name in {'config.json','adapter.safetensors'}:paths.append(str(file.relative_to(ROOT)))

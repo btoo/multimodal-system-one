@@ -1,0 +1,22 @@
+{
+  "key": "minicpmo45",
+  "baseline_points": {
+    "minicpmo45": {
+      "correct": 15,
+      "cases": 213,
+      "point_accuracy": 0.07042253521126761,
+      "summary_sha256": "3d7626cb638b87683ecaa411f2016e908e42a674adfc2d3ff65c38bb63266f53"
+    },
+    "qwen3-30ba3b": {
+      "correct": 1,
+      "cases": 213,
+      "point_accuracy": 0.004694835680751174,
+      "summary_sha256": "fbfa37fe586e283516f0686bf8829a5ffe479dd14f7c08c686e7a2fdd3de64b9"
+    }
+  },
+  "qwen_minus_mini_point_accuracy": -0.06572769953051644,
+  "rule": "Use smaller MiniCPM unless Qwen improves pooled development point accuracy by at least 10 percentage points. Both formatting failures and misses stay in the denominator.",
+  "manifest_sha256": "cf835e8859a6abf86ff0c2bf16a5d0115fe04d79c8b4b2020d6de0046b30af32",
+  "protocol_sha256": "30269d3e49a576e0bda322d9b4e86743359333b5d033ce406434aee614d386a7",
+  "confirmation_opened": false
+}

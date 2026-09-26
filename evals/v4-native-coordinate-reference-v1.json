@@ -1,0 +1,14 @@
+{
+  "id": "miso-v4-qwen-coordinate-convention-control",
+  "created": "2026-09-25",
+  "trigger": "After correcting EOS, Qwen still mostly emits values resembling its usual 0-1000 coordinate convention instead of following the requested 0-1 contract. Test that convention explicitly before interpreting the failure as poor perception.",
+  "model_key": "qwen3-30ba3b",
+  "coordinate_scale": 1000,
+  "conversion": "Tell the model in the prompt that coordinates range from 0 to 1000, permit real-valued numbers, validate that range, then divide both values by 1000. Never guess units from a prediction or target.",
+  "cases": "All development and confirmation point cases from the already-frozen manifest; keep the partitions separate in reporting.",
+  "timing": "Same complete local pipeline as the original baseline, including deterministic coordinate conversion.",
+  "selection": "Exploratory format-control reference. The earlier normalized-contract training nomination is retained; this does not retrospectively change that selection rule.",
+  "confirmation_opened_when_frozen": false,
+  "budget": "At most one additional GPU call within the existing eight-slot and $45 reservation cap.",
+  "limitations": "Not a new training result or a full ScreenSpot benchmark run. Compare canonical point-in-box correctness, and disclose the different prompt coordinate convention."
+}

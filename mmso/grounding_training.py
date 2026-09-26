@@ -49,9 +49,10 @@ def infer_task(backbone, root, safe, protocol):
                 output=backbone.model.generate(**inputs,eos_token_id=eos,pad_token_id=backbone.tokenizer.pad_token_id,**kwargs)
                 ids=output.sequences[0,length:]
             raw=backbone.tokenizer.decode(ids,skip_special_tokens=True).strip()
-            point=parse_point(raw) if safe['task']=='point' else None
+            point=parse_point(raw,coordinate_scale=safe.get('coordinate_scale',1)) if safe['task']=='point' else None
             result={'text':raw,'point':point,'schema_valid':point is not None if safe['task']=='point' else bool(raw),
                 'output_tokens':len(ids),'hit_output_limit':len(ids)>=maximum,
+                'coordinate_scale':safe.get('coordinate_scale',1) if safe['task']=='point' else None,
                 'last_token_id':int(ids[-1]) if len(ids) else None,
                 'expected_stop_tokens':terminators if backbone.family=='minicpmo45' else [eos]}
     torch.cuda.synchronize();ended=time.perf_counter()
@@ -191,6 +192,11 @@ def run(root,key,phase,output):
     selected=[r for r in rows if r['split'] in ('development','regression')]
     summary={'key':key,'phase':phase,'model':spec,'load_seconds':load_seconds,'gpu':torch.cuda.get_device_name(),
         'manifest_sha256':acquisition['manifest_sha256'],'protocol_sha256':digest(root/'evals/v4-grounding-training-protocol-v1.json')}
+    if phase=='native-coordinate-reference':
+        if key!='qwen3-30ba3b':raise ValueError('Native-coordinate control is Qwen only')
+        reference=json.loads((root/'evals/v4-native-coordinate-reference-v1.json').read_text())
+        summary['reference_protocol_sha256']=digest(root/'evals/v4-native-coordinate-reference-v1.json')
+        selected=[{**r,'coordinate_scale':reference['coordinate_scale']} for r in rows if r['task']=='point' and r['split'] in ('development','confirmation')]
     if phase=='train':
         nomination=json.loads((root/'evals/v4-grounding-training-nomination-v1.json').read_text())
         if nomination['key']!=key:raise ValueError('Training candidate not nominated')

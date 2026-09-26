@@ -1,11 +1,27 @@
 import unittest
 from types import SimpleNamespace
+from unittest.mock import patch
 import torch
 from mmso.grounding_tasks import task_prompt, safe_input, parse_point, chart_score, pointer_from_script
-from mmso.grounding_training import teacher_forcing_inputs
+from mmso.grounding_training import teacher_forcing_inputs, infer_task
 
 
 class GroundingTaskTests(unittest.TestCase):
+    def test_thinker_generation_gets_explicit_text_stop_token(self):
+        seen={}
+        def generate(**kwargs):
+            seen.update(kwargs)
+            return SimpleNamespace(sequences=torch.tensor([[1,2,3,42,151645]]))
+        tokenizer=SimpleNamespace(eos_token_id=151645,pad_token_id=151643,decode=lambda ids,skip_special_tokens:'{"x":0.2,"y":0.3}')
+        backbone=SimpleNamespace(family='qwen',tokenizer=tokenizer,model=SimpleNamespace(generate=generate),
+            prepare=lambda prompt,images,audios:({'input_ids':torch.tensor([[1,2,3]])},'rendered'))
+        policy={'input_policy':{'max_input_tokens':100},'generation':{'point_max_new_tokens':64}}
+        with patch('mmso.grounding_training.decode_media',return_value=([],[])),patch('mmso.grounding_training.move',side_effect=lambda x,d:x),patch('torch.cuda.synchronize'):
+            result=infer_task(backbone,None,{'task':'point','question':'Close','media':[]},policy)
+        self.assertEqual(seen['eos_token_id'],151645)
+        self.assertEqual(seen['pad_token_id'],151643)
+        self.assertEqual(result['output_tokens'],2)
+        self.assertEqual(result['point'],[.2,.3])
     def test_teacher_forcing_supervises_only_answer_prediction_positions(self):
         tokenizer=SimpleNamespace(encode=lambda answer,add_special_tokens:[3,4],eos_token_id=5)
         backbone=SimpleNamespace(tokenizer=tokenizer,family='qwen')
@@ -20,6 +36,9 @@ class GroundingTaskTests(unittest.TestCase):
         self.assertEqual(parse_point('```json\n{"x":0.2,"y":0.3}\n```'),[.2,.3])
         for bad in ('{"x":true,"y":0.5}','{"x":25,"y":75}','{"x":NaN,"y":0.5}', 'Click (0.2, 0.3)', '{"x":0.2,"y":0.3,"target":"secret"}'):
             self.assertIsNone(parse_point(bad))
+        self.assertIsNone(parse_point('{"x":980,"y":30}'))
+        self.assertEqual(parse_point('{"x":980,"y":30}',coordinate_scale=1000),[.98,.03])
+        self.assertEqual(parse_point('{"x":0.5,"y":0.5}',coordinate_scale=1000),[.0005,.0005])
 
     def test_task_prompt_cannot_leak_annotations(self):
         row=dict(task='point',question='Close the window',media=[],target_bbox_xyxy=[9,8,7,6],target_point=[.123,.456],transcript='SECRET')
