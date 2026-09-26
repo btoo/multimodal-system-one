@@ -9,6 +9,7 @@ import time
 
 import numpy as np
 from safetensors.torch import save_file
+from PIL import Image
 import torch
 from torch import nn
 
@@ -18,10 +19,11 @@ from .frontier_evals import point_inside
 from .grounding_tasks import safe_input, task_prompt, parse_point, chart_score
 
 
-def infer_task(backbone, root, safe, protocol):
+def infer_task(backbone, root, safe, protocol, *, blank_image=False):
     policy=protocol['input_policy'];started=time.perf_counter()
     backbone.events=[]
     images,audios=decode_media(root,safe['media'],policy)
+    if blank_image:images=[Image.new('RGB',image.size,(127,127,127)) for image in images]
     inputs,_=backbone.prepare(task_prompt(safe),images,audios)
     length=inputs['input_ids'].shape[-1]
     if length>policy['max_input_tokens']:raise ValueError('Input token ceiling exceeded')
@@ -56,7 +58,7 @@ def infer_task(backbone, root, safe, protocol):
                 'last_token_id':int(ids[-1]) if len(ids) else None,
                 'expected_stop_tokens':terminators if backbone.family=='minicpmo45' else [eos]}
     torch.cuda.synchronize();ended=time.perf_counter()
-    return {'status':'ok',**result,'input_tokens':length,'timings':{'request_ms':(ended-started)*1000,'decode_and_processor_ms':(prepared-started)*1000,'model_and_output_ms':(ended-prepared)*1000}}
+    return {'status':'ok',**result,'input_tokens':length,'input_ablation':'blank_image' if blank_image else None,'timings':{'request_ms':(ended-started)*1000,'decode_and_processor_ms':(prepared-started)*1000,'model_and_output_ms':(ended-prepared)*1000}}
 
 
 def score_result(row,result):
@@ -90,15 +92,15 @@ def summarize(rows,records):
     return report
 
 
-def evaluate(backbone,root,rows,protocol,output,*,prefix='',deadline=None):
+def evaluate(backbone,root,rows,protocol,output,*,prefix='',deadline=None,blank_image=False):
     output.mkdir(parents=True,exist_ok=True);records=[]
     # Pure input-schema warmups before scoring, not model-quality preselection.
     for task in ('point','chart','choice'):
         row=next((r for r in rows if r['task']==task),None)
-        if row is not None:infer_task(backbone,root,safe_input(row),protocol)
+        if row is not None:infer_task(backbone,root,safe_input(row),protocol,blank_image=blank_image)
     for row in sorted(rows,key=lambda r:__import__('hashlib').sha256(r['id'].encode()).hexdigest()):
         if deadline is not None and time.perf_counter()>deadline:raise TimeoutError('Evaluation deadline reached; partial predictions retained')
-        try:result=infer_task(backbone,root,safe_input(row),protocol)
+        try:result=infer_task(backbone,root,safe_input(row),protocol,blank_image=blank_image)
         except Exception as error:
             result={'status':'error','error_type':type(error).__name__,'error':str(error)};torch.cuda.empty_cache()
         record={'id':row['id'],'dataset':row['dataset'],'split':row['split'],'task':row['task'],**result,**score_result(row,result)}
@@ -208,6 +210,14 @@ def run(root,key,phase,output):
     if phase=='native-coordinate-reference':
         for split in ('development','confirmation'):
             summary[split]=evaluate(model,root,[r for r in selected if r['split']==split],protocol,output/split,prefix='native-coordinate-'+split,deadline=started+3300)
+    elif phase=='image-ablation':
+        if key!='minicpmo45':raise ValueError('Image ablation is the nominated small model only')
+        selected=[r for r in rows if r['split']=='confirmation' and r['dataset']=='screenspot_v2']
+        summary['base_blank']=evaluate(model,root,selected,protocol,output/'base-blank',prefix='base-blank',deadline=started+540,blank_image=True)
+        load_and_merge_adapter(model.model,root/'artifacts/v4-grounding-training'/key/'adapter',spec)
+        summary['adapted_blank']=evaluate(model,root,selected,protocol,output/'adapted-blank',prefix='adapted-blank',deadline=started+540,blank_image=True)
+        summary['interpretation']='Counterfactual diagnostic: agreement with original target boxes after removing all image content. Not a grounding accuracy score on a visible-target task.'
+        summary['ablation_protocol_sha256']=digest(root/'evals/v4-image-ablation-protocol-v1.json')
     elif phase=='confirmation':
         nomination=json.loads((root/'evals/v4-grounding-confirmation-nomination-v1.json').read_text())
         folder=root/'artifacts/v4-grounding-training'/key/'adapter'

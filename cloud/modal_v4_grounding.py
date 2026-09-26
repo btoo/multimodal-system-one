@@ -38,22 +38,32 @@ def mini(key,phase,attempt):return remote(key,phase,attempt)
 def qwen(key,phase,attempt):return remote(key,phase,attempt)
 
 
+@app.function(image=gpu_image(legacy=True,bundle=BUNDLE),gpu='H100!',cpu=4,memory=65536,volumes={'/cache':volume},
+    timeout=600,startup_timeout=300,retries=0,max_containers=1,min_containers=0,scaledown_window=2,single_use_containers=True,include_source=False)
+def ablation(key,phase,attempt):return remote(key,phase,attempt)
+
+
 @app.local_entrypoint()
 def main(key:str,phase:str,attempt:str):
-    if key not in {'minicpmo45','qwen3-30ba3b'} or phase not in {'baseline','train','adapted-development','confirmation','native-coordinate-reference'}:raise ValueError('Unknown candidate/phase')
+    if key not in {'minicpmo45','qwen3-30ba3b'} or phase not in {'baseline','train','adapted-development','confirmation','native-coordinate-reference','image-ablation'}:raise ValueError('Unknown candidate/phase')
     if not re.fullmatch('[a-z0-9][a-z0-9-]{0,79}',attempt):raise ValueError('Invalid attempt name')
     report=ROOT/'reports/v4-grounding-training-v1/attempts'/attempt
     if report.exists():raise ValueError('Local attempt already exists')
     protocol=json.loads((ROOT/'evals/v4-grounding-training-protocol-v1.json').read_text());budget=protocol['budget']
     previous=[json.loads(p.read_text()) for p in report.parent.glob('*/reservation.json')]
-    reserved=4200*(.001097+4*.0000131+64*.00000222)
-    if len(previous)>=budget['max_gpu_jobs'] or sum(r['maximum_compute_proxy_usd'] for r in previous)+reserved>budget['additional_reservation_ceiling_usd']:raise ValueError('Study budget exhausted')
+    is_ablation=phase=='image-ablation'
+    if is_ablation:
+        amendment=json.loads((ROOT/'evals/v4-image-ablation-protocol-v1.json').read_text())
+        if key!='minicpmo45' or any(r['phase']=='image-ablation' for r in previous):raise ValueError('Only one short ablation is reserved')
+    regular=sum(r['phase']!='image-ablation' for r in previous)
+    reserved=(900 if is_ablation else 4200)*(.001097+4*.0000131+64*.00000222)
+    if (not is_ablation and regular>=budget['max_gpu_jobs']) or len(previous)>=9 or sum(r['maximum_compute_proxy_usd'] for r in previous)+reserved>budget['additional_reservation_ceiling_usd']:raise ValueError('Study budget exhausted')
     if phase in {'train','adapted-development','confirmation'}:
         name='evals/v4-grounding-'+('confirmation' if phase=='confirmation' else 'training')+'-nomination-v1.json'
         if json.loads((ROOT/name).read_text())['key']!=key:raise ValueError('Candidate not nominated')
     report.mkdir(parents=True);start=time.time()
     (report/'reservation.json').write_text(json.dumps({'key':key,'phase':phase,'started_unix':start,'maximum_compute_proxy_usd':reserved,'bundle_id':identifier},indent=2)+'\n')
-    runner=mini if key=='minicpmo45' else qwen;call=runner.spawn(key,phase,attempt)
+    runner=ablation if is_ablation else mini if key=='minicpmo45' else qwen;call=runner.spawn(key,phase,attempt)
     try:result=call.get(timeout=4300)
     except BaseException:
         call.cancel(terminate_containers=True);raise

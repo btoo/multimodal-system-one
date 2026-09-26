@@ -2,11 +2,27 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import patch
 import torch
+from PIL import Image
 from mmso.grounding_tasks import task_prompt, safe_input, parse_point, chart_score, pointer_from_script
 from mmso.grounding_training import teacher_forcing_inputs, infer_task
 
 
 class GroundingTaskTests(unittest.TestCase):
+    def test_image_ablation_removes_pixels_without_changing_size_or_source(self):
+        original=Image.new('RGB',(18,12),'red');seen={}
+        def prepare(prompt,images,audios):
+            seen['image']=images[0]
+            return {'input_ids':torch.tensor([[1,2,3]])},'rendered'
+        tokenizer=SimpleNamespace(eos_token_id=151645,pad_token_id=151643,decode=lambda ids,skip_special_tokens:'{"x":0.2,"y":0.3}')
+        backbone=SimpleNamespace(family='qwen',tokenizer=tokenizer,prepare=prepare,
+            model=SimpleNamespace(generate=lambda **kw:SimpleNamespace(sequences=torch.tensor([[1,2,3,42,151645]]))))
+        policy={'input_policy':{'max_input_tokens':100},'generation':{'point_max_new_tokens':64}}
+        with patch('mmso.grounding_training.decode_media',return_value=([original],[])),patch('mmso.grounding_training.move',side_effect=lambda x,d:x),patch('torch.cuda.synchronize'):
+            result=infer_task(backbone,None,{'task':'point','question':'Close','media':[]},policy,blank_image=True)
+        self.assertEqual(seen['image'].size,original.size)
+        self.assertEqual(seen['image'].getpixel((0,0)),(127,127,127))
+        self.assertEqual(original.getpixel((0,0)),(255,0,0))
+        self.assertEqual(result['input_ablation'],'blank_image')
     def test_thinker_generation_gets_explicit_text_stop_token(self):
         seen={}
         def generate(**kwargs):

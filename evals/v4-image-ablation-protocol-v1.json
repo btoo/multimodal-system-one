@@ -1,0 +1,16 @@
+{
+  "id": "miso-v4-image-content-dependence-v1",
+  "created": "2026-09-25",
+  "reason": "Check whether improved pointing depends on screenshot content, beyond output formatting and position priors.",
+  "design": "On all 96 frozen ScreenSpot-v2 confirmation cases, replace the decoded screenshot with uniform gray at the same dimensions. Preserve instruction, preprocessing settings, model and output contract. Compare unchanged base and fixed final adapter with their already-budgeted clean-image confirmation results.",
+  "metric": "Agreement with the ORIGINAL target boxes after removing visible targets; a counterfactual reliance diagnostic, not a new grounding score or hidden-target task.",
+  "status": "Additional diagnostic specified after training and development inspection, before the coordinator inspected confirmation results. No checkpoint selection or training uses it.",
+  "resources": {
+    "gpu": "H100!",
+    "timeout_seconds": 600,
+    "startup_timeout_seconds": 300,
+    "max_additional_calls": 1
+  },
+  "budget_amendment": "Allow one ninth, short diagnostic call in addition to the original maximum of eight standard calls. Its 900-second resource reservation plus eight 4200-second reservations totals approximately $44.56, still below the unchanged $45 reservation ceiling. Standard-call count remains capped at eight.",
+  "decision_rule": "Report clean versus blank-image differences and uncertainty. A gain that survives image removal cannot be described as demonstrated visual grounding improvement. Never call blank-image reference agreement correct perception."
+}
