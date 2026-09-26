@@ -1,0 +1,43 @@
+{
+  "manifest_sha256": "cf835e8859a6abf86ff0c2bf16a5d0115fe04d79c8b4b2020d6de0046b30af32",
+  "sources_sha256": {
+    "data/v4-training/sources/OS-Copilot--ScreenSpot-v2/screenspotv2_image.zip": "750555b8b06e3898634c610cd904600feb7ec7ca530e625a00c1416a73d829ee",
+    "data/v4-training/sources/OS-Copilot--ScreenSpot-v2/screenspot_desktop_v2.json": "96f494e0b28eead9187c67794b02bde63350b9cb753acc5fc0384fa77c7182a4",
+    "data/v4-training/sources/OS-Copilot--ScreenSpot-v2/screenspot_web_v2.json": "3e89e245d69f56a8e8f430917dc02f95b6fc36f8c8f2836c2cafe4dad10e823d",
+    "data/v4-training/sources/Writer--omniact/train.json": "a1f4d5c8b1285b92dbb269036c1acc8c3c41831285529d6fe2a20827e2932f0b",
+    "data/v4-training/sources/Writer--omniact/data.zip": "959341cd0c9b23b32886476f30f95cf12e6dd133c4e48d85970e6e249acefc94",
+    "data/v4-training/sources/HuggingFaceM4--ChartQA/data/train-00000-of-00003-49492f364babfa44.parquet": "169979f8a8c64ba93ac1be22916bf9b49c9c2e4c57f5c0104e6f671f2aacd83a",
+    "data/v4-training/sources/HuggingFaceM4--ChartQA/data/val-00000-of-00001-0f11003c77497969.parquet": "de58d649aaac8343e6a3fa5ab362a0458d5b5374f4112a95fea5d1d9253dd86e",
+    "data/v4-training/sources/HuggingFaceM4--ChartQA/data/test-00000-of-00001-e2cd0b7a0f9eb20d.parquet": "efcf31333368c485eb569ec7bd4cc3694bd0e8e1a06c503124b51d27c924491d",
+    "data/v4-training/sources/google--boolq/data/train-00000-of-00001.parquet": "4f028e992c0bd4df30b9f056f4946b64f5c23028034ff0ed5ea467d8538cc623",
+    "data/v4-training/sources/google--boolq/data/validation-00000-of-00001.parquet": "52355d11524b4b874a9b9dcc278feb10f672d52c4f4eff9872e695ede59820f8"
+  },
+  "counts": {
+    "screenspot_v2:confirmation": 96,
+    "screenspot_pro:development": 117,
+    "omniact:train": 768,
+    "omniact:development": 96,
+    "omniact:confirmation": 96,
+    "chartqa:train": 384,
+    "chartqa:development": 128,
+    "chartqa:confirmation": 128,
+    "boolq:train": 384,
+    "boolq:development": 128,
+    "boolq:confirmation": 128,
+    "native_replay:train": 192,
+    "mmau:regression": 128,
+    "mmstar:regression": 120,
+    "mmlu_pro:regression": 112
+  },
+  "omissions_by_reason": {
+    "not_single_action": 1561,
+    "invalid_script_syntax": 1870,
+    "not_pointer_call": 318,
+    "unsupported_pointer_arguments": 4
+  },
+  "point_label_reachability": 1.0,
+  "no_cross_partition_groups_or_exact_media": true,
+  "pretraining_overlap": "unknown",
+  "research_only": true,
+  "boolq_grouping": "Exact normalized passage hash. This mirror has no title column; broader same-article overlap is not established."
+}

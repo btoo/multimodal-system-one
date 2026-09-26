@@ -1,0 +1,136 @@
+{
+  "id": "miso-v4-grounding-training-v1",
+  "created": "2026-09-25",
+  "purpose": "Evaluate real coordinate outputs, then test broader supervised adaptation without sacrificing native audio/text decisions.",
+  "baseline_commit": "ddc788bfc87d40e4e4c040d325313bbdff54cd72",
+  "budget": {
+    "max_gpu_jobs": 8,
+    "additional_reservation_ceiling_usd": 45,
+    "timeout_seconds": 3600,
+    "startup_timeout_seconds": 600,
+    "max_concurrent_gpu_containers": 1,
+    "retries": 0,
+    "persistent_endpoint": false
+  },
+  "models": [
+    "minicpmo45",
+    "qwen3-30ba3b"
+  ],
+  "input_policy": {
+    "image_max_side": 1536,
+    "audio_sample_rate": 16000,
+    "audio_max_seconds": 120,
+    "max_input_tokens": 8192
+  },
+  "outputs": {
+    "point": "JSON object with exactly x and y, finite normalized coordinates in [0,1]. No snap-to-grid, clipping, answer-derived crop or repair.",
+    "chart": "Shortest standalone answer to the original chart question; no answer-derived choices",
+    "choice": "Original candidate-code probabilities; no generated probability estimates"
+  },
+  "generation": {
+    "point_max_new_tokens": 64,
+    "chart_max_new_tokens": 48,
+    "do_sample": false,
+    "thinking": false
+  },
+  "sources": {
+    "omniact": {
+      "repo": "Writer/omniact",
+      "revision": "5e4bcb26745afc8d58ba9519ea9c9fb832386d26",
+      "license": "MIT publisher card",
+      "role": "GUI training; parse single pointer actions from source scripts as data, never execute scripts; source screenshot and website/application groups stay together"
+    },
+    "chartqa": {
+      "repo": "HuggingFaceM4/ChartQA",
+      "revision": "b605b6e08b57faf4359aeb2fe6a3ca595f99b6c5",
+      "license": "GPL-3.0 publisher/mirror metadata; research adapter licensing requires separate review before commercial release",
+      "role": "Train from the first pinned training shard; development from val, confirmation from test, with exact image/pixel identity deduplication"
+    },
+    "boolq": {
+      "repo": "google/boolq",
+      "revision": "35b264d03638db9f4ce671b711558bf7ff0f80d5",
+      "license": "CC-BY-SA-3.0",
+      "role": "Natural passage/question yes-no decisions; train from train, development/confirmation from validation, disjoint normalized passage hashes. The accessible publisher mirror omits article titles; original title-bearing download returned HTTP 403, so article-disjointness is not claimed."
+    },
+    "screenspot_v2": {
+      "repo": "OS-Copilot/ScreenSpot-v2",
+      "revision": "5efbb1f1b5463a575f2eb7bc30fe29e49c15f93c",
+      "license": "Apache-2.0 publisher card",
+      "role": "New coordinate confirmation only; original desktop/web bbox is pixel xywh, converted explicitly to xyxy"
+    },
+    "screenspot_pro": {
+      "role": "The 117 previously exposed v2 screenshots become development diagnostics for the new coordinate task; never call them fresh confirmation"
+    },
+    "native_replay": {
+      "role": "Existing train-only speech intent, sound events and paired image/audio cases. Preserve source licenses; SLURP makes the adapter noncommercial research."
+    }
+  },
+  "sampling": {
+    "seed": 20260925,
+    "rank_prefix": "miso-v4-grounding-training-v1:",
+    "omniact_train_max": 768,
+    "omniact_development_max": 96,
+    "omniact_confirmation_max": 96,
+    "chart_train": 384,
+    "chart_development": 128,
+    "chart_confirmation": 128,
+    "boolq_train": 384,
+    "boolq_development": 128,
+    "boolq_confirmation": 128,
+    "screenspot_confirmation_per_platform_type": 24,
+    "native_train_per_track": 64,
+    "regression": "Frozen stratified subsets from the already-exposed MMStar/MMAU/MMLU-Pro audit; diagnostic only, never training"
+  },
+  "training": {
+    "rank": 8,
+    "alpha": 16,
+    "learning_rate": 5e-05,
+    "weight_decay": 0.01,
+    "steps": 1024,
+    "seed": 20260925,
+    "gradient_clip_norm": 1.0,
+    "schedule": [
+      "point",
+      "point",
+      "chart",
+      "point",
+      "boolq",
+      "chart",
+      "point",
+      "native_replay"
+    ],
+    "optimizer": "AdamW",
+    "target_modules": "Language attention q/v projections only; existing parameters frozen, no new vision encoder",
+    "loss": "Answer-token cross entropy for points/charts, supplied-candidate cross entropy for binary/native decisions",
+    "checkpoint": "Final fixed-step checkpoint only; no early stopping or development-selected intermediate checkpoint",
+    "inference": "Merge adapter into BF16 weights; evaluate the merged artifact"
+  },
+  "selection": {
+    "training_nomination": "Choose the smaller MiniCPM baseline unless Qwen improves development point accuracy by at least 10 percentage points; freeze choice before training",
+    "confirmation_nomination": "Evaluate exactly the final fixed-step adapter and its unchanged base on untouched confirmation; freeze artifact hashes first",
+    "success": "Report paired task changes and intervals. Do not declare universal improvement if any material modality regresses. No frontier-parity claim from this bounded study."
+  },
+  "metrics": [
+    "point inside original target bbox",
+    "coordinate schema validity",
+    "distance to target center as diagnostic only",
+    "ChartQA original relaxed numeric/exact text accuracy",
+    "BoolQ accuracy",
+    "native decision accuracy/NLL",
+    "full warm file-to-output latency",
+    "new training cost and actual resource use"
+  ],
+  "data_integrity": [
+    "No labels/boxes/OCR/transcripts in inference prompts",
+    "No cross-partition screenshot, decoded pixel hash, chart or normalized passage groups. Same-article BoolQ overlap beyond exact passages is unknown.",
+    "Confirm every label point is a reachable in-box output under the exact coordinate contract",
+    "Record all omissions and source-schema errors",
+    "Do not publish source media or private credentials in the repository"
+  ],
+  "limitations": [
+    "Public-source pretraining contamination unknown",
+    "ChartQA is chart understanding, not arbitrary PDF/XLSX ingestion",
+    "Coordinate generation is a capability baseline and may require multiple output tokens; it does not establish final System One latency",
+    "Research-only weights; no automatic playground promotion"
+  ]
+}
