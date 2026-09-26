@@ -8,7 +8,7 @@ import modal
 from modal_v4_study import gpu_image,volume
 
 ROOT=Path(__file__).resolve().parents[1]
-identifier=(ROOT/'.research/v4-grounding/current-bundle.txt').read_text().strip()
+identifier=(ROOT/'.research/v4-grounding/current-bundle.txt').read_text().strip() if modal.is_local() else '0'*20
 if not re.fullmatch('[0-9a-f]{20}',identifier):raise ValueError('Invalid immutable bundle identifier')
 BUNDLE=ROOT/'.research/v4-grounding/bundles'/identifier
 app=modal.App('miso-v4-grounding-training')
